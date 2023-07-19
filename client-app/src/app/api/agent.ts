@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { router } from '../router/Routes';
 import { store } from '../stores/store';
 import { User, UserFormValues } from '../models/user';
+import { ActionPointCard } from '../models/actionPointCard';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -75,6 +76,10 @@ const Activities = {
     delete: (id: string) => axios.delete(`/activities/${id}`)
 }
 
+const ActionPointCards = {
+    list: () => requests.get<ActionPointCard[]>('/actionpointcard')
+}
+
 const Account = {
     current: () => requests.get<User>('/account'),
     login: (user: UserFormValues) => requests.post<User>('/account/login', user),
@@ -83,6 +88,7 @@ const Account = {
 
 const agent = {
     Activities,
+    ActionPointCards,
     Account
 }
 
