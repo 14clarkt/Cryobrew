@@ -77,7 +77,8 @@ const Activities = {
 }
 
 const ActionPointCards = {
-    list: () => requests.get<ActionPointCard[]>('/actionpointcard')
+    list: () => requests.get<ActionPointCard[]>('/actionpointcard'),
+    create: (apc: ActionPointCard) => axios.post('/actionpointcard', apc),
 }
 
 const Account = {

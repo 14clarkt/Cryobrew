@@ -1,14 +1,14 @@
 import { makeAutoObservable, runInAction } from "mobx"
 import agent from "../api/agent"
-import {v4 as uuid} from "uuid"
-import { format } from "date-fns";
-import { ActionPointCard } from "../models/actionPointCard";
+import { v4 as uuid } from "uuid"
+import { store } from "./store";
+import { ActionPointCard, ActionPointLevel } from "../models/actionPointCard";
 
 export default class ActionPointCardStore {
     apcRegistry = new Map<string, ActionPointCard>();
     // selectedActivity: Activity | undefined = undefined;
     // editMode = false;
-    // loading = false;
+    loading = false;
     loadingInitial = false;
 
     constructor() {
@@ -18,10 +18,9 @@ export default class ActionPointCardStore {
     get apcSortedList() {
         let apcs = Array.from(this.apcRegistry.values()).sort((a, b) =>
             a.name.localeCompare(b.name))
-        
-        apcs.map((apc) => {
-            apc.actionPointLevels = apc.actionPointLevels.slice().sort((a, b) => 
-                a.level - b.level)
+
+        runInAction(() => {
+            apcs.forEach((apc) => apc.actionPointLevels.sort((a, b) => a.level - b.level))
         })
 
         return apcs
@@ -83,24 +82,23 @@ export default class ActionPointCardStore {
         this.loadingInitial = state
     }
 
-    // createActivity = async (activity: Activity) => {
-    //     this.loading = true
-    //     activity.id = uuid()
-    //     try {
-    //         await agent.Activities.create(activity)
-    //         runInAction(() => {
-    //             this.activityRegistry.set(activity.id, activity)
-    //             this.selectedActivity = activity
-    //             this.editMode = false
-    //             this.loading = false
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //         runInAction(() => {
-    //             this.loading = false
-    //         })
-    //     }
-    // }
+    createApc = async (apc: ActionPointCard) => {
+        this.loading = true
+        apc.id = uuid()
+        try {
+            await agent.ActionPointCards.create(apc)
+            runInAction(() => {
+                this.setApc(apc)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
 
     // updateActivity = async (activity: Activity) => {
     //     this.loading = true

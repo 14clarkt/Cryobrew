@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 using Application.Core;
 
-namespace Application.Activities
+namespace Application.ActionPointCards
 {
     public class CreateAPC
     {

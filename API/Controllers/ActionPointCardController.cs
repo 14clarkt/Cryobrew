@@ -1,8 +1,9 @@
 using Persistence;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
-using Application.Activities;
 using Microsoft.AspNetCore.Authorization;
+using Application.Activities;
+using Application.ActionPointCards;
 
 namespace API.Controllers
 {
@@ -10,7 +11,7 @@ namespace API.Controllers
     public class ActionPointCardController : BaseApiController
     {
         [HttpGet] //api/actionpointcard
-        public async Task<IActionResult> GetActionPointCards()
+        public async Task<IActionResult> GetAPCs()
         {
             return HandleResult(await Mediator.Send(new ListAPC.Query()));
         }
@@ -22,7 +23,7 @@ namespace API.Controllers
         // }
 
         [HttpPost] 
-        public async Task<IActionResult> CreateActionPointCard(ActionPointCard apc)
+        public async Task<IActionResult> CreateAPC(ActionPointCard apc)
         {
             return HandleResult(await Mediator.Send(new CreateAPC.Command{ActionPointCard = apc}));
         }
@@ -34,10 +35,10 @@ namespace API.Controllers
         //     return HandleResult(await Mediator.Send(new Edit.Command{Activity = activity}));
         // }
 
-        // [HttpDelete("{id}")]
-        // public async Task<IActionResult> DeleteActivity(Guid id)
-        // {
-        //     return HandleResult(await Mediator.Send(new Delete.Command{Id = id}));
-        // }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAPC(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new DeleteAPC.Command{Id = id}));
+        }
     }
 }

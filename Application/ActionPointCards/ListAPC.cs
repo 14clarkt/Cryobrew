@@ -4,7 +4,7 @@ using Persistence;
 using Microsoft.EntityFrameworkCore;
 using Application.Core;
 
-namespace Application.Activities
+namespace Application.ActionPointCards
 {
     public class ListAPC
     {

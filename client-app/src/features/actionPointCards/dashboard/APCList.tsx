@@ -2,14 +2,17 @@ import { Button, Grid, Header, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 // import ActivityListItem from './ActivityListItem';
-import React, { Fragment } from 'react'
+import APCForm from '../form/APCForm';
 
 export default observer(function APCList() {
-    const { apcStore } = useStore()
+    const { apcStore, modalStore } = useStore()
     const { apcSortedList } = apcStore
 
     return (
         <>
+            <Button onClick={() => modalStore.openModal(<APCForm />)} size='huge' inverted>
+                Create APC
+            </Button>
             {apcSortedList.map((apc) => (
                 <Segment key={apc.id}>
                     <Grid>
@@ -46,7 +49,7 @@ export default observer(function APCList() {
                     </Grid>
                     <Grid divided="vertically">
                         {apc.actionPointLevels.map((apl) => (
-                            <Grid.Row>
+                            <Grid.Row key={apl.id}>
                                 <Grid.Column width='1'>
                                     <h4>{apl.level}</h4>
                                 </Grid.Column>
@@ -71,7 +74,7 @@ export default observer(function APCList() {
                             </Grid.Row>
                         ))}
                         <Grid.Row>
-                            <Grid.Column width='14'/>
+                            <Grid.Column width='14' />
                             <Grid.Column width='2'>
                                 <Button
                                     color='green'
