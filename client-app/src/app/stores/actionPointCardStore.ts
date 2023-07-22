@@ -124,23 +124,22 @@ export default class ActionPointCardStore {
         apc?.actionPointLevels.sort((a, b) => a.level - b.level)
     }
 
-    // updateActivity = async (activity: Activity) => {
-    //     this.loading = true
-    //     try {
-    //         await agent.Activities.update(activity)
-    //         runInAction(() => {
-    //             this.activityRegistry.set(activity.id, activity)
-    //             this.selectedActivity = activity
-    //             this.editMode = false
-    //             this.loading = false
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //         runInAction(() => {
-    //             this.loading = false
-    //         })            
-    //     }
-    // }
+    updateApc = async (apc: ActionPointCard) => {
+        this.loading = true
+        try {
+            await agent.ActionPointCards.update(apc)
+            runInAction(() => {
+                this.apcRegistry.set(apc.id, apc)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })            
+        }
+    }
 
     deleteApc = async (id: string) => {
         this.loading = true;

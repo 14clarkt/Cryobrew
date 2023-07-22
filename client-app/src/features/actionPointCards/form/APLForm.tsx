@@ -78,7 +78,6 @@ export default observer(function APLForm(props: Props) {
                     />
                 </Form>
             )}
-
         </Formik>
     )
 })

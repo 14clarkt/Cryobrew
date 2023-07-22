@@ -80,6 +80,7 @@ const ActionPointCards = {
     list: () => requests.get<ActionPointCard[]>('/actionpointcard'),
     create: (apc: ActionPointCard) => axios.post('/actionpointcard', apc),
     createApl: (APCid: string, apl: ActionPointLevel) => axios.post(`/actionpointlevel/${APCid}`, apl),
+    update: (apc: ActionPointCard) => axios.put(`/actionpointcard/${apc.id}`, apc),
     delete: (id: string) => axios.delete(`/actionpointcard/${id}`),
 }
 
