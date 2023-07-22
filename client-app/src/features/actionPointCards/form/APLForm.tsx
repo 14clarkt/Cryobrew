@@ -18,7 +18,7 @@ export default observer(function APLForm(props: Props) {
     return (
         <Formik
             initialValues={{
-                level: 0,
+                level: 1,
                 range: "",
                 cost: "",
                 duration: "",
@@ -43,7 +43,9 @@ export default observer(function APLForm(props: Props) {
                     setErrors({ error }))
             }}
             validationSchema={Yup.object({
-                level: Yup.number().required(),
+                level: Yup.string().matches(
+                    /^[1-9][0-9]*$/,
+                    "must a number greater than 0.").required(),
                 range: Yup.string().required(),
                 cost: Yup.string().required(),
                 duration: Yup.string().required(),
@@ -56,14 +58,14 @@ export default observer(function APLForm(props: Props) {
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     <Header as='h2' content='Create Action Point Level' color='teal' textAlign='center' />
-                    <MyTextInput placeholder='level' name='level' />
-                    <MyTextInput placeholder='range' name='range' />
-                    <MyTextInput placeholder='cost' name='cost' />
-                    <MyTextInput placeholder='duration' name='duration' />
-                    <MyTextInput placeholder='prerequisite' name='prerequisite' />
-                    <MyTextInput placeholder='upgradeCost' name='upgradeCost' />
-                    <MyTextInput placeholder='castingTime' name='castingTime' />
-                    <MyTextArea placeholder='description' name='description' rows={3}/>
+                    <MyTextInput placeholder='1' name='level' label="Level"/>
+                    <MyTextInput placeholder='5ft' name='range' label="Range"/>
+                    <MyTextInput placeholder='3 AP' name='cost' label="Cost"/>
+                    <MyTextInput placeholder='Instantaneous' name='duration' label="Duration"/>
+                    <MyTextInput placeholder='Character Level 1, At Full HP, etc.' name='prerequisite' label="Prerequisite"/>
+                    <MyTextInput placeholder='100CE' name='upgradeCost' label="Upgrade Cost"/>
+                    <MyTextInput placeholder='1 Action' name='castingTime' label="Casting Time"/>
+                    <MyTextArea placeholder='Details of this level of the APC' name='description' label="Description" rows={3}/>
                     <ErrorMessage
                         name='error' render={() =>
                             <ValidationErrors errors={errors.error} />}
