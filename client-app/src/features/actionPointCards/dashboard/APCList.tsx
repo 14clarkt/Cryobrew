@@ -103,7 +103,7 @@ export default observer(function APCList() {
                             <Grid.Column width='6'><h2>{apc.name}</h2></Grid.Column>
                             <Grid.Column width='4'>
                                 <Button
-                                    onClick={() => modalStore.openModal(<APLForm APCid={apc.id} />)}
+                                    onClick={() => modalStore.openModal(<APLForm APCid={apc.id}/>, "large")}
                                     color='green'
                                     size='large'
                                     fluid

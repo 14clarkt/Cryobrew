@@ -1,5 +1,5 @@
 import { ErrorMessage, Form, Formik } from "formik";
-import { Button, Header, Label } from "semantic-ui-react";
+import { Button, Grid, Header, Label, Segment } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
 import MyTextInput from "../../../app/common/form/MyTextInput";
@@ -26,7 +26,8 @@ export default observer(function APLForm(props: Props) {
                 upgradeCost: "",
                 castingTime: "",
                 description: "",
-                error: null }}
+                error: null
+            }}
             onSubmit={(values, { setErrors }) => {
                 let newApl = {
                     id: "",
@@ -58,24 +59,38 @@ export default observer(function APLForm(props: Props) {
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     <Header as='h2' content='Create Action Point Level' color='teal' textAlign='center' />
-                    <MyTextInput placeholder='1' name='level' label="Level"/>
-                    <MyTextInput placeholder='5ft' name='range' label="Range"/>
-                    <MyTextInput placeholder='3 AP' name='cost' label="Cost"/>
-                    <MyTextInput placeholder='Instantaneous' name='duration' label="Duration"/>
-                    <MyTextInput placeholder='Character Level 1, At Full HP, etc.' name='prerequisite' label="Prerequisite"/>
-                    <MyTextInput placeholder='100CE' name='upgradeCost' label="Upgrade Cost"/>
-                    <MyTextInput placeholder='1 Action' name='castingTime' label="Casting Time"/>
-                    <MyTextArea placeholder='Details of this level of the APC' name='description' label="Description" rows={3}/>
+                    <Grid>
+                        <Grid.Column width={8}>
+                            <MyTextInput placeholder='1' name='level' label="Level" />
+                            <MyTextInput placeholder='5ft' name='range' label="Range" />
+                            <MyTextInput placeholder='3 AP' name='cost' label="Cost" />
+                            <MyTextInput placeholder='Instantaneous' name='duration' label="Duration" />
+                            <MyTextInput placeholder='Character Level 2, Full HP, N/A, etc.' name='prerequisite' label="Prerequisite(s)" />
+                            <MyTextInput placeholder='100CE' name='upgradeCost' label="Upgrade Cost" />
+                            <MyTextInput placeholder='1 Action' name='castingTime' label="Casting Time" />
+                        </Grid.Column>
+                        <Grid.Column width={8}>
+                            <MyTextArea placeholder='Details of this level of the APC' name='description' label="Description" rows={25} />
+                        </Grid.Column>
+                    </Grid>
                     <ErrorMessage
                         name='error' render={() =>
                             <ValidationErrors errors={errors.error} />}
                     />
-                    <Button
-                        disabled={!isValid || !dirty || isSubmitting}
-                        content="Create"
-                        type="submit"
-                        positive fluid
-                    />
+                    <br />
+                    <Grid>
+                        <Grid.Column width={5} />
+                        <Grid.Column width={6}>
+                            <Button
+                                disabled={!isValid || !dirty || isSubmitting}
+                                content="Create"
+                                type="submit"
+                                positive fluid
+                            />
+                        </Grid.Column>
+                        <Grid.Column width={5} />
+                    </Grid>
+
                 </Form>
             )}
         </Formik>
