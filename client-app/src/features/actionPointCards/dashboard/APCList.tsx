@@ -1,16 +1,16 @@
 import { Button, Grid, Header, Segment } from 'semantic-ui-react';
-import { useStore } from '../../../app/stores/store';
+import { store, useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 // import ActivityListItem from './ActivityListItem';
 import APCForm from '../form/APCForm';
 
 export default observer(function APCList() {
     const { apcStore, modalStore } = useStore()
-    const { apcSortedList } = apcStore
+    const { apcSortedList, deleteApc, loading } = apcStore
 
     return (
         <>
-            <Button onClick={() => modalStore.openModal(<APCForm />)} size='huge' inverted>
+            <Button onClick={() => modalStore.openModal(<APCForm />)} size='huge' color='green' loading={loading}>
                 Create APC
             </Button>
             {apcSortedList.map((apc) => (
@@ -32,6 +32,8 @@ export default observer(function APCList() {
                                     color='red'
                                     content='Delete'
                                     fluid
+                                    loading={loading}
+                                    onClick={() => deleteApc(apc.id)}
                                 />
                             </Grid.Column>
                         </Grid.Row>

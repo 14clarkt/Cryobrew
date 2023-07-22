@@ -118,19 +118,19 @@ export default class ActionPointCardStore {
     //     }
     // }
 
-    // deleteActivity = async (id: string) => {
-    //     this.loading = true;
-    //     try {
-    //         await agent.Activities.delete(id)
-    //         runInAction(() => {
-    //             this.activityRegistry.delete(id)
-    //             this.loading = false
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //         runInAction(() => {
-    //             this.loading = false
-    //         })
-    //     }
-    // }
+    deleteApc = async (id: string) => {
+        this.loading = true;
+        try {
+            await agent.ActionPointCards.delete(id)
+            runInAction(() => {
+                this.apcRegistry.delete(id)
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
 }
