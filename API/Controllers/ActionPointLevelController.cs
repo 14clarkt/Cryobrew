@@ -28,6 +28,12 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new CreateAPL.Command{ActionPointLevel = apl, APCId = id}));
         }
 
+        [HttpDelete("{apcid}/{aplid}")]
+        public async Task<IActionResult> DeleteAPC(Guid apcid, Guid aplid)
+        {
+            return HandleResult(await Mediator.Send(new DeleteAPL.Command{APCId = apcid, APLId = aplid}));
+        }
+
         // [HttpPut("{id}")]
         // public async Task<IActionResult> EditActivity(Guid id, Activity activity)
         // {

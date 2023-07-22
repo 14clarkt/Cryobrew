@@ -8,17 +8,17 @@ import APCEditForm from '../form/APCUpdateForm';
 
 export default observer(function APCList() {
     const { apcStore, modalStore } = useStore()
-    const { apcSortedList, deleteApc, loading } = apcStore
+    const { apcSortedList, deleteApc, deleteApl, loading } = apcStore
 
     return (
         <>
             <Segment>
-                <Button 
+                <Button
                     onClick={() => modalStore.openModal(<APCForm />)}
                     size='huge'
                     color='green'
                     loading={loading}
-                    content="Create APC"/>
+                    content="Create APC" />
             </Segment>
             {apcSortedList.map((apc) => (
                 <Segment key={apc.id}>
@@ -64,15 +64,15 @@ export default observer(function APCList() {
                                     <h4>{apl.level}</h4>
                                 </Grid.Column>
                                 <Grid.Column width='3'>
-                                    <div><span style={{fontWeight: "bold"}}>Range: </span>{apl.range}</div>
-                                    <div><span style={{fontWeight: "bold"}}>Cost: </span>{apl.cost}</div>
-                                    <div><span style={{fontWeight: "bold"}}>Duration: </span>{apl.duration}</div>
-                                    <div><span style={{fontWeight: "bold"}}>Upgrade Cost: </span>{apl.upgradeCost}</div>
-                                    <div><span style={{fontWeight: "bold"}}>Casting Time: </span>{apl.castingTime}</div>
-                                    <div><span style={{fontWeight: "bold"}}>Prerequisite: </span>{apl.prerequisite}</div>
+                                    <div><span style={{ fontWeight: "bold" }}>Range: </span>{apl.range}</div>
+                                    <div><span style={{ fontWeight: "bold" }}>Cost: </span>{apl.cost}</div>
+                                    <div><span style={{ fontWeight: "bold" }}>Duration: </span>{apl.duration}</div>
+                                    <div><span style={{ fontWeight: "bold" }}>Upgrade Cost: </span>{apl.upgradeCost}</div>
+                                    <div><span style={{ fontWeight: "bold" }}>Casting Time: </span>{apl.castingTime}</div>
+                                    <div><span style={{ fontWeight: "bold" }}>Prerequisite: </span>{apl.prerequisite}</div>
                                 </Grid.Column>
                                 <Grid.Column width='10'>
-                                    <div style={{overflowWrap: "break-word"}}>{apl.description}</div>
+                                    <div style={{ overflowWrap: "break-word" }}>{apl.description}</div>
                                 </Grid.Column >
                                 <Grid.Column width='2' stretched>
                                     <Grid.Row>
@@ -87,6 +87,8 @@ export default observer(function APCList() {
                                             color='red'
                                             content='Delete Lvl'
                                             fluid
+                                            loading={loading}
+                                            onClick={() => deleteApl(apc.id, apl.id)}
                                         />
                                     </Grid.Row>
                                     <Grid.Row>
@@ -103,7 +105,7 @@ export default observer(function APCList() {
                             <Grid.Column width='6'><h2>{apc.name}</h2></Grid.Column>
                             <Grid.Column width='4'>
                                 <Button
-                                    onClick={() => modalStore.openModal(<APLForm APCid={apc.id}/>, "large")}
+                                    onClick={() => modalStore.openModal(<APLForm APCid={apc.id} />, "large")}
                                     color='green'
                                     size='large'
                                     fluid

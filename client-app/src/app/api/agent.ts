@@ -82,6 +82,7 @@ const ActionPointCards = {
     createApl: (APCid: string, apl: ActionPointLevel) => axios.post(`/actionpointlevel/${APCid}`, apl),
     update: (apc: ActionPointCard) => axios.put(`/actionpointcard/${apc.id}`, apc),
     delete: (id: string) => axios.delete(`/actionpointcard/${id}`),
+    deleteApl: (APCid: string, APLid: string) => axios.delete(`/actionpointlevel/${APCid}/${APLid}`),
 }
 
 const Account = {

@@ -156,4 +156,21 @@ export default class ActionPointCardStore {
             })
         }
     }
+
+    deleteApl = async (APCid: string, APLid: string) => {
+        this.loading = true;
+        try {
+            await agent.ActionPointCards.deleteApl(APCid, APLid)
+            runInAction(() => {
+                let apc = this.apcRegistry.get(APCid)
+                apc!.actionPointLevels = apc!.actionPointLevels.filter((apl) => apl.id !== APLid)
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
 }
