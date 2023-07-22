@@ -19,7 +19,7 @@ export default class ActionPointCardStore {
         let apcs = Array.from(this.apcRegistry.values()).sort((a, b) =>
             a.name.localeCompare(b.name))
 
-        runInAction(() => {
+        runInAction(() => { // sort the levels within the apcs
             apcs.forEach((apc) => apc.actionPointLevels.sort((a, b) => a.level - b.level))
         })
 
@@ -98,6 +98,30 @@ export default class ActionPointCardStore {
                 this.loading = false
             })
         }
+    }
+
+    createApl = async (APCid: string, apl: ActionPointLevel) => {
+        this.loading = true
+        apl.id = uuid()
+        try {
+            await agent.ActionPointCards.createApl(APCid, apl)
+            runInAction(() => {
+                this.setApl(APCid, apl)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
+    private setApl = (APCid: string, apl: ActionPointLevel) => {
+        let apc = this.apcRegistry.get(APCid)
+        apc?.actionPointLevels.push(apl)
+        apc?.actionPointLevels.sort((a, b) => a.level - b.level)
     }
 
     // updateActivity = async (activity: Activity) => {

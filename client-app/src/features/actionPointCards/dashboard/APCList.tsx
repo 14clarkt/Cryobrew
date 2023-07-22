@@ -3,6 +3,7 @@ import { store, useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 // import ActivityListItem from './ActivityListItem';
 import APCForm from '../form/APCForm';
+import APLForm from '../form/APLForm';
 
 export default observer(function APCList() {
     const { apcStore, modalStore } = useStore()
@@ -10,9 +11,7 @@ export default observer(function APCList() {
 
     return (
         <>
-            <Button onClick={() => modalStore.openModal(<APCForm />)} size='huge' color='green' loading={loading}>
-                Create APC
-            </Button>
+            <Button onClick={() => modalStore.openModal(<APCForm />)} size='huge' color='green' loading={loading} content="Create APC"/>
             {apcSortedList.map((apc) => (
                 <Segment key={apc.id}>
                     <Grid>
@@ -79,10 +78,11 @@ export default observer(function APCList() {
                             <Grid.Column width='14' />
                             <Grid.Column width='2'>
                                 <Button
+                                    onClick={() => modalStore.openModal(<APLForm APCid={apc.id} />)}
                                     color='green'
-                                    content='Add Level'
                                     fluid
-                                />
+                                    loading={loading}
+                                    content="Add Level"/>
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>

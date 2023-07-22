@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { router } from '../router/Routes';
 import { store } from '../stores/store';
 import { User, UserFormValues } from '../models/user';
-import { ActionPointCard } from '../models/actionPointCard';
+import { ActionPointCard, ActionPointLevel } from '../models/actionPointCard';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -79,6 +79,7 @@ const Activities = {
 const ActionPointCards = {
     list: () => requests.get<ActionPointCard[]>('/actionpointcard'),
     create: (apc: ActionPointCard) => axios.post('/actionpointcard', apc),
+    createApl: (APCid: string, apl: ActionPointLevel) => axios.post(`/actionpointlevel/${APCid}`, apl),
     delete: (id: string) => axios.delete(`/actionpointcard/${id}`),
 }
 
