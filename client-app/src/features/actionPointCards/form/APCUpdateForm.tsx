@@ -40,6 +40,7 @@ export default observer(function APCUpdateForm(props: Props) {
                         content="Rename"
                         type="submit"
                         positive fluid
+                        loading={apcStore.loading}
                     />
                 </Form>
             )}

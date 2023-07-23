@@ -39,6 +39,7 @@ export default observer(function APCForm() {
                         content="Create"
                         type="submit"
                         positive fluid
+                        loading={apcStore.loading}
                     />
                 </Form>
             )}

@@ -33,6 +33,7 @@ export default observer(function APCList() {
                                     color='teal'
                                     content='Rename'
                                     fluid
+                                    loading={loading}
                                     onClick={() => modalStore.openModal(<APCEditForm apc={apc} />)}
                                 />
                             </Grid.Column>

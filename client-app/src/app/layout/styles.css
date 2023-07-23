@@ -39,10 +39,6 @@ body {
   font-weight: normal;
 }
 
-.ui.form.field>label{
-  color: teal !important;
-}
-
 div{
   overflow-wrap: break-word;
 }

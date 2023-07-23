@@ -75,11 +75,11 @@ export default observer(function APLForm(props: Props) {
                                 content="Create"
                                 type="submit"
                                 positive fluid
+                            loading={apcStore.loading}
                             />
                         </Grid.Column>
                         <Grid.Column width={5} />
                     </Grid>
-
                 </Form>
             )}
         </Formik>

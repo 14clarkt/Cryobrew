@@ -15,7 +15,7 @@ export default function MyTextInput(props: Props) {
     return (
         <Form.Field error={meta.touched && !!meta.error}>
             <label style={{color: 'teal'}}>{props.label}</label>
-            <input {...field} {...props} />
+            <input style={{backgroundColor: "#222222", color: "white"}} {...field} {...props} />
             {meta.touched && meta.error ? (
                 <Label basic color='red'>{meta.error}</Label>
             ) : null}
