@@ -18,6 +18,7 @@ export default observer(function APCList() {
                     onClick={() => modalStore.openModal(<APCForm />)}
                     size='huge'
                     color='green'
+                    inverted
                     loading={loading}
                     content="Create APC" />
             </Segment>
@@ -32,7 +33,7 @@ export default observer(function APCList() {
                                 <Button
                                     color='teal'
                                     content='Rename'
-                                    fluid
+                                    fluid inverted
                                     loading={loading}
                                     onClick={() => modalStore.openModal(<APCEditForm apc={apc} />)}
                                 />
@@ -41,7 +42,7 @@ export default observer(function APCList() {
                                 <Button
                                     color='red'
                                     content='Delete'
-                                    fluid
+                                    fluid inverted
                                     loading={loading}
                                     onClick={() => deleteApc(apc.id)}
                                 />
@@ -81,7 +82,7 @@ export default observer(function APCList() {
                                         <Button
                                             color='teal'
                                             content='Edit'
-                                            fluid
+                                            fluid inverted
                                             loading={loading}
                                             onClick={() => modalStore.openModal(<APLUpdateForm APCid={apc.id} apl={apl} />, "large")}
                                         />
@@ -90,7 +91,7 @@ export default observer(function APCList() {
                                         <Button
                                             color='red'
                                             content='Delete Lvl'
-                                            fluid
+                                            fluid inverted
                                             loading={loading}
                                             onClick={() => deleteApl(apc.id, apl.id)}
                                         />
@@ -99,7 +100,7 @@ export default observer(function APCList() {
                                         <Button
                                             color='yellow'
                                             content='Copy'
-                                            fluid
+                                            fluid inverted
                                             loading={loading}
                                             onClick={() => copyApl(apc.id, apl.id)}
                                         />
@@ -114,7 +115,7 @@ export default observer(function APCList() {
                                     onClick={() => modalStore.openModal(<APLForm APCid={apc.id} />, "large")}
                                     color='green'
                                     size='large'
-                                    fluid
+                                    fluid inverted
                                     loading={loading}
                                     content="Add Level" />
                             </Grid.Column>

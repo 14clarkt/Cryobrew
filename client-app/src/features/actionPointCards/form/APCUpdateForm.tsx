@@ -39,7 +39,8 @@ export default observer(function APCUpdateForm(props: Props) {
                         disabled={!isValid || !dirty || isSubmitting}
                         content="Rename"
                         type="submit"
-                        positive fluid
+                        color = "green"
+                        fluid inverted
                         loading={apcStore.loading}
                     />
                 </Form>

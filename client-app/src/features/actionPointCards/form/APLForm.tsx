@@ -74,7 +74,8 @@ export default observer(function APLForm(props: Props) {
                                 disabled={!isValid || !dirty || isSubmitting}
                                 content="Create"
                                 type="submit"
-                                positive fluid
+                                color = "green"
+                                fluid inverted
                             loading={apcStore.loading}
                             />
                         </Grid.Column>

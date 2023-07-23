@@ -38,7 +38,8 @@ export default observer(function APCForm() {
                         disabled={!isValid || !dirty || isSubmitting}
                         content="Create"
                         type="submit"
-                        positive fluid
+                        color = "green"
+                        fluid inverted
                         loading={apcStore.loading}
                     />
                 </Form>
