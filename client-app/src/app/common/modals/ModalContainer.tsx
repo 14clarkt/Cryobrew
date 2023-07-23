@@ -3,10 +3,10 @@ import { useStore } from "../../stores/store";
 import { Modal } from "semantic-ui-react";
 
 export default observer(function ModalContainer() {
-    const {modalStore} = useStore();
+    const { modalStore } = useStore();
     return (
         <Modal open={modalStore.modal.open} onClose={modalStore.closeModal} size={modalStore.modal.size}>
-            <Modal.Content>
+            <Modal.Content style={{ backgroundColor: "black", borderColor: "teal", borderStyle: "solid", borderWidth: "4px", padding: "4px" }}>
                 {modalStore.modal.body}
             </Modal.Content>
         </Modal>

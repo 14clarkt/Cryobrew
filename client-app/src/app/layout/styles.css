@@ -1,5 +1,5 @@
 body {
-  background-color: #EAEAEA !important;
+  background-color: #000000 !important;
 }
 
 .ui.inverted.top.fixed.menu {
@@ -37,4 +37,8 @@ body {
 .masthead h2 {
   font-size: 1.7em;
   font-weight: normal;
+}
+
+.ui.form.field>label{
+  color: teal !important;
 }

@@ -12,7 +12,7 @@ export default observer(function APCList() {
 
     return (
         <>
-            <Segment>
+            <Segment style={{ backgroundColor: "black" }}>
                 <Button
                     onClick={() => modalStore.openModal(<APCForm />)}
                     size='huge'
@@ -21,7 +21,7 @@ export default observer(function APCList() {
                     content="Create APC" />
             </Segment>
             {apcSortedList.map((apc) => (
-                <Segment key={apc.id}>
+                <Segment key={apc.id} style={{ backgroundColor: "#111111", color: "white"}}>
                     <Grid>
                         <Grid.Row>
                             <Grid.Column width='12'>
@@ -57,7 +57,7 @@ export default observer(function APCList() {
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
-                    <Grid divided="vertically">
+                    <Grid divided="vertically" inverted>
                         {apc.actionPointLevels.map((apl) => (
                             <Grid.Row key={apl.id}>
                                 <Grid.Column width='1'>
