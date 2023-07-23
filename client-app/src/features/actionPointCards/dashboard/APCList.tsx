@@ -8,7 +8,7 @@ import APCEditForm from '../form/APCUpdateForm';
 
 export default observer(function APCList() {
     const { apcStore, modalStore } = useStore()
-    const { apcSortedList, deleteApc, deleteApl, loading } = apcStore
+    const { apcSortedList, deleteApc, deleteApl, copyApl, loading } = apcStore
 
     return (
         <>
@@ -96,6 +96,8 @@ export default observer(function APCList() {
                                             color='yellow'
                                             content='Copy'
                                             fluid
+                                            loading={loading}
+                                            onClick={() => copyApl(apc.id, apl.id)}
                                         />
                                     </Grid.Row>
                                 </Grid.Column>

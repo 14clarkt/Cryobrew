@@ -29,17 +29,16 @@ namespace API.Controllers
         }
 
         [HttpDelete("{apcid}/{aplid}")]
-        public async Task<IActionResult> DeleteAPC(Guid apcid, Guid aplid)
+        public async Task<IActionResult> DeleteAPL(Guid apcid, Guid aplid)
         {
             return HandleResult(await Mediator.Send(new DeleteAPL.Command{APCId = apcid, APLId = aplid}));
         }
 
-        // [HttpPut("{id}")]
-        // public async Task<IActionResult> EditActivity(Guid id, Activity activity)
-        // {
-        //     activity.Id = id;
-        //     return HandleResult(await Mediator.Send(new Edit.Command{Activity = activity}));
-        // }
+        [HttpPost("{apcid}/{aplid}/{copyAplId}")]
+        public async Task<IActionResult> CopyApl(Guid apcid, Guid aplid, Guid copyAplId)
+        {
+            return HandleResult(await Mediator.Send(new CopyAPL.Command{APCid = apcid, APLid = aplid, CopyAplId = copyAplId}));
+        }
 
         // [HttpDelete("{id}")]
         // public async Task<IActionResult> DeleteActivity(Guid id)

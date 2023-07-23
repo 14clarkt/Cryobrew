@@ -173,4 +173,23 @@ export default class ActionPointCardStore {
             })
         }
     }
+
+    copyApl = async (APCid: string, APLid: string) => {
+        this.loading = true;
+        try {
+            let copyAplId = uuid()
+            await agent.ActionPointCards.copyApl(APCid, APLid, copyAplId)
+            runInAction(() => {
+                let apc = this.apcRegistry.get(APCid)
+                let apl = apc!.actionPointLevels.filter((apl) => apl.id === APLid)[0]
+                this.setApl(APCid, {...apl, id: copyAplId})
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
 }
