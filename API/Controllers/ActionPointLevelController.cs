@@ -40,6 +40,12 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new CopyAPL.Command{APCid = apcid, APLid = aplid, CopyAplId = copyAplId}));
         }
 
+        [HttpPut]
+        public async Task<IActionResult> EditActionPointLevel(ActionPointLevel apl)
+        {
+            return HandleResult(await Mediator.Send(new UpdateAPL.Command{ActionPointLevel = apl}));
+        }
+
         // [HttpDelete("{id}")]
         // public async Task<IActionResult> DeleteActivity(Guid id)
         // {

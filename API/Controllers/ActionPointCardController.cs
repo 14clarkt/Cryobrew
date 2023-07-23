@@ -29,7 +29,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditActionPointCard(Guid id, ActionPointCard apc)
+        public async Task<IActionResult> UpdateActionPointCard(Guid id, ActionPointCard apc)
         {
             apc.Id = id;
             return HandleResult(await Mediator.Send(new UpdateAPC.Command{ActionPointCard = apc}));

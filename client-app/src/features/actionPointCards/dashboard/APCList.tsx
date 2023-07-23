@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import APCForm from '../form/APCForm';
 import APLForm from '../form/APLForm';
 import APCEditForm from '../form/APCUpdateForm';
+import APLUpdateForm from '../form/APLUpdateForm';
 
 export default observer(function APCList() {
     const { apcStore, modalStore } = useStore()
@@ -72,7 +73,7 @@ export default observer(function APCList() {
                                     <div><span style={{ fontWeight: "bold" }}>Prerequisite: </span>{apl.prerequisite}</div>
                                 </Grid.Column>
                                 <Grid.Column width='10'>
-                                    <div style={{ overflowWrap: "break-word" }}>{apl.description}</div>
+                                    <div>{apl.description}</div>
                                 </Grid.Column >
                                 <Grid.Column width='2' stretched>
                                     <Grid.Row>
@@ -80,6 +81,8 @@ export default observer(function APCList() {
                                             color='teal'
                                             content='Edit'
                                             fluid
+                                            loading={loading}
+                                            onClick={() => modalStore.openModal(<APLUpdateForm APCid={apc.id} apl={apl} />, "large")}
                                         />
                                     </Grid.Row>
                                     <Grid.Row>

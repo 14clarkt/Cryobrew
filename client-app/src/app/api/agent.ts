@@ -79,11 +79,13 @@ const Activities = {
 const ActionPointCards = {
     list: () => requests.get<ActionPointCard[]>('/actionpointcard'),
     create: (apc: ActionPointCard) => axios.post('/actionpointcard', apc),
-    createApl: (APCid: string, apl: ActionPointLevel) => axios.post(`/actionpointlevel/${APCid}`, apl),
     update: (apc: ActionPointCard) => axios.put(`/actionpointcard/${apc.id}`, apc),
     delete: (id: string) => axios.delete(`/actionpointcard/${id}`),
+
+    createApl: (APCid: string, apl: ActionPointLevel) => axios.post(`/actionpointlevel/${APCid}`, apl),
     deleteApl: (APCid: string, APLid: string) => axios.delete(`/actionpointlevel/${APCid}/${APLid}`),
     copyApl: (APCid: string, APLid: string, copyAplId: string) => axios.post(`/actionpointlevel/${APCid}/${APLid}/${copyAplId}`, {}),
+    updateApl: (apl: ActionPointLevel) => axios.put(`/actionpointlevel`, apl),
 }
 
 const Account = {
