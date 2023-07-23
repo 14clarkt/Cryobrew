@@ -6,6 +6,7 @@ import APCForm from '../form/APCForm';
 import APLForm from '../form/APLForm';
 import APCEditForm from '../form/APCUpdateForm';
 import APLUpdateForm from '../form/APLUpdateForm';
+import APCRules from './APCRules';
 
 export default observer(function APCList() {
     const { apcStore, modalStore } = useStore()
@@ -21,9 +22,16 @@ export default observer(function APCList() {
                     inverted
                     loading={loading}
                     content="Create APC" />
+                <Button
+                    onClick={() => modalStore.openModal(<APCRules />, "large")}
+                    size='huge'
+                    color='yellow'
+                    inverted
+                    loading={loading}
+                    content="APC Rules" />
             </Segment>
             {apcSortedList.map((apc) => (
-                <Segment key={apc.id} style={{ backgroundColor: "#111111", color: "white"}}>
+                <Segment key={apc.id} style={{ backgroundColor: "#111111", color: "white" }}>
                     <Grid>
                         <Grid.Row>
                             <Grid.Column width='12'>
