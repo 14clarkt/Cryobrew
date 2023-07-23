@@ -29,18 +29,7 @@ export default observer(function APLForm(props: Props) {
                 error: null
             }}
             onSubmit={(values, { setErrors }) => {
-                let newApl = {
-                    id: "",
-                    level: values.level,
-                    range: values.range,
-                    cost: values.cost,
-                    duration: values.duration,
-                    prerequisite: values.prerequisite,
-                    upgradeCost: values.upgradeCost,
-                    castingTime: values.castingTime,
-                    description: values.description,
-                }
-                apcStore.createApl(props.APCid, newApl).catch(error =>
+                apcStore.createApl(props.APCid, {...values, id: ""}).catch(error =>
                     setErrors({ error }))
             }}
             validationSchema={Yup.object({
