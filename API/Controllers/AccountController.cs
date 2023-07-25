@@ -33,7 +33,7 @@ namespace API.Controllers
 
             if (result)
             {
-                return CreateUserObject(user);
+                return await CreateUserObject(user);
             }
 
             return Unauthorized();
@@ -67,7 +67,7 @@ namespace API.Controllers
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, "Member");
-                return CreateUserObject(user);
+                return await CreateUserObject(user);
             }
 
             return BadRequest(result.Errors);
@@ -78,17 +78,19 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
 
-            return CreateUserObject(user);
+            return await CreateUserObject(user);
         }
         
-        private UserDto CreateUserObject(AppUser user)
+        private async Task<UserDto> CreateUserObject(AppUser user)
         {
+            var userRoles = await _userManager.GetRolesAsync(user);
             return new UserDto
             {
                 DisplayName = user.DisplayName,
                 Image = null,
                 Token = _tokenService.CreateToken(user),
-                Username = user.UserName
+                Username = user.UserName,
+                Role = userRoles.ElementAt(0)
             };
         }
     }
