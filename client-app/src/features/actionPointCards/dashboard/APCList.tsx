@@ -9,13 +9,15 @@ import APLUpdateForm from '../form/APLUpdateForm';
 import APCRules from './APCRules';
 
 export default observer(function APCList() {
-    const { apcStore, modalStore } = useStore()
+    const { apcStore, modalStore, userStore } = useStore()
     const { apcSortedList, deleteApc, deleteApl, copyApl, loading } = apcStore
+    const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
 
     return (
         <>
             <Segment style={{ backgroundColor: "black" }}>
                 <Button
+                    disabled={!isAdmin}
                     onClick={() => modalStore.openModal(<APCForm />)}
                     size='huge'
                     color='green'
@@ -39,6 +41,7 @@ export default observer(function APCList() {
                             </Grid.Column>
                             <Grid.Column width='2'>
                                 <Button
+                                    disabled={!isAdmin}
                                     color='teal'
                                     content='Rename'
                                     fluid inverted
@@ -48,6 +51,7 @@ export default observer(function APCList() {
                             </Grid.Column>
                             <Grid.Column width='2'>
                                 <Button
+                                    disabled={!isAdmin}
                                     color='red'
                                     content='Delete'
                                     fluid inverted
@@ -88,6 +92,7 @@ export default observer(function APCList() {
                                 <Grid.Column width='2' stretched>
                                     <Grid.Row>
                                         <Button
+                                            disabled={!isAdmin}
                                             color='teal'
                                             content='Edit'
                                             fluid inverted
@@ -97,6 +102,7 @@ export default observer(function APCList() {
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Button
+                                            disabled={!isAdmin}
                                             color='red'
                                             content='Delete Lvl'
                                             fluid inverted
@@ -106,6 +112,7 @@ export default observer(function APCList() {
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Button
+                                            disabled={!isAdmin}
                                             color='yellow'
                                             content='Copy'
                                             fluid inverted
@@ -120,6 +127,7 @@ export default observer(function APCList() {
                             <Grid.Column width='6'><h2>{apc.name}</h2></Grid.Column>
                             <Grid.Column width='4'>
                                 <Button
+                                    disabled={!isAdmin}
                                     onClick={() => modalStore.openModal(<APLForm APCid={apc.id} />, "large")}
                                     color='green'
                                     size='large'
