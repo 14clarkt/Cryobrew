@@ -10,8 +10,8 @@ export default function NotFound() {
                 Oops - we've lokoed everywhere but could not find what you are looking for!
             </Header>
             <Segment.Inline>
-                <Button as={Link} to='/activities'>
-                    Return to activities page
+                <Button as={Link} to='/apc'>
+                    Return to APC page
                 </Button>
             </Segment.Inline>
         </Segment>
