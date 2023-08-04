@@ -10,7 +10,7 @@ import APCRules from './APCRules';
 
 export default observer(function APCList() {
     const { apcStore, modalStore, userStore } = useStore()
-    const { apcSortedList, deleteApc, deleteApl, copyApl, loading } = apcStore
+    const { apcSortedList, deleteApc, deleteApl, copyApl, upgradeApc, downgradeApc, loading } = apcStore
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
 
     return (
@@ -60,7 +60,7 @@ export default observer(function APCList() {
                                 />
                             </Grid.Column>
                         </Grid.Row>
-                        <Grid.Row>
+                        <Grid.Row style={{borderColor: "grey", borderWidth: "2px", borderBottomStyle: "dashed"}}>
                             <Grid.Column width='1'>
                                 <h4>Lvl</h4>
                             </Grid.Column>
@@ -74,9 +74,14 @@ export default observer(function APCList() {
                     </Grid>
                     <Grid divided="vertically" inverted>
                         {apc.actionPointLevels.map((apl) => (
-                            <Grid.Row key={apl.id}>
+                            <Grid.Row key={apl.id} style={{
+                                    borderColor: apl.level === apc.upgradeLevel ? "green" : apl.level < apc.upgradeLevel ? "teal" : "#111111",
+                                    borderWidth: "2px",
+                                    borderStyle: "solid",
+                                    borderTopStyle: "none"
+                                }}>
                                 <Grid.Column width='1'>
-                                    <h4>{apl.level}</h4>
+                                    <h4 style={{textAlign: "center", fontWeight: "bold"}}>{apl.level}</h4>
                                 </Grid.Column>
                                 <Grid.Column width='3'>
                                     <div><span style={{ fontWeight: "bold" }}>Range: </span>{apl.range}</div>
@@ -130,12 +135,29 @@ export default observer(function APCList() {
                                     disabled={!isAdmin}
                                     onClick={() => modalStore.openModal(<APLForm APCid={apc.id} />, "large")}
                                     color='green'
-                                    size='large'
                                     fluid inverted
                                     loading={loading}
                                     content="Add Level" />
                             </Grid.Column>
-                            <Grid.Column width='6' />
+                            <Grid.Column width='2' />
+                            <Grid.Column width='2'>
+                                <Button
+                                    disabled={!isAdmin}
+                                    onClick={() => {upgradeApc(apc)}}
+                                    color='teal'
+                                    fluid inverted
+                                    loading={loading}
+                                    content="Upgrade" />
+                            </Grid.Column>
+                            <Grid.Column width='2'>
+                                <Button
+                                    disabled={!isAdmin || apc.upgradeLevel === 0}
+                                    onClick={() => {downgradeApc(apc)}}
+                                    color='red'
+                                    fluid inverted
+                                    loading={loading}
+                                    content="Ungrade" />
+                            </Grid.Column>
                         </Grid.Row>
                     </Grid>
                 </Segment>

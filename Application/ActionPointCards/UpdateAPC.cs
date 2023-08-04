@@ -36,7 +36,7 @@ namespace Application.ActionPointCards
 
                 if (apc == null) return null;
 
-                apc.Name = request.ActionPointCard.Name;
+                _mapper.Map(request.ActionPointCard, apc);
 
                 var result = await _context.SaveChangesAsync() > 0;
 

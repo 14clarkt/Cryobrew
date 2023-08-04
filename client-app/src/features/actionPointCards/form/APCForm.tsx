@@ -17,6 +17,7 @@ export default observer(function APCForm() {
                 let newApc = {
                     id: "",
                     name: values.name,
+                    upgradeLevel: 0,
                     actionPointLevels: new Array<ActionPointLevel>()
                 }
                 apcStore.createApc(newApc).catch(error =>

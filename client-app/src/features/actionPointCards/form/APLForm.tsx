@@ -33,9 +33,7 @@ export default observer(function APLForm(props: Props) {
                     setErrors({ error }))
             }}
             validationSchema={Yup.object({
-                level: Yup.string().matches(
-                    /^[1-9][0-9]*$/,
-                    "must a number greater than 0.").required(),
+                level: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than 0."),
                 range: Yup.string().required(),
                 cost: Yup.string().required(),
                 duration: Yup.string().required(),

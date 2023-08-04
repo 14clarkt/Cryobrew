@@ -1,6 +1,7 @@
 export interface ActionPointCard {
     id: string
     name: string
+    upgradeLevel: number
     actionPointLevels: Array<ActionPointLevel>
 }
 

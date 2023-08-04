@@ -3,6 +3,7 @@ import agent from "../api/agent"
 import { v4 as uuid } from "uuid"
 import { store } from "./store";
 import { ActionPointCard, ActionPointLevel } from "../models/actionPointCard";
+import { toast } from "react-toastify";
 
 export default class ActionPointCardStore {
     apcRegistry = new Map<string, ActionPointCard>();
@@ -139,6 +140,38 @@ export default class ActionPointCardStore {
                 this.loading = false
             })            
         }
+    }
+
+    upgradeApc = async (apc: ActionPointCard) => {
+        this.loading = true
+        for (let i = 0; i < apc.actionPointLevels.length; i++) {
+            if (apc.actionPointLevels[i].level == apc.upgradeLevel + 1) {
+                await agent.ActionPointCards.update({...apc, upgradeLevel: apc.upgradeLevel+1})
+                runInAction(() => {
+                    this.apcRegistry.set(apc.id, {...apc, upgradeLevel: apc.upgradeLevel+1})
+                    this.loading = false
+                })
+                return
+            }
+        }
+        toast.error(`No APL of level ${apc.upgradeLevel+1} for APC: ${apc.name}.`)
+        this.loading = false
+    }
+
+    downgradeApc = async (apc: ActionPointCard) => {
+        this.loading = true
+        for (let i = 0; i < apc.actionPointLevels.length; i++) {
+            if (apc.actionPointLevels[i].level == apc.upgradeLevel - 1 || apc.upgradeLevel === 1) {
+                await agent.ActionPointCards.update({...apc, upgradeLevel: apc.upgradeLevel-1})
+                runInAction(() => {
+                    this.apcRegistry.set(apc.id, {...apc, upgradeLevel: apc.upgradeLevel-1})
+                    this.loading = false
+                })
+                return
+            }
+        }
+        toast.error(`No APL of level ${apc.upgradeLevel-1} for APC: ${apc.name}.`)
+        this.loading = false
     }
 
     updateApl = async (APCid: string, apl: ActionPointLevel) => {
