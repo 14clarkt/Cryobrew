@@ -33,7 +33,7 @@ export default observer(function APCList() {
                     content="APC Rules" />
             </Segment>
             {apcSortedList.map((apc) => (
-                <Segment key={apc.id} style={{ backgroundColor: "#111111", color: "white" }}>
+                <>{(apc.upgradeLevel > 0 || isAdmin) && <Segment key={apc.id} style={{ backgroundColor: "#111111", color: "white" }}>
                     <Grid>
                         <Grid.Row>
                             <Grid.Column width='12'>
@@ -60,7 +60,7 @@ export default observer(function APCList() {
                                 />
                             </Grid.Column>
                         </Grid.Row>
-                        <Grid.Row style={{borderColor: "grey", borderWidth: "2px", borderBottomStyle: "dashed"}}>
+                        <Grid.Row style={{borderColor: "teal", borderWidth: "3px", borderBottomStyle: "solid"}}>
                             <Grid.Column width='1'>
                                 <h4>Lvl</h4>
                             </Grid.Column>
@@ -76,9 +76,10 @@ export default observer(function APCList() {
                         {apc.actionPointLevels.map((apl) => (
                             <Grid.Row key={apl.id} style={{
                                     borderColor: apl.level === apc.upgradeLevel ? "green" : apl.level < apc.upgradeLevel ? "teal" : "#111111",
-                                    borderWidth: "2px",
+                                    borderWidth: "3px",
                                     borderStyle: "solid",
-                                    borderTopStyle: "none"
+                                    borderTopStyle: apl.level === apc.upgradeLevel ? "solid" : "none",
+                                    borderBottomStyle: apl.level === apc.upgradeLevel ? "solid" : "none"
                                 }}>
                                 <Grid.Column width='1'>
                                     <h4 style={{textAlign: "center", fontWeight: "bold"}}>{apl.level}</h4>
@@ -89,7 +90,7 @@ export default observer(function APCList() {
                                     <div><span style={{ fontWeight: "bold" }}>Duration: </span>{apl.duration}</div>
                                     <div><span style={{ fontWeight: "bold" }}>Upgrade Cost: </span>{apl.upgradeCost}</div>
                                     <div><span style={{ fontWeight: "bold" }}>Casting Time: </span>{apl.castingTime}</div>
-                                    <div><span style={{ fontWeight: "bold" }}>Prerequisite: </span>{apl.prerequisite}</div>
+                                    <div><span style={{ fontWeight: "bold" }}>Prereq(s): </span>{apl.prerequisite}</div>
                                 </Grid.Column>
                                 <Grid.Column width='10'>
                                     <div>{apl.description}</div>
@@ -160,7 +161,7 @@ export default observer(function APCList() {
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
-                </Segment>
+                </Segment>}</>
             ))}
             <Segment basic></Segment>
         </>
