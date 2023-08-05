@@ -2,6 +2,7 @@ export interface ActionPointCard {
     id: string
     name: string
     upgradeLevel: number
+    equippedBy: string | null
     actionPointLevels: Array<ActionPointLevel>
 }
 

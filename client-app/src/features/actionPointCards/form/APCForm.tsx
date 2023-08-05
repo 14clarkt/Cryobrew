@@ -16,6 +16,7 @@ export default observer(function APCForm() {
             onSubmit={(values, { setErrors }) => {
                 let newApc = {
                     id: "",
+                    equippedBy: null,
                     name: values.name,
                     upgradeLevel: 0,
                     actionPointLevels: new Array<ActionPointLevel>()

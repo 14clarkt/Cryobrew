@@ -174,6 +174,17 @@ export default class ActionPointCardStore {
         this.loading = false
     }
 
+    equipApc = async (apc: ActionPointCard, username: string | undefined) => {
+        if (!username) return
+        
+        this.loading = true
+        await agent.ActionPointCards.update(username !== apc.equippedBy ? {...apc, equippedBy: username} : {...apc, equippedBy: null})
+        runInAction(() => {
+            this.apcRegistry.set(apc.id, username !== apc.equippedBy ? {...apc, equippedBy: username} : {...apc, equippedBy: null})
+            this.loading = false
+        })
+    }
+
     updateApl = async (APCid: string, apl: ActionPointLevel) => {
         this.loading = true
         try {
