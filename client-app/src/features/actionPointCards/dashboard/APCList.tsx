@@ -39,8 +39,8 @@ export default observer(function APCList() {
                                 backgroundColor: "#111111",
                                 color: "white",
                                 borderStyle: "solid",
-                                borderWidth: "2px",
-                                borderColor: apc.equippedBy === userStore.user?.username ? "white" : "#111111"}}>
+                                borderWidth: "4px",
+                                borderColor: apc.equippedBy === userStore.user?.username ? "yellow" : "#111111"}}>
                         <Grid>
                             <Grid.Row>
                                 <Grid.Column width='10'>
@@ -93,7 +93,7 @@ export default observer(function APCList() {
                             {apc.actionPointLevels.map((apl) => (
                                 <Grid.Row key={apl.id} style={{
                                     borderColor: apl.level === apc.upgradeLevel ? "green" : apl.level < apc.upgradeLevel ? "teal" : "#111111",
-                                    borderWidth: "3px",
+                                    borderWidth: "5px",
                                     borderStyle: "solid",
                                     borderTopStyle: apl.level === apc.upgradeLevel ? "solid" : "none",
                                     borderBottomStyle: apl.level === apc.upgradeLevel ? "solid" : "none"
