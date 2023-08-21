@@ -4,6 +4,8 @@ export interface User {
     token: string;
     image?: string;
     role: string;
+    currentAP: number;
+    maxAP: number;
 }
 
 export interface UserFormValues {

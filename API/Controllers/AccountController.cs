@@ -90,6 +90,8 @@ namespace API.Controllers
                 Image = null,
                 Token = _tokenService.CreateToken(user),
                 Username = user.UserName,
+                CurrentAP = user.CurrentAP,
+                MaxAP = user.MaxAP,
                 Role = userRoles.ElementAt(0)
             };
         }
