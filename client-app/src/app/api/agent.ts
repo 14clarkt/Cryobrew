@@ -23,7 +23,8 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(async response => {
-    await sleep(1000)
+    //TODO: this await is just to simulate load time. It should be removed in production.
+    await sleep(100)
     return response
 }, (error: AxiosError) => { // this runs on rejection (an error/exception)
     const { data, status, config } = error.response as AxiosResponse;
