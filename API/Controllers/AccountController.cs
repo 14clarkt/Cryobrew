@@ -80,6 +80,17 @@ namespace API.Controllers
 
             return await CreateUserObject(user);
         }
+
+        [HttpPut("update")]
+        public async Task<ActionResult<UserDto>> UpdateUserValues(UserEditDto userEditDto)
+        {
+            var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+            user.CurrentAP = userEditDto.CurrentAP;
+            user.MaxAP = userEditDto.MaxAP;
+
+            await _userManager.UpdateAsync(user);
+            return await CreateUserObject(user);
+        }
         
         private async Task<UserDto> CreateUserObject(AppUser user)
         {

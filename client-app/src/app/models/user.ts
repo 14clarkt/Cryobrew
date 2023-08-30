@@ -14,3 +14,8 @@ export interface UserFormValues {
     displayName?: string;
     userName?: string;
 }
+
+export interface UserEditValues {
+    currentAP: number;
+    maxAP: number;
+}

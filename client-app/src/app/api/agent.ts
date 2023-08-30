@@ -3,7 +3,7 @@ import { Activity } from '../models/activity';
 import { toast } from 'react-toastify';
 import { router } from '../router/Routes';
 import { store } from '../stores/store';
-import { User, UserFormValues } from '../models/user';
+import { User, UserEditValues, UserFormValues } from '../models/user';
 import { ActionPointCard, ActionPointLevel } from '../models/actionPointCard';
 
 const sleep = (delay: number) => {
@@ -91,7 +91,8 @@ const ActionPointCards = {
 const Account = {
     current: () => requests.get<User>('/account'),
     login: (user: UserFormValues) => requests.post<User>('/account/login', user),
-    register: (user: UserFormValues) => requests.post<User>('/account/register', user)
+    register: (user: UserFormValues) => requests.post<User>('/account/register', user),
+    updateUserValues: (values: UserEditValues) => requests.put<User>('/account/update', values)
 }
 
 const agent = {
