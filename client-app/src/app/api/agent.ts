@@ -12,7 +12,7 @@ const sleep = (delay: number) => {
     })
 }
 
-axios.defaults.baseURL = 'http://localhost:5000/api';
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -24,7 +24,7 @@ axios.interceptors.request.use(config => {
 
 axios.interceptors.response.use(async response => {
     //TODO: this await is just to simulate load time. It should be removed in production.
-    await sleep(100)
+    if (import.meta.env.DEV) await sleep(100)
     return response
 }, (error: AxiosError) => { // this runs on rejection (an error/exception)
     const { data, status, config } = error.response as AxiosResponse;
