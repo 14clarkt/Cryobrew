@@ -9,5 +9,6 @@ namespace API.DTOs
     {
         public int CurrentAP { get; set; }
         public int MaxAP { get; set; }
+        public int APCSlots { get; set; }
     }
 }

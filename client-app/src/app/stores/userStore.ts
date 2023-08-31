@@ -60,6 +60,7 @@ export default class UserStore {
             runInAction(() => {
                 this.user!.currentAP = updatedUser.currentAP
                 this.user!.maxAP = updatedUser.maxAP
+                this.user!.apcSlots = updatedUser.apcSlots
                 store.modalStore.closeModal();
             });
         } catch (error) {
