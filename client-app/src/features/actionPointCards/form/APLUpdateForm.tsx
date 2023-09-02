@@ -24,7 +24,7 @@ export default observer(function APLUpdateForm(props: Props) {
                 error: null
             }}
             onSubmit={(values, { setErrors }) => {
-                apcStore.updateApl(props.APCid, values).catch(error =>
+                apcStore.updateApl(props.APCid, {...values, level: +values.level}).catch(error =>
                     setErrors({ error }))
             }}
             validationSchema={Yup.object({

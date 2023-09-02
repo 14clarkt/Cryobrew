@@ -106,7 +106,6 @@ export default class ActionPointCardStore {
         apl.id = uuid()
         try {
             await agent.ActionPointCards.createApl(APCid, apl)
-            apl = {...apl, level: +apl.level} //convert the level from string to number
             runInAction(() => {
                 this.setApl(APCid, apl)
                 this.loading = false
