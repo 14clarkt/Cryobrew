@@ -35,6 +35,10 @@ app.UseCors("CorsPolicy");
 app.UseAuthentication(); //this must come before Authorization
 app.UseAuthorization();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+app.MapFallbackToController("Index", "Fallback");
+
 app.MapControllers();
 
 // this segment updates the migrations upon launch.
