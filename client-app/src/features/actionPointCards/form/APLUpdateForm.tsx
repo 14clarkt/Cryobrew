@@ -1,5 +1,5 @@
 import { ErrorMessage, Form, Formik } from "formik";
-import { Button, Grid, Header, Label, Segment } from "semantic-ui-react";
+import { Button, Grid, Header } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
 import MyTextInput from "../../../app/common/form/MyTextInput";
@@ -7,7 +7,6 @@ import { ActionPointLevel } from "../../../app/models/actionPointCard";
 import * as Yup from 'yup';
 import ValidationErrors from "../../errors/ValidationErrors";
 import MyTextArea from "../../../app/common/form/MyTextArea";
-import { values } from "mobx";
 
 interface Props {
     APCid: string

@@ -1,7 +1,6 @@
-import { Button, Container, Grid, Header, Radio, Segment } from 'semantic-ui-react';
-import { store, useStore } from '../../../app/stores/store';
+import { Button, Grid, Radio, Segment } from 'semantic-ui-react';
+import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
-// import ActivityListItem from './ActivityListItem';
 import APCForm from '../form/APCForm';
 import APLForm from '../form/APLForm';
 import APCEditForm from '../form/APCUpdateForm';
