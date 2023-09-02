@@ -3,7 +3,8 @@ import { Activity } from '../models/activity';
 import { toast } from 'react-toastify';
 import { router } from '../router/Routes';
 import { store } from '../stores/store';
-import { User, UserFormValues } from '../models/user';
+import { User, UserEditValues, UserFormValues } from '../models/user';
+import { ActionPointCard, ActionPointLevel } from '../models/actionPointCard';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -11,7 +12,7 @@ const sleep = (delay: number) => {
     })
 }
 
-axios.defaults.baseURL = 'http://localhost:5000/api';
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -22,7 +23,8 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(async response => {
-    await sleep(1000)
+    //TODO: this await is just to simulate load time. It should be removed in production.
+    if (import.meta.env.DEV) await sleep(100)
     return response
 }, (error: AxiosError) => { // this runs on rejection (an error/exception)
     const { data, status, config } = error.response as AxiosResponse;
@@ -75,14 +77,28 @@ const Activities = {
     delete: (id: string) => axios.delete(`/activities/${id}`)
 }
 
+const ActionPointCards = {
+    list: () => requests.get<ActionPointCard[]>('/actionpointcard'),
+    create: (apc: ActionPointCard) => axios.post('/actionpointcard', apc),
+    update: (apc: ActionPointCard) => axios.put(`/actionpointcard/${apc.id}`, apc),
+    delete: (id: string) => axios.delete(`/actionpointcard/${id}`),
+
+    createApl: (APCid: string, apl: ActionPointLevel) => axios.post(`/actionpointlevel/${APCid}`, apl),
+    deleteApl: (APCid: string, APLid: string) => axios.delete(`/actionpointlevel/${APCid}/${APLid}`),
+    copyApl: (APCid: string, APLid: string, copyAplId: string) => axios.post(`/actionpointlevel/${APCid}/${APLid}/${copyAplId}`, {}),
+    updateApl: (apl: ActionPointLevel) => axios.put(`/actionpointlevel`, apl),
+}
+
 const Account = {
     current: () => requests.get<User>('/account'),
     login: (user: UserFormValues) => requests.post<User>('/account/login', user),
-    register: (user: UserFormValues) => requests.post<User>('/account/register', user)
+    register: (user: UserFormValues) => requests.post<User>('/account/register', user),
+    updateUserValues: (values: UserEditValues) => requests.put<User>('/account/update', values)
 }
 
 const agent = {
     Activities,
+    ActionPointCards,
     Account
 }
 

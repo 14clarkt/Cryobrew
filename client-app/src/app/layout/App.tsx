@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Container } from 'semantic-ui-react';
 import NavBar from './NavBar';
-import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 import LoadingComponent from './LoadingComponent';
 import { useStore } from '../stores/store';
 import { observer } from 'mobx-react-lite';
@@ -20,7 +19,7 @@ import ModalContainer from '../common/modals/ModalContainer';
 
 function App() {
   const location = useLocation()
-  const {commonStore, userStore} = useStore();
+  const { commonStore, userStore } = useStore();
 
   useEffect(() => {
     if (commonStore.token) {
@@ -30,7 +29,7 @@ function App() {
     }
   }, [commonStore, userStore])
 
-  if(!commonStore.appLoaded) return <LoadingComponent content='Loading app...'/>
+  if (!commonStore.appLoaded) return <LoadingComponent content='Loading app...' />
 
   return (
     <>
@@ -39,7 +38,7 @@ function App() {
       {location.pathname === '/' ? <HomePage /> : (
         <>
           <NavBar />
-          <Container style={{ marginTop: '7em' }}>
+          <Container style={{ paddingTop: '7em', backgroundColor: 'black' }}>
             <Outlet />
           </Container>
         </>

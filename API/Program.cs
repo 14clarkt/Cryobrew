@@ -35,6 +35,10 @@ app.UseCors("CorsPolicy");
 app.UseAuthentication(); //this must come before Authorization
 app.UseAuthorization();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+app.MapFallbackToController("Index", "Fallback");
+
 app.MapControllers();
 
 // this segment updates the migrations upon launch.
@@ -45,13 +49,15 @@ try
 {
     var context = services.GetRequiredService<DataContext>();
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
     await context.Database.MigrateAsync();
-    await Seed.SeedData(context, userManager);
+    await Seed.SeedData(context, userManager, roleManager, app.Configuration);
 }
 catch (Exception ex)
 {
-    var logger = services.GetRequiredService<Logger<Program>>();
-    logger.LogError(ex, "An error occured during migration");
+    // var logger = services.GetRequiredService<Logger<Program>>();
+    // logger.LogError(ex, "An error occured during migration");
 }
 // end of segment that updates migrations upon launch.
 

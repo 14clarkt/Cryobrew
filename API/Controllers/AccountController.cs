@@ -33,7 +33,7 @@ namespace API.Controllers
 
             if (result)
             {
-                return CreateUserObject(user);
+                return await CreateUserObject(user);
             }
 
             return Unauthorized();
@@ -66,7 +66,8 @@ namespace API.Controllers
 
             if (result.Succeeded)
             {
-                return CreateUserObject(user);
+                await _userManager.AddToRoleAsync(user, "Member");
+                return await CreateUserObject(user);
             }
 
             return BadRequest(result.Errors);
@@ -77,17 +78,34 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
 
-            return CreateUserObject(user);
+            return await CreateUserObject(user);
+        }
+
+        [HttpPut("update")]
+        public async Task<ActionResult<UserDto>> UpdateUserValues(UserEditDto userEditDto)
+        {
+            var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+            user.CurrentAP = userEditDto.CurrentAP;
+            user.MaxAP = userEditDto.MaxAP;
+            user.APCSlots = userEditDto.APCSlots;
+
+            await _userManager.UpdateAsync(user);
+            return await CreateUserObject(user);
         }
         
-        private UserDto CreateUserObject(AppUser user)
+        private async Task<UserDto> CreateUserObject(AppUser user)
         {
+            var userRoles = await _userManager.GetRolesAsync(user);
             return new UserDto
             {
                 DisplayName = user.DisplayName,
                 Image = null,
                 Token = _tokenService.CreateToken(user),
-                Username = user.UserName
+                Username = user.UserName,
+                CurrentAP = user.CurrentAP,
+                MaxAP = user.MaxAP,
+                APCSlots = user.APCSlots,
+                Role = userRoles.ElementAt(0)
             };
         }
     }

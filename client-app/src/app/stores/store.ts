@@ -3,19 +3,22 @@ import ActivityStore from "./activityStore";
 import CommonStore from "./commonStore";
 import UserStore from "./userStore";
 import ModalStore from "./modalStore";
+import ActionPointCardStore from "./actionPointCardStore";
 
 interface Store {
     activityStore: ActivityStore;
     commonStore: CommonStore;
     userStore: UserStore;
     modalStore: ModalStore;
+    apcStore: ActionPointCardStore;
 }
 
 export const store: Store = {
     activityStore: new ActivityStore(),
     commonStore: new CommonStore(),
     userStore: new UserStore(),
-    modalStore: new ModalStore()
+    modalStore: new ModalStore(),
+    apcStore: new ActionPointCardStore()
 }
 
 export const StoreContext = createContext(store)
