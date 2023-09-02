@@ -6,6 +6,7 @@ import UserEditForm from '../userForm/UserEditForm';
 export default observer(function UserDetails() {
     const { userStore, modalStore } = useStore()
     const { user } = userStore
+    if(!user) return <></>
 
     return (
         <Segment basic style={{ color: "white" }}>
