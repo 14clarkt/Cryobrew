@@ -13,6 +13,7 @@ export default observer(function NavBar() {
                     Cryobrew
                 </Menu.Item>
                 <Menu.Item as={NavLink} to='/apc' name="APC" />
+                <Menu.Item as={NavLink} to='/alchemy' name="Alchemy" />
                 <Menu.Item position='right'>
                     <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
                     <Dropdown pointing='top left' text={user?.displayName}>

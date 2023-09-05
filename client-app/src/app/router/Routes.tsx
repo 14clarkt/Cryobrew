@@ -8,6 +8,7 @@ import NotFound from "../../features/errors/NotFound";
 import ServerError from "../../features/errors/ServerError";
 import APCDashboard from "../../features/actionPointCards/dashboard/APCDashboard";
 import UserDetails from "../../features/users/userDetails/UserDetails";
+import AlchemyDashboard from "../../features/alchemy/dashboard/AlchemyDashboard";
 
 export const routes: RouteObject[] = [
     {
@@ -20,6 +21,7 @@ export const routes: RouteObject[] = [
             {path: 'manage/:id', element: <ActivityForm key='manage'/>},     //between both pages
             
             {path: 'apc', element: <APCDashboard />},
+            {path: 'alchemy', element: <AlchemyDashboard />},
             
             {path: 'profile/:username', element: <UserDetails />},
 
