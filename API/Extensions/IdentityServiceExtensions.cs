@@ -20,7 +20,7 @@ namespace API.Extensions
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<DataContext>();
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("2kf8PtRycFEBN5hDjVzVV7TyWYaESFEh"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("d36m2KmeU6xPtCALFJw9NgBsG2wmG3XmId3k9thrJ9yqczkHe8WusXdmbFTCMvW9"));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
