@@ -9,6 +9,8 @@ import ServerError from "../../features/errors/ServerError";
 import APCDashboard from "../../features/actionPointCards/dashboard/APCDashboard";
 import UserDetails from "../../features/users/userDetails/UserDetails";
 import AlchemyDashboard from "../../features/alchemy/dashboard/AlchemyDashboard";
+import EquipmentQualityDashboard from "../../features/equipmentQuality/dashboard/EquipmentQualityDashboard";
+import SuppliesDashboard from "../../features/supplies/dashboard/SuppliesDashboard";
 
 export const routes: RouteObject[] = [
     {
@@ -22,6 +24,8 @@ export const routes: RouteObject[] = [
             
             {path: 'apc', element: <APCDashboard />},
             {path: 'alchemy', element: <AlchemyDashboard />},
+            {path: 'equipmentQuality', element: <EquipmentQualityDashboard />},
+            {path: 'supplies', element: <SuppliesDashboard />},
             
             {path: 'profile/:username', element: <UserDetails />},
 

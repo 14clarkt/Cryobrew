@@ -14,6 +14,8 @@ export default observer(function NavBar() {
                 </Menu.Item>
                 <Menu.Item as={NavLink} to='/apc' name="APC" />
                 <Menu.Item as={NavLink} to='/alchemy' name="Alchemy" />
+                <Menu.Item as={NavLink} to='/equipmentQuality' name="Equipment Quality" />
+                <Menu.Item as={NavLink} to='/supplies' name="Supplies" />
                 <Menu.Item position='right'>
                     <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
                     <Dropdown pointing='top left' text={user?.displayName}>
