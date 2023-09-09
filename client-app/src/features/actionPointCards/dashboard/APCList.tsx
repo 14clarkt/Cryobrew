@@ -84,7 +84,7 @@ export default observer(function APCList() {
                             color: "white",
                             borderStyle: "solid",
                             borderWidth: "4px",
-                            borderColor: apc.equippedBy === username ? "yellow" : "#111111"
+                            borderColor: apc.equippedBy === username ? "yellow" : "#222222"
                         }}>
                             <Grid>
                                 <Grid.Row>
