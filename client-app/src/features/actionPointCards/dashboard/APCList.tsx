@@ -1,4 +1,4 @@
-import { Button, Grid, Radio, Segment } from 'semantic-ui-react';
+import { Button, Container, Grid, Radio, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 import APCForm from '../form/APCForm';
@@ -43,7 +43,7 @@ export default observer(function APCList() {
     }, [apcFilter, apcSortedList])
 
     return (
-        <>
+        <Container>
             <Segment style={{ backgroundColor: "black" }}>
                 <Button
                     disabled={!isAdmin}
@@ -225,7 +225,6 @@ export default observer(function APCList() {
                             </Grid>
                         </Segment>}</Segment>
             ))}
-            <Segment basic></Segment>
-        </>
+        </Container>
     )
 })
