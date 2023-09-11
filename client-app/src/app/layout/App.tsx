@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Container } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 import NavBar from './NavBar';
 import LoadingComponent from './LoadingComponent';
 import { useStore } from '../stores/store';
@@ -38,9 +38,9 @@ function App() {
       {location.pathname === '/' ? <HomePage /> : (
         <>
           <NavBar />
-          <Container style={{ paddingTop: '7em', backgroundColor: 'black' }}>
+          <Segment style={{ paddingLeft: '3em', paddingRight: '3em', paddingTop: '5em', backgroundColor: 'black' }}>
             <Outlet />
-          </Container>
+          </Segment>
         </>
       )}
     </>

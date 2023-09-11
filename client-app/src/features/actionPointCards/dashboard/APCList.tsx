@@ -1,4 +1,4 @@
-import { Button, Grid, Radio, Segment } from 'semantic-ui-react';
+import { Button, Container, Grid, Radio, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 import APCForm from '../form/APCForm';
@@ -15,17 +15,25 @@ export default observer(function APCList() {
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
     const username = userStore.user?.username
 
-    const [apcFilter, setAPCFilter] = useState("all");
-    const [APCList, setAPCList] = useState<ActionPointCard[]>([]);
+    const [apcFilter, setAPCFilter] = useState("all")
+    const [APCList, setAPCList] = useState<ActionPointCard[]>([])
+    const [currentAP, setCurrentAP] = useState(0)
+    const [equippedAmount, setEquippedAmount] = useState(0)
 
     useEffect(() => {
+        let apcsEquipped = 0
+        for (let i = 0; i < apcSortedList.length; i++) {
+            if (apcSortedList[i].equippedBy === username) apcsEquipped++
+        }
+        setEquippedAmount(apcsEquipped)
+
         if (apcFilter === "all") {
             setAPCList(apcSortedList)
         }
         if (apcFilter === "equipped") {
             let newAPCList = []
             for (let i = 0; i < apcSortedList.length; i++) {
-                if(apcSortedList[i].equippedBy === username) {
+                if (apcSortedList[i].equippedBy === username) {
                     newAPCList.push(apcSortedList[i])
                 }
             }
@@ -34,7 +42,7 @@ export default observer(function APCList() {
         if (apcFilter === "available") {
             let newAPCList = []
             for (let i = 0; i < apcSortedList.length; i++) {
-                if(apcSortedList[i].equippedBy === null) {
+                if (apcSortedList[i].equippedBy === null) {
                     newAPCList.push(apcSortedList[i])
                 }
             }
@@ -42,40 +50,63 @@ export default observer(function APCList() {
         }
     }, [apcFilter, apcSortedList])
 
+    useEffect(() => {
+        setCurrentAP(userStore.currentAP!)
+    }, [userStore.currentAP])
+
     return (
-        <>
-            <Segment style={{ backgroundColor: "black" }}>
-                <Button
-                    disabled={!isAdmin}
-                    onClick={() => modalStore.openModal(<APCForm />)}
-                    size='huge'
-                    color='green'
-                    inverted
-                    loading={loading}
-                    content="Create APC" />
-                <Button
-                    onClick={() => modalStore.openModal(<APCRules />, "large")}
-                    size='huge'
-                    color='yellow'
-                    inverted
-                    loading={loading}
-                    content="APC Rules" />
-                <span style={{color: "white"}}> All </span>
-                <Radio
-                    checked={apcFilter === 'all'}
-                    onChange={() => setAPCFilter("all")}
-                />
-                <span style={{color: "white"}}> Equipped </span>
-                <Radio
-                    checked={apcFilter === 'equipped'}
-                    onChange={() => setAPCFilter("equipped")}
-                />
-                <span style={{color: "white"}}> Available </span>
-                <Radio
-                    checked={apcFilter === 'available'}
-                    onChange={() => setAPCFilter("available")}
-                />
-            </Segment>
+        <Container>
+            <Grid>
+                <Grid.Row>
+                    <Grid.Column width="1"></Grid.Column>
+                    <Grid.Column width="5">
+                        <Button
+                            disabled={!isAdmin}
+                            onClick={() => modalStore.openModal(<APCForm />)}
+                            size='huge'
+                            color='green'
+                            inverted
+                            loading={loading}
+                            content="Create APC" />
+                        <Button
+                            onClick={() => modalStore.openModal(<APCRules />, "large")}
+                            size='huge'
+                            color='yellow'
+                            inverted
+                            loading={loading}
+                            content="APC Rules" />
+                    </Grid.Column>
+                    <Grid.Column width="6">
+                        <Button inverted icon='left chevron' onClick={() => setCurrentAP(currentAP! - 1)} />
+                        <span style={{ color: "white", fontSize: "1.5em" }}> AP: {currentAP} / {userStore.user?.maxAP} </span>
+                        <Button inverted icon='right chevron' onClick={() => setCurrentAP(currentAP! + 1)} />
+                        <Button inverted icon='save' disabled={currentAP === userStore.currentAP}
+                            onClick={() => userStore.updateUserValues({
+                                currentAP,
+                                maxAP: userStore.user?.maxAP!,
+                                apcSlots: userStore.user?.apcSlots!
+                            })} />
+                        <span style={{ color: "white", fontSize: "1.5em" }}> Slots: {equippedAmount} / {userStore.user?.apcSlots} </span>
+                    </Grid.Column>
+                    <Grid.Column width="4">
+                        <span style={{ color: "white" }}> All </span>
+                        <Radio
+                            checked={apcFilter === 'all'}
+                            onChange={() => setAPCFilter("all")}
+                        />
+                        <span style={{ color: "white" }}> Equipped </span>
+                        <Radio
+                            checked={apcFilter === 'equipped'}
+                            onChange={() => setAPCFilter("equipped")}
+                        />
+                        <span style={{ color: "white" }}> Available </span>
+                        <Radio
+                            checked={apcFilter === 'available'}
+                            onChange={() => setAPCFilter("available")}
+                        />
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
             {APCList.map((apc) => (
                 <Segment basic key={apc.id}>
                     {(apc.upgradeLevel > 0 || isAdmin) &&
@@ -84,7 +115,7 @@ export default observer(function APCList() {
                             color: "white",
                             borderStyle: "solid",
                             borderWidth: "4px",
-                            borderColor: apc.equippedBy === username ? "yellow" : "#111111"
+                            borderColor: apc.equippedBy === username ? "yellow" : "#222222"
                         }}>
                             <Grid>
                                 <Grid.Row>
@@ -225,7 +256,6 @@ export default observer(function APCList() {
                             </Grid>
                         </Segment>}</Segment>
             ))}
-            <Segment basic></Segment>
-        </>
+        </Container>
     )
 })
