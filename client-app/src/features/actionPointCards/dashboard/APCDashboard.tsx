@@ -12,7 +12,7 @@ export default observer(function APCDashboard() {
         if (apcRegistry.size <= 1) loadApcs();
     }, [loadApcs, apcRegistry.size])
 
-    if (loadingInitial) return <LoadingComponent content='Loading APCs...' />
+    if (loadingInitial) return <div style={{padding:'400px', position:'relative'}}><LoadingComponent content='Loading APCs...' /></div>
 
     return (
         <APCList />
