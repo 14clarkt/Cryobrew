@@ -1,10 +1,10 @@
-using Application.Activities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Application.Core;
 using FluentValidation.AspNetCore;
 using FluentValidation;
+using Application.ActionPointCards;
 
 namespace API.Extensions
 {
@@ -59,10 +59,10 @@ namespace API.Extensions
                     policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
                 });
             });
-            services.AddMediatR(typeof(List.Handler));
+            services.AddMediatR(typeof(ListAPC.Handler));
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddFluentValidationAutoValidation();
-            services.AddValidatorsFromAssemblyContaining<Create>();
+            services.AddValidatorsFromAssemblyContaining<CreateAPC>();
 
             return services;
         }

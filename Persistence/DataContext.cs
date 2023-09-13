@@ -10,7 +10,6 @@ namespace Persistence
         {
         }
 
-        public DbSet<Activity> Activities { get; set; }
         public DbSet<ActionPointCard> ActionPointCards { get; set; }
         public DbSet<ActionPointLevel> ActionPointLevels { get; set; }
     }

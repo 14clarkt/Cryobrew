@@ -7,8 +7,6 @@ import { toast } from "react-toastify";
 
 export default class ActionPointCardStore {
     apcRegistry = new Map<string, ActionPointCard>();
-    // selectedActivity: Activity | undefined = undefined;
-    // editMode = false;
     loading = false;
     loadingInitial = false;
 
@@ -51,33 +49,9 @@ export default class ActionPointCardStore {
         }
     }
 
-    // loadActivity = async (id: string) => {
-    //     let activity = this.getActivity(id)
-    //     if(activity) {
-    //         this.selectedActivity = activity
-    //         return activity
-    //     }
-    //     else {
-    //         this.setLoadingInitial(true)
-    //         try {
-    //             activity = await agent.Activities.details(id)
-    //             runInAction(() => this.selectedActivity = activity)
-    //             this.setLoadingInitial(false)
-    //             return activity
-    //         } catch (error) {
-    //             console.log(error)
-    //             this.setLoadingInitial(false)
-    //         }
-    //     }
-    // }
-
     private setApc = (apc: ActionPointCard) => {
         this.apcRegistry.set(apc.id, apc)
     }
-
-    // private getActivity = (id: string) => {
-    //     return this.activityRegistry.get(id)
-    // }
 
     setLoadingInitial = (state: boolean) => {
         this.loadingInitial = state
