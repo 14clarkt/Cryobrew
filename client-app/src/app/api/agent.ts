@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { Activity } from '../models/activity';
 import { toast } from 'react-toastify';
 import { router } from '../router/Routes';
 import { store } from '../stores/store';
@@ -69,14 +68,6 @@ const requests = {
     del: <T>(url: string) => axios.delete<T>(url).then(responseBody),
 }
 
-const Activities = {
-    list: () => requests.get<Activity[]>('/activities'),
-    details: (id: string) => requests.get<Activity>(`/activities/${id}`),
-    create: (activity: Activity) => axios.post('/activities', activity),
-    update: (activity: Activity) => axios.put(`/activities/${activity.id}`, activity),
-    delete: (id: string) => axios.delete(`/activities/${id}`)
-}
-
 const ActionPointCards = {
     list: () => requests.get<ActionPointCard[]>('/actionpointcard'),
     create: (apc: ActionPointCard) => axios.post('/actionpointcard', apc),
@@ -97,7 +88,6 @@ const Account = {
 }
 
 const agent = {
-    Activities,
     ActionPointCards,
     Account
 }

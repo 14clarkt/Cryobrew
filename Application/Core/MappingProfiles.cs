@@ -11,7 +11,6 @@ namespace Application.Core
     {
         public MappingProfiles()
         {
-            CreateMap<Activity, Activity>();
             CreateMap<ActionPointCard, ActionPointCard>();
             CreateMap<ActionPointLevel, ActionPointLevel>();
         }

@@ -4,7 +4,7 @@ import axios from 'axios';
 import ValidationErrors from './ValidationErrors';
 
 export default function TestErrors() {
-    const [errors, setErrors] = useState(null)
+    const [errors/*, setErrors*/] = useState(null)
     
     function handleNotFound() {
         axios.get('/buggy/not-found').catch(err => console.log(err.response));
@@ -22,13 +22,13 @@ export default function TestErrors() {
         axios.get('/buggy/unauthorised').catch(err => console.log(err.response));
     }
 
-    function handleBadGuid() {
-        axios.get('/activities/notaguid').catch(err => console.log(err.response));
-    }
+    // function handleBadGuid() {
+    //     axios.get('/activities/notaguid').catch(err => console.log(err.response));
+    // }
 
-    function handleValidationError() {
-        axios.post('/activities', {}).catch(err => setErrors(err));
-    }
+    // function handleValidationError() {
+    //     axios.post('/activities', {}).catch(err => setErrors(err));
+    // }
 
     return (
         <>
@@ -37,10 +37,10 @@ export default function TestErrors() {
                 <Button.Group widths='7'>
                     <Button onClick={handleNotFound} content='Not Found' basic primary />
                     <Button onClick={handleBadRequest} content='Bad Request' basic primary />
-                    <Button onClick={handleValidationError} content='Validation Error' basic primary />
+                    {/* <Button onClick={handleValidationError} content='Validation Error' basic primary /> */}
                     <Button onClick={handleServerError} content='Server Error' basic primary />
                     <Button onClick={handleUnauthorised} content='Unauthorised' basic primary />
-                    <Button onClick={handleBadGuid} content='Bad Guid' basic primary />
+                    {/* <Button onClick={handleBadGuid} content='Bad Guid' basic primary /> */}
                 </Button.Group>
             </Segment>
             {errors && <ValidationErrors errors={errors}/> }

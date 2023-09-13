@@ -2,7 +2,6 @@ using Persistence;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Application.Activities;
 using Application.ActionPointCards;
 
 namespace API.Controllers
@@ -15,12 +14,6 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new ListAPC.Query()));
         }
-
-        // [HttpGet("{id}")] //api/actionpointcard/{Guid}
-        // public async Task<IActionResult> GetActivity(Guid id)
-        // {
-        //     return HandleResult(await Mediator.Send(new Details.Query{Id = id}));
-        // }
 
         [HttpPost] 
         public async Task<IActionResult> CreateAPC(ActionPointCard apc)
