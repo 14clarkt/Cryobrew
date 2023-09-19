@@ -178,12 +178,12 @@ export default observer(function APCList() {
                                             <h4 style={{ textAlign: "center", fontWeight: "bold" }}>{apl.level}</h4>
                                         </Grid.Column>
                                         <Grid.Column width='3'>
-                                            <div><span style={{ fontWeight: "bold" }}>Range: </span>{apl.range}</div>
-                                            <div><span style={{ fontWeight: "bold" }}>Cost: </span>{apl.cost}</div>
-                                            <div><span style={{ fontWeight: "bold" }}>Duration: </span>{apl.duration}</div>
-                                            <div><span style={{ fontWeight: "bold" }}>Upgrade Cost: </span>{apl.upgradeCost}</div>
-                                            <div><span style={{ fontWeight: "bold" }}>Casting Time: </span>{apl.castingTime}</div>
-                                            <div><span style={{ fontWeight: "bold" }}>Prereq(s): </span>{apl.prerequisite}</div>
+                                            <div><span style={{color:"cyan"}}>Range: </span>{apl.range}</div>
+                                            <div><span style={{color:"cyan" }}>Cost: </span>{apl.cost}</div>
+                                            <div><span style={{color:"cyan" }}>Duration: </span>{apl.duration}</div>
+                                            <div><span style={{color:"cyan" }}>Upgrade Cost: </span>{apl.upgradeCost}</div>
+                                            <div><span style={{color:"cyan" }}>Casting Time: </span>{apl.castingTime}</div>
+                                            <div><span style={{color:"cyan" }}>Prereq(s): </span>{apl.prerequisite}</div>
                                         </Grid.Column>
                                         <Grid.Column width='10'>
                                             <div>{apl.description}</div>
