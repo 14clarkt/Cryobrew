@@ -1,13 +1,12 @@
-import { Grid, Header } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
 export default function APCRules() {
     return (
         <>
-            <Header as='h2' content='Action Point Card Rules' color='teal' textAlign='center' />
-            <Grid divided="vertically" inverted style={{ color: "white", fontSize: "1.5em" }}>
+            <Grid divided inverted style={{ color: "white", fontSize: "1.5em" }}>
                 <Grid.Row>
                     <Grid.Column width={2}>
-                        <div style={{ fontWeight: "bold" }}>AP:</div>
+                        <div style={{ color: "cyan", fontWeight: "bold" }}>AP:</div>
                     </Grid.Column>
                     <Grid.Column width={14}>
                         <div>
@@ -18,7 +17,7 @@ export default function APCRules() {
 
                 <Grid.Row>
                     <Grid.Column width={2}>
-                        <div style={{ fontWeight: "bold" }}>AP Amount:</div>
+                        <div style={{ color: "cyan", fontWeight: "bold" }}>AP Amount:</div>
                     </Grid.Column>
                     <Grid.Column width={14}>
                         <div>
@@ -29,7 +28,7 @@ export default function APCRules() {
 
                 <Grid.Row>
                     <Grid.Column width={2}>
-                        <div style={{ fontWeight: "bold" }}>AP Cards:</div>
+                        <div style={{ color: "cyan", fontWeight: "bold" }}>AP Cards:</div>
                     </Grid.Column>
                     <Grid.Column width={14}>
                         <div>
@@ -40,7 +39,7 @@ export default function APCRules() {
 
                 <Grid.Row>
                     <Grid.Column width={2}>
-                        <div style={{ fontWeight: "bold" }}>Upgrading AP Cards:</div>
+                        <div style={{ color: "cyan", fontWeight: "bold" }}>Upgrading AP Cards:</div>
                     </Grid.Column>
                     <Grid.Column width={14}>
                         <div>
@@ -51,7 +50,7 @@ export default function APCRules() {
 
                 <Grid.Row>
                     <Grid.Column width={2}>
-                        <div style={{ fontWeight: "bold" }}>Finding AP Cards:</div>
+                        <div style={{ color: "cyan", fontWeight: "bold" }}>Finding AP Cards:</div>
                     </Grid.Column>
                     <Grid.Column width={14}>
                         <div>
@@ -62,7 +61,7 @@ export default function APCRules() {
 
                 <Grid.Row>
                     <Grid.Column width={2}>
-                        <div style={{ fontWeight: "bold" }}>Starting APC:</div>
+                        <div style={{ color: "cyan", fontWeight: "bold" }}>Starting APC:</div>
                     </Grid.Column>
                     <Grid.Column width={14}>
                         <div>
@@ -73,7 +72,7 @@ export default function APCRules() {
 
                 <Grid.Row>
                     <Grid.Column width={2}>
-                        <div style={{ fontWeight: "bold" }}>APC Slots: </div>
+                        <div style={{ color: "cyan", fontWeight: "bold" }}>APC Slots: </div>
                     </Grid.Column>
                     <Grid.Column width={14}>
                         <div>
@@ -84,7 +83,7 @@ export default function APCRules() {
 
                 <Grid.Row>
                     <Grid.Column width={2}>
-                        <div style={{ fontWeight: "bold" }}>AP Regen:</div>
+                        <div style={{ color: "cyan", fontWeight: "bold" }}>AP Regen:</div>
                     </Grid.Column>
                     <Grid.Column width={14}>
                         <div>
@@ -95,7 +94,7 @@ export default function APCRules() {
 
                 <Grid.Row>
                     <Grid.Column width={2}>
-                        <div style={{ fontWeight: "bold" }}>Wild Cards:</div>
+                        <div style={{ color: "cyan", fontWeight: "bold" }}>Wild Cards:</div>
                     </Grid.Column>
                     <Grid.Column width={14}>
                         <div>
@@ -106,7 +105,7 @@ export default function APCRules() {
 
                 <Grid.Row>
                     <Grid.Column width={2}>
-                        <div style={{ fontWeight: "bold" }}>Use limitations on different levels:</div>
+                        <div style={{ color: "cyan", fontWeight: "bold" }}>Use limitations on different levels:</div>
                     </Grid.Column>
                     <Grid.Column width={14}>
                         <div>

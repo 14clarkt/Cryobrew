@@ -1,5 +1,5 @@
 import { ErrorMessage, Form, Formik } from "formik";
-import { Button, Header } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
 import MyTextInput from "../../../app/common/form/MyTextInput";
@@ -29,7 +29,6 @@ export default observer(function APCUpdateForm(props: Props) {
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <Header as='h2' content='Rename Action Point Card' color='teal' textAlign='center' />
                     <MyTextInput placeholder='Name' name='name' />
                     <ErrorMessage
                         name='error' render={() =>

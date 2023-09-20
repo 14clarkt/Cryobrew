@@ -17,7 +17,7 @@ export default observer(function UserDetails() {
             <div>maxAP: {user.maxAP}</div>
             <div>APCSlots: {user.apcSlots}</div>
             <Button
-                onClick={() => modalStore.openModal(<UserEditForm />)}
+                onClick={() => modalStore.openModal('Edit User Details', <UserEditForm />)}
                 color='teal'
                 inverted
                 content="Edit" />

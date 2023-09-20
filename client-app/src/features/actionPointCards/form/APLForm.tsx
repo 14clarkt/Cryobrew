@@ -1,5 +1,5 @@
 import { ErrorMessage, Form, Formik } from "formik";
-import { Button, Grid, Header } from "semantic-ui-react";
+import { Button, Grid } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
 import MyTextInput from "../../../app/common/form/MyTextInput";
@@ -44,7 +44,6 @@ export default observer(function APLForm(props: Props) {
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <Header as='h2' content='Create Action Point Level' color='teal' textAlign='center' />
                     <Grid>
                         <Grid.Column width={8}>
                             <MyTextInput placeholder='1' name='level' label="Level" />

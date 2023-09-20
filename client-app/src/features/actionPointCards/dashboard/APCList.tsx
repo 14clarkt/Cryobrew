@@ -62,14 +62,14 @@ export default observer(function APCList() {
                     <Grid.Column width="5">
                         <Button
                             disabled={!isAdmin}
-                            onClick={() => modalStore.openModal(<APCForm />)}
+                            onClick={() => modalStore.openModal('Create Action Point Card', <APCForm />)}
                             size='huge'
                             color='green'
                             inverted
                             loading={loading}
                             content="Create APC" />
                         <Button
-                            onClick={() => modalStore.openModal(<APCRules />, "large")}
+                            onClick={() => modalStore.openModal('Action Point Card Rules', <APCRules />, "large")}
                             size='huge'
                             color='yellow'
                             inverted
@@ -139,7 +139,7 @@ export default observer(function APCList() {
                                         content='Rename'
                                         fluid inverted
                                         loading={loading}
-                                        onClick={() => modalStore.openModal(<APCEditForm apc={apc} />)}
+                                        onClick={() => modalStore.openModal('Rename Action Point Card', <APCEditForm apc={apc} />)}
                                     />
                                 </Grid.Column>
                                 <Grid.Column width='2'>
@@ -196,7 +196,7 @@ export default observer(function APCList() {
                                                 content='Edit'
                                                 fluid inverted
                                                 loading={loading}
-                                                onClick={() => modalStore.openModal(<APLUpdateForm APCid={apc.id} apl={apl} />, "large")}
+                                                onClick={() => modalStore.openModal('Update Action Point Level', <APLUpdateForm APCid={apc.id} apl={apl} />, "large")}
                                             />
                                         </Grid.Row>
                                         <Grid.Row>
@@ -227,7 +227,7 @@ export default observer(function APCList() {
                                 <Grid.Column width='4'>
                                     <Button
                                         disabled={!isAdmin}
-                                        onClick={() => modalStore.openModal(<APLForm APCid={apc.id} />, "large")}
+                                        onClick={() => modalStore.openModal('Create Action Point Level', <APLForm APCid={apc.id} />, "large")}
                                         color='green'
                                         fluid inverted
                                         loading={loading}

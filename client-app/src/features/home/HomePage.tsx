@@ -23,10 +23,10 @@ export default observer(function HomePage() {
                     </>
                 ) : (
                     <>
-                        <Button onClick={() => modalStore.openModal(<LoginForm />)} size='huge' inverted>
+                        <Button onClick={() => modalStore.openModal('Login to the Cryobrew', <LoginForm />)} size='huge' inverted>
                             Login!
                         </Button>
-                        <Button onClick={() => modalStore.openModal(<RegisterForm />)} size='huge' inverted>
+                        <Button onClick={() => modalStore.openModal('Sign up to the Cryobrew', <RegisterForm />)} size='huge' inverted>
                             Register
                         </Button>
                     </>
