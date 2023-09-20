@@ -29,7 +29,6 @@ export default observer(function APCUpdateForm(props: Props) {
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <Header as='h2' content='Rename Action Point Card' color='teal' textAlign='center' />
                     <MyTextInput placeholder='Name' name='name' />
                     <ErrorMessage
                         name='error' render={() =>

@@ -44,7 +44,6 @@ export default observer(function APLForm(props: Props) {
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <Header as='h2' content='Create Action Point Level' color='teal' textAlign='center' />
                     <Grid>
                         <Grid.Column width={8}>
                             <MyTextInput placeholder='1' name='level' label="Level" />

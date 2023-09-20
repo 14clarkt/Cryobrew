@@ -20,7 +20,7 @@ export default observer(function EquipmentQualityList() {
                     // loading={loading}
                     content="Create EQ" />
                 <Button
-                    onClick={() => modalStore.openModal(<EquipmentQualityRules />, "fullscreen")}
+                    onClick={() => modalStore.openModal('Equipment Quality Rules', <EquipmentQualityRules />, "fullscreen")}
                     size='huge'
                     color='yellow'
                     inverted

@@ -30,7 +30,6 @@ export default observer(function APCForm() {
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <Header as='h2' content='Create Action Point Card' color='teal' textAlign='center' />
                     <MyTextInput placeholder='Name' name='name' />
                     <ErrorMessage
                         name='error' render={() =>
