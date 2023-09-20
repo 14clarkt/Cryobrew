@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { Button, Grid, Segment } from 'semantic-ui-react';
+import { Button, Grid, Popup, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import EquipmentQualityRules from './EquipmentQualityRules';
 
@@ -75,24 +75,43 @@ export default observer(function EquipmentQualityList() {
                 <Grid divided inverted>
                     <Grid.Row style={{ textAlign: "center", borderColor: "teal", borderWidth: "3px", borderBottomStyle: "solid", borderTopStyle: "solid" }}>
                         <Grid.Column width='1'>
-                            <h3 style={{ color: "cyan" }}>Pts</h3><div style={{fontSize: "1.1em"}}>1</div>
+                            <Popup inverted header="Quality Points"
+                                content="Adds this many max Points to the equipment this is added to."
+                                trigger={<h3 style={{ color: "cyan" }}>Pts</h3>} />
+                            <div style={{ fontSize: "1.1em" }}>1</div>
                         </Grid.Column>
+
                         <Grid.Column width='3'>
-                            <h3 style={{ color: "cyan" }}>Tool(s)</h3><div style={{fontSize: "1.1em"}}>Smith's</div>
+                            <Popup inverted position='top center'
+                                content="Tool(s) that can apply this Quality."
+                                trigger={<h3 style={{ color: "cyan" }}>Tool(s)</h3>} />
+                            <div style={{ fontSize: "1.1em" }}>Smith's</div>
                         </Grid.Column>
+
                         <Grid.Column width='5'>
-                            <h3 style={{ color: "cyan" }}>Equipment</h3><div style={{fontSize: "1.1em"}}>All Weapons and Armor</div>
+                            <Popup inverted position='top center'
+                                content="Equipment that this Quality can be applied to."
+                                trigger={<h3 style={{ color: "cyan" }}>Equipment</h3>} />
+                            <div style={{ fontSize: "1.1em" }}>All Weapons and Armor</div>
                         </Grid.Column>
+
                         <Grid.Column width='4'>
-                            <h3 style={{ color: "cyan" }}>Restrictions</h3><div style={{fontSize: "1.1em"}}>None</div>
+                            <Popup inverted position='top center'
+                                content="Restrictions to use this Quality."
+                                trigger={<h3 style={{ color: "cyan" }}>Restrictions</h3>} />
+                            <div style={{ fontSize: "1.1em" }}>None</div>
                         </Grid.Column>
+
                         <Grid.Column width='3'>
-                            <h3 style={{ color: "cyan" }}>Cost</h3><div style={{fontSize: "1.1em"}}>0.9x</div>
+                            <Popup inverted position='top center'
+                                content="Cost in gp worth of Equipment Supplies. X represents the equipment's base value."
+                                trigger={<h3 style={{ color: "cyan" }}>Cost</h3>} />
+                            <div style={{ fontSize: "1.1em" }}>0.9x</div>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row style={{ textAlign: "center" }}>
                         <Grid.Column width='16'>
-                            <h3 style={{ color: "cyan" }}>Effect</h3><div style={{fontSize: "1.2em"}}>No special effect.</div>
+                            <h3 style={{ color: "cyan" }}>Effect</h3><div style={{ fontSize: "1.2em" }}>No special effect.</div>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
@@ -145,24 +164,24 @@ export default observer(function EquipmentQualityList() {
                 <Grid divided inverted>
                     <Grid.Row style={{ textAlign: "center", borderColor: "teal", borderWidth: "3px", borderBottomStyle: "solid", borderTopStyle: "solid" }}>
                         <Grid.Column width='1'>
-                            <h3 style={{ color: "cyan" }}>Pts</h3><div style={{fontSize: "1.1em"}}>1</div>
+                            <h3 style={{ color: "cyan" }}>Pts</h3><div style={{ fontSize: "1.1em" }}>1</div>
                         </Grid.Column>
                         <Grid.Column width='3'>
-                            <h3 style={{ color: "cyan" }}>Tool(s)</h3><div style={{fontSize: "1.1em"}}>Smith's</div>
+                            <h3 style={{ color: "cyan" }}>Tool(s)</h3><div style={{ fontSize: "1.1em" }}>Smith's</div>
                         </Grid.Column>
                         <Grid.Column width='5'>
-                            <h3 style={{ color: "cyan" }}>Equipment</h3><div style={{fontSize: "1.1em"}}>All Weapons and Armor</div>
+                            <h3 style={{ color: "cyan" }}>Equipment</h3><div style={{ fontSize: "1.1em" }}>All Weapons and Armor</div>
                         </Grid.Column>
                         <Grid.Column width='4'>
-                            <h3 style={{ color: "cyan" }}>Restrictions</h3><div style={{fontSize: "1.1em"}}>None</div>
+                            <h3 style={{ color: "cyan" }}>Restrictions</h3><div style={{ fontSize: "1.1em" }}>None</div>
                         </Grid.Column>
                         <Grid.Column width='3'>
-                            <h3 style={{ color: "cyan" }}>Cost</h3><div style={{fontSize: "1.1em"}}>0.9x</div>
+                            <h3 style={{ color: "cyan" }}>Cost</h3><div style={{ fontSize: "1.1em" }}>0.9x</div>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row style={{ textAlign: "center" }}>
                         <Grid.Column width='16'>
-                            <h3 style={{ color: "cyan" }}>Effect</h3><div style={{fontSize: "1.2em"}}>No special effect.</div>
+                            <h3 style={{ color: "cyan" }}>Effect</h3><div style={{ fontSize: "1.2em" }}>No special effect.</div>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
@@ -215,24 +234,24 @@ export default observer(function EquipmentQualityList() {
                 <Grid divided inverted>
                     <Grid.Row style={{ textAlign: "center", borderColor: "teal", borderWidth: "3px", borderBottomStyle: "solid", borderTopStyle: "solid" }}>
                         <Grid.Column width='1'>
-                            <h3 style={{ color: "cyan" }}>Pts</h3><div style={{fontSize: "1.1em"}}>1</div>
+                            <h3 style={{ color: "cyan" }}>Pts</h3><div style={{ fontSize: "1.1em" }}>1</div>
                         </Grid.Column>
                         <Grid.Column width='3'>
-                            <h3 style={{ color: "cyan" }}>Tool(s)</h3><div style={{fontSize: "1.1em"}}>Smith's</div>
+                            <h3 style={{ color: "cyan" }}>Tool(s)</h3><div style={{ fontSize: "1.1em" }}>Smith's</div>
                         </Grid.Column>
                         <Grid.Column width='5'>
-                            <h3 style={{ color: "cyan" }}>Equipment</h3><div style={{fontSize: "1.1em"}}>All Weapons and Armor</div>
+                            <h3 style={{ color: "cyan" }}>Equipment</h3><div style={{ fontSize: "1.1em" }}>All Weapons and Armor</div>
                         </Grid.Column>
                         <Grid.Column width='4'>
-                            <h3 style={{ color: "cyan" }}>Restrictions</h3><div style={{fontSize: "1.1em"}}>None</div>
+                            <h3 style={{ color: "cyan" }}>Restrictions</h3><div style={{ fontSize: "1.1em" }}>None</div>
                         </Grid.Column>
                         <Grid.Column width='3'>
-                            <h3 style={{ color: "cyan" }}>Cost</h3><div style={{fontSize: "1.1em"}}>0.9x</div>
+                            <h3 style={{ color: "cyan" }}>Cost</h3><div style={{ fontSize: "1.1em" }}>0.9x</div>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row style={{ textAlign: "center" }}>
                         <Grid.Column width='16'>
-                            <h3 style={{ color: "cyan" }}>Effect</h3><div style={{fontSize: "1.2em"}}>No special effect.</div>
+                            <h3 style={{ color: "cyan" }}>Effect</h3><div style={{ fontSize: "1.2em" }}>No special effect.</div>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
