@@ -40,6 +40,17 @@ export default function EquipmentQualityRules() {
 
                 <Grid.Row>
                     <Grid.Column width={2}>
+                        <div style={{ fontWeight: "bold" }}>Learning Qualities 3:</div>
+                    </Grid.Column>
+                    <Grid.Column width={14}>
+                        <div>
+                            You can cast Identify on a piece of equipment with a Quality that you do not know, and instantly know how to replicate it given that you are proficient with the relevant tools.
+                        </div>
+                    </Grid.Column>
+                </Grid.Row>
+
+                <Grid.Row>
+                    <Grid.Column width={2}>
                         <div style={{ fontWeight: "bold" }}>Quality Points:</div>
                     </Grid.Column>
                     <Grid.Column width={14}>

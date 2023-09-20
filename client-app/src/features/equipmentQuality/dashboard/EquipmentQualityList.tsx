@@ -9,7 +9,7 @@ export default observer(function EquipmentQualityList() {
 
     return (
         <>
-        <div>Example Layout</div>
+            <div style={{ color: 'white' }}>Example Layout</div>
             <Segment style={{ backgroundColor: "black" }}>
                 <Button
                     disabled={!isAdmin}
@@ -20,13 +20,14 @@ export default observer(function EquipmentQualityList() {
                     // loading={loading}
                     content="Create EQ" />
                 <Button
-                    onClick={() => modalStore.openModal(<EquipmentQualityRules />, "large")}
+                    onClick={() => modalStore.openModal(<EquipmentQualityRules />, "fullscreen")}
                     size='huge'
                     color='yellow'
                     inverted
                     // loading={loading}
                     content="EQ Rules" />
             </Segment>
+
             <Segment style={{
                 backgroundColor: "#111111",
                 color: "white",
@@ -36,8 +37,18 @@ export default observer(function EquipmentQualityList() {
             }}>
                 <Grid>
                     <Grid.Row>
-                        <Grid.Column width='12'>
+                        <Grid.Column width='10' style={{ color: "cyan" }}>
                             <h1>Reinforced</h1>
+                        </Grid.Column>
+                        <Grid.Column width='2'>
+                            <Button
+                                disabled={!isAdmin}
+                                color='yellow'
+                                content='Hide'
+                                fluid inverted
+                            // loading={loading}
+                            // onClick={() => modalStore.openModal(<APCEditForm apc={apc} />)}
+                            />
                         </Grid.Column>
                         <Grid.Column width='2'>
                             <Button
@@ -62,32 +73,26 @@ export default observer(function EquipmentQualityList() {
                     </Grid.Row>
                 </Grid>
                 <Grid divided inverted>
-                    <Grid.Row style={{ borderColor: "teal", borderWidth: "3px", borderBottomStyle: "solid" }}>
+                    <Grid.Row style={{ textAlign: "center", borderColor: "teal", borderWidth: "3px", borderBottomStyle: "solid", borderTopStyle: "solid" }}>
                         <Grid.Column width='1'>
-                            <h4>Slots</h4>
+                            <h3 style={{ color: "cyan" }}>Pts</h3><div style={{fontSize: "1.1em"}}>1</div>
+                        </Grid.Column>
+                        <Grid.Column width='3'>
+                            <h3 style={{ color: "cyan" }}>Tool(s)</h3><div style={{fontSize: "1.1em"}}>Smith's</div>
                         </Grid.Column>
                         <Grid.Column width='5'>
-                            <h4>Restrictions</h4>
+                            <h3 style={{ color: "cyan" }}>Equipment</h3><div style={{fontSize: "1.1em"}}>All Weapons and Armor</div>
                         </Grid.Column>
-                        <Grid.Column width='8'>
-                            <h4>Description</h4>
+                        <Grid.Column width='4'>
+                            <h3 style={{ color: "cyan" }}>Restrictions</h3><div style={{fontSize: "1.1em"}}>None</div>
                         </Grid.Column>
-                        <Grid.Column width='2'>
-                            <h4>Price</h4>
+                        <Grid.Column width='3'>
+                            <h3 style={{ color: "cyan" }}>Cost</h3><div style={{fontSize: "1.1em"}}>0.9x</div>
                         </Grid.Column>
                     </Grid.Row>
-                    <Grid.Row>
-                        <Grid.Column width='1'>
-                            <h4>1</h4>
-                        </Grid.Column>
-                        <Grid.Column width='5'>
-                            <h4>None</h4>
-                        </Grid.Column>
-                        <Grid.Column width='8'>
-                            <h4>No special effect.</h4>
-                        </Grid.Column>
-                        <Grid.Column width='2'>
-                            <h4>0.9x</h4>
+                    <Grid.Row style={{ textAlign: "center" }}>
+                        <Grid.Column width='16'>
+                            <h3 style={{ color: "cyan" }}>Effect</h3><div style={{fontSize: "1.2em"}}>No special effect.</div>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
@@ -102,8 +107,18 @@ export default observer(function EquipmentQualityList() {
             }}>
                 <Grid>
                     <Grid.Row>
-                        <Grid.Column width='12'>
+                        <Grid.Column width='10' style={{ color: "cyan" }}>
                             <h1>Reinforced</h1>
+                        </Grid.Column>
+                        <Grid.Column width='2'>
+                            <Button
+                                disabled={!isAdmin}
+                                color='yellow'
+                                content='Hide'
+                                fluid inverted
+                            // loading={loading}
+                            // onClick={() => modalStore.openModal(<APCEditForm apc={apc} />)}
+                            />
                         </Grid.Column>
                         <Grid.Column width='2'>
                             <Button
@@ -128,32 +143,96 @@ export default observer(function EquipmentQualityList() {
                     </Grid.Row>
                 </Grid>
                 <Grid divided inverted>
-                    <Grid.Row style={{ borderColor: "teal", borderWidth: "3px", borderBottomStyle: "solid" }}>
+                    <Grid.Row style={{ textAlign: "center", borderColor: "teal", borderWidth: "3px", borderBottomStyle: "solid", borderTopStyle: "solid" }}>
                         <Grid.Column width='1'>
-                            <h4>Slots</h4>
+                            <h3 style={{ color: "cyan" }}>Pts</h3><div style={{fontSize: "1.1em"}}>1</div>
+                        </Grid.Column>
+                        <Grid.Column width='3'>
+                            <h3 style={{ color: "cyan" }}>Tool(s)</h3><div style={{fontSize: "1.1em"}}>Smith's</div>
                         </Grid.Column>
                         <Grid.Column width='5'>
-                            <h4>Restrictions</h4>
+                            <h3 style={{ color: "cyan" }}>Equipment</h3><div style={{fontSize: "1.1em"}}>All Weapons and Armor</div>
                         </Grid.Column>
-                        <Grid.Column width='8'>
-                            <h4>Description</h4>
+                        <Grid.Column width='4'>
+                            <h3 style={{ color: "cyan" }}>Restrictions</h3><div style={{fontSize: "1.1em"}}>None</div>
                         </Grid.Column>
-                        <Grid.Column width='2'>
-                            <h4>Price</h4>
+                        <Grid.Column width='3'>
+                            <h3 style={{ color: "cyan" }}>Cost</h3><div style={{fontSize: "1.1em"}}>0.9x</div>
                         </Grid.Column>
                     </Grid.Row>
+                    <Grid.Row style={{ textAlign: "center" }}>
+                        <Grid.Column width='16'>
+                            <h3 style={{ color: "cyan" }}>Effect</h3><div style={{fontSize: "1.2em"}}>No special effect.</div>
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+            </Segment>
+
+            <Segment style={{
+                backgroundColor: "#111111",
+                color: "white",
+                borderStyle: "solid",
+                borderWidth: "4px",
+                borderColor: "#222222"
+            }}>
+                <Grid>
                     <Grid.Row>
-                        <Grid.Column width='1'>
-                            <h4>1</h4>
-                        </Grid.Column>
-                        <Grid.Column width='5'>
-                            <h4>None</h4>
-                        </Grid.Column>
-                        <Grid.Column width='8'>
-                            <h4>No special effect.</h4>
+                        <Grid.Column width='10' style={{ color: "cyan" }}>
+                            <h1>Reinforced</h1>
                         </Grid.Column>
                         <Grid.Column width='2'>
-                            <h4>0.9x</h4>
+                            <Button
+                                disabled={!isAdmin}
+                                color='yellow'
+                                content='Hide'
+                                fluid inverted
+                            // loading={loading}
+                            // onClick={() => modalStore.openModal(<APCEditForm apc={apc} />)}
+                            />
+                        </Grid.Column>
+                        <Grid.Column width='2'>
+                            <Button
+                                disabled={!isAdmin}
+                                color='teal'
+                                content='Edit'
+                                fluid inverted
+                            // loading={loading}
+                            // onClick={() => modalStore.openModal(<APCEditForm apc={apc} />)}
+                            />
+                        </Grid.Column>
+                        <Grid.Column width='2'>
+                            <Button
+                                disabled={!isAdmin}
+                                color='red'
+                                content='Delete'
+                                fluid inverted
+                            // loading={loading}
+                            // onClick={() => deleteApc(apc.id)}
+                            />
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+                <Grid divided inverted>
+                    <Grid.Row style={{ textAlign: "center", borderColor: "teal", borderWidth: "3px", borderBottomStyle: "solid", borderTopStyle: "solid" }}>
+                        <Grid.Column width='1'>
+                            <h3 style={{ color: "cyan" }}>Pts</h3><div style={{fontSize: "1.1em"}}>1</div>
+                        </Grid.Column>
+                        <Grid.Column width='3'>
+                            <h3 style={{ color: "cyan" }}>Tool(s)</h3><div style={{fontSize: "1.1em"}}>Smith's</div>
+                        </Grid.Column>
+                        <Grid.Column width='5'>
+                            <h3 style={{ color: "cyan" }}>Equipment</h3><div style={{fontSize: "1.1em"}}>All Weapons and Armor</div>
+                        </Grid.Column>
+                        <Grid.Column width='4'>
+                            <h3 style={{ color: "cyan" }}>Restrictions</h3><div style={{fontSize: "1.1em"}}>None</div>
+                        </Grid.Column>
+                        <Grid.Column width='3'>
+                            <h3 style={{ color: "cyan" }}>Cost</h3><div style={{fontSize: "1.1em"}}>0.9x</div>
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row style={{ textAlign: "center" }}>
+                        <Grid.Column width='16'>
+                            <h3 style={{ color: "cyan" }}>Effect</h3><div style={{fontSize: "1.2em"}}>No special effect.</div>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
