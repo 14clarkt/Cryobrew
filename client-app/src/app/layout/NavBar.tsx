@@ -17,7 +17,7 @@ export default observer(function NavBar() {
                 <Menu.Item as={NavLink} to='/equipmentQuality' name="Equipment Quality" />
                 <Menu.Item as={NavLink} to='/supplies' name="Supplies" />
                 <Menu.Item position='right' >
-                    <Button fluid inverted color='teal' content="Long Rest" onClick={() => modalStore.openModal(<LongRest />)}/>
+                    <Button fluid inverted color='teal' content="Long Rest" onClick={() => modalStore.openModal('Long Rest', <LongRest />)}/>
                 </Menu.Item>
                 <Menu.Item position='right'>
                     <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />

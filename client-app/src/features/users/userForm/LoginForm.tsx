@@ -1,6 +1,6 @@
 import { ErrorMessage, Form, Formik } from "formik";
 import MyTextInput from "../../../app/common/form/MyTextInput";
-import { Button, Header, Label } from "semantic-ui-react";
+import { Button, Label } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
 

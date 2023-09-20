@@ -1,5 +1,5 @@
 import { ErrorMessage, Form, Formik } from "formik";
-import { Button, Header } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
 import MyTextInput from "../../../app/common/form/MyTextInput";
@@ -31,7 +31,6 @@ export default observer(function UserEditForm() {
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <Header as='h2' content='Edit User Details' color='teal' textAlign='center' />
                     <MyTextInput placeholder='10' name='currentAP' label="currentAP" />
                     <MyTextInput placeholder='10' name='maxAP' label="maxAP" />
                     <MyTextInput placeholder='Max # APCs you can equip. Ex: 2.' name='apcSlots' label="apcSlots" />
