@@ -31,7 +31,7 @@ export default class EquipmentQualityStore {
             this.setLoadingInitial(false)
         }
     }
-    
+
     createEQ = async (eq: EquipmentQuality) => {
         this.loading = true
         eq.id = uuid()
@@ -50,10 +50,26 @@ export default class EquipmentQualityStore {
         }
     }
 
+    deleteEQ = async (id: string) => {
+        this.loading = true;
+        try {
+            await agent.EquipmentQualities.delete(id)
+            runInAction(() => {
+                this.eqRegistry.delete(id)
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
     setLoadingInitial = (state: boolean) => {
         this.loadingInitial = state
     }
-    
+
     private setEQ = (eq: EquipmentQuality) => {
         this.eqRegistry.set(eq.id, eq)
     }

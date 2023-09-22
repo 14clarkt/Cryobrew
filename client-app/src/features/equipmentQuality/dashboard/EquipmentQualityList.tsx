@@ -5,7 +5,7 @@ import { useStore } from '../../../app/stores/store';
 export default observer(function EquipmentQualityList() {
     const { userStore, equipmentQualityStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
-    const { eqList } = equipmentQualityStore
+    const { eqList, deleteEQ, loading } = equipmentQualityStore
 
     return (
         <>{eqList.map((eq) => (
@@ -47,8 +47,8 @@ export default observer(function EquipmentQualityList() {
                                 color='red'
                                 content='Delete'
                                 fluid inverted
-                            // loading={loading}
-                            // onClick={() => deleteApc(apc.id)}
+                            loading={loading}
+                            onClick={() => deleteEQ(eq.id)}
                             />
                         </Grid.Column>
                     </Grid.Row>

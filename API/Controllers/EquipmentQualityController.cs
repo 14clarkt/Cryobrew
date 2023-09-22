@@ -29,10 +29,10 @@ namespace API.Controllers
         //     return HandleResult(await Mediator.Send(new UpdateAPC.Command{ActionPointCard = apc}));
         // }
 
-        // [HttpDelete("{id}")]
-        // public async Task<IActionResult> DeleteAPC(Guid id)
-        // {
-        //     return HandleResult(await Mediator.Send(new DeleteAPC.Command{Id = id}));
-        // }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteEQ(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new DeleteEQ.Command{Id = id}));
+        }
     }
 }
