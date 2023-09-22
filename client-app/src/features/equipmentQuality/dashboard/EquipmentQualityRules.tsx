@@ -105,6 +105,28 @@ export default function EquipmentQualityRules() {
 
                 <Grid.Row>
                     <Grid.Column width={2}>
+                        <div style={{ fontWeight: "bold" }}>Getting Equipment Supplies 1:</div>
+                    </Grid.Column>
+                    <Grid.Column width={14}>
+                        <div>
+                            You may take 30 minutes to dismatle a piece of equipment. You receive Equipment Supplies equal to half of its base cost.
+                        </div>
+                    </Grid.Column>
+                </Grid.Row>
+
+                <Grid.Row>
+                    <Grid.Column width={2}>
+                        <div style={{ fontWeight: "bold" }}>Getting Equipment Supplies 2:</div>
+                    </Grid.Column>
+                    <Grid.Column width={14}>
+                        <div>
+                            There are instances where you may find Equipment Supply Nodes. These can be from mines, large creatures that may be skinned, or other sources of raw materials fit for equipment. You may take 1 hour to make a pertinent tool check to gather from an Equipment Supplies Node. You gather Equipment Supplies equal to the check times the Node Level in gp.
+                        </div>
+                    </Grid.Column>
+                </Grid.Row>
+
+                <Grid.Row>
+                    <Grid.Column width={2}>
                         <div style={{ fontWeight: "bold" }}>Application Restriction:</div>
                     </Grid.Column>
                     <Grid.Column width={14}>
