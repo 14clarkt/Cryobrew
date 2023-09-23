@@ -85,6 +85,7 @@ const EquipmentQualities = {
     list: () => requests.get<EquipmentQuality[]>('/equipmentquality'),
     create: (eq: EquipmentQuality) => axios.post('/equipmentquality', eq),
     delete: (id: string) => axios.delete(`/equipmentquality/${id}`),
+    update: (eq: EquipmentQuality) => axios.put(`/equipmentquality/${eq.id}`, eq),
 }
 
 const Account = {

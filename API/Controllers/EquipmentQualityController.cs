@@ -17,17 +17,17 @@ namespace API.Controllers
         }
 
         [HttpPost] 
-        public async Task<IActionResult> CreateAPC(EquipmentQuality eq)
+        public async Task<IActionResult> CreateEQ(EquipmentQuality eq)
         {
             return HandleResult(await Mediator.Send(new CreateEQ.Command{EquipmentQuality = eq}));
         }
 
-        // [HttpPut("{id}")]
-        // public async Task<IActionResult> UpdateActionPointCard(Guid id, ActionPointCard apc)
-        // {
-        //     apc.Id = id;
-        //     return HandleResult(await Mediator.Send(new UpdateAPC.Command{ActionPointCard = apc}));
-        // }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateEQ(Guid id, EquipmentQuality eq)
+        {
+            eq.Id = id;
+            return HandleResult(await Mediator.Send(new UpdateEQ.Command{EquipmentQuality = eq}));
+        }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEQ(Guid id)

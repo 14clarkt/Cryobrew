@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react-lite';
 import { Button, Grid, Popup, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
+import EQUpdateForm from '../form/EQUpdateForm';
 
 export default observer(function EquipmentQualityList() {
-    const { userStore, equipmentQualityStore } = useStore()
+    const { userStore, equipmentQualityStore, modalStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
     const { eqList, deleteEQ, loading } = equipmentQualityStore
 
@@ -37,8 +38,8 @@ export default observer(function EquipmentQualityList() {
                                 color='teal'
                                 content='Edit'
                                 fluid inverted
-                            // loading={loading}
-                            // onClick={() => modalStore.openModal(<APCEditForm apc={apc} />)}
+                                loading={loading}
+                                onClick={() => modalStore.openModal("Update Equipment Quality", <EQUpdateForm eq={eq}/>, 'large')}
                             />
                         </Grid.Column>
                         <Grid.Column width='2'>
@@ -47,8 +48,8 @@ export default observer(function EquipmentQualityList() {
                                 color='red'
                                 content='Delete'
                                 fluid inverted
-                            loading={loading}
-                            onClick={() => deleteEQ(eq.id)}
+                                loading={loading}
+                                onClick={() => deleteEQ(eq.id)}
                             />
                         </Grid.Column>
                     </Grid.Row>

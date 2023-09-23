@@ -66,6 +66,23 @@ export default class EquipmentQualityStore {
         }
     }
 
+    updateEQ = async (eq: EquipmentQuality) => {
+        this.loading = true
+        try {
+            await agent.EquipmentQualities.update(eq)
+            runInAction(() => {
+                this.eqRegistry.set(eq.id, eq)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })            
+        }
+    }
+
     setLoadingInitial = (state: boolean) => {
         this.loadingInitial = state
     }
