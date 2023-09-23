@@ -4,6 +4,7 @@ import { router } from '../router/Routes';
 import { store } from '../stores/store';
 import { User, UserEditValues, UserFormValues } from '../models/user';
 import { ActionPointCard, ActionPointLevel } from '../models/actionPointCard';
+import { EquipmentQuality } from '../models/equipmentQuality';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -80,6 +81,13 @@ const ActionPointCards = {
     updateApl: (apl: ActionPointLevel) => axios.put(`/actionpointlevel`, apl),
 }
 
+const EquipmentQualities = {
+    list: () => requests.get<EquipmentQuality[]>('/equipmentquality'),
+    create: (eq: EquipmentQuality) => axios.post('/equipmentquality', eq),
+    delete: (id: string) => axios.delete(`/equipmentquality/${id}`),
+    update: (eq: EquipmentQuality) => axios.put(`/equipmentquality/${eq.id}`, eq),
+}
+
 const Account = {
     current: () => requests.get<User>('/account'),
     login: (user: UserFormValues) => requests.post<User>('/account/login', user),
@@ -89,6 +97,7 @@ const Account = {
 
 const agent = {
     ActionPointCards,
+    EquipmentQualities,
     Account
 }
 

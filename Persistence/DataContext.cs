@@ -12,5 +12,6 @@ namespace Persistence
 
         public DbSet<ActionPointCard> ActionPointCards { get; set; }
         public DbSet<ActionPointLevel> ActionPointLevels { get; set; }
+        public DbSet<EquipmentQuality> EquipmentQualities { get; set; }
     }
 }
