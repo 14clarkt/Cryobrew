@@ -15,6 +15,8 @@ namespace Domain
         public string Restrictions { get; set; }
         public string Cost { get; set; }
         public string Effect { get; set; }
+        public string EffectCost { get; set; }
+        public string EffectAction { get; set; }
         public bool Found { get; set; }
         public bool Learned { get; set; }
     }
