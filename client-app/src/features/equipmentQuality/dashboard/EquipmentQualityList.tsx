@@ -6,16 +6,16 @@ import EQUpdateForm from '../form/EQUpdateForm';
 export default observer(function EquipmentQualityList() {
     const { userStore, equipmentQualityStore, modalStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
-    const { eqList, deleteEQ, loading } = equipmentQualityStore
+    const { eqList, deleteEQ, findLearnForgetEQ, loading } = equipmentQualityStore
 
     return (
         <>{eqList.map((eq) => (
-            <Segment style={{
+            (isAdmin || eq.found) && <Segment style={{
                 backgroundColor: "#111111",
                 color: "white",
                 borderStyle: "solid",
                 borderWidth: "4px",
-                borderColor: "#222222"
+                borderColor: eq.found ? (eq.learned ? "yellow" :  "#222222") : "red"
             }}>
                 <Grid>
                     <Grid.Row>
@@ -23,34 +23,34 @@ export default observer(function EquipmentQualityList() {
                             <h1>{eq.name}</h1>
                         </Grid.Column>
                         <Grid.Column width='2'>
-                            <Button
+                            {isAdmin && <Button
                                 disabled={!isAdmin}
                                 color='yellow'
-                                content='Hide'
+                                content={eq.found ? (eq.learned ? "Forget" : "Learn") : "Reveal"}
                                 fluid inverted
-                            // loading={loading}
-                            // onClick={() => modalStore.openModal(<APCEditForm apc={apc} />)}
-                            />
+                                loading={loading}
+                                onClick={() => findLearnForgetEQ(eq)}
+                            />}
                         </Grid.Column>
                         <Grid.Column width='2'>
-                            <Button
+                            {isAdmin && <Button
                                 disabled={!isAdmin}
                                 color='teal'
                                 content='Edit'
                                 fluid inverted
                                 loading={loading}
                                 onClick={() => modalStore.openModal("Update Equipment Quality", <EQUpdateForm eq={eq}/>, 'large')}
-                            />
+                            />}
                         </Grid.Column>
                         <Grid.Column width='2'>
-                            <Button
+                            {isAdmin && <Button
                                 disabled={!isAdmin}
                                 color='red'
                                 content='Delete'
                                 fluid inverted
                                 loading={loading}
                                 onClick={() => deleteEQ(eq.id)}
-                            />
+                            />}
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
