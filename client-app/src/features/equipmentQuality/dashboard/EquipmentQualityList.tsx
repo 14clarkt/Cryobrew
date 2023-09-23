@@ -15,7 +15,7 @@ export default observer(function EquipmentQualityList() {
                 color: "white",
                 borderStyle: "solid",
                 borderWidth: "4px",
-                borderColor: eq.found ? (eq.learned ? "yellow" :  "#222222") : "red"
+                borderColor: eq.found ? (eq.learned ? "yellow" : "#222222") : "red"
             }}>
                 <Grid>
                     <Grid.Row>
@@ -39,7 +39,7 @@ export default observer(function EquipmentQualityList() {
                                 content='Edit'
                                 fluid inverted
                                 loading={loading}
-                                onClick={() => modalStore.openModal("Update Equipment Quality", <EQUpdateForm eq={eq}/>, 'large')}
+                                onClick={() => modalStore.openModal("Update Equipment Quality", <EQUpdateForm eq={eq} />, 'large')}
                             />}
                         </Grid.Column>
                         <Grid.Column width='2'>
@@ -92,8 +92,27 @@ export default observer(function EquipmentQualityList() {
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row style={{ textAlign: "center" }}>
+                        <Grid.Column width='7'>
+                            <h3><Popup inverted position='top center'
+                                content="Quality Points spent to activate this Effect."
+                                trigger={<span style={{ color: "cyan" }}>Effect Cost: </span>} />
+                                <span>{eq.effectCost}</span>
+                            </h3>
+                        </Grid.Column>
+                        <Grid.Column width='2'>
+                            <h3 style={{ color: "cyan" }}>Effect</h3>
+                        </Grid.Column>
+                        <Grid.Column width='7'>
+                            <h3><Popup inverted position='top center'
+                                content='The "Casting Time" to activate this Effect.'
+                                trigger={<span style={{ color: "cyan" }}>Effect Action: </span>} />
+                                <span>{eq.effectAction}</span>
+                            </h3>
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row style={{ textAlign: "center" }}>
                         <Grid.Column width='16'>
-                            <h3 style={{ color: "cyan" }}>Effect</h3><div style={{ fontSize: "1.2em" }}>{eq.effect}</div>
+                            <div style={{ fontSize: "1.2em" }}>{eq.effect}</div>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>

@@ -7,6 +7,8 @@ export interface EquipmentQuality {
     restrictions: string
     cost: string
     effect: string
+    effectCost: string
+    effectAction: string
     found: boolean
     learned: boolean
 }

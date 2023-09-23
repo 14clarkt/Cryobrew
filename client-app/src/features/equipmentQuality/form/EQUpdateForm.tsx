@@ -26,6 +26,8 @@ export default observer(function EQUpdateForm(props: Props) {
                 restrictions: oldEQ.restrictions,
                 cost: oldEQ.cost,
                 effect: oldEQ.effect,
+                effectCost: oldEQ.effectCost,
+                effectAction: oldEQ.effectAction,
                 error: null }}
             onSubmit={(values, { setErrors }) => {
                 let newEQ = {
@@ -37,6 +39,8 @@ export default observer(function EQUpdateForm(props: Props) {
                     restrictions: values.restrictions,
                     cost: values.cost,
                     effect: values.effect,
+                    effectCost: values.effectCost,
+                    effectAction: values.effectAction,
                     found: oldEQ.found,
                     learned: oldEQ.learned
                 }
@@ -50,7 +54,9 @@ export default observer(function EQUpdateForm(props: Props) {
                 equipment: Yup.string().required(),
                 restrictions: Yup.string().required(),
                 cost: Yup.string().required(),
-                effect: Yup.string().required()
+                effect: Yup.string().required(),
+                effectCost: Yup.string().required(),
+                effectAction: Yup.string().required(),
             })}
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
@@ -65,7 +71,9 @@ export default observer(function EQUpdateForm(props: Props) {
                             <MyTextInput placeholder='1.1x + 5gp' label='Cost' name='cost' />
                         </Grid.Column>
                         <Grid.Column width={8}>
-                            <MyTextArea placeholder='Effect of this Quality' label='Effect' name='effect' rows={21} />
+                            <MyTextInput placeholder='1 QP, Passive, 0 QP' label='Effect Cost' name='effectCost' />
+                            <MyTextInput placeholder='1 Action' label='Effect Action' name='effectAction' />
+                            <MyTextArea placeholder="Details of this Quality's Effect" label='Effect' name='effect' rows={13} />
                         </Grid.Column>
                     </Grid>
                     <ErrorMessage
