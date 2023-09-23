@@ -3,7 +3,7 @@ import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 import APCForm from '../form/APCForm';
 import APLForm from '../form/APLForm';
-import APCEditForm from '../form/APCUpdateForm';
+import APCUpdateForm from '../form/APCUpdateForm';
 import APLUpdateForm from '../form/APLUpdateForm';
 import APCRules from './APCRules';
 import { useEffect, useState } from 'react';
@@ -139,7 +139,7 @@ export default observer(function APCList() {
                                         content='Rename'
                                         fluid inverted
                                         loading={loading}
-                                        onClick={() => modalStore.openModal('Rename Action Point Card', <APCEditForm apc={apc} />)}
+                                        onClick={() => modalStore.openModal('Rename Action Point Card', <APCUpdateForm apc={apc} />)}
                                     />
                                 </Grid.Column>
                                 <Grid.Column width='2'>
