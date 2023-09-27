@@ -76,7 +76,7 @@ export default function EquipmentQualityRules() {
                     </Grid.Column>
                     <Grid.Column width={14}>
                         <div>
-                            A Quality Point may be refreshed on a piece of equipment by spending 30 minutes with appropriate tools that you are proficient with, and using up Equipment Supplies equal to half of the base gold value of the equipment. Ex: Recovering an Equipment Point of a longsword would require 7.5gp worth of Equipment Supplies.
+                            A Quality Point may be refreshed on a piece of equipment by spending 30 minutes with appropriate tools that you are proficient with, and using up Equipment Supplies equal to a fourth of the base gold value of the equipment. Ex: Recovering an Equipment Point of a longsword would require 3.75gp worth of Equipment Supplies.
                         </div>
                     </Grid.Column>
                 </Grid.Row>
@@ -99,6 +99,17 @@ export default function EquipmentQualityRules() {
                     <Grid.Column width={14}>
                         <div>
                             The cost to apply a Quality is usually relative to the base cost of the piece of Equipment. Ex: the Reinforced Quality has a cost of 0.9x, meaning that it costs 0.9 times the base cost of the equipment that it is being applied to.
+                        </div>
+                    </Grid.Column>
+                </Grid.Row>
+
+                <Grid.Row>
+                    <Grid.Column width={2}>
+                        <div style={{ fontWeight: "bold" }}>Application Time:</div>
+                    </Grid.Column>
+                    <Grid.Column width={14}>
+                        <div>
+                            The time it takes to apply a Quality equals a number of hours equal to how many Quality Points the piece of Equipment will have after the new Quality is applied.
                         </div>
                     </Grid.Column>
                 </Grid.Row>
