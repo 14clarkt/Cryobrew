@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react-lite';
-import { Button, Grid, GridColumn, Popup, Segment } from 'semantic-ui-react';
+import { Button, Grid, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 
 export default observer(function AlchemyIngredientList() {
-    const { userStore, modalStore } = useStore()
+    const { userStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
 
     return (
