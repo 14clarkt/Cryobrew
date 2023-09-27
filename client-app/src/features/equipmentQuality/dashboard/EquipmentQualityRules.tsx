@@ -109,7 +109,7 @@ export default function EquipmentQualityRules() {
                     </Grid.Column>
                     <Grid.Column width={14}>
                         <div>
-                            You may take 30 minutes to dismatle a piece of equipment. You receive Equipment Supplies equal to half of its base cost.
+                            You may take 30 minutes to dismatle a piece of equipment. You receive Equipment Supplies equal to a fourth of its base cost.
                         </div>
                     </Grid.Column>
                 </Grid.Row>
