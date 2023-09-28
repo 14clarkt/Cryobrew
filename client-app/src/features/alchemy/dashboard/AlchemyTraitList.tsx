@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { Button, Grid, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import AlchemyPRForm from '../form/AlchemyPRForm';
+import AlchemyPRUpdateForm from '../form/AlchemyPRUpdateForm';
 
 export default observer(function AlchemyTraitList() {
     const { userStore, alchemyStore, modalStore } = useStore()
@@ -10,8 +11,6 @@ export default observer(function AlchemyTraitList() {
 
     return (
         <>
-            make button to create new traits
-            <div style={{ color: 'white' }}>trait list. When you click on Traits in Ingredients or Products it will scroll and highlight it.</div>
             {traitList.map((trait) => (<Segment key={trait.id} style={{
                 backgroundColor: "#111111",
                 color: "white",
@@ -71,7 +70,7 @@ export default observer(function AlchemyTraitList() {
                             <div style={{ fontSize: "1.2em" }}>{trait.tier}</div>
                         </Grid.Column>
                     </Grid.Row>
-                    <Grid.Row>
+                    <Grid.Row style={{ borderColor: "#222222", borderWidth: "3px", borderBottomStyle: "solid" }}>
                         <Grid.Column width='2'>
                             <h3>Potency</h3>
                         </Grid.Column>
@@ -93,10 +92,10 @@ export default observer(function AlchemyTraitList() {
                             />
                         </Grid.Column>
                     </Grid.Row>
-                    {trait.potencyRanges.map((pRange) => (<Grid.Row key={pRange.id}>
-                        <Grid.Column width='2' style={{ color: "cyan", fontSize: "1.2em" }}><div>{pRange.range}</div></Grid.Column>
-                        <Grid.Column width='3' style={{ color: "cyan", fontSize: "1.2em" }}><div>{pRange.duration}</div></Grid.Column>
-                        <Grid.Column width='9' style={{ fontSize: "1.2em" }}><div>{pRange.effect}</div></Grid.Column>
+                    {trait.potencyRanges.map((apr) => (<Grid.Row key={apr.id}>
+                        <Grid.Column width='2' style={{ color: "cyan", fontSize: "1.2em" }}><div>{apr.range}</div></Grid.Column>
+                        <Grid.Column width='3' style={{ color: "cyan", fontSize: "1.2em" }}><div>{apr.duration}</div></Grid.Column>
+                        <Grid.Column width='9' style={{ fontSize: "1.2em" }}><div>{apr.effect}</div></Grid.Column>
                         <Grid.Column width='2'>
                             <Button
                                 disabled={!isAdmin}
@@ -105,7 +104,7 @@ export default observer(function AlchemyTraitList() {
                                 fluid inverted
                                 size='mini'
                                 loading={loading}
-                                // onClick={() => modalStore.openModal("Add", <EQUpdateForm eq={eq} />, 'large')}
+                                onClick={() => modalStore.openModal("Edit Potency Range Effect", <AlchemyPRUpdateForm ATid={trait.id} apr={apr} />, 'large')}
                             />
                         </Grid.Column>
                     </Grid.Row>))}

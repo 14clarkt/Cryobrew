@@ -23,9 +23,15 @@ namespace API.Controllers
         }
 
         [HttpPost("potencyrange/{id}")] 
-        public async Task<IActionResult> CreateActionPointLevel(AlchemyPotencyRange apr, Guid id)
+        public async Task<IActionResult> CreateAlchemyPotencyRange(AlchemyPotencyRange apr, Guid id)
         {
             return HandleResult(await Mediator.Send(new CreateAPR.Command{AlchemyPotencyRange = apr, ATId = id}));
+        }
+
+        [HttpPut("potencyrange/{id}")]
+        public async Task<IActionResult> EditAlchemyPotencyRange(AlchemyPotencyRange apr)
+        {
+            return HandleResult(await Mediator.Send(new UpdateAPR.Command{AlchemyPotencyRange = apr}));
         }
 
         // [HttpPut("{id}")]

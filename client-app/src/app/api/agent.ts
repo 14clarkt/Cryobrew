@@ -94,6 +94,7 @@ const Alchemy = {
     createTrait: (trait: AlchemyTrait) => axios.post('/alchemy/trait', trait),
 
     createAPR: (ATid: string, apr: AlchemyPotencyRange) => axios.post(`/alchemy/potencyrange/${ATid}`, apr),
+    updateAPR: (apr: AlchemyPotencyRange) => axios.put(`/alchemy/potencyrange/${apr.id}`, apr),
 }
 
 const Account = {
