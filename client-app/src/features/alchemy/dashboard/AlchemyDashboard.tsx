@@ -8,19 +8,21 @@ import AlchemyTraitList from "./AlchemyTraitList"
 
 export default observer(function AlchemyDashboard() {
     return (
-            <Grid>
-                <Grid.Column width='8'>
-                    <div style={{ color: 'white' }}>Example Layout</div>
-                    <AlchemyHeader />
-                    <div style={{ overflow: 'auto', maxHeight: 700}}>
-                        <AlchemyIngredientList />
-                    </div>
-                </Grid.Column>
-                <Grid.Column width='8'>
+        <Grid>
+            <Grid.Column width='8'>
+                <div style={{ color: 'white' }}>Example Layout</div>
+                <AlchemyHeader />
+                <div style={{ overflow: 'auto', maxHeight: 700 }}>
+                    <AlchemyIngredientList />
+                </div>
+            </Grid.Column>
+            <Grid.Column width='8'>
+                <AlchemyCreation />
+                <AlchemyProductList />
+                <div style={{ overflow: 'auto', maxHeight: 800 }}>
                     <AlchemyTraitList />
-                    <AlchemyCreation />
-                    <AlchemyProductList />
-                </Grid.Column>
-            </Grid>
+                </div>
+            </Grid.Column>
+        </Grid>
     )
 })
