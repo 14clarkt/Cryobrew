@@ -15,6 +15,7 @@ interface Props {
 
 export default observer(function AlchemyPRUpdateForm(props: Props) {
     const { alchemyStore } = useStore()
+    const { updateAPR, deleteAPR, loading } = alchemyStore
 
     return (
         <Formik
@@ -23,7 +24,7 @@ export default observer(function AlchemyPRUpdateForm(props: Props) {
                 error: null
             }}
             onSubmit={(values, { setErrors }) => {
-                alchemyStore.updateAPR(props.ATid, {...values, order: +values.order}).catch(error =>
+                updateAPR(props.ATid, { ...values, order: +values.order }).catch(error =>
                     setErrors({ error }))
             }}
             validationSchema={Yup.object({
@@ -57,12 +58,21 @@ export default observer(function AlchemyPRUpdateForm(props: Props) {
                                 disabled={!isValid || !dirty || isSubmitting}
                                 content="Update"
                                 type="submit"
-                                color = "green"
+                                color="green"
                                 fluid inverted
-                            loading={alchemyStore.loading}
+                                loading={loading}
                             />
                         </Grid.Column>
-                        <Grid.Column width={5} />
+                        <Grid.Column width={5}>
+                            <Button
+                                color='red'
+                                content='Delete'
+                                type="button"
+                                fluid inverted
+                                loading={loading}
+                                onClick={() => deleteAPR(props.ATid, props.apr.id)}
+                            />
+                        </Grid.Column>
                     </Grid>
                 </Form>
             )}

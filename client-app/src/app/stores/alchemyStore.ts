@@ -186,22 +186,24 @@ export default class AlchemyStore {
     //     }
     // }
 
-    // deleteApl = async (APCid: string, APLid: string) => {
-    //     this.loading = true;
-    //     try {
-    //         await agent.ActionPointCards.deleteApl(APCid, APLid)
-    //         runInAction(() => {
-    //             let apc = this.apcRegistry.get(APCid)
-    //             apc!.actionPointLevels = apc!.actionPointLevels.filter((apl) => apl.id !== APLid)
-    //             this.loading = false
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //         runInAction(() => {
-    //             this.loading = false
-    //         })
-    //     }
-    // }
+    deleteAPR = async (ATid: string, APRid: string) => {
+        this.loading = true;
+        try {
+            console.log(`ATid:${ATid}, APRid:${APRid}`);
+            await agent.Alchemy.deleteAPR(ATid, APRid)
+            runInAction(() => {
+                let at = this.traitRegistry.get(ATid)
+                at!.potencyRanges = at!.potencyRanges.filter((apr) => apr.id !== APRid)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
 
     // copyApl = async (APCid: string, APLid: string) => {
     //     this.loading = true;

@@ -34,6 +34,12 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new UpdateAPR.Command{AlchemyPotencyRange = apr}));
         }
 
+        [HttpDelete("potencyrange/{atid}/{aprid}")]
+        public async Task<IActionResult> DeleteAlchemyPotencyRange(Guid atid, Guid aprid)
+        {
+            return HandleResult(await Mediator.Send(new DeleteAPR.Command{ATId = atid, APRId = aprid}));
+        }
+
         // [HttpPut("{id}")]
         // public async Task<IActionResult> UpdateActionPointCard(Guid id, ActionPointCard apc)
         // {

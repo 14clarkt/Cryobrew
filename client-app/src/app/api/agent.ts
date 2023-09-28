@@ -95,6 +95,7 @@ const Alchemy = {
 
     createAPR: (ATid: string, apr: AlchemyPotencyRange) => axios.post(`/alchemy/potencyrange/${ATid}`, apr),
     updateAPR: (apr: AlchemyPotencyRange) => axios.put(`/alchemy/potencyrange/${apr.id}`, apr),
+    deleteAPR: (ATid: string, APRid: string) => axios.delete(`/alchemy/potencyrange/${ATid}/${APRid}`),
 }
 
 const Account = {
