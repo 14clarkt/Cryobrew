@@ -1,11 +1,12 @@
 import { observer } from 'mobx-react-lite';
 import { Button, Grid, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
+import AlchemyPRForm from '../form/AlchemyPRForm';
 
 export default observer(function AlchemyTraitList() {
-    const { userStore, alchemyStore } = useStore()
+    const { userStore, alchemyStore, modalStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
-    const { traitList } = alchemyStore
+    const { traitList, loading } = alchemyStore
 
     return (
         <>
@@ -77,14 +78,36 @@ export default observer(function AlchemyTraitList() {
                         <Grid.Column width='3'>
                             <h3>Duration</h3>
                         </Grid.Column>
-                        <Grid.Column width='11'>
+                        <Grid.Column width='9'>
                             <h3>Effect</h3>
+                        </Grid.Column>
+                        <Grid.Column width='2'>
+                            <Button
+                                disabled={!isAdmin}
+                                color='green'
+                                content='Add'
+                                fluid inverted
+                                size='mini'
+                                loading={loading}
+                                onClick={() => modalStore.openModal("Add Potency Range Effect", <AlchemyPRForm ATid={trait.id} />, 'large')}
+                            />
                         </Grid.Column>
                     </Grid.Row>
                     {trait.potencyRanges.map((pRange) => (<Grid.Row key={pRange.id}>
                         <Grid.Column width='2' style={{ color: "cyan", fontSize: "1.2em" }}><div>{pRange.range}</div></Grid.Column>
                         <Grid.Column width='3' style={{ color: "cyan", fontSize: "1.2em" }}><div>{pRange.duration}</div></Grid.Column>
-                        <Grid.Column width='11' style={{ fontSize: "1.2em" }}><div>{pRange.effect}</div></Grid.Column>
+                        <Grid.Column width='9' style={{ fontSize: "1.2em" }}><div>{pRange.effect}</div></Grid.Column>
+                        <Grid.Column width='2'>
+                            <Button
+                                disabled={!isAdmin}
+                                color='yellow'
+                                content='Edit'
+                                fluid inverted
+                                size='mini'
+                                loading={loading}
+                                // onClick={() => modalStore.openModal("Add", <EQUpdateForm eq={eq} />, 'large')}
+                            />
+                        </Grid.Column>
                     </Grid.Row>))}
                 </Grid>
             </Segment>))}

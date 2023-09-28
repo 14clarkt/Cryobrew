@@ -5,7 +5,7 @@ import { store } from '../stores/store';
 import { User, UserEditValues, UserFormValues } from '../models/user';
 import { ActionPointCard, ActionPointLevel } from '../models/actionPointCard';
 import { EquipmentQuality } from '../models/equipmentQuality';
-import { AlchemyTrait } from '../models/alchemy';
+import { AlchemyPotencyRange, AlchemyTrait } from '../models/alchemy';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -92,6 +92,8 @@ const EquipmentQualities = {
 const Alchemy = {
     listTrait: () => requests.get<AlchemyTrait[]>('/alchemy/trait'),
     createTrait: (trait: AlchemyTrait) => axios.post('/alchemy/trait', trait),
+
+    createAPR: (ATid: string, apr: AlchemyPotencyRange) => axios.post(`/alchemy/potencyrange/${ATid}`, apr),
 }
 
 const Account = {

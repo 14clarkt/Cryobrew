@@ -3,7 +3,7 @@ import agent from "../api/agent"
 import { v4 as uuid } from "uuid"
 import { store } from "./store";
 import { toast } from "react-toastify";
-import { AlchemyTrait } from "../models/alchemy";
+import { AlchemyPotencyRange, AlchemyTrait } from "../models/alchemy";
 
 export default class AlchemyStore {
     traitRegistry = new Map<string, AlchemyTrait>();
@@ -67,29 +67,29 @@ export default class AlchemyStore {
         }
     }
 
-    // createApl = async (APCid: string, apl: ActionPointLevel) => {
-    //     this.loading = true
-    //     apl.id = uuid()
-    //     try {
-    //         await agent.ActionPointCards.createApl(APCid, apl)
-    //         runInAction(() => {
-    //             this.setApl(APCid, apl)
-    //             this.loading = false
-    //             store.modalStore.closeModal();
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //         runInAction(() => {
-    //             this.loading = false
-    //         })
-    //     }
-    // }
+    createAPR = async (ATid: string, apr: AlchemyPotencyRange) => {
+        this.loading = true
+        apr.id = uuid()
+        try {
+            await agent.Alchemy.createAPR(ATid, apr)
+            runInAction(() => {
+                this.setAPR(ATid, apr)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
 
-    // private setApl = (APCid: string, apl: ActionPointLevel) => {
-    //     let apc = this.apcRegistry.get(APCid)
-    //     apc?.actionPointLevels.push(apl)
-    //     apc?.actionPointLevels.sort((a, b) => a.level - b.level)
-    // }
+    private setAPR = (ATid: string, apr: AlchemyPotencyRange) => {
+        let at = this.traitRegistry.get(ATid)
+        at?.potencyRanges.push(apr)
+        at?.potencyRanges.sort((a, b) => a.order - b.order)
+    }
 
     // updateApc = async (apc: ActionPointCard) => {
     //     this.loading = true

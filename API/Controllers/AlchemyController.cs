@@ -22,6 +22,12 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new CreateAlchemyTrait.Command{AlchemyTrait = trait}));
         }
 
+        [HttpPost("potencyrange/{id}")] 
+        public async Task<IActionResult> CreateActionPointLevel(AlchemyPotencyRange apr, Guid id)
+        {
+            return HandleResult(await Mediator.Send(new CreateAPR.Command{AlchemyPotencyRange = apr, ATId = id}));
+        }
+
         // [HttpPut("{id}")]
         // public async Task<IActionResult> UpdateActionPointCard(Guid id, ActionPointCard apc)
         // {
