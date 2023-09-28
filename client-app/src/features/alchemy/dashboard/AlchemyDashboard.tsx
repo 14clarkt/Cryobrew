@@ -5,8 +5,20 @@ import AlchemyIngredientList from "./AlchemyIngredientList"
 import AlchemyCreation from "./AlchemyCreation"
 import AlchemyProductList from "./AlchemyProductList"
 import AlchemyTraitList from "./AlchemyTraitList"
+import { useStore } from "../../../app/stores/store"
+import LoadingComponent from "../../../app/layout/LoadingComponent"
+import { useEffect } from "react"
 
 export default observer(function AlchemyDashboard() {
+    const { alchemyStore } = useStore()
+    const {loadTraits, traitRegistry, loadingInitial} = alchemyStore
+
+    useEffect(() => {
+        if (traitRegistry.size < 1) loadTraits();
+    }, [loadTraits, traitRegistry.size])
+
+    if (loadingInitial) return <div style={{padding:'400px', position:'relative'}}><LoadingComponent content='Loading Alchemy...' /></div>
+    
     return (
         <Grid>
             <Grid.Column width='8'>
