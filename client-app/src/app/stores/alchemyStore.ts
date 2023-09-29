@@ -2,7 +2,6 @@ import { makeAutoObservable, runInAction } from "mobx"
 import agent from "../api/agent"
 import { v4 as uuid } from "uuid"
 import { store } from "./store";
-import { toast } from "react-toastify";
 import { AlchemyPotencyRange, AlchemyTrait } from "../models/alchemy";
 
 export default class AlchemyStore {
@@ -91,22 +90,22 @@ export default class AlchemyStore {
         at?.potencyRanges.sort((a, b) => a.order - b.order)
     }
 
-    // updateApc = async (apc: ActionPointCard) => {
-    //     this.loading = true
-    //     try {
-    //         await agent.ActionPointCards.update(apc)
-    //         runInAction(() => {
-    //             this.apcRegistry.set(apc.id, apc)
-    //             this.loading = false
-    //             store.modalStore.closeModal();
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //         runInAction(() => {
-    //             this.loading = false
-    //         })            
-    //     }
-    // }
+    updateTrait = async (at: AlchemyTrait) => {
+        this.loading = true
+        try {
+            await agent.Alchemy.updateTrait(at)
+            runInAction(() => {
+                this.traitRegistry.set(at.id, at)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })            
+        }
+    }
 
     // upgradeApc = async (apc: ActionPointCard) => {
     //     this.loading = true

@@ -93,6 +93,7 @@ const Alchemy = {
     listTrait: () => requests.get<AlchemyTrait[]>('/alchemy/trait'),
     createTrait: (trait: AlchemyTrait) => axios.post('/alchemy/trait', trait),
     deleteTrait: (id: string) => axios.delete(`/alchemy/trait/${id}`),
+    updateTrait: (at: AlchemyTrait) => axios.put(`/alchemy/trait/${at.id}`, at),
 
     createAPR: (ATid: string, apr: AlchemyPotencyRange) => axios.post(`/alchemy/potencyrange/${ATid}`, apr),
     updateAPR: (apr: AlchemyPotencyRange) => axios.put(`/alchemy/potencyrange/${apr.id}`, apr),

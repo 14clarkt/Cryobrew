@@ -3,6 +3,7 @@ import { Button, Grid, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import AlchemyPRForm from '../form/AlchemyPRForm';
 import AlchemyPRUpdateForm from '../form/AlchemyPRUpdateForm';
+import AlchemyTraitUpdateForm from '../form/AlchemyTraitUpdateForm';
 
 export default observer(function AlchemyTraitList() {
     const { userStore, alchemyStore, modalStore } = useStore()
@@ -39,8 +40,8 @@ export default observer(function AlchemyTraitList() {
                                 color='teal'
                                 content='Edit'
                                 fluid inverted
-                            // loading={loading}
-                            // onClick={() => modalStore.openModal("Update Equipment Quality", <EQUpdateForm eq={eq} />, 'large')}
+                                loading={loading}
+                                onClick={() => modalStore.openModal("Update Alchemy Trait", <AlchemyTraitUpdateForm trait={trait} />, 'large')}
                             />}
                         </Grid.Column>
                         <Grid.Column width='2'>
