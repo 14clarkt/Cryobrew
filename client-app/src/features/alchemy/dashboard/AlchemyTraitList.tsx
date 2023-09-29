@@ -8,16 +8,16 @@ import AlchemyTraitUpdateForm from '../form/AlchemyTraitUpdateForm';
 export default observer(function AlchemyTraitList() {
     const { userStore, alchemyStore, modalStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
-    const { traitList, deleteTrait, loading } = alchemyStore
+    const { traitList, deleteTrait, updateTrait, loading } = alchemyStore
 
     return (
         <>
-            {traitList.map((trait) => (<Segment key={trait.id} style={{
+            {traitList.map((trait) => ((isAdmin || !trait.hidden) && <Segment key={trait.id} style={{
                 backgroundColor: "#111111",
                 color: "white",
                 borderStyle: "solid",
                 borderWidth: "4px",
-                borderColor: "#222222",
+                borderColor: trait.hidden ? "red" : "#222222",
             }}>
                 <Grid>
                     <Grid.Row style={{ fontWeight: "bold" }}>
@@ -28,10 +28,10 @@ export default observer(function AlchemyTraitList() {
                             {isAdmin && <Button
                                 disabled={!isAdmin}
                                 color='yellow'
-                                content='Find'
+                                content={trait.hidden ? 'Show' : 'Hide'}
                                 fluid inverted
-                            // loading={loading}
-                            // onClick={() => findLearnForgetEQ(eq)}
+                                loading={loading}
+                                onClick={() => updateTrait({...trait, hidden: !trait.hidden})}
                             />}
                         </Grid.Column>
                         <Grid.Column width='2'>
@@ -50,8 +50,8 @@ export default observer(function AlchemyTraitList() {
                                 color='red'
                                 content='Del'
                                 fluid inverted
-                            loading={loading}
-                            onClick={() => deleteTrait(trait.id)}
+                                loading={loading}
+                                onClick={() => deleteTrait(trait.id)}
                             />}
                         </Grid.Column>
                     </Grid.Row>
