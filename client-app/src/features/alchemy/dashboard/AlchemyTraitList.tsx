@@ -70,7 +70,7 @@ export default observer(function AlchemyTraitList() {
                             <div style={{ fontSize: "1.2em" }}>{trait.tier}</div>
                         </Grid.Column>
                     </Grid.Row>
-                    <Grid.Row style={{ borderColor: "#222222", borderWidth: "3px", borderBottomStyle: "solid" }}>
+                    <Grid.Row>
                         <Grid.Column width='2'>
                             <h3>Potency</h3>
                         </Grid.Column>
@@ -92,7 +92,7 @@ export default observer(function AlchemyTraitList() {
                             />
                         </Grid.Column>
                     </Grid.Row>
-                    {trait.potencyRanges.map((apr) => (<Grid.Row key={apr.id}>
+                    {trait.potencyRanges.map((apr) => (<Grid.Row key={apr.id} style={{ borderColor: "#222222", borderWidth: "3px", borderTopStyle: "solid" }}>
                         <Grid.Column width='2' style={{ color: "cyan", fontSize: "1.2em" }}><div>{apr.range}</div></Grid.Column>
                         <Grid.Column width='3' style={{ color: "cyan", fontSize: "1.2em" }}><div>{apr.duration}</div></Grid.Column>
                         <Grid.Column width='9' style={{ fontSize: "1.2em" }}><div>{apr.effect}</div></Grid.Column>
