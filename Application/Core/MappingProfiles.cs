@@ -14,6 +14,8 @@ namespace Application.Core
             CreateMap<ActionPointCard, ActionPointCard>();
             CreateMap<ActionPointLevel, ActionPointLevel>();
             CreateMap<EquipmentQuality, EquipmentQuality>();
+            CreateMap<AlchemyPotencyRange, AlchemyPotencyRange>();
+            CreateMap<AlchemyTrait, AlchemyTrait>();
         }
     }
 }

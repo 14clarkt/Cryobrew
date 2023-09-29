@@ -5,6 +5,7 @@ import { store } from '../stores/store';
 import { User, UserEditValues, UserFormValues } from '../models/user';
 import { ActionPointCard, ActionPointLevel } from '../models/actionPointCard';
 import { EquipmentQuality } from '../models/equipmentQuality';
+import { AlchemyPotencyRange, AlchemyTrait } from '../models/alchemy';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -88,6 +89,17 @@ const EquipmentQualities = {
     update: (eq: EquipmentQuality) => axios.put(`/equipmentquality/${eq.id}`, eq),
 }
 
+const Alchemy = {
+    listTrait: () => requests.get<AlchemyTrait[]>('/alchemy/trait'),
+    createTrait: (trait: AlchemyTrait) => axios.post('/alchemy/trait', trait),
+    deleteTrait: (id: string) => axios.delete(`/alchemy/trait/${id}`),
+    updateTrait: (at: AlchemyTrait) => axios.put(`/alchemy/trait/${at.id}`, at),
+
+    createAPR: (ATid: string, apr: AlchemyPotencyRange) => axios.post(`/alchemy/potencyrange/${ATid}`, apr),
+    updateAPR: (apr: AlchemyPotencyRange) => axios.put(`/alchemy/potencyrange/${apr.id}`, apr),
+    deleteAPR: (ATid: string, APRid: string) => axios.delete(`/alchemy/potencyrange/${ATid}/${APRid}`),
+}
+
 const Account = {
     current: () => requests.get<User>('/account'),
     login: (user: UserFormValues) => requests.post<User>('/account/login', user),
@@ -98,6 +110,7 @@ const Account = {
 const agent = {
     ActionPointCards,
     EquipmentQualities,
+    Alchemy,
     Account
 }
 
