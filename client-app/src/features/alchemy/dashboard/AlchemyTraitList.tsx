@@ -7,7 +7,7 @@ import AlchemyPRUpdateForm from '../form/AlchemyPRUpdateForm';
 export default observer(function AlchemyTraitList() {
     const { userStore, alchemyStore, modalStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
-    const { traitList, loading } = alchemyStore
+    const { traitList, deleteTrait, loading } = alchemyStore
 
     return (
         <>
@@ -49,8 +49,8 @@ export default observer(function AlchemyTraitList() {
                                 color='red'
                                 content='Del'
                                 fluid inverted
-                            // loading={loading}
-                            // onClick={() => deleteEQ(eq.id)}
+                            loading={loading}
+                            onClick={() => deleteTrait(trait.id)}
                             />}
                         </Grid.Column>
                     </Grid.Row>

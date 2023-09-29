@@ -92,6 +92,7 @@ const EquipmentQualities = {
 const Alchemy = {
     listTrait: () => requests.get<AlchemyTrait[]>('/alchemy/trait'),
     createTrait: (trait: AlchemyTrait) => axios.post('/alchemy/trait', trait),
+    deleteTrait: (id: string) => axios.delete(`/alchemy/trait/${id}`),
 
     createAPR: (ATid: string, apr: AlchemyPotencyRange) => axios.post(`/alchemy/potencyrange/${ATid}`, apr),
     updateAPR: (apr: AlchemyPotencyRange) => axios.put(`/alchemy/potencyrange/${apr.id}`, apr),

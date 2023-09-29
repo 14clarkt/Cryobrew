@@ -170,21 +170,21 @@ export default class AlchemyStore {
         }
     }
 
-    // deleteApc = async (id: string) => {
-    //     this.loading = true;
-    //     try {
-    //         await agent.ActionPointCards.delete(id)
-    //         runInAction(() => {
-    //             this.apcRegistry.delete(id)
-    //             this.loading = false
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //         runInAction(() => {
-    //             this.loading = false
-    //         })
-    //     }
-    // }
+    deleteTrait = async (id: string) => {
+        this.loading = true;
+        try {
+            await agent.Alchemy.deleteTrait(id)
+            runInAction(() => {
+                this.traitRegistry.delete(id)
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
 
     deleteAPR = async (ATid: string, APRid: string) => {
         this.loading = true;
