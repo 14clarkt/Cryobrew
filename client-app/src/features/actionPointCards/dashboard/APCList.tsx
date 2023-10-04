@@ -1,4 +1,4 @@
-import { Button, Container, Grid, Radio, Segment } from 'semantic-ui-react';
+import { Button, Container, Grid, Radio, Search, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 import APCForm from '../form/APCForm';
@@ -19,6 +19,8 @@ export default observer(function APCList() {
     const [APCList, setAPCList] = useState<ActionPointCard[]>([])
     const [currentAP, setCurrentAP] = useState(0)
     const [equippedAmount, setEquippedAmount] = useState(0)
+
+    const [query, setQuery] = useState("")
 
     useEffect(() => {
         let apcsEquipped = 0
@@ -104,12 +106,17 @@ export default observer(function APCList() {
                             checked={apcFilter === 'available'}
                             onChange={() => setAPCFilter("available")}
                         />
+                        <Search
+                            onSearchChange={(_e, data) => {data.value ? setQuery(data.value) : setQuery("")}}
+                            open={false}
+                            placeholder='Search'
+                        />
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
             <br/>
             {APCList.map((apc) => (
-                <>{(apc.upgradeLevel > 0 || isAdmin) &&
+                <>{(apc.upgradeLevel > 0 || isAdmin) && (apc.name.toLowerCase().includes(query.toLowerCase())) &&
                     <><Segment style={{
                         backgroundColor: "#111111",
                         color: "white",
