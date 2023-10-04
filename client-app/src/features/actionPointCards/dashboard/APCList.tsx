@@ -107,7 +107,7 @@ export default observer(function APCList() {
                             onChange={() => setAPCFilter("available")}
                         />
                         <Search
-                            onSearchChange={(e, data) => {data.value ? setQuery(data.value) : setQuery("")}}
+                            onSearchChange={(_e, data) => {data.value ? setQuery(data.value) : setQuery("")}}
                             open={false}
                             placeholder='Search'
                         />
