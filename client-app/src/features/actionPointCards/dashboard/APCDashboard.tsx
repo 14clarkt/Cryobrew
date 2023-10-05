@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
 import APCList from './APCList';
+import ScrollToTop from '../../../app/common/display/ScrollToTop';
 
 export default observer(function APCDashboard() {
     const { apcStore } = useStore()
@@ -15,6 +16,9 @@ export default observer(function APCDashboard() {
     if (loadingInitial) return <div style={{padding:'400px', position:'relative'}}><LoadingComponent content='Loading APCs...' /></div>
 
     return (
-        <APCList />
+        <>
+            <APCList />
+            <ScrollToTop />
+        </>
     )
 })
