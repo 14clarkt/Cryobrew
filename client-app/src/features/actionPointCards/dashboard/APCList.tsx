@@ -8,6 +8,7 @@ import APLUpdateForm from '../form/APLUpdateForm';
 import APCRules from './APCRules';
 import { useEffect, useState } from 'react';
 import { ActionPointCard } from '../../../app/models/actionPointCard';
+import DiffSpan from '../../../app/common/display/DiffSpan';
 
 export default observer(function APCList() {
     const { apcStore, modalStore, userStore } = useStore()
@@ -185,15 +186,15 @@ export default observer(function APCList() {
                                         <h4 style={{ textAlign: "center", fontWeight: "bold" }}>{apl.level}</h4>
                                     </Grid.Column>
                                     <Grid.Column width='3'>
-                                        <div><span style={{ color: "cyan" }}>Range: </span>{apl.range}</div>
-                                        <div><span style={{ color: "cyan" }}>Cost: </span>{apl.cost}</div>
-                                        <div><span style={{ color: "cyan" }}>Duration: </span>{apl.duration}</div>
-                                        <div><span style={{ color: "cyan" }}>Upgrade Cost: </span>{apl.upgradeCost}</div>
-                                        <div><span style={{ color: "cyan" }}>Casting Time: </span>{apl.castingTime}</div>
-                                        <div><span style={{ color: "cyan" }}>Prereq(s): </span>{apl.prerequisite}</div>
+                                        <div><span style={{ color: "cyan" }}>Range: </span><DiffSpan content={apl.range}/></div>
+                                        <div><span style={{ color: "cyan" }}>Cost: </span><DiffSpan content={apl.cost}/></div>
+                                        <div><span style={{ color: "cyan" }}>Duration: </span><DiffSpan content={apl.duration}/></div>
+                                        <div><span style={{ color: "cyan" }}>Upgrade Cost: </span><DiffSpan content={apl.upgradeCost}/></div>
+                                        <div><span style={{ color: "cyan" }}>Casting Time: </span><DiffSpan content={apl.castingTime}/></div>
+                                        <div><span style={{ color: "cyan" }}>Prereq(s): </span><DiffSpan content={apl.prerequisite}/></div>
                                     </Grid.Column>
                                     <Grid.Column width='10'>
-                                        <div>{apl.description}</div>
+                                        <div><DiffSpan content={apl.description}/></div>
                                     </Grid.Column >
                                     <Grid.Column width='2' stretched>
                                         <Grid.Row>
