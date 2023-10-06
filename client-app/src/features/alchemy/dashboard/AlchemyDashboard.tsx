@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite"
 import { Grid } from "semantic-ui-react"
-import AlchemyHeader from "./AlchemyHeader"
 import AlchemyIngredientList from "./AlchemyIngredientList"
 import AlchemyCreation from "./AlchemyCreation"
 import AlchemyProductList from "./AlchemyProductList"
@@ -8,10 +7,12 @@ import AlchemyTraitList from "./AlchemyTraitList"
 import { useStore } from "../../../app/stores/store"
 import LoadingComponent from "../../../app/layout/LoadingComponent"
 import { useEffect } from "react"
+import AlchemyRightHandHeader from "./AlchemyRightHandHeader"
+import AlchemyIngredientHeader from "./AlchemyIngredientHeader"
 
 export default observer(function AlchemyDashboard() {
     const { alchemyStore } = useStore()
-    const {loadTraits, loadIngredients, traitRegistry, ingredientRegistry, loadingInitial} = alchemyStore
+    const {loadTraits, loadIngredients, traitRegistry, ingredientRegistry, loadingInitial, rightHandDisplay} = alchemyStore
 
     useEffect(() => {
         if (traitRegistry.size < 1) loadTraits();
@@ -23,17 +24,17 @@ export default observer(function AlchemyDashboard() {
     return (
         <Grid>
             <Grid.Column width='8'>
-                <div style={{ color: 'white' }}>Example Layout</div>
-                <AlchemyHeader />
+                <AlchemyIngredientHeader />
                 <div style={{ overflow: 'auto', maxHeight: 700 }}>
                     <AlchemyIngredientList />
                 </div>
             </Grid.Column>
             <Grid.Column width='8'>
-                <AlchemyCreation />
-                <AlchemyProductList />
-                <div style={{ overflow: 'auto', maxHeight: 800 }}>
-                    <AlchemyTraitList />
+                <AlchemyRightHandHeader />
+                <div style={{ overflow: 'auto', maxHeight: 700 }}>
+                    {rightHandDisplay.includes("Creation") && <AlchemyCreation />}
+                    {rightHandDisplay.includes("Products") && <AlchemyProductList />}
+                    {rightHandDisplay.includes("Traits") && <AlchemyTraitList />}
                 </div>
             </Grid.Column>
         </Grid>

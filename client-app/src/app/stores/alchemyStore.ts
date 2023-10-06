@@ -7,8 +7,11 @@ import { AlchemyIngredient, AlchemyIngredientPotency, AlchemyPotencyRange, Alche
 export default class AlchemyStore {
     traitRegistry = new Map<string, AlchemyTrait>();
     ingredientRegistry = new Map<string, AlchemyIngredient>();
+    newQuantityRegistry = new Map<string, number>();
+
     loading = false;
     loadingInitial = false;
+    rightHandDisplay : "Traits" | "Products" | "Creation" = "Traits"
 
     constructor() {
         makeAutoObservable(this)
@@ -146,7 +149,6 @@ export default class AlchemyStore {
     deleteAPR = async (ATid: string, APRid: string) => {
         this.loading = true;
         try {
-            console.log(`ATid:${ATid}, APRid:${APRid}`);
             await agent.Alchemy.deleteAPR(ATid, APRid)
             runInAction(() => {
                 let at = this.traitRegistry.get(ATid)
@@ -178,6 +180,7 @@ export default class AlchemyStore {
             runInAction(() => {
                 ings.forEach(ing => {
                     this.setIng(ing)
+                    this.setIngQuantity(ing)
                 })
             })
             this.setLoadingInitial(false)
@@ -189,6 +192,10 @@ export default class AlchemyStore {
 
     private setIng = (ing: AlchemyIngredient) => {
         this.ingredientRegistry.set(ing.id, ing)
+    }
+
+    private setIngQuantity = (ing: AlchemyIngredient) => {
+        this.newQuantityRegistry.set(ing.id, ing.quantity)
     }
 
     createIngredient = async (ing: AlchemyIngredient) => {
@@ -230,5 +237,75 @@ export default class AlchemyStore {
     private setAIP = (AIid: string, aip: AlchemyIngredientPotency) => {
         let ing = this.ingredientRegistry.get(AIid)
         ing?.potencies.push(aip)
+    }
+
+    updateIngredient = async (ing: AlchemyIngredient) => {
+        this.loading = true
+        try {
+            await agent.Alchemy.updateIngredient(ing)
+            runInAction(() => {
+                this.ingredientRegistry.set(ing.id, ing)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })            
+        }
+    }
+
+    hideShowIngredient = async (ing: AlchemyIngredient) => {
+        await this.updateIngredient({...ing, hidden: !ing.hidden})
+    }
+
+    deleteAlchemyIngredient = async (id: string) => {
+        this.loading = true;
+        try {
+            await agent.Alchemy.deleteIngredient(id)
+            runInAction(() => {
+                this.ingredientRegistry.delete(id)
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
+    deleteAIP = async (AIid: string, AIPid: string) => {
+        this.loading = true;
+        try {
+            await agent.Alchemy.deleteAIP(AIid, AIPid)
+            runInAction(() => {
+                let ing = this.ingredientRegistry.get(AIid)
+                ing!.potencies = ing!.potencies.filter((aip) => aip.id !== AIPid)
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
+    incrementIngredientQuantity = (ingId: string, increment: boolean) => {
+        let nq = this.newQuantityRegistry.get(ingId)
+        if (nq === undefined) return
+        increment ? this.newQuantityRegistry.set(ingId, nq+1) : this.newQuantityRegistry.set(ingId, Math.max(nq-1, 0))
+    }
+
+    saveIngredientQuantity = async (ing: AlchemyIngredient) => {
+        await this.updateIngredient({...ing, quantity: this.newQuantityRegistry.get(ing.id)!})
+    }
+
+    // misc
+
+    setRightHandDisplay = (toDisplay: "Traits" | "Products" | "Creation") => {
+        this.rightHandDisplay = toDisplay
     }
 }

@@ -67,10 +67,30 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new CreateAlchemyIngredient.Command{AlchemyIngredient = ing}));
         }
         
+        [HttpPut("ingredient/{id}")]
+        public async Task<IActionResult> UpdateAlchemyIngredient(Guid id, AlchemyIngredient ing)
+        {
+            ing.Id = id;
+            return HandleResult(await Mediator.Send(new UpdateAlchemyIngredient.Command{AlchemyIngredient = ing}));
+        }
+
+        [HttpDelete("ingredient/{id}")]
+        public async Task<IActionResult> DeleteAlchemyIngredient(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new DeleteAlchemyIngredient.Command{Id = id}));
+        }
+
         [HttpPost("ingredientpotency/{id}")] 
         public async Task<IActionResult> CreateAlchemyIngredientPotency(AlchemyIngredientPotency aip, Guid id)
         {
             return HandleResult(await Mediator.Send(new CreateAIP.Command{AlchemyIngredientPotency = aip, AIid = id}));
         }
+
+        [HttpDelete("ingredientpotency/{aiid}/{aipid}")]
+        public async Task<IActionResult> DeleteAlchemyIngredientPotency(Guid aiid, Guid aipid)
+        {
+            return HandleResult(await Mediator.Send(new DeleteAIP.Command{AIid = aiid, AIPId = aipid}));
+        }
+
     }
 }
