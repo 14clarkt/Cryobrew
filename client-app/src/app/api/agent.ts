@@ -105,6 +105,7 @@ const Alchemy = {
     updateIngredient: (ing: AlchemyIngredient) => axios.put(`/alchemy/ingredient/${ing.id}`, ing),
 
     createAIP: (AIid: string, aip: AlchemyIngredientPotency) => axios.post(`/alchemy/ingredientpotency/${AIid}`, aip),
+    deleteAIP: (AIid: string, AIPid: string) => axios.delete(`/alchemy/ingredientpotency/${AIid}/${AIPid}`),
 }
 
 const Account = {

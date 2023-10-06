@@ -5,7 +5,7 @@ import { useStore } from "../../../app/stores/store";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import * as Yup from 'yup';
 import ValidationErrors from "../../errors/ValidationErrors";
-import { AlchemyIngredient, AlchemyTrait } from "../../../app/models/alchemy";
+import { AlchemyIngredient } from "../../../app/models/alchemy";
 
 interface Props {
     ing: AlchemyIngredient

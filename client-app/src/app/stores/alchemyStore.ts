@@ -147,7 +147,6 @@ export default class AlchemyStore {
     deleteAPR = async (ATid: string, APRid: string) => {
         this.loading = true;
         try {
-            console.log(`ATid:${ATid}, APRid:${APRid}`);
             await agent.Alchemy.deleteAPR(ATid, APRid)
             runInAction(() => {
                 let at = this.traitRegistry.get(ATid)
@@ -260,6 +259,23 @@ export default class AlchemyStore {
             await agent.Alchemy.deleteIngredient(id)
             runInAction(() => {
                 this.ingredientRegistry.delete(id)
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
+    deleteAIP = async (AIid: string, AIPid: string) => {
+        this.loading = true;
+        try {
+            await agent.Alchemy.deleteAIP(AIid, AIPid)
+            runInAction(() => {
+                let ing = this.ingredientRegistry.get(AIid)
+                ing!.potencies = ing!.potencies.filter((aip) => aip.id !== AIPid)
                 this.loading = false
             })
         } catch (error) {

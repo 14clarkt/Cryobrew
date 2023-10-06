@@ -3,6 +3,7 @@ import { Button, Grid, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import AlchemyIngredientPotencyForm from '../form/AlchemyIngredientPotencyForm';
 import AlchemyIngredientUpdateForm from '../form/AlchemyIngredientUpdateForm';
+import AlchemyIngredientPotencyDelete from '../form/AlchemyIngredientPotencyDelete';
 
 export default observer(function AlchemyIngredientList() {
     const { userStore, alchemyStore, modalStore } = useStore()
@@ -26,7 +27,7 @@ export default observer(function AlchemyIngredientList() {
                         <Grid.Column width='2'>
                             {isAdmin && <Button
                                 color='yellow'
-                                content= {ing.hidden ? 'Show' : 'Hide'}
+                                content={ing.hidden ? 'Show' : 'Hide'}
                                 fluid inverted
                                 loading={loading}
                                 onClick={() => hideShowIngredient(ing)}
@@ -83,14 +84,23 @@ export default observer(function AlchemyIngredientList() {
                         />
                         </Grid.Column>
                         <Grid.Column width='12'><span style={{ color: "cyan" }}><h2>Traits</h2></span></Grid.Column>
-                        <Grid.Column width='2'><Button disabled={!isAdmin} fluid inverted content="Del" color="red" /></Grid.Column>
+                        <Grid.Column width='2'>
+                            <Button
+                                disabled={!isAdmin}
+                                color="red"
+                                content="Del"
+                                fluid inverted
+                                loading={loading}
+                                onClick={() => modalStore.openModal("Delete Ingredient Trait Potencies", <AlchemyIngredientPotencyDelete ing={ing} />)}
+                            />
+                        </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
-                        {ing.potencies.map((tp) => (
+                        {ing.potencies.map((aip) => (
                             <Grid.Column width='4'
                                 style={{ textAlign: "center", fontSize: "1.2em", paddingBottom: "10px" }}>
-                                <span style={{ color: 'cyan' }}>{tp.traitName} : </span>
-                                <span>{tp.potency}</span>
+                                <span style={{ color: 'cyan' }}>{aip.traitName} : </span>
+                                <span>{aip.potency}</span>
                             </Grid.Column>
                         ))}
                     </Grid.Row>
