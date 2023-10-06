@@ -74,6 +74,12 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new UpdateAlchemyIngredient.Command{AlchemyIngredient = ing}));
         }
 
+        [HttpDelete("ingredient/{id}")]
+        public async Task<IActionResult> DeleteAlchemyIngredient(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new DeleteAlchemyIngredient.Command{Id = id}));
+        }
+
         [HttpPost("ingredientpotency/{id}")] 
         public async Task<IActionResult> CreateAlchemyIngredientPotency(AlchemyIngredientPotency aip, Guid id)
         {

@@ -7,7 +7,7 @@ import AlchemyIngredientUpdateForm from '../form/AlchemyIngredientUpdateForm';
 export default observer(function AlchemyIngredientList() {
     const { userStore, alchemyStore, modalStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
-    const { hideShowIngredient, ingredientList, loading } = alchemyStore
+    const { hideShowIngredient, deleteAlchemyIngredient, ingredientList, loading } = alchemyStore
 
     return (
         <>
@@ -46,8 +46,8 @@ export default observer(function AlchemyIngredientList() {
                                 color='red'
                                 content='Del'
                                 fluid inverted
-                            // loading={loading}
-                            // onClick={() => deleteEQ(eq.id)}
+                                loading={loading}
+                                onClick={() => deleteAlchemyIngredient(ing.id)}
                             />}
                         </Grid.Column>
                     </Grid.Row>

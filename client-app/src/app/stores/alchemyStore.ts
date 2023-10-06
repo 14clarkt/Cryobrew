@@ -254,6 +254,22 @@ export default class AlchemyStore {
         this.updateIngredient({...ing, hidden: !ing.hidden})
     }
 
+    deleteAlchemyIngredient = async (id: string) => {
+        this.loading = true;
+        try {
+            await agent.Alchemy.deleteIngredient(id)
+            runInAction(() => {
+                this.ingredientRegistry.delete(id)
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
     // misc
 
     setRightHandDisplay = (toDisplay: "Traits" | "Products" | "Creation") => {

@@ -101,7 +101,7 @@ const Alchemy = {
 
     listIngredient: () => requests.get<AlchemyIngredient[]>('/alchemy/ingredient'),
     createIngredient: (ing: AlchemyIngredient) => axios.post('/alchemy/ingredient', ing),
-    // deleteTrait: (id: string) => axios.delete(`/alchemy/trait/${id}`),
+    deleteIngredient: (id: string) => axios.delete(`/alchemy/ingredient/${id}`),
     updateIngredient: (ing: AlchemyIngredient) => axios.put(`/alchemy/ingredient/${ing.id}`, ing),
 
     createAIP: (AIid: string, aip: AlchemyIngredientPotency) => axios.post(`/alchemy/ingredientpotency/${AIid}`, aip),
