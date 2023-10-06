@@ -9,6 +9,7 @@ export default class AlchemyStore {
     ingredientRegistry = new Map<string, AlchemyIngredient>();
     loading = false;
     loadingInitial = false;
+    rightHandDisplay : "Traits" | "Products" | "Creation" = "Traits"
 
     constructor() {
         makeAutoObservable(this)
@@ -230,5 +231,11 @@ export default class AlchemyStore {
     private setAIP = (AIid: string, aip: AlchemyIngredientPotency) => {
         let ing = this.ingredientRegistry.get(AIid)
         ing?.potencies.push(aip)
+    }
+    
+    // misc
+
+    setRightHandDisplay = (toDisplay: "Traits" | "Products" | "Creation") => {
+        this.rightHandDisplay = toDisplay
     }
 }
