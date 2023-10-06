@@ -15,5 +15,7 @@ namespace Persistence
         public DbSet<EquipmentQuality> EquipmentQualities { get; set; }
         public DbSet<AlchemyTrait> AlchemyTraits { get; set; }
         public DbSet<AlchemyPotencyRange> AlchemyPotencyRanges { get; set; }
+        public DbSet<AlchemyIngredient> AlchemyIngredients { get; set; }
+        public DbSet<AlchemyIngredientPotency> AlchemyIngredientPotencies { get; set; }
     }
 }

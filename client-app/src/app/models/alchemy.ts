@@ -15,3 +15,19 @@ export interface AlchemyPotencyRange {
     effect: string
     order: number
 }
+
+export interface AlchemyIngredient {
+    id: string
+    name: string
+    biomesCreatures: string
+    types: string
+    quantity: number
+    hidden: boolean
+    potencies: Array<AlchemyIngredientPotency>
+}
+
+export interface AlchemyIngredientPotency {
+    id: string
+    traitName: string
+    potency: number
+}

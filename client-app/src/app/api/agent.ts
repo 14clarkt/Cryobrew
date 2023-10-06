@@ -5,7 +5,7 @@ import { store } from '../stores/store';
 import { User, UserEditValues, UserFormValues } from '../models/user';
 import { ActionPointCard, ActionPointLevel } from '../models/actionPointCard';
 import { EquipmentQuality } from '../models/equipmentQuality';
-import { AlchemyPotencyRange, AlchemyTrait } from '../models/alchemy';
+import { AlchemyIngredient, AlchemyIngredientPotency, AlchemyPotencyRange, AlchemyTrait } from '../models/alchemy';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -98,6 +98,13 @@ const Alchemy = {
     createAPR: (ATid: string, apr: AlchemyPotencyRange) => axios.post(`/alchemy/potencyrange/${ATid}`, apr),
     updateAPR: (apr: AlchemyPotencyRange) => axios.put(`/alchemy/potencyrange/${apr.id}`, apr),
     deleteAPR: (ATid: string, APRid: string) => axios.delete(`/alchemy/potencyrange/${ATid}/${APRid}`),
+
+    listIngredient: () => requests.get<AlchemyIngredient[]>('/alchemy/ingredient'),
+    createIngredient: (ing: AlchemyIngredient) => axios.post('/alchemy/ingredient', ing),
+    // deleteTrait: (id: string) => axios.delete(`/alchemy/trait/${id}`),
+    // updateTrait: (at: AlchemyTrait) => axios.put(`/alchemy/trait/${at.id}`, at),
+
+    createAIP: (AIid: string, aip: AlchemyIngredientPotency) => axios.post(`/alchemy/ingredientpotency/${AIid}`, aip),
 }
 
 const Account = {
