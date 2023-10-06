@@ -205,6 +205,7 @@ export default class AlchemyStore {
             await agent.Alchemy.createIngredient(ing)
             runInAction(() => {
                 this.setIng(ing)
+                this.setIngQuantity(ing)
                 this.loading = false
                 store.modalStore.closeModal();
             })
