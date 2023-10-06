@@ -232,7 +232,24 @@ export default class AlchemyStore {
         let ing = this.ingredientRegistry.get(AIid)
         ing?.potencies.push(aip)
     }
-    
+
+    updateIngredient = async (ing: AlchemyIngredient) => {
+        this.loading = true
+        try {
+            await agent.Alchemy.updateIngredient(ing)
+            runInAction(() => {
+                this.ingredientRegistry.set(ing.id, ing)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })            
+        }
+    }
+
     // misc
 
     setRightHandDisplay = (toDisplay: "Traits" | "Products" | "Creation") => {

@@ -3,32 +3,32 @@ import { Button } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
 import MyTextInput from "../../../app/common/form/MyTextInput";
-import ValidationErrors from "../../errors/ValidationErrors";
 import * as Yup from 'yup';
-import { AlchemyIngredientPotency } from "../../../app/models/alchemy";
+import ValidationErrors from "../../errors/ValidationErrors";
+import { AlchemyIngredient, AlchemyTrait } from "../../../app/models/alchemy";
 
-export default observer(function AlchemyTraitForm() {
+interface Props {
+    ing: AlchemyIngredient
+}
+
+export default observer(function AlchemyIngredientUpdateForm(props: Props) {
     const { alchemyStore } = useStore()
+    const { ing: oldIng } = props
     const { loading } = alchemyStore
 
     return (
         <Formik
             initialValues={{
-                name: "",
-                biomesCreatures: "",
-                types: "",
+                ...oldIng,
                 error: null }}
             onSubmit={(values, { setErrors }) => {
-                let newIngredient = {
-                    id: "",
+                let newIng = {
+                    ...oldIng,
                     name: values.name,
                     biomesCreatures: values.biomesCreatures,
                     types: values.types,
-                    quantity: 0,
-                    hidden: true,
-                    potencies: new Array<AlchemyIngredientPotency>()
                 }
-                alchemyStore.createIngredient(newIngredient).catch(error =>
+                alchemyStore.updateIngredient(newIng).catch(error =>
                     setErrors({ error }))
             }}
             validationSchema={Yup.object({
@@ -48,7 +48,7 @@ export default observer(function AlchemyTraitForm() {
                     />
                     <Button
                         disabled={!isValid || !dirty || isSubmitting}
-                        content="Create"
+                        content="Update"
                         type="submit"
                         color="green"
                         fluid inverted
