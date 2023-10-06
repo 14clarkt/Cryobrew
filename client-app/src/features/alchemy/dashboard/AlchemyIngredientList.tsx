@@ -8,7 +8,7 @@ import AlchemyIngredientPotencyDelete from '../form/AlchemyIngredientPotencyDele
 export default observer(function AlchemyIngredientList() {
     const { userStore, alchemyStore, modalStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
-    const { hideShowIngredient, deleteAlchemyIngredient, ingredientList, loading } = alchemyStore
+    const { hideShowIngredient, deleteAlchemyIngredient, incrementIngredientQuantity, saveIngredientQuantity, newQuantityRegistry, ingredientList, loading } = alchemyStore
 
     return (
         <>
@@ -65,10 +65,16 @@ export default observer(function AlchemyIngredientList() {
                         </Grid.Column>
                         <Grid.Column width='4'>
                             <h3 style={{ color: "cyan" }}>Quantity</h3>
-                            <Button inverted icon='left chevron' size='mini' />
-                            <span style={{ fontSize: "1.5em", paddingInline: "10px" }}> {ing.quantity} </span>
-                            <Button inverted icon='right chevron' size='mini' />
-                            <span style={{ paddingInline: "10px" }}><Button inverted icon='save' size='mini' /></span>
+                            <Button inverted icon='left chevron' size='mini' onClick={() => incrementIngredientQuantity(ing.id, false)} />
+                            <span style={{ fontSize: "1.5em", paddingInline: "10px" }}> {newQuantityRegistry.get(ing.id)} </span>
+                            <Button inverted icon='right chevron' size='mini' onClick={() => incrementIngredientQuantity(ing.id, true)}/>
+                            <span style={{ paddingInline: "10px" }}>
+                                <Button 
+                                    disabled={ing.quantity===newQuantityRegistry.get(ing.id)}
+                                    inverted icon='save' size='mini' loading={loading}
+                                    onClick={() => saveIngredientQuantity(ing)}
+                                />
+                            </span>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
@@ -97,7 +103,7 @@ export default observer(function AlchemyIngredientList() {
                     </Grid.Row>
                     <Grid.Row>
                         {ing.potencies.map((aip) => (
-                            <Grid.Column width='4'
+                            <Grid.Column width='4' key={aip.id}
                                 style={{ textAlign: "center", fontSize: "1.2em", paddingBottom: "10px" }}>
                                 <span style={{ color: 'cyan' }}>{aip.traitName} : </span>
                                 <span>{aip.potency}</span>

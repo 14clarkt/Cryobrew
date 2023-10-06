@@ -7,6 +7,8 @@ import { AlchemyIngredient, AlchemyIngredientPotency, AlchemyPotencyRange, Alche
 export default class AlchemyStore {
     traitRegistry = new Map<string, AlchemyTrait>();
     ingredientRegistry = new Map<string, AlchemyIngredient>();
+    newQuantityRegistry = new Map<string, number>();
+
     loading = false;
     loadingInitial = false;
     rightHandDisplay : "Traits" | "Products" | "Creation" = "Traits"
@@ -178,6 +180,7 @@ export default class AlchemyStore {
             runInAction(() => {
                 ings.forEach(ing => {
                     this.setIng(ing)
+                    this.setIngQuantity(ing)
                 })
             })
             this.setLoadingInitial(false)
@@ -189,6 +192,10 @@ export default class AlchemyStore {
 
     private setIng = (ing: AlchemyIngredient) => {
         this.ingredientRegistry.set(ing.id, ing)
+    }
+
+    private setIngQuantity = (ing: AlchemyIngredient) => {
+        this.newQuantityRegistry.set(ing.id, ing.quantity)
     }
 
     createIngredient = async (ing: AlchemyIngredient) => {
@@ -250,7 +257,7 @@ export default class AlchemyStore {
     }
 
     hideShowIngredient = async (ing: AlchemyIngredient) => {
-        this.updateIngredient({...ing, hidden: !ing.hidden})
+        await this.updateIngredient({...ing, hidden: !ing.hidden})
     }
 
     deleteAlchemyIngredient = async (id: string) => {
@@ -284,6 +291,16 @@ export default class AlchemyStore {
                 this.loading = false
             })
         }
+    }
+
+    incrementIngredientQuantity = (ingId: string, increment: boolean) => {
+        let nq = this.newQuantityRegistry.get(ingId)
+        if (nq === undefined) return
+        increment ? this.newQuantityRegistry.set(ingId, nq+1) : this.newQuantityRegistry.set(ingId, Math.max(nq-1, 0))
+    }
+
+    saveIngredientQuantity = async (ing: AlchemyIngredient) => {
+        await this.updateIngredient({...ing, quantity: this.newQuantityRegistry.get(ing.id)!})
     }
 
     // misc
