@@ -5,8 +5,9 @@ import AlchemyRules from './AlchemyRules';
 import AlchemyIngredientForm from '../form/AlchemyIngredientForm';
 
 export default observer(function AlchemyIngredientHeader() {
-    const { userStore, modalStore } = useStore()
+    const { userStore, modalStore, alchemyStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
+    const { loading } = alchemyStore
 
     return (
         <Segment style={{ backgroundColor: "black" }}>
@@ -16,14 +17,13 @@ export default observer(function AlchemyIngredientHeader() {
                 size='huge'
                 color='green'
                 inverted
-                // loading={equipmentQualityStore.loading}
+                loading={loading}
                 content="Create Ingredient" />
             <Button
                 onClick={() => modalStore.openModal('Alchemy Rules', <AlchemyRules />, "fullscreen")}
                 size='huge'
                 color='yellow'
                 inverted
-                // loading={equipmentQualityStore.loading}
                 content="Alchemy Rules" />
         </Segment>
     )

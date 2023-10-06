@@ -7,7 +7,7 @@ import AlchemyIngredientUpdateForm from '../form/AlchemyIngredientUpdateForm';
 export default observer(function AlchemyIngredientList() {
     const { userStore, alchemyStore, modalStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
-    const { ingredientList, loading } = alchemyStore
+    const { hideShowIngredient, ingredientList, loading } = alchemyStore
 
     return (
         <>
@@ -25,17 +25,15 @@ export default observer(function AlchemyIngredientList() {
                         </Grid.Column>
                         <Grid.Column width='2'>
                             {isAdmin && <Button
-                                disabled={!isAdmin}
                                 color='yellow'
-                                content='Find'
+                                content= {ing.hidden ? 'Show' : 'Hide'}
                                 fluid inverted
                                 loading={loading}
-                            // onClick={() => hideShowIngredient(ing)}
+                                onClick={() => hideShowIngredient(ing)}
                             />}
                         </Grid.Column>
                         <Grid.Column width='2'>
                             {isAdmin && <Button
-                                disabled={!isAdmin}
                                 color='teal'
                                 content='Edit'
                                 fluid inverted
@@ -45,7 +43,6 @@ export default observer(function AlchemyIngredientList() {
                         </Grid.Column>
                         <Grid.Column width='2'>
                             {isAdmin && <Button
-                                disabled={!isAdmin}
                                 color='red'
                                 content='Del'
                                 fluid inverted

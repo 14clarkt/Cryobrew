@@ -250,6 +250,10 @@ export default class AlchemyStore {
         }
     }
 
+    hideShowIngredient = async (ing: AlchemyIngredient) => {
+        this.updateIngredient({...ing, hidden: !ing.hidden})
+    }
+
     // misc
 
     setRightHandDisplay = (toDisplay: "Traits" | "Products" | "Creation") => {
