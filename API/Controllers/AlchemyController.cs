@@ -53,5 +53,24 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new DeleteAPR.Command{ATId = atid, APRId = aprid}));
         }
 
+        // Ingredients
+
+        [HttpGet("ingredient")] //api/alchemy/ingredient
+        public async Task<IActionResult> GetAlchemyIngredients()
+        {
+            return HandleResult(await Mediator.Send(new ListAlchemyIngredients.Query()));
+        }
+
+        [HttpPost("ingredient")]
+        public async Task<IActionResult> CreateAlchemyIngredient(AlchemyIngredient ing)
+        {
+            return HandleResult(await Mediator.Send(new CreateAlchemyIngredient.Command{AlchemyIngredient = ing}));
+        }
+        
+        [HttpPost("ingredientpotency/{id}")] 
+        public async Task<IActionResult> CreateAlchemyIngredientPotency(AlchemyIngredientPotency aip, Guid id)
+        {
+            return HandleResult(await Mediator.Send(new CreateAIP.Command{AlchemyIngredientPotency = aip, AIid = id}));
+        }
     }
 }

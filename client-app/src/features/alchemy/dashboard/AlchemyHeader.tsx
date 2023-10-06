@@ -3,6 +3,7 @@ import { Button, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import AlchemyRules from './AlchemyRules';
 import AlchemyTraitForm from '../form/AlchemyTraitForm';
+import AlchemyIngredientForm from '../form/AlchemyIngredientForm';
 
 export default observer(function AlchemyHeader() {
     const { userStore, modalStore } = useStore()
@@ -12,7 +13,7 @@ export default observer(function AlchemyHeader() {
         <Segment style={{ backgroundColor: "black" }}>
             <Button
                 disabled={!isAdmin}
-                // onClick={() => modalStore.openModal("Create Equipment Quality", <EQForm />, "large")}
+                onClick={() => modalStore.openModal("Create Alchemy Ingredient", <AlchemyIngredientForm />)}
                 size='huge'
                 color='green'
                 inverted

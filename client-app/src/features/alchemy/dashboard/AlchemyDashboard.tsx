@@ -11,11 +11,12 @@ import { useEffect } from "react"
 
 export default observer(function AlchemyDashboard() {
     const { alchemyStore } = useStore()
-    const {loadTraits, traitRegistry, loadingInitial} = alchemyStore
+    const {loadTraits, loadIngredients, traitRegistry, ingredientRegistry, loadingInitial} = alchemyStore
 
     useEffect(() => {
         if (traitRegistry.size < 1) loadTraits();
-    }, [loadTraits, traitRegistry.size])
+        if (ingredientRegistry.size < 1) loadIngredients();
+    }, [loadTraits, loadIngredients, traitRegistry.size, ingredientRegistry.size])
 
     if (loadingInitial) return <div style={{padding:'400px', position:'relative'}}><LoadingComponent content='Loading Alchemy...' /></div>
     

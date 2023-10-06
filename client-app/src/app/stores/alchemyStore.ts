@@ -2,10 +2,11 @@ import { makeAutoObservable, runInAction } from "mobx"
 import agent from "../api/agent"
 import { v4 as uuid } from "uuid"
 import { store } from "./store";
-import { AlchemyPotencyRange, AlchemyTrait } from "../models/alchemy";
+import { AlchemyIngredient, AlchemyIngredientPotency, AlchemyPotencyRange, AlchemyTrait } from "../models/alchemy";
 
 export default class AlchemyStore {
     traitRegistry = new Map<string, AlchemyTrait>();
+    ingredientRegistry = new Map<string, AlchemyIngredient>();
     loading = false;
     loadingInitial = false;
 
@@ -107,49 +108,6 @@ export default class AlchemyStore {
         }
     }
 
-    // upgradeApc = async (apc: ActionPointCard) => {
-    //     this.loading = true
-    //     for (let i = 0; i < apc.actionPointLevels.length; i++) {
-    //         if (apc.actionPointLevels[i].level == apc.upgradeLevel + 1) {
-    //             await agent.ActionPointCards.update({...apc, upgradeLevel: apc.upgradeLevel+1})
-    //             runInAction(() => {
-    //                 this.apcRegistry.set(apc.id, {...apc, upgradeLevel: apc.upgradeLevel+1})
-    //                 this.loading = false
-    //             })
-    //             return
-    //         }
-    //     }
-    //     toast.error(`No APL of level ${apc.upgradeLevel+1} for APC: ${apc.name}.`)
-    //     this.loading = false
-    // }
-
-    // downgradeApc = async (apc: ActionPointCard) => {
-    //     this.loading = true
-    //     for (let i = 0; i < apc.actionPointLevels.length; i++) {
-    //         if (apc.actionPointLevels[i].level == apc.upgradeLevel - 1 || apc.upgradeLevel === 1) {
-    //             await agent.ActionPointCards.update({...apc, upgradeLevel: apc.upgradeLevel-1})
-    //             runInAction(() => {
-    //                 this.apcRegistry.set(apc.id, {...apc, upgradeLevel: apc.upgradeLevel-1})
-    //                 this.loading = false
-    //             })
-    //             return
-    //         }
-    //     }
-    //     toast.error(`No APL of level ${apc.upgradeLevel-1} for APC: ${apc.name}.`)
-    //     this.loading = false
-    // }
-
-    // equipApc = async (apc: ActionPointCard, username: string | undefined) => {
-    //     if (!username) return
-
-    //     this.loading = true
-    //     await agent.ActionPointCards.update(username !== apc.equippedBy ? {...apc, equippedBy: username} : {...apc, equippedBy: null})
-    //     runInAction(() => {
-    //         this.apcRegistry.set(apc.id, username !== apc.equippedBy ? {...apc, equippedBy: username} : {...apc, equippedBy: null})
-    //         this.loading = false
-    //     })
-    // }
-
     updateAPR = async (ATid: string, apr: AlchemyPotencyRange) => {
         this.loading = true
         try {
@@ -204,22 +162,73 @@ export default class AlchemyStore {
         }
     }
 
-    // copyApl = async (APCid: string, APLid: string) => {
-    //     this.loading = true;
-    //     try {
-    //         let copyAplId = uuid()
-    //         await agent.ActionPointCards.copyApl(APCid, APLid, copyAplId)
-    //         runInAction(() => {
-    //             let apc = this.apcRegistry.get(APCid)
-    //             let apl = apc!.actionPointLevels.filter((apl) => apl.id === APLid)[0]
-    //             this.setApl(APCid, {...apl, id: copyAplId})
-    //             this.loading = false
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //         runInAction(() => {
-    //             this.loading = false
-    //         })
-    //     }
-    // }
+    // Ingredients
+
+    get ingredientList() {
+        let ings = Array.from(this.ingredientRegistry.values()).sort((a, b) =>
+            a.name.localeCompare(b.name))
+
+        return ings
+    }
+
+    loadIngredients = async () => {
+        this.setLoadingInitial(true)
+        try {
+            const ings = await agent.Alchemy.listIngredient()
+            runInAction(() => {
+                ings.forEach(ing => {
+                    this.setIng(ing)
+                })
+            })
+            this.setLoadingInitial(false)
+        } catch (error) {
+            console.log(error)
+            this.setLoadingInitial(false)
+        }
+    }
+
+    private setIng = (ing: AlchemyIngredient) => {
+        this.ingredientRegistry.set(ing.id, ing)
+    }
+
+    createIngredient = async (ing: AlchemyIngredient) => {
+        this.loading = true
+        ing.id = uuid()
+        try {
+            await agent.Alchemy.createIngredient(ing)
+            runInAction(() => {
+                this.setIng(ing)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
+    createAIP = async (AIid: string, aip: AlchemyIngredientPotency) => {
+        this.loading = true
+        aip.id = uuid()
+        try {
+            await agent.Alchemy.createAIP(AIid, aip)
+            runInAction(() => {
+                this.setAIP(AIid, aip)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
+    private setAIP = (AIid: string, aip: AlchemyIngredientPotency) => {
+        let ing = this.ingredientRegistry.get(AIid)
+        ing?.potencies.push(aip)
+    }
 }
