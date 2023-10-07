@@ -25,13 +25,13 @@ export default observer(function AlchemyDashboard() {
         <Grid>
             <Grid.Column width='8'>
                 <AlchemyIngredientHeader />
-                <div style={{ overflow: 'auto', maxHeight: 700 }}>
+                <div style={{ overflow: 'auto', maxHeight: 750 }}>
                     <AlchemyIngredientList />
                 </div>
             </Grid.Column>
             <Grid.Column width='8'>
                 <AlchemyRightHandHeader />
-                <div style={{ overflow: 'auto', maxHeight: 700 }}>
+                <div style={{ overflow: 'auto', maxHeight: 750 }}>
                     {rightHandDisplay.includes("Creation") && <AlchemyCreation />}
                     {rightHandDisplay.includes("Products") && <AlchemyProductList />}
                     {rightHandDisplay.includes("Traits") && <AlchemyTraitList />}

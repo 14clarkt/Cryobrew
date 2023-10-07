@@ -9,11 +9,13 @@ import DiffSpan from '../../../app/common/display/DiffSpan';
 export default observer(function AlchemyTraitList() {
     const { userStore, alchemyStore, modalStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
-    const { traitList, deleteTrait, updateTrait, loading } = alchemyStore
+    const { traitList, deleteTrait, updateTrait, loading, traitFilter } = alchemyStore
 
     return (
         <>
-            {traitList.map((trait) => ((isAdmin || !trait.hidden) && <Segment key={trait.id} style={{
+            {traitList.map((trait) => ((isAdmin || !trait.hidden)
+                    && trait.name.toLowerCase().includes(traitFilter.toLowerCase())
+                    && <Segment key={trait.id} style={{
                 backgroundColor: "#111111",
                 color: "white",
                 borderStyle: "solid",

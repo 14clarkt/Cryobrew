@@ -13,6 +13,9 @@ export default class AlchemyStore {
     loadingInitial = false;
     rightHandDisplay : "Traits" | "Products" | "Creation" = "Traits"
 
+    traitFilter = ""
+    ingredientFilter = ""
+
     constructor() {
         makeAutoObservable(this)
     }
@@ -308,5 +311,14 @@ export default class AlchemyStore {
 
     setRightHandDisplay = (toDisplay: "Traits" | "Products" | "Creation") => {
         this.rightHandDisplay = toDisplay
+        this.traitFilter = ""
+    }
+
+    setTraitFilter = (query: string) => {
+        this.traitFilter = query
+    }
+
+    setIngredientFilter = (query: string) => {
+        this.ingredientFilter = query
     }
 }
