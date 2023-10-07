@@ -16,6 +16,9 @@ export default class AlchemyStore {
     traitFilter = ""
     ingredientFilter = ""
 
+    showZero : boolean = true
+    filterByName : boolean = true
+
     constructor() {
         makeAutoObservable(this)
     }
@@ -169,7 +172,7 @@ export default class AlchemyStore {
 
     // Ingredients
 
-    get ingredientList() {
+    get ingredientSortedList() {
         let ings = Array.from(this.ingredientRegistry.values()).sort((a, b) =>
             a.name.localeCompare(b.name))
 
@@ -320,5 +323,13 @@ export default class AlchemyStore {
 
     setIngredientFilter = (query: string) => {
         this.ingredientFilter = query
+    }
+
+    toggleShowZero = () => {
+        this.showZero = !this.showZero
+    }
+
+    toggleFilterByName = () => {
+        this.filterByName = !this.filterByName
     }
 }
