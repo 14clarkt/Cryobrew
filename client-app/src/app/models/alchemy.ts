@@ -22,6 +22,7 @@ export interface AlchemyIngredient {
     biomesCreatures: string
     types: string
     quantity: number
+    perUse: number
     hidden: boolean
     potencies: Array<AlchemyIngredientPotency>
 }
