@@ -49,6 +49,17 @@ export default function AlchemyRules() {
 
             <Grid.Row>
                 <Grid.Column width={2}>
+                    <div style={{ color: "cyan", fontWeight: "bold" }}>Per Use:</div>
+                </Grid.Column>
+                <Grid.Column width={14}>
+                    <div>
+                        Some Ingredients require a more than one of themselves to be potent enough to apply their Traits to the Product. Using more or less than the Per Use amount will cause the Product to fail.
+                    </div>
+                </Grid.Column>
+            </Grid.Row>
+
+            <Grid.Row>
+                <Grid.Column width={2}>
                     <div style={{ color: "cyan", fontWeight: "bold" }}>Restriction 1:</div>
                 </Grid.Column>
                 <Grid.Column width={14}>
@@ -75,7 +86,7 @@ export default function AlchemyRules() {
                 </Grid.Column>
                 <Grid.Column width={14}>
                     <div>
-                        Duplicate Ingredients will cause the Product to fail.
+                        Duplicate (Per Use amounts of) Ingredients will cause the Product to fail.
                     </div>
                 </Grid.Column>
             </Grid.Row>
