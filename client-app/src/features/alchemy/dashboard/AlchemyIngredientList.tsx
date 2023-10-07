@@ -9,11 +9,14 @@ import DiffSpan from '../../../app/common/display/DiffSpan';
 export default observer(function AlchemyIngredientList() {
     const { userStore, alchemyStore, modalStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
-    const { hideShowIngredient, deleteAlchemyIngredient, incrementIngredientQuantity, saveIngredientQuantity, newQuantityRegistry, ingredientList, loading } = alchemyStore
+    const { hideShowIngredient, deleteAlchemyIngredient, incrementIngredientQuantity, saveIngredientQuantity,
+        newQuantityRegistry, ingredientList, ingredientFilter, loading } = alchemyStore
 
     return (
         <>
-            {ingredientList.map((ing) => ((isAdmin || !ing.hidden) && <Segment key={ing.id} style={{
+            {ingredientList.map((ing) => ((isAdmin || !ing.hidden)
+                    && ing.name.toLowerCase().includes(ingredientFilter.toLowerCase())
+                    && <Segment key={ing.id} style={{
                 backgroundColor: "#111111",
                 color: "white",
                 borderStyle: "solid",
