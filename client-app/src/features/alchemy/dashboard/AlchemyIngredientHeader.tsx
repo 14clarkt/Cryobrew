@@ -3,12 +3,11 @@ import { Button, Grid, Popup, Search, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import AlchemyRules from './AlchemyRules';
 import AlchemyIngredientForm from '../form/AlchemyIngredientForm';
-import { useState } from 'react';
 
 export default observer(function AlchemyIngredientHeader() {
     const { userStore, modalStore, alchemyStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
-    const { loading, setIngredientFilter, showZero, toggleShowZero } = alchemyStore
+    const { loading, setIngredientFilter, showZero, toggleShowZero, filterByName, toggleFilterByName } = alchemyStore
 
     return (
         <Segment style={{ backgroundColor: "black" }}>
@@ -32,8 +31,27 @@ export default observer(function AlchemyIngredientHeader() {
                             inverted fluid
                             content="Alch. Rules" />
                     </Grid.Column>
+                    <Grid.Column width='4'>
+                        <Search
+                            onSearchChange={(_e, data) => { data.value ? setIngredientFilter(data.value) : setIngredientFilter("") }}
+                            open={false}
+                            placeholder={filterByName ? 'Search Ingredients' : 'Search Ingredient Traits'}
+                        />
+                    </Grid.Column>
                     <Grid.Column width='3'>
-                        <Popup inverted style={{ textAlign: 'center'}}
+                        <Popup inverted style={{ textAlign: 'center' }}
+                            content="Filter by Ingredient Name or their Trait Names."
+                            position='bottom center'
+                            trigger={<Button
+                                toggle active={filterByName}
+                                onClick={toggleFilterByName}
+                                size='large'
+                                color='red'
+                                fluid
+                                content={filterByName ? "Name" : "Traits"}/>} />
+                    </Grid.Column>
+                    <Grid.Column width='3'>
+                        <Popup inverted style={{ textAlign: 'center' }}
                             content="Hide/Show Ingredients that have a Quantity of 0."
                             position='bottom center'
                             trigger={<Button
@@ -42,14 +60,7 @@ export default observer(function AlchemyIngredientHeader() {
                                 size='large'
                                 color='red'
                                 fluid
-                                content="Show 0" />} />
-                    </Grid.Column>
-                    <Grid.Column width='3'>
-                        <Search
-                            onSearchChange={(_e, data) => { data.value ? setIngredientFilter(data.value) : setIngredientFilter("") }}
-                            open={false}
-                            placeholder='Search Ingredients'
-                        />
+                                content={showZero ? "Hide 0" : "Show 0"} />} />
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
