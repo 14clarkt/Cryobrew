@@ -16,6 +16,8 @@ export default class AlchemyStore {
     traitFilter = ""
     ingredientFilter = ""
 
+    showZero : boolean = true
+
     constructor() {
         makeAutoObservable(this)
     }
@@ -320,5 +322,9 @@ export default class AlchemyStore {
 
     setIngredientFilter = (query: string) => {
         this.ingredientFilter = query
+    }
+
+    toggleShowZero = () => {
+        this.showZero = !this.showZero
     }
 }

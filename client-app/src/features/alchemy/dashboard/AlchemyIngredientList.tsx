@@ -5,16 +5,26 @@ import AlchemyIngredientPotencyForm from '../form/AlchemyIngredientPotencyForm';
 import AlchemyIngredientUpdateForm from '../form/AlchemyIngredientUpdateForm';
 import AlchemyIngredientPotencyDelete from '../form/AlchemyIngredientPotencyDelete';
 import DiffSpan from '../../../app/common/display/DiffSpan';
+import { useEffect, useState } from 'react';
+import { AlchemyIngredient } from '../../../app/models/alchemy';
 
 export default observer(function AlchemyIngredientList() {
     const { userStore, alchemyStore, modalStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
     const { hideShowIngredient, deleteAlchemyIngredient, incrementIngredientQuantity, saveIngredientQuantity,
-        newQuantityRegistry, ingredientList, ingredientFilter, loading } = alchemyStore
+        newQuantityRegistry, ingredientList, ingredientFilter, loading, showZero } = alchemyStore
+
+    const [IngredientList, setIngredientList] = useState<AlchemyIngredient[]>([])
+    
+    useEffect(() => {
+        showZero
+        ? setIngredientList(ingredientList)
+        : setIngredientList(ingredientList.filter((ing) => ing.quantity > 0))
+    }, [showZero])
 
     return (
         <>
-            {ingredientList.map((ing) => ((isAdmin || !ing.hidden)
+            {IngredientList.map((ing) => ((isAdmin || !ing.hidden)
                     && ing.name.toLowerCase().includes(ingredientFilter.toLowerCase())
                     && <Segment key={ing.id} style={{
                 backgroundColor: "#111111",
