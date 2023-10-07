@@ -4,6 +4,7 @@ import { useStore } from '../../../app/stores/store';
 import AlchemyPRForm from '../form/AlchemyPRForm';
 import AlchemyPRUpdateForm from '../form/AlchemyPRUpdateForm';
 import AlchemyTraitUpdateForm from '../form/AlchemyTraitUpdateForm';
+import DiffSpan from '../../../app/common/display/DiffSpan';
 
 export default observer(function AlchemyTraitList() {
     const { userStore, alchemyStore, modalStore } = useStore()
@@ -22,7 +23,7 @@ export default observer(function AlchemyTraitList() {
                 <Grid>
                     <Grid.Row style={{ fontWeight: "bold" }}>
                         <Grid.Column width='10' style={{ color: "cyan", textAlign: "center" }}>
-                            <h1>{trait.name}</h1>
+                            <h1><DiffSpan content={trait.name}/></h1>
                         </Grid.Column>
                         <Grid.Column width='2'>
                             {isAdmin && <Button
@@ -60,15 +61,15 @@ export default observer(function AlchemyTraitList() {
                     <Grid.Row style={{ textAlign: "center", borderColor: "teal", borderWidth: "3px", borderBottomStyle: "solid", borderTopStyle: "solid" }}>
                         <Grid.Column width='5'>
                             <h3 style={{ color: "cyan" }}>Type(s)</h3>
-                            <div style={{ fontSize: "1.2em" }}>{trait.types}</div>
+                            <div style={{ fontSize: "1.2em" }}><DiffSpan content={trait.types}/></div>
                         </Grid.Column>
                         <Grid.Column width='6'>
                             <h3 style={{ color: "cyan" }}>Trigger(s)</h3>
-                            <div style={{ fontSize: "1.2em" }}>{trait.triggers}</div>
+                            <div style={{ fontSize: "1.2em" }}><DiffSpan content={trait.triggers}/></div>
                         </Grid.Column>
                         <Grid.Column width='5'>
                             <h3 style={{ color: "cyan" }}>Tier</h3>
-                            <div style={{ fontSize: "1.2em" }}>{trait.tier}</div>
+                            <div style={{ fontSize: "1.2em" }}><DiffSpan content={trait.tier}/></div>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
@@ -94,9 +95,9 @@ export default observer(function AlchemyTraitList() {
                         </Grid.Column>
                     </Grid.Row>
                     {trait.potencyRanges.map((apr) => (<Grid.Row key={apr.id} style={{ borderColor: "#222222", borderWidth: "3px", borderTopStyle: "solid" }}>
-                        <Grid.Column width='2' style={{ color: "cyan", fontSize: "1.2em" }}><div>{apr.range}</div></Grid.Column>
-                        <Grid.Column width='3' style={{ color: "cyan", fontSize: "1.2em" }}><div>{apr.duration}</div></Grid.Column>
-                        <Grid.Column width='9' style={{ fontSize: "1.2em" }}><div>{apr.effect}</div></Grid.Column>
+                        <Grid.Column width='2' style={{ color: "cyan", fontSize: "1.2em" }}><div><DiffSpan content={apr.range}/></div></Grid.Column>
+                        <Grid.Column width='3' style={{ color: "cyan", fontSize: "1.2em" }}><div><DiffSpan content={apr.duration}/></div></Grid.Column>
+                        <Grid.Column width='9' style={{ fontSize: "1.2em" }}><div><DiffSpan content={apr.effect}/></div></Grid.Column>
                         <Grid.Column width='2'>
                             <Button
                                 disabled={!isAdmin}
