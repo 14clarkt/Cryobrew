@@ -8,9 +8,8 @@ export default function DiffSpan(props: Props) {
     return (
         <span>
             {contentArray.map((val, ind) => 
-                <span style={{
-                    color: ind % 2===0 ? "white" : "yellow"
-                }}key={ind}>{val}</span>
+                (ind % 2 === 0) ? <span key={ind}>{val}</span>
+                : <span style={{color: "yellow"}}key={ind}>{val}</span>
             )}
         </span>
     )

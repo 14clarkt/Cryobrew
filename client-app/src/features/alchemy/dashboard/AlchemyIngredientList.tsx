@@ -4,6 +4,7 @@ import { useStore } from '../../../app/stores/store';
 import AlchemyIngredientPotencyForm from '../form/AlchemyIngredientPotencyForm';
 import AlchemyIngredientUpdateForm from '../form/AlchemyIngredientUpdateForm';
 import AlchemyIngredientPotencyDelete from '../form/AlchemyIngredientPotencyDelete';
+import DiffSpan from '../../../app/common/display/DiffSpan';
 
 export default observer(function AlchemyIngredientList() {
     const { userStore, alchemyStore, modalStore } = useStore()
@@ -22,7 +23,7 @@ export default observer(function AlchemyIngredientList() {
                 <Grid>
                     <Grid.Row>
                         <Grid.Column width='10' style={{ color: "cyan" }}>
-                            <h1>{ing.name}</h1>
+                            <h1><DiffSpan content={ing.name}/></h1>
                         </Grid.Column>
                         <Grid.Column width='2'>
                             {isAdmin && <Button
@@ -57,11 +58,11 @@ export default observer(function AlchemyIngredientList() {
                     <Grid.Row style={{ textAlign: "center", borderColor: "teal", borderWidth: "3px", borderBottomStyle: "solid", borderTopStyle: "solid" }}>
                         <Grid.Column width='6'>
                             <h3 style={{ color: "cyan" }}>Biome(s) | Creature(s)</h3>
-                            <div style={{ fontSize: "1.2em" }}>{ing.biomesCreatures}</div>
+                            <div style={{ fontSize: "1.2em" }}><DiffSpan content={ing.biomesCreatures}/></div>
                         </Grid.Column>
                         <Grid.Column width='6'>
                             <h3 style={{ color: "cyan" }}>Type(s)</h3>
-                            <div style={{ fontSize: "1.2em" }}>{ing.types}</div>
+                            <div style={{ fontSize: "1.2em" }}><DiffSpan content={ing.types}/></div>
                         </Grid.Column>
                         <Grid.Column width='4'>
                             <h3 style={{ color: "cyan" }}>Quantity</h3>
@@ -105,7 +106,7 @@ export default observer(function AlchemyIngredientList() {
                         {ing.potencies.map((aip) => (
                             <Grid.Column width='4' key={aip.id}
                                 style={{ textAlign: "center", fontSize: "1.2em", paddingBottom: "10px" }}>
-                                <span style={{ color: 'cyan' }}>{aip.traitName} : </span>
+                                <span style={{ color: 'cyan' }}><DiffSpan content={aip.traitName}/> : </span>
                                 <span>{aip.potency}</span>
                             </Grid.Column>
                         ))}

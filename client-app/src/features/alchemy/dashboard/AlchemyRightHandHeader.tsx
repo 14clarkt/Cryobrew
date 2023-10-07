@@ -25,7 +25,7 @@ export default observer(function AlchemyRightHandHeader() {
                 color='yellow'
                 inverted
                 loading={loading}
-                content="Show Traits" />
+                content="Traits" />
             <Button
                 disabled={rightHandDisplay.includes("Creation")}
                 onClick={() => setRightHandDisplay("Creation")}
@@ -33,7 +33,7 @@ export default observer(function AlchemyRightHandHeader() {
                 color='yellow'
                 inverted
                 loading={loading}
-                content="Show Creation" />
+                content="Creation" />
             <Button
                 disabled={rightHandDisplay.includes("Products")}
                 onClick={() => setRightHandDisplay("Products")}
@@ -41,7 +41,7 @@ export default observer(function AlchemyRightHandHeader() {
                 color='yellow'
                 inverted
                 loading={loading}
-                content="Show Products" />
+                content="Products" />
         </Segment>
     )
 })
