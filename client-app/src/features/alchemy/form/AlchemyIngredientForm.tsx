@@ -17,6 +17,7 @@ export default observer(function AlchemyTraitForm() {
                 name: "",
                 biomesCreatures: "",
                 types: "",
+                perUse: 1,
                 error: null }}
             onSubmit={(values, { setErrors }) => {
                 let newIngredient = {
@@ -24,6 +25,7 @@ export default observer(function AlchemyTraitForm() {
                     name: values.name,
                     biomesCreatures: values.biomesCreatures,
                     types: values.types,
+                    perUse: values.perUse,
                     quantity: 0,
                     hidden: true,
                     potencies: new Array<AlchemyIngredientPotency>()
@@ -35,6 +37,7 @@ export default observer(function AlchemyTraitForm() {
                 name: Yup.string().required(),
                 biomesCreatures: Yup.string().required(),
                 types: Yup.string().required(),
+                perUse: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than 0."),
             })}
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
@@ -42,6 +45,7 @@ export default observer(function AlchemyTraitForm() {
                     <MyTextInput label='Name' placeholder='Name' name='name' />
                     <MyTextInput label='Biome(s) / Creature(s)' placeholder='Forest; Goblin' name='biomesCreatures' />
                     <MyTextInput label='Types' placeholder='Crystal; Heart' name='types' />
+                    <MyTextInput label='Per Use' placeholder='Required amount per Product' name='perUse' />
                     <ErrorMessage
                         name='error' render={() =>
                             <ValidationErrors errors={errors.error} />}

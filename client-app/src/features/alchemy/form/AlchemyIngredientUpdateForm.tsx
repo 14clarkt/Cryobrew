@@ -27,6 +27,7 @@ export default observer(function AlchemyIngredientUpdateForm(props: Props) {
                     name: values.name,
                     biomesCreatures: values.biomesCreatures,
                     types: values.types,
+                    perUse: values.perUse,
                 }
                 alchemyStore.updateIngredient(newIng).catch(error =>
                     setErrors({ error }))
@@ -35,6 +36,7 @@ export default observer(function AlchemyIngredientUpdateForm(props: Props) {
                 name: Yup.string().required(),
                 biomesCreatures: Yup.string().required(),
                 types: Yup.string().required(),
+                perUse: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than 0."),
             })}
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
@@ -42,6 +44,7 @@ export default observer(function AlchemyIngredientUpdateForm(props: Props) {
                     <MyTextInput label='Name' placeholder='Name' name='name' />
                     <MyTextInput label='Biome(s) / Creature(s)' placeholder='Forest; Goblin' name='biomesCreatures' />
                     <MyTextInput label='Types' placeholder='Crystal; Heart' name='types' />
+                    <MyTextInput label='Per Use' placeholder='Required amount per Product' name='perUse' />
                     <ErrorMessage
                         name='error' render={() =>
                             <ValidationErrors errors={errors.error} />}

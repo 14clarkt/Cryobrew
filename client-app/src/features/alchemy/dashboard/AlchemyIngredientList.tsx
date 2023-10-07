@@ -25,7 +25,7 @@ export default observer(function AlchemyIngredientList() {
             }}>
                 <Grid>
                     <Grid.Row>
-                        <Grid.Column width='10' style={{ color: "cyan" }}>
+                        <Grid.Column width='10' style={{ color: "cyan", textAlign: "center" }}>
                             <h1><DiffSpan content={ing.name}/></h1>
                         </Grid.Column>
                         <Grid.Column width='2'>
@@ -59,11 +59,11 @@ export default observer(function AlchemyIngredientList() {
                 </Grid>
                 <Grid divided inverted>
                     <Grid.Row style={{ textAlign: "center", borderColor: "teal", borderWidth: "3px", borderBottomStyle: "solid", borderTopStyle: "solid" }}>
-                        <Grid.Column width='6'>
+                        <Grid.Column width='5'>
                             <h3 style={{ color: "cyan" }}>Biome(s) | Creature(s)</h3>
                             <div style={{ fontSize: "1.2em" }}><DiffSpan content={ing.biomesCreatures}/></div>
                         </Grid.Column>
-                        <Grid.Column width='6'>
+                        <Grid.Column width='5'>
                             <h3 style={{ color: "cyan" }}>Type(s)</h3>
                             <div style={{ fontSize: "1.2em" }}><DiffSpan content={ing.types}/></div>
                         </Grid.Column>
@@ -79,6 +79,10 @@ export default observer(function AlchemyIngredientList() {
                                     onClick={() => saveIngredientQuantity(ing)}
                                 />
                             </span>
+                        </Grid.Column>
+                        <Grid.Column width='2'>
+                            <h3 style={{ color: "cyan" }}>Per Use</h3>
+                            <div style={{ fontSize: "1.2em" }}>{ing.perUse}</div>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
