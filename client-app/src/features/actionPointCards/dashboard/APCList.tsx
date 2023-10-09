@@ -127,10 +127,10 @@ export default observer(function APCList() {
                     }}>
                         <Grid>
                             <Grid.Row>
-                                <Grid.Column width='10'>
+                                <Grid.Column width='8'>
                                     <h1>{apc.name}</h1>
                                 </Grid.Column>
-                                <Grid.Column width='2'>
+                                <Grid.Column width='4'>
                                     {!apc.equippedBy || (apc.equippedBy === username) ? <Button
                                         disabled={!!apc.equippedBy && apc.equippedBy !== username}
                                         color='yellow'
