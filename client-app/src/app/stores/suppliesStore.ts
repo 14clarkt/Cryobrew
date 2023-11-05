@@ -9,7 +9,8 @@ export default class SuppliesStore {
     loadingInitial = false
     loading = false
 
-    newQuantityRegistry = new Map<string, number>();
+    newQuantityRegistry = new Map<string, number>()
+    quantityIncrement: 1|10|100 = 1;
 
     constructor() {
         makeAutoObservable(this)
@@ -106,10 +107,26 @@ export default class SuppliesStore {
     incrementSupplyQuantity = (supplyId: string, increment: boolean) => {
         let nq = this.newQuantityRegistry.get(supplyId)
         if (nq === undefined) return
-        increment ? this.newQuantityRegistry.set(supplyId, nq+1) : this.newQuantityRegistry.set(supplyId, Math.max(nq-1, 0))
+        increment ? this.newQuantityRegistry.set(supplyId, nq+this.quantityIncrement) : this.newQuantityRegistry.set(supplyId, Math.max(nq-this.quantityIncrement, 0))
     }
 
     saveSupplyQuantity = async (supply: Supply) => {
         await this.updateSupply({...supply, quantity: this.newQuantityRegistry.get(supply.id)!})
+    }
+
+    get leftwardIcon() {
+        if (this.quantityIncrement === 1) return "angle left"
+        if (this.quantityIncrement === 10) return "double angle left"
+        if (this.quantityIncrement === 100) return "backward"
+    }
+
+    get rightwardIcon() {
+        if (this.quantityIncrement === 1) return "angle right"
+        if (this.quantityIncrement === 10) return "double angle right"
+        if (this.quantityIncrement === 100) return "forward"
+    }
+
+    setQuantityIncrement = (increment: 1|10|100) => {
+        this.quantityIncrement = increment
     }
 }
