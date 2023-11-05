@@ -17,5 +17,6 @@ namespace Persistence
         public DbSet<AlchemyPotencyRange> AlchemyPotencyRanges { get; set; }
         public DbSet<AlchemyIngredient> AlchemyIngredients { get; set; }
         public DbSet<AlchemyIngredientPotency> AlchemyIngredientPotencies { get; set; }
+        public DbSet<Supply> Supplies { get; set; }
     }
 }

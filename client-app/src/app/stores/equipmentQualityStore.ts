@@ -5,17 +5,20 @@ import { store } from "./store";
 import agent from "../api/agent";
 
 export default class EquipmentQualityStore {
-    eqRegistry = new Map<string, EquipmentQuality>();
-    loadingInitial = false;
-    loading = false;
+    eqRegistry = new Map<string, EquipmentQuality>()
+    loadingInitial = false
+    loading = false
+    eqFilter = ""
 
     constructor() {
         makeAutoObservable(this)
     }
 
     get eqList() {
-        return Array.from(this.eqRegistry.values()).sort((a, b) =>
+        let sortedEQs = Array.from(this.eqRegistry.values()).sort((a, b) =>
             a.name.localeCompare(b.name))
+
+        return sortedEQs.filter((eq) => eq.name.toLowerCase().includes(this.eqFilter.toLowerCase()))
     }
 
     loadEQs = async () => {
@@ -114,5 +117,9 @@ export default class EquipmentQualityStore {
 
     private setEQ = (eq: EquipmentQuality) => {
         this.eqRegistry.set(eq.id, eq)
+    }
+
+    setEQFilter = (query: string) => {
+        this.eqFilter = query
     }
 }
