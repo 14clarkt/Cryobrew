@@ -6,6 +6,7 @@ import { User, UserEditValues, UserFormValues } from '../models/user';
 import { ActionPointCard, ActionPointLevel } from '../models/actionPointCard';
 import { EquipmentQuality } from '../models/equipmentQuality';
 import { AlchemyIngredient, AlchemyIngredientPotency, AlchemyPotencyRange, AlchemyTrait } from '../models/alchemy';
+import { Supply } from '../models/supply';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -108,6 +109,13 @@ const Alchemy = {
     deleteAIP: (AIid: string, AIPid: string) => axios.delete(`/alchemy/ingredientpotency/${AIid}/${AIPid}`),
 }
 
+const Supplies = {
+    list: () => requests.get<Supply[]>('/supply'),
+    create: (supply: Supply) => axios.post('/supply', supply),
+    delete: (id: string) => axios.delete(`/supply/${id}`),
+    update: (supply: Supply) => axios.put(`/supply/${supply.id}`, supply),
+}
+
 const Account = {
     current: () => requests.get<User>('/account'),
     login: (user: UserFormValues) => requests.post<User>('/account/login', user),
@@ -119,7 +127,8 @@ const agent = {
     ActionPointCards,
     EquipmentQualities,
     Alchemy,
-    Account
+    Supplies,
+    Account,
 }
 
 export default agent;
