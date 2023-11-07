@@ -1,4 +1,4 @@
-import { Button, Container, Dropdown, Image, Menu } from 'semantic-ui-react';
+import { Button, Container, Dropdown, DropdownDivider, Image, Menu } from 'semantic-ui-react';
 import { Link, NavLink } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../stores/store';
@@ -20,18 +20,17 @@ export default observer(function NavBar() {
                 <Menu.Item as={NavLink} to='/alchemy' name="Alchemy" />
                 <Menu.Item as={NavLink} to='/equipmentQuality' name="Equipment Quality" />
                 <Menu.Item as={NavLink} to='/supplies' name="Supplies" />
-                <Menu.Item position='right' >
-                    <Button fluid inverted color='teal' content="Long Rest" onClick={() => modalStore.openModal('Long Rest', <LongRest />)} />
-                </Menu.Item>
-                <Menu.Item position='right'>
-                    <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
+                <Menu.Item position='right' content={
+                    <><Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
                     <Dropdown pointing='top left' text={user?.displayName}>
                         <Dropdown.Menu>
+                            <Dropdown.Item onClick={() => modalStore.openModal('Long Rest', <LongRest />)} text='Long Rest' icon='fire' />
+                            <DropdownDivider/>
                             <Dropdown.Item as={Link} to={`/profile/${user?.username}`} text='My Profile' icon='user' />
                             <Dropdown.Item onClick={logout} text='Logout' icon='power' />
                         </Dropdown.Menu>
-                    </Dropdown>
-                </Menu.Item>
+                    </Dropdown></>
+                }/>
             </Container>
         </Menu>
     )
