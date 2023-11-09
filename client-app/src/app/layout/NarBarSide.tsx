@@ -22,43 +22,10 @@ export default observer(function NavBarSide(props: Props) {
             >
                 <Menu.Item as='a'>
                     <Icon name='home' />
-                    Home
-                </Menu.Item>
-                <Menu.Item as='a'>
-                    <Icon name='gamepad' />
-                    Games
-                </Menu.Item>
-                <Menu.Item as='a'>
-                    <Icon name='camera' />
-                    Channels
-                </Menu.Item>
-                <Menu.Item as='a'>
-                    <Icon name='camera' />
-                    Channels
-                </Menu.Item>
-                <Menu.Item as='a'>
-                    <Icon name='camera' />
-                    Channels
-                </Menu.Item>
-                <Menu.Item as='a'>
-                    <Icon name='camera' />
-                    Channels
-                </Menu.Item>
-                <Menu.Item as='a'>
-                    <Icon name='camera' />
-                    Channels
-                </Menu.Item>
-                <Menu.Item as='a'>
-                    <Icon name='camera' />
-                    Channels
-                </Menu.Item>
-                <Menu.Item as='a'>
-                    <Icon name='camera' />
-                    Channels
+                    To be Implemented
                 </Menu.Item>
             </Sidebar>
-
-            <Sidebar.Pusher content={content}/>
+            <Sidebar.Pusher content={content} />
         </Sidebar.Pushable>
     )
 })
