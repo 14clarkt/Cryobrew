@@ -11,7 +11,7 @@ export default observer(function NavBarSide(props: Props) {
     const { content } = props
     return (
         <Sidebar.Pushable as={Segment} style={{ backgroundColor: 'black', overflow: 'hidden' }}>
-            <Sidebar style={{ paddingTop: '40px' }}
+            <Sidebar
                 as={Menu}
                 animation='push'
                 icon='labeled'

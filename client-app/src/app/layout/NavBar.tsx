@@ -9,9 +9,8 @@ export default observer(function NavBar() {
         <Menu inverted fixed='top'>
             <Container fluid>
                 <Menu.Item
-                    style={{ paddingLeft:"51px", paddingRight:"52px" }}
-                    as={Button} name="Sidebar" onClick={toggleSidebar}
-                    active={sidebarVisable}/>
+                    as={Button} onClick={toggleSidebar}
+                    active={sidebarVisable}><span id="sidebarToggle">Sidebar</span></Menu.Item>
                 
                 <Menu.Item style={{ paddingLeft:"250px" }}/>
                 
