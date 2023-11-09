@@ -5,6 +5,7 @@ export default class CommonStore {
     error: ServerError | null = null;
     token: string | null = localStorage.getItem('jwt');
     appLoaded = false;
+    sidebarVisable: boolean = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -31,5 +32,10 @@ export default class CommonStore {
 
     setApploaded = () => {
         this.appLoaded = true;
+    }
+
+    toggleSidebar = () => {
+        this.sidebarVisable = !this.sidebarVisable
+        console.log(this.sidebarVisable);
     }
 }

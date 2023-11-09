@@ -8,6 +8,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import HomePage from '../../features/home/HomePage';
 import { ToastContainer } from 'react-toastify';
 import ModalContainer from '../common/modals/ModalContainer';
+import NarBarSide from './NarBarSide';
 
 // You must
 // cd API
@@ -38,9 +39,10 @@ function App() {
       {location.pathname === '/' ? <HomePage /> : (
         <>
           <NavBar />
-          <Segment style={{ paddingLeft: '3em', paddingRight: '3em', paddingTop: '5em', backgroundColor: 'black' }}>
+          <NarBarSide content={
+          <Segment style={{minHeight:903, paddingLeft: '3em', paddingRight: '3em', paddingTop: '5em', backgroundColor: 'black' }}>
             <Outlet />
-          </Segment>
+          </Segment>}/>
         </>
       )}
     </>
