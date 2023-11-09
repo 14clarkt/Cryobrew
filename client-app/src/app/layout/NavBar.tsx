@@ -8,7 +8,10 @@ export default observer(function NavBar() {
     return (
         <Menu inverted fixed='top'>
             <Container fluid>
-                <Menu.Item as={Button} name="Sidebar" onClick={toggleSidebar} active={sidebarVisable}/>
+                <Menu.Item
+                    style={{ paddingLeft:"51px", paddingRight:"52px" }}
+                    as={Button} name="Sidebar" onClick={toggleSidebar}
+                    active={sidebarVisable}/>
                 
                 <Menu.Item style={{ paddingLeft:"250px" }}/>
                 
@@ -21,6 +24,7 @@ export default observer(function NavBar() {
                 <Menu.Item as={NavLink} to='/equipmentQuality' name="Equipment Quality" />
                 <Menu.Item as={NavLink} to='/supplies' name="Supplies" />
                 <Menu.Item position='right' content={<AccountOptions/>}/>
+                <Menu.Item style={{ paddingRight:"50px" }}/>
             </Container>
         </Menu>
     )
