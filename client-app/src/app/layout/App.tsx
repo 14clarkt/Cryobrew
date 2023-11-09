@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Segment, Sidebar } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 import NavBar from './NavBar';
 import LoadingComponent from './LoadingComponent';
 import { useStore } from '../stores/store';
