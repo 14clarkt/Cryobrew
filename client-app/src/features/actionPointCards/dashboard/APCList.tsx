@@ -115,8 +115,9 @@ export default observer(function APCList() {
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
+            <br/>
             {APCList.map((apc) => (
-                <>{(apc.upgradeLevel > 0 || isAdmin) && (apc.name.toLowerCase().includes(query.toLowerCase())) &&
+                <div key={"seg"+apc.id}>{(apc.upgradeLevel > 0 || isAdmin) && (apc.name.toLowerCase().includes(query.toLowerCase())) &&
                     <><Segment style={{
                         backgroundColor: "#111111",
                         color: "white",
@@ -261,7 +262,7 @@ export default observer(function APCList() {
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>
-                    </Segment><br/></>}</>
+                    </Segment><br/></>}</div>
             ))}
         </Container>
     )
