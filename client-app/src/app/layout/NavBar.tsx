@@ -22,6 +22,9 @@ export default observer(function NavBar() {
                 <Menu.Item as={NavLink} to='/alchemy' name="Alchemy" />
                 <Menu.Item as={NavLink} to='/equipmentQuality' name="Equipment Quality" />
                 <Menu.Item as={NavLink} to='/supplies' name="Supplies" />
+                <Menu.Item as={NavLink} to='/crystals' name="Crystals" />
+                <Menu.Item as={NavLink} to='/aiden' name="Aiden Upgrades" />
+                <Menu.Item as={NavLink} to='/crelics' name="Crelics" />
                 <Menu.Item position='right' content={<AccountOptions/>}/>
                 <Menu.Item style={{ paddingRight:"50px" }}/>
             </Container>

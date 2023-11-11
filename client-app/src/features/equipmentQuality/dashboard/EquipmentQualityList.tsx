@@ -10,7 +10,7 @@ export default observer(function EquipmentQualityList() {
 
     return (
         <>{eqList.map((eq) => (
-            (isAdmin || eq.found) && <Segment style={{
+            (isAdmin || eq.found) && <Segment key={eq.id} style={{
                 backgroundColor: "#111111",
                 color: "white",
                 borderStyle: "solid",

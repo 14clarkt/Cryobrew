@@ -46,7 +46,7 @@ export default observer(function AlchemyIngredientList() {
             if (flag) listToShow.push(ing)
         }
         setIngredientList(listToShow)
-    }, [ingredientList, ingredientFilter, showZero, filterByName])
+    }, [ingredientSortedList, ingredientFilter, showZero, filterByName])
 
     return (
         <>

@@ -9,7 +9,7 @@ export default observer(function SuppliesList() {
     return (
         <Grid divided inverted>
             <Grid.Row>
-                {suppliesList.map((supply) => (<Grid.Column width='4'>
+                {suppliesList.map((supply) => (<Grid.Column key={supply.id} width='4'>
                     <h3 style={{ color: "cyan" }}>{supply.name}</h3>
                     <Button inverted icon={leftwardIcon} size='mini' onClick={() => incrementSupplyQuantity(supply.id, false)} />
                     <span style={{ fontSize: "1.5em", paddingInline: "10px" }}>

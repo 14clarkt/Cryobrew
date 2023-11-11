@@ -9,6 +9,9 @@ import AlchemyDashboard from "../../features/alchemy/dashboard/AlchemyDashboard"
 import EquipmentQualityDashboard from "../../features/equipmentQuality/dashboard/EquipmentQualityDashboard";
 import SuppliesDashboard from "../../features/supplies/dashboard/SuppliesDashboard";
 import RequireAuth from "./RequireAuth";
+import CrystalsDashboard from "../../features/crystals/dashboard/CrystalsDashboard";
+import AidenDashboard from "../../features/aiden/dashboard/AidenDashboard";
+import CrelicsDashboard from "../../features/crelics/dashboard/CrelicsDashboard";
 
 export const routes: RouteObject[] = [
     {
@@ -20,6 +23,9 @@ export const routes: RouteObject[] = [
                 {path: 'alchemy', element: <AlchemyDashboard />},
                 {path: 'equipmentQuality', element: <EquipmentQualityDashboard />},
                 {path: 'supplies', element: <SuppliesDashboard />},
+                {path: 'crystals', element: <CrystalsDashboard />},
+                {path: 'aiden', element: <AidenDashboard />},
+                {path: 'crelics', element: <CrelicsDashboard />},
                 
                 {path: 'profile/:username', element: <UserDetails />},
                 
