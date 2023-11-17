@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { Button, Grid, Popup, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import EQUpdateForm from '../form/EQUpdateForm';
+import DiffSpan from '../../../app/common/display/DiffSpan';
 
 export default observer(function EquipmentQualityList() {
     const { userStore, equipmentQualityStore, modalStore } = useStore()
@@ -112,7 +113,7 @@ export default observer(function EquipmentQualityList() {
                     </Grid.Row>
                     <Grid.Row style={{ textAlign: "center" }}>
                         <Grid.Column width='16'>
-                            <div style={{ fontSize: "1.2em" }}>{eq.effect}</div>
+                            <div style={{ fontSize: "1.2em" }}><DiffSpan content={eq.effect}/></div>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
