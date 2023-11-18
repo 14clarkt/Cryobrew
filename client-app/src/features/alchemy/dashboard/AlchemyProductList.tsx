@@ -4,7 +4,8 @@ import { useStore } from '../../../app/stores/store';
 import DiffSpan from '../../../app/common/display/DiffSpan';
 
 export default observer(function AlchemyProductList() {
-    const { alchemyStore } = useStore()
+    const { userStore, alchemyStore } = useStore()
+    const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
     const { deleteProduct, productList, loading } = alchemyStore
 
     return (
@@ -31,6 +32,7 @@ export default observer(function AlchemyProductList() {
                         </Grid.Column>
                         <Grid.Column width={2}>
                             <Button
+                                disabled={!isAdmin}
                                 color='red'
                                 content='Del'
                                 fluid inverted
