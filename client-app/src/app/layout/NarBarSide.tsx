@@ -2,12 +2,13 @@ import { observer } from "mobx-react-lite";
 import { Icon, Menu, Segment, Sidebar } from "semantic-ui-react";
 import { useStore } from "../stores/store";
 import { ReactNode } from "react";
+import DiceRoller from "../../features/misc/diceRoller/DiceRoller";
 
 interface Props {
     content: ReactNode
 }
 export default observer(function NavBarSide(props: Props) {
-    const { commonStore: { sidebarVisable } } = useStore();
+    const { commonStore: { sidebarVisable }, modalStore } = useStore();
     const { content } = props
     return (
         <Sidebar.Pushable as={Segment} style={{ backgroundColor: 'black', overflow: 'hidden' }}>
@@ -20,9 +21,9 @@ export default observer(function NavBarSide(props: Props) {
                 visible={sidebarVisable}
                 width='thin'
             >
-                <Menu.Item as='a'>
-                    <Icon name='home' />
-                    To be Implemented
+                <Menu.Item onClick={() => modalStore.openModal("Roll the Dice", <DiceRoller />)}>
+                    <Icon name='cube' />
+                    Dice Roller
                 </Menu.Item>
             </Sidebar>
             <Sidebar.Pusher content={content} />
