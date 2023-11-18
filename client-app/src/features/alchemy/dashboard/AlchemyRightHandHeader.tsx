@@ -9,6 +9,7 @@ export default observer(function AlchemyRightHandHeader() {
     const { loading, rightHandDisplay, setRightHandDisplay, setTraitFilter } = alchemyStore
 
     return (
+        <><h1 style={{ color: 'white', textAlign: 'center' }}>Traits</h1>
         <Segment style={{ backgroundColor: "black" }}>
             <Grid>
                 <Grid.Row>
@@ -34,13 +35,13 @@ export default observer(function AlchemyRightHandHeader() {
                     </Grid.Column>
                     <Grid.Column width='3'>
                         <Button
-                            disabled={rightHandDisplay.includes("Creation")}
-                            onClick={() => setRightHandDisplay("Creation")}
+                            disabled={rightHandDisplay.includes("Picker")}
+                            onClick={() => setRightHandDisplay("Picker")}
                             size='large'
                             color='yellow'
                             inverted fluid
                             loading={loading}
-                            content="Creation" />
+                            content="Picker" />
                     </Grid.Column>
                     <Grid.Column width='3'>
                         <Button
@@ -61,6 +62,6 @@ export default observer(function AlchemyRightHandHeader() {
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
-        </Segment>
+        </Segment></>
     )
 })
