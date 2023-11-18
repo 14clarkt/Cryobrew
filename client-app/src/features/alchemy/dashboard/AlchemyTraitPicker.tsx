@@ -5,7 +5,7 @@ import { AlchemyTrait } from "../../../app/models/alchemy"
 import { useState } from "react"
 
 export default observer(function AlchemyTraitPicker() {
-    const { userStore, alchemyStore, modalStore } = useStore()
+    const { userStore, alchemyStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
     const { traitList } = alchemyStore
 
