@@ -27,6 +27,11 @@ export interface AlchemyIngredient {
     potencies: Array<AlchemyIngredientPotency>
 }
 
+export interface AlchemyProduct {
+    id: string
+    name: string
+}
+
 export interface AlchemyIngredientPotency {
     id: string
     traitName: string

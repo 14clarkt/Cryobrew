@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { Button, Grid, Search, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import AlchemyTraitForm from '../form/AlchemyTraitForm';
+import AlchemyProductForm from '../form/AlchemyProductForm';
 
 export default observer(function AlchemyRightHandHeader() {
     const { userStore, modalStore, alchemyStore } = useStore()
@@ -9,19 +10,27 @@ export default observer(function AlchemyRightHandHeader() {
     const { loading, rightHandDisplay, setRightHandDisplay, setTraitFilter } = alchemyStore
 
     return (
-        <><h1 style={{ color: 'white', textAlign: 'center' }}>Traits</h1>
+        <><h1 style={{ color: 'white', textAlign: 'center' }}>{rightHandDisplay}</h1>
         <Segment style={{ backgroundColor: "black" }}>
             <Grid>
                 <Grid.Row>
                     <Grid.Column width='3'>
-                        <Button
+                        {rightHandDisplay.includes("Traits") && <Button
                             disabled={!isAdmin}
                             onClick={() => modalStore.openModal("Create Alchemy Trait", <AlchemyTraitForm />, "large")}
                             size='large'
                             color='green'
                             inverted fluid
                             loading={loading}
-                            content="Create Trait" />
+                            content="Create Trait" />}
+                        {rightHandDisplay.includes("Products") && <Button
+                            disabled={!isAdmin}
+                            onClick={() => modalStore.openModal("Create Product", <AlchemyProductForm />)}
+                            size='large'
+                            color='green'
+                            inverted fluid
+                            loading={loading}
+                            content="Create Prod." />}
                     </Grid.Column>
                     <Grid.Column width='3'>
                         <Button

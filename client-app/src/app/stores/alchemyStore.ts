@@ -2,11 +2,13 @@ import { makeAutoObservable, runInAction } from "mobx"
 import agent from "../api/agent"
 import { v4 as uuid } from "uuid"
 import { store } from "./store";
-import { AlchemyIngredient, AlchemyIngredientPotency, AlchemyPotencyRange, AlchemyTrait } from "../models/alchemy";
+import { AlchemyIngredient, AlchemyIngredientPotency, AlchemyPotencyRange, AlchemyProduct, AlchemyTrait } from "../models/alchemy";
 
 export default class AlchemyStore {
     traitRegistry = new Map<string, AlchemyTrait>();
     ingredientRegistry = new Map<string, AlchemyIngredient>();
+    productRegistry = new Map<string, AlchemyProduct>();
+
     newQuantityRegistry = new Map<string, number>();
 
     loading = false;
@@ -23,6 +25,7 @@ export default class AlchemyStore {
         makeAutoObservable(this)
     }
 
+    // Alchemy Traits
     get traitList() {
         let traits = Array.from(this.traitRegistry.values()).sort((a, b) =>
             a.name.localeCompare(b.name))
@@ -52,10 +55,6 @@ export default class AlchemyStore {
 
     private setTrait = (trait: AlchemyTrait) => {
         this.traitRegistry.set(trait.id, trait)
-    }
-
-    setLoadingInitial = (state: boolean) => {
-        this.loadingInitial = state
     }
 
     createTrait = async (trait: AlchemyTrait) => {
@@ -170,7 +169,7 @@ export default class AlchemyStore {
         }
     }
 
-    // Ingredients
+    // Alchemy Ingredients
 
     get ingredientSortedList() {
         let ings = Array.from(this.ingredientRegistry.values()).sort((a, b) =>
@@ -310,11 +309,77 @@ export default class AlchemyStore {
         await this.updateIngredient({...ing, quantity: this.newQuantityRegistry.get(ing.id)!})
     }
 
+    // Alchemy Products
+    get productList() {
+        let products = Array.from(this.productRegistry.values()).sort((a, b) =>
+            a.name.localeCompare(b.name))
+
+        return products
+    }
+
+    loadProducts = async () => {
+        this.setLoadingInitial(true)
+        try {
+            const products = await agent.Alchemy.listProduct()
+            runInAction(() => {
+                products.forEach(product => {
+                    this.setProduct(product)
+                })
+            })
+            this.setLoadingInitial(false)
+        } catch (error) {
+            console.log(error)
+            this.setLoadingInitial(false)
+        }
+    }
+
+    private setProduct = (product: AlchemyProduct) => {
+        this.productRegistry.set(product.id, product)
+    }
+
+    createProduct = async (product: AlchemyProduct) => {
+        this.loading = true
+        product.id = uuid()
+        try {
+            await agent.Alchemy.createProduct(product)
+            runInAction(() => {
+                this.setProduct(product)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
+    deleteProduct = async (id: string) => {
+        this.loading = true;
+        try {
+            await agent.Alchemy.deleteProduct(id)
+            runInAction(() => {
+                this.productRegistry.delete(id)
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
     // misc
 
     setRightHandDisplay = (toDisplay: "Traits" | "Products" | "Creation" | "Picker") => {
         this.rightHandDisplay = toDisplay
         this.traitFilter = ""
+    }
+
+    setLoadingInitial = (state: boolean) => {
+        this.loadingInitial = state
     }
 
     setTraitFilter = (query: string) => {
