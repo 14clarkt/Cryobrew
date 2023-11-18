@@ -9,6 +9,7 @@ import LoadingComponent from "../../../app/layout/LoadingComponent"
 import { useEffect } from "react"
 import AlchemyRightHandHeader from "./AlchemyRightHandHeader"
 import AlchemyIngredientHeader from "./AlchemyIngredientHeader"
+import AlchemyTraitPicker from "./AlchemyTraitPicker"
 
 export default observer(function AlchemyDashboard() {
     const { alchemyStore } = useStore()
@@ -25,16 +26,17 @@ export default observer(function AlchemyDashboard() {
         <Grid>
             <Grid.Column width='8'>
                 <AlchemyIngredientHeader />
-                <div style={{ overflow: 'auto', maxHeight: 750 }}>
+                <div style={{ overflow: 'auto', maxHeight: 710 }}>
                     <AlchemyIngredientList />
                 </div>
             </Grid.Column>
             <Grid.Column width='8'>
                 <AlchemyRightHandHeader />
-                <div style={{ overflow: 'auto', maxHeight: 750 }}>
+                <div style={{ overflow: 'auto', maxHeight: 710 }}>
                     {rightHandDisplay.includes("Creation") && <AlchemyCreation />}
                     {rightHandDisplay.includes("Products") && <AlchemyProductList />}
                     {rightHandDisplay.includes("Traits") && <AlchemyTraitList />}
+                    {rightHandDisplay.includes("Picker") && <AlchemyTraitPicker />}
                 </div>
             </Grid.Column>
         </Grid>

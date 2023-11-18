@@ -11,7 +11,7 @@ export default class AlchemyStore {
 
     loading = false;
     loadingInitial = false;
-    rightHandDisplay : "Traits" | "Products" | "Creation" = "Traits"
+    rightHandDisplay : "Traits" | "Products" | "Creation" | "Picker" = "Traits"
 
     traitFilter = ""
     ingredientFilter = ""
@@ -312,7 +312,7 @@ export default class AlchemyStore {
 
     // misc
 
-    setRightHandDisplay = (toDisplay: "Traits" | "Products" | "Creation") => {
+    setRightHandDisplay = (toDisplay: "Traits" | "Products" | "Creation" | "Picker") => {
         this.rightHandDisplay = toDisplay
         this.traitFilter = ""
     }

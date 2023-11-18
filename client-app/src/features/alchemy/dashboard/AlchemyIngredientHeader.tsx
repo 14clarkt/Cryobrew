@@ -10,6 +10,7 @@ export default observer(function AlchemyIngredientHeader() {
     const { loading, setIngredientFilter, showZero, toggleShowZero, filterByName, toggleFilterByName } = alchemyStore
 
     return (
+        <><h1 style={{ color: 'white', textAlign: 'center' }}>Ingredients</h1>
         <Segment style={{ backgroundColor: "black" }}>
             <Grid>
                 <Grid.Row>
@@ -48,7 +49,7 @@ export default observer(function AlchemyIngredientHeader() {
                                 size='large'
                                 color='red'
                                 fluid
-                                content={filterByName ? "Name" : "Traits"}/>} />
+                                content={filterByName ? "Name" : "Traits"} />} />
                     </Grid.Column>
                     <Grid.Column width='3'>
                         <Popup inverted style={{ textAlign: 'center' }}
@@ -64,6 +65,6 @@ export default observer(function AlchemyIngredientHeader() {
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
-        </Segment>
+        </Segment></>
     )
 })
