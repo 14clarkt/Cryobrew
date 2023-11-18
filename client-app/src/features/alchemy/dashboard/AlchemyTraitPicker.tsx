@@ -3,6 +3,7 @@ import { useStore } from "../../../app/stores/store"
 import { Button } from "semantic-ui-react"
 import { AlchemyTrait } from "../../../app/models/alchemy"
 import { useState } from "react"
+import DiffSpan from "../../../app/common/display/DiffSpan"
 
 export default observer(function AlchemyTraitPicker() {
     const { userStore, alchemyStore } = useStore()
@@ -27,6 +28,6 @@ export default observer(function AlchemyTraitPicker() {
                 onClick={randomizeTrait}
             />
         </div>
-        <h1 style={{textAlign:"center", color:"white"}}>{randomTrait?.name}</h1></>
+        {randomTrait && <h1 style={{textAlign:"center", color:"white"}}><DiffSpan content={randomTrait.name}/></h1>}</>
     )
 })
