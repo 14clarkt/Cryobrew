@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite"
 import { useState } from "react"
 import { Button, Grid, Input } from "semantic-ui-react"
-import { isNumericLiteral } from "typescript"
 
 export default observer(function DiceRoller() {
     const [min, setMin] = useState<string>("")
