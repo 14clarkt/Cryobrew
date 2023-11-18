@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { Dropdown, DropdownDivider, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { useStore } from '../../stores/store';
-import LongRest from '../../../features/longRest/LongRest';
+import LongRest from '../../../features/misc/longRest/LongRest';
 
 export default observer(function AccountOptions() {
     const { userStore: { user, logout }, modalStore } = useStore();

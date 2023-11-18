@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import { useStore } from "../../app/stores/store"
+import { useStore } from "../../../app/stores/store"
 import { Button } from "semantic-ui-react"
 
 export default observer(function LongRest() {
