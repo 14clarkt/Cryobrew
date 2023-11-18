@@ -5,7 +5,7 @@ import { store } from '../stores/store';
 import { User, UserEditValues, UserFormValues } from '../models/user';
 import { ActionPointCard, ActionPointLevel } from '../models/actionPointCard';
 import { EquipmentQuality } from '../models/equipmentQuality';
-import { AlchemyIngredient, AlchemyIngredientPotency, AlchemyPotencyRange, AlchemyTrait } from '../models/alchemy';
+import { AlchemyIngredient, AlchemyIngredientPotency, AlchemyPotencyRange, AlchemyProduct, AlchemyTrait } from '../models/alchemy';
 import { Supply } from '../models/supply';
 
 const sleep = (delay: number) => {
@@ -107,6 +107,10 @@ const Alchemy = {
 
     createAIP: (AIid: string, aip: AlchemyIngredientPotency) => axios.post(`/alchemy/ingredientpotency/${AIid}`, aip),
     deleteAIP: (AIid: string, AIPid: string) => axios.delete(`/alchemy/ingredientpotency/${AIid}/${AIPid}`),
+
+    listProduct: () => requests.get<AlchemyProduct[]>('/alchemy/product'),
+    createProduct: (product: AlchemyProduct) => axios.post('/alchemy/product', product),
+    deleteProduct: (id: string) => axios.delete(`/alchemy/product/${id}`),
 }
 
 const Supplies = {

@@ -92,5 +92,23 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new DeleteAIP.Command{AIid = aiid, AIPId = aipid}));
         }
 
+        // Products
+        [HttpGet("product")] //api/alchemy/product
+        public async Task<IActionResult> GetAlchemyProducts()
+        {
+            return HandleResult(await Mediator.Send(new ListAlchemyProduct.Query()));
+        }
+
+        [HttpPost("product")]
+        public async Task<IActionResult> CreateAlchemyProduct(AlchemyProduct product)
+        {
+            return HandleResult(await Mediator.Send(new CreateAlchemyProduct.Command{AlchemyProduct = product}));
+        }
+
+        [HttpDelete("product/{id}")]
+        public async Task<IActionResult> DeleteAlchemyProduct(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new DeleteAlchemyProduct.Command{Id = id}));
+        }
     }
 }

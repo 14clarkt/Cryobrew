@@ -18,6 +18,7 @@ namespace Application.Core
             CreateMap<AlchemyTrait, AlchemyTrait>();
             CreateMap<AlchemyIngredient, AlchemyIngredient>();
             CreateMap<AlchemyIngredientPotency, AlchemyIngredientPotency>();
+            CreateMap<AlchemyProduct, AlchemyProduct>();
             CreateMap<Domain.Supply, Domain.Supply>();
         }
     }
