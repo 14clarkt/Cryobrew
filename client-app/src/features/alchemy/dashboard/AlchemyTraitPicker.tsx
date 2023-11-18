@@ -6,8 +6,7 @@ import { useState } from "react"
 import DiffSpan from "../../../app/common/display/DiffSpan"
 
 export default observer(function AlchemyTraitPicker() {
-    const { userStore, alchemyStore } = useStore()
-    const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
+    const { alchemyStore } = useStore()
     const { traitList } = alchemyStore
 
     const [randomTrait, setRandomTrait] = useState<AlchemyTrait | undefined>(undefined)
@@ -43,7 +42,6 @@ export default observer(function AlchemyTraitPicker() {
                 <Grid.Row>
                     <Grid.Column width={5}>
                         <Button
-                            disabled={!isAdmin}
                             color='teal'
                             content='Random Trait'
                             size="huge"
@@ -51,24 +49,22 @@ export default observer(function AlchemyTraitPicker() {
                             onClick={randomizeTrait}
                         />
                     </Grid.Column>
-                    <Grid.Column width={5}>
-                        <Button
-                            disabled={!isAdmin}
-                            color='teal'
-                            content='Random Hinderance'
-                            size="huge"
-                            fluid inverted
-                            onClick={randomizeHinderance}
-                        />
-                    </Grid.Column>
                     <Grid.Column width={6}>
                         <Button
-                            disabled={!isAdmin}
                             color='teal'
                             content='Random Non-Hinderance'
                             size="huge"
                             fluid inverted
                             onClick={randomizeNonHinderance}
+                        />
+                    </Grid.Column>
+                    <Grid.Column width={5}>
+                        <Button
+                            color='teal'
+                            content='Random Hinderance'
+                            size="huge"
+                            fluid inverted
+                            onClick={randomizeHinderance}
                         />
                     </Grid.Column>
                 </Grid.Row>
