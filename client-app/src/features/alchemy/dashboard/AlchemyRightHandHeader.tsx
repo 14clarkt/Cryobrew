@@ -31,16 +31,23 @@ export default observer(function AlchemyRightHandHeader() {
                             inverted fluid
                             loading={loading}
                             content="Create Prod." />}
+                        {!rightHandDisplay.includes("Products") && !rightHandDisplay.includes("Traits") && <Button
+                            disabled={true}
+                            size='large'
+                            color='green'
+                            inverted fluid
+                            loading={loading}
+                            content="N/A" />}
                     </Grid.Column>
                     <Grid.Column width='3'>
                         <Button
-                            disabled={rightHandDisplay.includes("Traits")}
-                            onClick={() => setRightHandDisplay("Traits")}
+                            disabled={rightHandDisplay.includes("Products")}
+                            onClick={() => setRightHandDisplay("Products")}
                             size='large'
                             color='yellow'
                             inverted fluid
                             loading={loading}
-                            content="Traits" />
+                            content="Products" />
                     </Grid.Column>
                     <Grid.Column width='3'>
                         <Button
@@ -54,13 +61,13 @@ export default observer(function AlchemyRightHandHeader() {
                     </Grid.Column>
                     <Grid.Column width='3'>
                         <Button
-                            disabled={rightHandDisplay.includes("Products")}
-                            onClick={() => setRightHandDisplay("Products")}
+                            disabled={rightHandDisplay.includes("Creation")}
+                            onClick={() => setRightHandDisplay("Creation")}
                             size='large'
                             color='yellow'
                             inverted fluid
                             loading={loading}
-                            content="Products" />
+                            content="Creation" />
                     </Grid.Column>
                     <Grid.Column width='4'>
                         {rightHandDisplay.includes("Traits") && <Search
@@ -68,6 +75,14 @@ export default observer(function AlchemyRightHandHeader() {
                             open={false}
                             placeholder='Search Traits'
                         />}
+                        {!rightHandDisplay.includes("Traits") && <Button
+                            disabled={rightHandDisplay.includes("Traits")}
+                            onClick={() => setRightHandDisplay("Traits")}
+                            size='large'
+                            color='yellow'
+                            inverted fluid
+                            loading={loading}
+                            content="Traits" />}
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
