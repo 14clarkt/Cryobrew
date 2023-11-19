@@ -36,6 +36,5 @@ export default class CommonStore {
 
     toggleSidebar = () => {
         this.sidebarVisable = !this.sidebarVisable
-        console.log(this.sidebarVisable);
     }
 }

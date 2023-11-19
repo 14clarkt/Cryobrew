@@ -21,7 +21,7 @@ export default observer(function NavBarSide(props: Props) {
                 visible={sidebarVisable}
                 width='thin'
             >
-                <Menu.Item onClick={() => modalStore.openModal("Roll the Dice", <DiceRoller />)}>
+                <Menu.Item onClick={() => modalStore.openModal("Roll the Dice", <DiceRoller />, "large")}>
                     <Icon name='cube' />
                     Dice Roller
                 </Menu.Item>
