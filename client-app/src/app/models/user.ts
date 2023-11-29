@@ -6,6 +6,7 @@ export interface User {
     role: string;
     currentAP: number;
     maxAP: number;
+    shortAP: number;
     apcSlots: number;
 }
 
@@ -19,5 +20,6 @@ export interface UserFormValues {
 export interface UserEditValues {
     currentAP: number;
     maxAP: number;
+    shortAP: number;
     apcSlots: number;
 }

@@ -15,6 +15,7 @@ export default observer(function UserDetails() {
             <div>role: {user.role}</div>
             <div>currentAP: {user.currentAP}</div>
             <div>maxAP: {user.maxAP}</div>
+            <div>shortAP: {user.shortAP}</div>
             <div>APCSlots: {user.apcSlots}</div>
             <Button
                 onClick={() => modalStore.openModal('Edit User Details', <UserEditForm />)}

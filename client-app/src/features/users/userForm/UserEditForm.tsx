@@ -14,11 +14,17 @@ export default observer(function UserEditForm() {
 
     return (
         <Formik
-            initialValues={{ currentAP: user.currentAP, maxAP: user.maxAP, apcSlots: user.apcSlots, error: null }}
+            initialValues={{
+                currentAP: user.currentAP,
+                maxAP: user.maxAP,
+                shortAP: user.shortAP,
+                apcSlots: user.apcSlots,
+                error: null }}
             onSubmit={(values, { setErrors }) => {
                 userStore.updateUserValues({
                     currentAP: values.currentAP,
                     maxAP: values.maxAP,
+                    shortAP: values.shortAP,
                     apcSlots: values.apcSlots,
                 }).catch(error =>
                     setErrors({ error }))
@@ -26,14 +32,16 @@ export default observer(function UserEditForm() {
             validationSchema={Yup.object({
                 currentAP: Yup.number().integer("must be a whole number.").min(0).required("must be a number >= 0."),
                 maxAP: Yup.number().integer("must be a whole number.").min(0).required("must be a number >= 0."),
+                shortAP: Yup.number().integer("must be a whole number.").min(0).required("must be a number >= 0."),
                 apcSlots: Yup.number().integer("must be a whole number.").min(0).required("must be a number >= 0.")
             })}
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <MyTextInput placeholder='10' name='currentAP' label="currentAP" />
-                    <MyTextInput placeholder='10' name='maxAP' label="maxAP" />
-                    <MyTextInput placeholder='Max # APCs you can equip. Ex: 2.' name='apcSlots' label="apcSlots" />
+                    <MyTextInput placeholder='10' name='currentAP' label="Current AP" />
+                    <MyTextInput placeholder='10' name='maxAP' label="Max AP" />
+                    <MyTextInput placeholder='AP recovered on Short Rest' name='shortAP' label="Short Rest AP" />
+                    <MyTextInput placeholder='Max # APCs you can equip. Ex: 2.' name='apcSlots' label="APC Slots" />
                     <ErrorMessage
                         name='error' render={() =>
                             <ValidationErrors errors={errors.error} />}
