@@ -87,6 +87,7 @@ export default observer(function APCList() {
                             onClick={() => userStore.updateUserValues({
                                 currentAP,
                                 maxAP: userStore.user?.maxAP!,
+                                shortAP: userStore.user?.shortAP!,
                                 apcSlots: userStore.user?.apcSlots!
                             })} />
                         <span style={{ color: "white", fontSize: "1.5em" }}> Slots: {equippedAmount} / {userStore.user?.apcSlots} </span>
