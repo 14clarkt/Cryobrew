@@ -1,8 +1,43 @@
-import { Grid } from "semantic-ui-react";
+import { observer } from "mobx-react-lite";
+import { Button, Grid } from "semantic-ui-react";
+import { useStore } from "../../../app/stores/store";
+import RuleForm from "../forms/RuleForm";
 
-export default function APCRules() {
+export default observer(function APCRules() {
+    const { rulesStore, modalStore, userStore } = useStore()
+    const { APCRulesList, loading } = rulesStore
+    const { isAdmin } = userStore
+
     return (
         <Grid divided inverted style={{ color: "white", fontSize: "1.5em" }}>
+            <Grid.Row>
+                <Grid.Column width={6} />
+                <Grid.Column width={4}>
+                    <Button
+                        disabled={!isAdmin}
+                        onClick={() => modalStore.openModal('Create Rule', <RuleForm group='apc' />)}
+                        color='green'
+                        inverted fluid
+                        loading={loading}
+                        content="Create Rule" />
+                </Grid.Column>
+                <Grid.Column width={6} />
+            </Grid.Row>
+            {APCRulesList.map((rule) => (
+                <Grid.Row key={rule.id}>
+                    <Grid.Column width={2}>
+                        <div style={{ color: "cyan", fontWeight: "bold" }}>{rule.title}</div>
+                    </Grid.Column>
+                    <Grid.Column width={12}>
+                        <div>
+                            {rule.description}
+                        </div>
+                    </Grid.Column>
+                    <Grid.Column width={2}>
+                        <div><Button>del</Button></div>
+                    </Grid.Column>
+                </Grid.Row>))}
+
             <Grid.Row>
                 <Grid.Column width={2}>
                     <div style={{ color: "cyan", fontWeight: "bold" }}>AP:</div>
@@ -114,4 +149,4 @@ export default function APCRules() {
             </Grid.Row>
         </Grid>
     )
-}
+})

@@ -19,6 +19,7 @@ namespace Application.Core
             CreateMap<AlchemyIngredient, AlchemyIngredient>();
             CreateMap<AlchemyIngredientPotency, AlchemyIngredientPotency>();
             CreateMap<AlchemyProduct, AlchemyProduct>();
+            CreateMap<Domain.Rule, Domain.Rule>();
             CreateMap<Domain.Supply, Domain.Supply>();
         }
     }

@@ -19,6 +19,10 @@ export default class UserStore {
         return this.user?.currentAP
     }
 
+    get isAdmin() {
+        return this.user?.role.localeCompare("Admin") === 0
+    }
+
     login = async (creds: UserFormValues) => {
         try {
             const user = await agent.Account.login(creds);

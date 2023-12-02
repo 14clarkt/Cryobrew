@@ -5,7 +5,7 @@ import APCForm from '../form/APCForm';
 import APLForm from '../form/APLForm';
 import APCUpdateForm from '../form/APCUpdateForm';
 import APLUpdateForm from '../form/APLUpdateForm';
-import APCRules from './APCRules';
+import APCRules from '../../rules/apcs/APCRules';
 import { useEffect, useState } from 'react';
 import { ActionPointCard } from '../../../app/models/actionPointCard';
 import DiffSpan from '../../../app/common/display/DiffSpan';
