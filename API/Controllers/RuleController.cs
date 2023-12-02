@@ -22,17 +22,17 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new CreateRule.Command{Rule = rule}));
         }
 
-        // [HttpPut("{id}")]
-        // public async Task<IActionResult> UpdateActionPointCard(Guid id, ActionPointCard apc)
-        // {
-        //     apc.Id = id;
-        //     return HandleResult(await Mediator.Send(new UpdateAPC.Command{ActionPointCard = apc}));
-        // }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateRule(Guid id, Rule rule)
+        {
+            rule.Id = id;
+            return HandleResult(await Mediator.Send(new UpdateRule.Command{Rule = rule}));
+        }
 
-        // [HttpDelete("{id}")]
-        // public async Task<IActionResult> DeleteAPC(Guid id)
-        // {
-        //     return HandleResult(await Mediator.Send(new DeleteAPC.Command{Id = id}));
-        // }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteRule(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new DeleteRule.Command{Id = id}));
+        }
     }
 }

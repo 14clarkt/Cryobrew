@@ -8,14 +8,17 @@ import { useEffect } from 'react';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 
 export default observer(function EquipmentQualityDashboard() {
-    const { equipmentQualityStore } = useStore()
+    const { equipmentQualityStore, rulesStore } = useStore()
     const { loadEQs, eqRegistry, loadingInitial } = equipmentQualityStore
+    const { loadRules, ruleRegistry, loadingInitial: loadingRules } = rulesStore
 
     useEffect(() => {
         if (eqRegistry.size < 1) loadEQs();
-    }, [loadEQs, eqRegistry.size])
+        if (ruleRegistry.size < 1) loadRules();
+    }, [loadEQs, loadRules, eqRegistry.size, ruleRegistry.size])
 
     if (loadingInitial) return <div style={{ padding: '400px', position: 'relative' }}><LoadingComponent content='Loading Equipment Qualities...' /></div>
+    if (loadingRules) return <div style={{padding:'400px', position:'relative'}}><LoadingComponent content='Loading Rules...' /></div>
 
     return (
         <Grid>

@@ -6,7 +6,7 @@ import AlchemyProductForm from '../form/AlchemyProductForm';
 
 export default observer(function AlchemyRightHandHeader() {
     const { userStore, modalStore, alchemyStore } = useStore()
-    const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
+    const { isAdmin } = userStore
     const { loading, rightHandDisplay, setRightHandDisplay, setTraitFilter } = alchemyStore
 
     return (

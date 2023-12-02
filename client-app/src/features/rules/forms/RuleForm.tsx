@@ -40,7 +40,7 @@ export default observer(function RuleForm(props: Props) {
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     <MyTextInput label='Title' placeholder='Title' name='title' />
-                    <MyTextInput label='description' placeholder='description' name='description' />
+                    <MyTextInput label='Description' placeholder='description' name='description' />
                     <MyTextInput label='Order' placeholder='Order' name='order' />
                     <ErrorMessage
                         name='error' render={() =>

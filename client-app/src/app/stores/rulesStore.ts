@@ -12,7 +12,7 @@ export default class RulesStore {
     constructor() {
         makeAutoObservable(this)
     }
-    
+
     loadRules = async () => {
         this.setLoadingInitial(true)
         try {
@@ -44,14 +44,46 @@ export default class RulesStore {
             })
         }
     }
+
+    deleteRule = async (id: string) => {
+        this.loading = true;
+        try {
+            await agent.Rules.delete(id)
+            runInAction(() => {
+                this.ruleRegistry.delete(id)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
+    updateRule = async (rule: Rule) => {
+        this.loading = true
+        try {
+            await agent.Rules.update(rule)
+            runInAction(() => {
+                this.ruleRegistry.set(rule.id, rule)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })            
+        }
+    }
     
     // getters
-    get APCRulesList() {
+    get rulesList() {
         let rules = Array.from(this.ruleRegistry.values()).sort((a, b) =>
             a.order - b.order)
-    
-        rules = rules.filter((a) => a.group === "apc")
-        
+            
         return rules
     }
 

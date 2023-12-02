@@ -124,6 +124,8 @@ const Supplies = {
 const Rules = {
     list: () => requests.get<Rule[]>('/rule'),
     create: (rule: Rule) => axios.post('/rule', rule),
+    delete: (id: string) => axios.delete(`/rule/${id}`),
+    update: (rule: Rule) => axios.put(`/rule/${rule.id}`, rule),
 }
 
 const Account = {
