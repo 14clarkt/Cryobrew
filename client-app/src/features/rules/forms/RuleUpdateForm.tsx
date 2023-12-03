@@ -6,6 +6,7 @@ import MyTextInput from "../../../app/common/form/MyTextInput";
 import * as Yup from 'yup';
 import ValidationErrors from "../../errors/ValidationErrors";
 import { Rule } from "../../../app/models/rule";
+import MyTextArea from "../../../app/common/form/MyTextArea";
 
 interface Props {
     rule: Rule
@@ -39,37 +40,45 @@ export default observer(function AlchemyTraitUpdateForm(props: Props) {
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <MyTextInput label='Title' placeholder='Title' name='title' />
-                    <MyTextInput label='Description' placeholder='description' name='description' />
-                    <MyTextInput label='Order' placeholder='Order' name='order' />
-                    <ErrorMessage
-                        name='error' render={() =>
-                            <ValidationErrors errors={errors.error} />}
-                    />
                     <Grid>
-                        <Grid.Column width={1}/>
-                        <Grid.Column width={6}>
-                            <Button
-                                disabled={!isValid || !dirty || isSubmitting}
-                                content="Update"
-                                type="submit"
-                                color="green"
-                                fluid inverted
-                                loading={rulesStore.loading}
+                        <Grid.Row>
+                            <Grid.Column width={4}>
+                                <MyTextInput label='Title' placeholder='Title' name='title' />
+                                <MyTextInput label='Order' placeholder='Order' name='order' />
+                            </Grid.Column>
+                            <Grid.Column width={12}>
+                                <MyTextArea rows={5} label='Description' placeholder='description' name='description' />
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row>
+                            <ErrorMessage
+                                name='error' render={() =>
+                                    <ValidationErrors errors={errors.error} />}
                             />
-                        </Grid.Column>
-                        <Grid.Column width={2}/>
-                        <Grid.Column width={6}>
-                            <Button
-                                color='red'
-                                content='Delete'
-                                type="button"
-                                fluid inverted
-                                loading={rulesStore.loading}
-                                onClick={() => rulesStore.deleteRule(props.rule.id)}
-                            />
-                        </Grid.Column>
-                        <Grid.Column width={1}/>
+                            <Grid.Column width={1} />
+                            <Grid.Column width={6}>
+                                <Button
+                                    disabled={!isValid || !dirty || isSubmitting}
+                                    content="Update"
+                                    type="submit"
+                                    color="green"
+                                    fluid inverted
+                                    loading={rulesStore.loading}
+                                />
+                            </Grid.Column>
+                            <Grid.Column width={2} />
+                            <Grid.Column width={6}>
+                                <Button
+                                    color='red'
+                                    content='Delete'
+                                    type="button"
+                                    fluid inverted
+                                    loading={rulesStore.loading}
+                                    onClick={() => rulesStore.deleteRule(props.rule.id)}
+                                />
+                            </Grid.Column>
+                            <Grid.Column width={1} />
+                        </Grid.Row>
                     </Grid>
                 </Form>
             )}

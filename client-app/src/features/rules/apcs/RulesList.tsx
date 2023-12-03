@@ -27,7 +27,7 @@ export default observer(function APCRules(props: Props) {
                 <Grid.Column width={6} />
                 <Grid.Column width={4}>
                     <Button
-                        onClick={() => modalStore.openModal('Create Rule', <RuleForm group={props.group} />)}
+                        onClick={() => modalStore.openModal('Create Rule', <RuleForm group={props.group} />, "large")}
                         color='green'
                         inverted fluid
                         loading={loading}
@@ -52,7 +52,7 @@ export default observer(function APCRules(props: Props) {
                             content='Edit'
                             fluid inverted
                             loading={loading}
-                            onClick={() => modalStore.openModal("Update Rule", <RuleUpdateForm rule={rule} />)}
+                            onClick={() => modalStore.openModal("Update Rule", <RuleUpdateForm rule={rule} />, "large")}
                         />
                     </Grid.Column>
                 </Grid.Row>))}
