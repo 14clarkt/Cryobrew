@@ -19,6 +19,10 @@ export default class UserStore {
         return this.user?.currentAP
     }
 
+    get isAdmin() {
+        return this.user?.role.localeCompare("Admin") === 0
+    }
+
     login = async (creds: UserFormValues) => {
         try {
             const user = await agent.Account.login(creds);
@@ -64,6 +68,7 @@ export default class UserStore {
             runInAction(() => {
                 this.user!.currentAP = updatedUser.currentAP
                 this.user!.maxAP = updatedUser.maxAP
+                this.user!.shortAP = updatedUser.shortAP
                 this.user!.apcSlots = updatedUser.apcSlots
                 store.modalStore.closeModal();
             });

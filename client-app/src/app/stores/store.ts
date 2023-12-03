@@ -6,6 +6,7 @@ import ActionPointCardStore from "./actionPointCardStore";
 import EquipmentQualityStore from "./equipmentQualityStore";
 import AlchemyStore from "./alchemyStore";
 import SuppliesStore from "./suppliesStore";
+import RulesStore from "./rulesStore";
 
 interface Store {
     commonStore: CommonStore;
@@ -15,6 +16,7 @@ interface Store {
     equipmentQualityStore: EquipmentQualityStore;
     alchemyStore: AlchemyStore;
     suppliesStore: SuppliesStore;
+    rulesStore: RulesStore;
 }
 
 export const store: Store = {
@@ -24,7 +26,8 @@ export const store: Store = {
     apcStore: new ActionPointCardStore(),
     equipmentQualityStore: new EquipmentQualityStore(),
     alchemyStore: new AlchemyStore(),
-    suppliesStore: new SuppliesStore()
+    suppliesStore: new SuppliesStore(),
+    rulesStore: new RulesStore(),
 }
 
 export const StoreContext = createContext(store)

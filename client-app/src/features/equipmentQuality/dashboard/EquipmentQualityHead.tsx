@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import { Button, Grid, Search, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
-import EquipmentQualityRules from './EquipmentQualityRules';
 import EQForm from '../form/EQForm';
+import RulesList from '../../rules/apcs/RulesList';
 
 export default observer(function EquipmentQualityList() {
     const { userStore, modalStore, equipmentQualityStore } = useStore()
@@ -23,7 +23,7 @@ export default observer(function EquipmentQualityList() {
                             loading={equipmentQualityStore.loading}
                             content="Create EQ" />
                         <Button
-                            onClick={() => modalStore.openModal('Equipment Quality Rules', <EquipmentQualityRules />, "fullscreen")}
+                            onClick={() => modalStore.openModal('Equipment Quality Rules', <RulesList group="equipmentQuality" />, "fullscreen")}
                             size='huge'
                             color='yellow'
                             inverted

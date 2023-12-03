@@ -13,6 +13,7 @@ export default observer(function LongRest() {
                 userStore.updateUserValues({
                     currentAP: userStore.user?.maxAP!,
                     maxAP: userStore.user?.maxAP!,
+                    shortAP: userStore.user?.shortAP!,
                     apcSlots: userStore.user?.apcSlots!
             })} /></div>
         </>

@@ -12,16 +12,19 @@ import AlchemyIngredientHeader from "./AlchemyIngredientHeader"
 import AlchemyTraitPicker from "./AlchemyTraitPicker"
 
 export default observer(function AlchemyDashboard() {
-    const { alchemyStore } = useStore()
+    const { alchemyStore, rulesStore } = useStore()
     const {loadTraits, loadIngredients, loadProducts, productRegistry, traitRegistry, ingredientRegistry, loadingInitial, rightHandDisplay} = alchemyStore
+    const { ruleRegistry, loadRules, loadingInitial: loadingRules} = rulesStore
 
     useEffect(() => {
         if (traitRegistry.size < 1) loadTraits();
         if (ingredientRegistry.size < 1) loadIngredients();
         if (productRegistry.size < 1) loadProducts();
-    }, [loadTraits, loadIngredients, loadProducts, productRegistry.size, traitRegistry.size, ingredientRegistry.size])
+        if (ruleRegistry.size < 1) loadRules();
+    }, [loadTraits, loadIngredients, loadProducts, loadRules, productRegistry.size, traitRegistry.size, ingredientRegistry.size, ruleRegistry.size])
 
     if (loadingInitial) return <div style={{padding:'400px', position:'relative'}}><LoadingComponent content='Loading Alchemy...' /></div>
+    if (loadingRules) return <div style={{padding:'400px', position:'relative'}}><LoadingComponent content='Loading Rules...' /></div>
     
     return (
         <Grid>

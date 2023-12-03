@@ -5,15 +5,15 @@ import APCForm from '../form/APCForm';
 import APLForm from '../form/APLForm';
 import APCUpdateForm from '../form/APCUpdateForm';
 import APLUpdateForm from '../form/APLUpdateForm';
-import APCRules from './APCRules';
 import { useEffect, useState } from 'react';
 import { ActionPointCard } from '../../../app/models/actionPointCard';
 import DiffSpan from '../../../app/common/display/DiffSpan';
+import RulesList from '../../rules/apcs/RulesList';
 
 export default observer(function APCList() {
     const { apcStore, modalStore, userStore } = useStore()
     const { apcSortedList, deleteApc, deleteApl, copyApl, upgradeApc, downgradeApc, equipApc, loading } = apcStore
-    const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
+    const { isAdmin } = userStore
     const username = userStore.user?.username
 
     const [apcFilter, setAPCFilter] = useState("all")
@@ -72,7 +72,7 @@ export default observer(function APCList() {
                             loading={loading}
                             content="Create APC" />
                         <Button
-                            onClick={() => modalStore.openModal('Action Point Card Rules', <APCRules />, "large")}
+                            onClick={() => modalStore.openModal('Action Point Card Rules', <RulesList group="apc" />, "large")}
                             size='huge'
                             color='yellow'
                             inverted
@@ -87,6 +87,7 @@ export default observer(function APCList() {
                             onClick={() => userStore.updateUserValues({
                                 currentAP,
                                 maxAP: userStore.user?.maxAP!,
+                                shortAP: userStore.user?.shortAP!,
                                 apcSlots: userStore.user?.apcSlots!
                             })} />
                         <span style={{ color: "white", fontSize: "1.5em" }}> Slots: {equippedAmount} / {userStore.user?.apcSlots} </span>

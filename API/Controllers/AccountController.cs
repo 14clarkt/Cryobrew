@@ -87,6 +87,7 @@ namespace API.Controllers
             var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
             user.CurrentAP = userEditDto.CurrentAP;
             user.MaxAP = userEditDto.MaxAP;
+            user.ShortAP = userEditDto.ShortAP;
             user.APCSlots = userEditDto.APCSlots;
 
             await _userManager.UpdateAsync(user);
@@ -104,6 +105,7 @@ namespace API.Controllers
                 Username = user.UserName,
                 CurrentAP = user.CurrentAP,
                 MaxAP = user.MaxAP,
+                ShortAP = user.ShortAP,
                 APCSlots = user.APCSlots,
                 Role = userRoles.ElementAt(0)
             };
