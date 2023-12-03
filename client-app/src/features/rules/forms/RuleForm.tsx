@@ -1,10 +1,11 @@
 import { ErrorMessage, Form, Formik } from "formik";
-import { Button } from "semantic-ui-react";
+import { Button, Grid } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import ValidationErrors from "../../errors/ValidationErrors";
 import * as Yup from 'yup';
+import MyTextArea from "../../../app/common/form/MyTextArea";
 
 interface Props {
     group: string;
@@ -19,7 +20,8 @@ export default observer(function RuleForm(props: Props) {
                 title: "",
                 description: "",
                 order: 1,
-                error: null }}
+                error: null
+            }}
             onSubmit={(values, { setErrors }) => {
                 let newRule = {
                     id: "",
@@ -39,21 +41,35 @@ export default observer(function RuleForm(props: Props) {
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <MyTextInput label='Title' placeholder='Title' name='title' />
-                    <MyTextInput label='Description' placeholder='description' name='description' />
-                    <MyTextInput label='Order' placeholder='Order' name='order' />
-                    <ErrorMessage
-                        name='error' render={() =>
-                            <ValidationErrors errors={errors.error} />}
-                    />
-                    <Button
-                        disabled={!isValid || !dirty || isSubmitting}
-                        content="Create"
-                        type="submit"
-                        color="green"
-                        fluid inverted
-                        loading={loading}
-                    />
+                    <Grid>
+                        <Grid.Row>
+                            <Grid.Column width={4}>
+                                <MyTextInput label='Title' placeholder='Title' name='title' />
+                                <MyTextInput label='Order' placeholder='Order' name='order' />
+                            </Grid.Column>
+                            <Grid.Column width={12}>
+                                <MyTextArea rows={5} label='Description' placeholder='description' name='description' />
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row>
+                            <ErrorMessage
+                                name='error' render={() =>
+                                    <ValidationErrors errors={errors.error} />}
+                            />
+                            <Grid.Column width={4} />
+                            <Grid.Column width={8}>
+                                <Button
+                                    disabled={!isValid || !dirty || isSubmitting}
+                                    content="Create"
+                                    type="submit"
+                                    color="green"
+                                    fluid inverted
+                                    loading={loading}
+                                />
+                            </Grid.Column>
+                            <Grid.Column width={4} />
+                        </Grid.Row>
+                    </Grid>
                 </Form>
             )}
         </Formik>
