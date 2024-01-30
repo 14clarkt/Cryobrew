@@ -21,6 +21,7 @@ export default observer(function NavBar() {
                 <Menu.Item as={NavLink} to='/apc' name="APC" />
                 <Menu.Item as={NavLink} to='/alchemy' name="Alchemy" />
                 <Menu.Item as={NavLink} to='/equipmentQuality' name="Equipment Quality" />
+                <Menu.Item as={NavLink} to='/enchanting' name="Enchanting" />
                 <Menu.Item as={NavLink} to='/supplies' name="Supplies" />
                 <Menu.Item as={NavLink} to='/crystals' name="Crystals" />
                 <Menu.Item as={NavLink} to='/aiden' name="Aiden Upgrades" />
