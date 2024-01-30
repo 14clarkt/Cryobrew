@@ -7,6 +7,7 @@ import EquipmentQualityStore from "./equipmentQualityStore";
 import AlchemyStore from "./alchemyStore";
 import SuppliesStore from "./suppliesStore";
 import RulesStore from "./rulesStore";
+import EnchantingStore from "./enchantingStore";
 
 interface Store {
     commonStore: CommonStore;
@@ -15,6 +16,7 @@ interface Store {
     apcStore: ActionPointCardStore;
     equipmentQualityStore: EquipmentQualityStore;
     alchemyStore: AlchemyStore;
+    enchantingStore: EnchantingStore;
     suppliesStore: SuppliesStore;
     rulesStore: RulesStore;
 }
@@ -26,6 +28,7 @@ export const store: Store = {
     apcStore: new ActionPointCardStore(),
     equipmentQualityStore: new EquipmentQualityStore(),
     alchemyStore: new AlchemyStore(),
+    enchantingStore: new EnchantingStore(),
     suppliesStore: new SuppliesStore(),
     rulesStore: new RulesStore(),
 }

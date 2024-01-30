@@ -12,6 +12,7 @@ import RequireAuth from "./RequireAuth";
 import CrystalsDashboard from "../../features/crystals/dashboard/CrystalsDashboard";
 import AidenDashboard from "../../features/aiden/dashboard/AidenDashboard";
 import CrelicsDashboard from "../../features/crelics/dashboard/CrelicsDashboard";
+import EnchantingDashboard from "../../features/enchanting/dashboard/EnchantingDashboard";
 
 export const routes: RouteObject[] = [
     {
@@ -22,6 +23,7 @@ export const routes: RouteObject[] = [
                 {path: 'apc', element: <APCDashboard />},
                 {path: 'alchemy', element: <AlchemyDashboard />},
                 {path: 'equipmentQuality', element: <EquipmentQualityDashboard />},
+                {path: 'enchanting', element: <EnchantingDashboard />},
                 {path: 'supplies', element: <SuppliesDashboard />},
                 {path: 'crystals', element: <CrystalsDashboard />},
                 {path: 'aiden', element: <AidenDashboard />},
