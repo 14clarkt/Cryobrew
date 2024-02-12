@@ -21,6 +21,7 @@ namespace Application.Core
             CreateMap<AlchemyProduct, AlchemyProduct>();
             CreateMap<Domain.Rule, Domain.Rule>();
             CreateMap<Domain.Supply, Domain.Supply>();
+            CreateMap<Enchantment, Enchantment>();
         }
     }
 }

@@ -1,122 +1,125 @@
-import { makeAutoObservable } from "mobx"
-// import { v4 as uuid } from "uuid"
-// import { store } from "./store";
-// import agent from "../api/agent";
+import { makeAutoObservable, runInAction } from "mobx"
+import { v4 as uuid } from "uuid"
+import agent from "../api/agent";
+import { Enchantment } from "../models/enchantment";
+import { store } from "./store";
 
 export default class EnchantingStore {
-    // eqRegistry = new Map<string, EquipmentQuality>()
-    // loadingInitial = false
-    // loading = false
-    // eqFilter = ""
+    enchRegistry = new Map<string, Enchantment>()
+    loadingInitial = false
+    loading = false
+    enchFilter = ""
 
     constructor() {
         makeAutoObservable(this)
     }
 
-    // get eqList() {
-    //     let sortedEQs = Array.from(this.eqRegistry.values()).sort((a, b) =>
-    //         a.name.localeCompare(b.name))
+    get enchList() {
+        let sortedEQs = Array.from(this.enchRegistry.values()).sort((a, b) =>
+            a.name.localeCompare(b.name))
 
-    //     return sortedEQs.filter((eq) => eq.name.toLowerCase().includes(this.eqFilter.toLowerCase()))
-    // }
+        return sortedEQs.filter((ench) => ench.name.toLowerCase().includes(this.enchFilter.toLowerCase()))
+    }
 
-    // loadEQs = async () => {
-    //     this.setLoadingInitial(true)
-    //     try {
-    //         const apcs = await agent.EquipmentQualities.list()
-    //         apcs.forEach(eq => {
-    //             this.setEQ(eq)
-    //         })
-    //         this.setLoadingInitial(false)
-    //     } catch (error) {
-    //         console.log(error)
-    //         this.setLoadingInitial(false)
-    //     }
-    // }
+    loadEnchantments = async () => {
+        this.setLoadingInitial(true)
+        try {
+            const enchs = await agent.Enchanting.list()
+            enchs.forEach(ench => {
+                this.setEnch(ench)
+            })
+            this.setLoadingInitial(false)
+        } catch (error) {
+            console.log(error)
+            this.setLoadingInitial(false)
+        }
+    }
 
-    // createEQ = async (eq: EquipmentQuality) => {
-    //     this.loading = true
-    //     eq.id = uuid()
-    //     try {
-    //         await agent.EquipmentQualities.create(eq)
-    //         runInAction(() => {
-    //             this.setEQ(eq)
-    //             this.loading = false
-    //             store.modalStore.closeModal();
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //         runInAction(() => {
-    //             this.loading = false
-    //         })
-    //     }
-    // }
+    createEnch = async (ench: Enchantment) => {
+        this.loading = true
+        ench.id = uuid()
+        try {
+            console.log(ench)
+            await agent.Enchanting.create(ench)
+            runInAction(() => {
+                this.setEnch(ench)
+                store.modalStore.closeModal()
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
 
-    // deleteEQ = async (id: string) => {
-    //     this.loading = true;
-    //     try {
-    //         await agent.EquipmentQualities.delete(id)
-    //         runInAction(() => {
-    //             this.eqRegistry.delete(id)
-    //             this.loading = false
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //         runInAction(() => {
-    //             this.loading = false
-    //         })
-    //     }
-    // }
+    deleteEnch = async (id: string) => {
+        this.loading = true;
+        try {
+            await agent.Enchanting.delete(id)
+            runInAction(() => {
+                this.enchRegistry.delete(id)
+                store.modalStore.closeModal()
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
 
-    // updateEQ = async (eq: EquipmentQuality) => {
-    //     this.loading = true
-    //     try {
-    //         await agent.EquipmentQualities.update(eq)
-    //         runInAction(() => {
-    //             this.eqRegistry.set(eq.id, eq)
-    //             this.loading = false
-    //             store.modalStore.closeModal();
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //         runInAction(() => {
-    //             this.loading = false
-    //         })            
-    //     }
-    // }
+    updateEnch = async (ench: Enchantment) => {
+        this.loading = true
+        try {
+            await agent.Enchanting.update(ench)
+            runInAction(() => {
+                this.enchRegistry.set(ench.id, ench)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })            
+        }
+    }
 
-    // findLearnForgetEQ = async (eq: EquipmentQuality) => {
-    //     this.loading = true
+    findLearnForgetEnch = async (ench: Enchantment) => {
+        this.loading = true
         
-    //     if(eq.found) {
-    //         if(eq.learned) {
-    //             eq.found = false
-    //             eq.learned = false
-    //         } else eq.learned = true
-    //     } else eq.found = true
+        if(ench.found) {
+            if(ench.learned) {
+                ench.found = false
+                ench.learned = false
+            } else ench.learned = true
+        } else ench.found = true
 
-    //     try {
-    //         await agent.EquipmentQualities.update(eq)
-    //         runInAction(() => {
-    //             this.eqRegistry.set(eq.id, eq)
-    //             this.loading = false
-    //             store.modalStore.closeModal();
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //         runInAction(() => {
-    //             this.loading = false
-    //         })            
-    //     }
-    // }
+        try {
+            await agent.Enchanting.update(ench)
+            runInAction(() => {
+                this.enchRegistry.set(ench.id, ench)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })            
+        }
+    }
 
-    // setLoadingInitial = (state: boolean) => {
-    //     this.loadingInitial = state
-    // }
+    setLoadingInitial = (state: boolean) => {
+        this.loadingInitial = state
+    }
 
-    // private setEQ = (eq: EquipmentQuality) => {
-    //     this.eqRegistry.set(eq.id, eq)
-    // }
+    private setEnch = (ench: Enchantment) => {
+        this.enchRegistry.set(ench.id, ench)
+    }
 
     // setEQFilter = (query: string) => {
     //     this.eqFilter = query
