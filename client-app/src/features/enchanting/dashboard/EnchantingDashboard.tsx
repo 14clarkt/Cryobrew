@@ -5,25 +5,32 @@ import { useEffect } from "react"
 import LoadingComponent from "../../../app/layout/LoadingComponent"
 import EnchantingCrystalDisplay from "./EnchantingCrystalDisplay"
 import { Grid } from "semantic-ui-react"
+import EnchantingList from "./EnchantingList"
 
 export default observer(function EnchantingDashboard() {
-    const { suppliesStore } = useStore()
-    const { loadSupplies, suppliesRegistry, loadingInitial } = suppliesStore
+    const { suppliesStore, enchantingStore } = useStore()
+    const { loadSupplies, suppliesRegistry, loadingInitial: loadingInitialSupplies } = suppliesStore
+    const { loadEnchantments, enchRegistry, loadingInitial: loadingInitialEnchantment } = enchantingStore
 
     useEffect(() => {
         if (suppliesRegistry.size < 1) loadSupplies();
-    }, [loadSupplies, suppliesRegistry.size])
+        if (enchRegistry.size < 1) loadEnchantments();
+    }, [loadSupplies, loadSupplies, suppliesRegistry.size, enchRegistry.size])
 
-    if (loadingInitial) return <div style={{ padding: '400px', position: 'relative' }}><LoadingComponent content='Loading Enchanting...' /></div>
+    if (loadingInitialSupplies || loadingInitialEnchantment)
+        return <div style={{ padding: '400px', position: 'relative' }}><LoadingComponent content='Loading Enchanting...' /></div>
 
     return (
         <>
             <EnchantingHeader />
+            <EnchantingCrystalDisplay />
             <Grid>
                 <Grid.Row>
-                    <Grid.Column width={1}>
-                        <EnchantingCrystalDisplay />
+                    <Grid.Column width={2} />
+                    <Grid.Column width={12}>
+                        <EnchantingList />
                     </Grid.Column>
+                    <Grid.Column width={2} />
                 </Grid.Row>
             </Grid>
         </>

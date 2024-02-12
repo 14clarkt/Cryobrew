@@ -1,11 +1,15 @@
 import { observer } from 'mobx-react-lite';
-import { Grid } from 'semantic-ui-react';
+import { Button, Grid, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import { useEffect, useState } from 'react';
+import RulesList from '../../rules/apcs/RulesList';
+import EnchForm from '../form/EnchForm';
 
 export default observer(function EnchantingCrystalDisplay() {
-    const { suppliesStore } = useStore()
+    const { userStore, enchantingStore, suppliesStore, modalStore } = useStore()
     const { suppliesList } = suppliesStore
+
+    const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
     const [enchantingCrystalAmounts, setEnchantingCrystalAmounts] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0])
 
     useEffect(() => {
@@ -21,33 +25,71 @@ export default observer(function EnchantingCrystalDisplay() {
     }, [suppliesList])
 
     return (
-        <>
-            <Grid>
-                <Grid.Row>
-                    <Grid.Column width={16}>
-                        <h2 style={{ color: 'cyan', textAlign: 'center' }}>Crystal</h2>
-                    </Grid.Column>
-                </Grid.Row>
-                <Grid.Row>
-                    <Grid.Column width={8}>
-                        <h3 style={{ color: 'cyan', textAlign: 'center' }}>Lvl</h3>
-                    </Grid.Column>
-                    <Grid.Column width={8}>
-                        <h3 style={{ color: 'cyan', textAlign: 'center' }}>Ct</h3>
-                    </Grid.Column>
-                </Grid.Row>
-                <Grid.Row>
-                    {enchantingCrystalAmounts.map((amount, index) => (
-                        <>
-                            <Grid.Column width={8}>
-                                <h3 style={{ color: index % 2 === 0 ? 'white' : 'lightgrey', textAlign: 'center' }}>{index + 1}</h3>
-                            </Grid.Column>
-                            <Grid.Column width={8}>
-                                <h3 style={{ color: index % 2 === 0 ? 'white' : 'lightgrey', textAlign: 'center' }}>{amount}</h3>
-                            </Grid.Column>
-                        </>))}
-                </Grid.Row>
-            </Grid>
-        </>
+        <Grid style={{
+            position: 'fixed',
+            zIndex: 2
+        }}>
+            <Grid.Row>
+                <Grid.Column width={3}>
+                    <Segment style={{
+                        background: 'black'
+                    }}>
+                        <Grid>
+                            <Grid.Row>
+                                <Grid.Column width={10}>
+                                    <Button
+                                        disabled={!isAdmin}
+                                        onClick={() => modalStore.openModal("Create Enchantment", <EnchForm />, "large")}
+                                        size='large'
+                                        color='green'
+                                        inverted fluid
+                                        loading={enchantingStore.loading}
+                                        content="Create Ench" />
+                                </Grid.Column>
+                            </Grid.Row>
+                            <Grid.Row>
+                                <Grid.Column width={10}>
+                                    <Button
+                                        onClick={() => modalStore.openModal('Enchanting Rules', <RulesList group="enchanting" />, "large")}
+                                        size='large'
+                                        color='yellow'
+                                        inverted fluid
+                                        content="Ench Rules" />
+                                </Grid.Column>
+                            </Grid.Row>
+                            <Grid.Row>
+                                <Grid.Column width={10}>
+                                    <h2 style={{ color: 'cyan', textAlign: 'center' }}>Crystals</h2>
+                                </Grid.Column>
+                            </Grid.Row>
+                            <Grid.Row>
+                                <Grid.Column width={3}>
+                                    <h3 style={{ color: 'cyan', textAlign: 'center' }}>Lvl</h3>
+                                </Grid.Column>
+                                <Grid.Column width={4}>
+                                    <h3 style={{ color: 'cyan', textAlign: 'center' }}>(Pwr)</h3>
+                                </Grid.Column>
+                                <Grid.Column width={3}>
+                                    <h3 style={{ color: 'cyan', textAlign: 'center' }}>Amt</h3>
+                                </Grid.Column>
+                            </Grid.Row>
+                            {enchantingCrystalAmounts.map((amount, index) => (
+                                <Grid.Row key={"crystal" + index}>
+                                    <Grid.Column width={3}>
+                                        <h3 style={{ color: index % 2 === 0 ? 'white' : '#bbbbbb', textAlign: 'center' }}>{index + 1} </h3>
+                                    </Grid.Column>
+                                    <Grid.Column width={4}>
+                                        <h3 style={{ color: index % 2 === 0 ? 'white' : '#bbbbbb', textAlign: 'center' }}>({(index + 1) ** 2})</h3>
+                                    </Grid.Column>
+                                    <Grid.Column width={3}>
+                                        <h3 style={{ color: index % 2 === 0 ? 'white' : '#bbbbbb', textAlign: 'center' }}>{amount > 99 ? "99+" : amount}</h3>
+                                    </Grid.Column>
+                                </Grid.Row>
+                            ))}
+                        </Grid>
+                    </Segment>
+                </Grid.Column>
+            </Grid.Row>
+        </Grid>
     )
 })

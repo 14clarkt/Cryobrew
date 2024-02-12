@@ -8,6 +8,7 @@ import { EquipmentQuality } from '../models/equipmentQuality';
 import { AlchemyIngredient, AlchemyIngredientPotency, AlchemyPotencyRange, AlchemyProduct, AlchemyTrait } from '../models/alchemy';
 import { Supply } from '../models/supply';
 import { Rule } from '../models/rule';
+import { Enchantment } from '../models/enchantment';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -121,6 +122,13 @@ const Supplies = {
     update: (supply: Supply) => axios.put(`/supply/${supply.id}`, supply),
 }
 
+const Enchanting = {
+    list: () => requests.get<Enchantment[]>('/enchanting'),
+    create: (ench: Enchantment) => axios.post('/enchanting', ench),
+    update: (ench: Enchantment) => axios.put(`/enchanting/${ench.id}`, ench),
+    delete: (id: string) => axios.delete(`/enchanting/${id}`),
+}
+
 const Rules = {
     list: () => requests.get<Rule[]>('/rule'),
     create: (rule: Rule) => axios.post('/rule', rule),
@@ -140,6 +148,7 @@ const agent = {
     EquipmentQualities,
     Alchemy,
     Supplies,
+    Enchanting,
     Account,
     Rules,
 }
