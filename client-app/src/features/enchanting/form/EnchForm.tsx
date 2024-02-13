@@ -79,7 +79,7 @@ export default observer(function EnchForm() {
                             <MyTextInput placeholder='10, 25, 100...' label='Total Power' name='totalPower' />
                             <MyTextInput placeholder='1 EP, Passive, 0 EP, level 1 spell slot...' label='Effect Cost' name='effectCost' />
                             <MyTextInput placeholder='1 Action, 1 Bonus Action, Free Action...' label='Effect Action' name='effectAction' />
-                            <MyTextArea placeholder="Details of this Quality's Effect" label='Effect' name='effect' rows={13} />
+                            <MyTextArea placeholder="Details of this Enchantment's Effect" label='Effect' name='effect' rows={13} />
                         </Grid.Column>
                     </Grid>
                     <ErrorMessage
