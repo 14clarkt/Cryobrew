@@ -70,7 +70,7 @@ export default observer(function EnchantingCrystalDisplay() {
                                     <h3 style={{ color: 'cyan', textAlign: 'center' }}>(Pwr)</h3>
                                 </Grid.Column>
                                 <Grid.Column width={3}>
-                                    <h3 style={{ color: 'cyan', textAlign: 'center' }}>Amt</h3>
+                                    <h3 style={{ color: 'cyan', textAlign: 'center' }}>Inv</h3>
                                 </Grid.Column>
                             </Grid.Row>
                             {enchantingCrystalAmounts.map((amount, index) => (
