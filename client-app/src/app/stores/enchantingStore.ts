@@ -121,7 +121,7 @@ export default class EnchantingStore {
         this.enchRegistry.set(ench.id, ench)
     }
 
-    // setEQFilter = (query: string) => {
-    //     this.eqFilter = query
-    // }
+    setEnchFilter = (query: string) => {
+        this.enchFilter = query
+    }
 }
