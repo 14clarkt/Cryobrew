@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { Button, Grid, Segment } from 'semantic-ui-react';
+import { Button, Grid, Search, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import { useEffect, useState } from 'react';
 import RulesList from '../../rules/apcs/RulesList';
@@ -88,6 +88,24 @@ export default observer(function EnchantingCrystalDisplay() {
                             ))}
                         </Grid>
                     </Segment>
+                </Grid.Column>
+                <Grid.Column width={10} />
+                <Grid.Column width={3}>
+                    <Grid>
+                        <Grid.Row>
+                            <Grid.Column width={3} />
+                            <Grid.Column width={10}>
+                                <div style={{marginTop: '15px'}}><Search
+                                    onSearchChange={(_e, data) => { data.value
+                                        ? enchantingStore.setEnchFilter(data.value)
+                                        : enchantingStore.setEnchFilter("") }}
+                                    open={false}
+                                    placeholder='Search'
+                                /></div>
+                            </Grid.Column>
+                            <Grid.Column width={3} />
+                        </Grid.Row>
+                    </Grid>
                 </Grid.Column>
             </Grid.Row>
         </Grid>
