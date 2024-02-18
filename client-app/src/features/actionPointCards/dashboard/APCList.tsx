@@ -16,7 +16,7 @@ export default observer(function APCList() {
     const { isAdmin } = userStore
     const username = userStore.user?.username
 
-    const [apcFilter, setAPCFilter] = useState("all")
+    const [apcFilter, setAPCFilter] = useState(isAdmin ? "all" : "equipped")
     const [APCList, setAPCList] = useState<ActionPointCard[]>([])
     const [currentAP, setCurrentAP] = useState(0)
     const [equippedAmount, setEquippedAmount] = useState(0)
