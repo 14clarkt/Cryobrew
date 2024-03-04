@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { Button, Grid, Search, Segment } from 'semantic-ui-react';
+import { Button, Grid, Search } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import { useEffect, useState } from 'react';
 import RulesList from '../../rules/apcs/RulesList';
