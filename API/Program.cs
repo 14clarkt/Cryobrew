@@ -26,8 +26,6 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
 
 app.UseCors("CorsPolicy");
@@ -56,8 +54,8 @@ try
 }
 catch (Exception ex)
 {
-    // var logger = services.GetRequiredService<Logger<Program>>();
-    // logger.LogError(ex, "An error occured during migration");
+    var logger = services.GetRequiredService<Logger<Program>>();
+    logger.LogError(ex, "An error occured during migration");
 }
 // end of segment that updates migrations upon launch.
 

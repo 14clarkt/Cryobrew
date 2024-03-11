@@ -14,7 +14,6 @@ namespace API.Extensions
             IConfiguration config)
         {
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
             services.AddDbContext<DataContext>(options =>
             {
                 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
