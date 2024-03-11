@@ -21,6 +21,11 @@ import NarBarSide from './NarBarSide';
 function App() {
   const location = useLocation()
   const { commonStore, userStore } = useStore();
+  
+  useEffect(() => {
+    //Set the Tab Title to distinguish between prod and dev.
+    import.meta.env.DEV ? document.title = "Cryobrew Beta" : document.title = "Cryobrew"
+  }, [])
 
   useEffect(() => {
     if (commonStore.token) {
