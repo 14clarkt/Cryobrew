@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { Button, Grid, Search } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import { useEffect, useState } from 'react';
-import RulesList from '../../rules/apcs/RulesList';
+import RulesList from '../../rules/list/RulesList';
 import EnchForm from '../form/EnchForm';
 
 export default observer(function EnchantingCrystalDisplay() {
