@@ -8,16 +8,18 @@ import { Grid } from "semantic-ui-react"
 import EnchantingList from "./EnchantingList"
 
 export default observer(function EnchantingDashboard() {
-    const { suppliesStore, enchantingStore } = useStore()
+    const { suppliesStore, enchantingStore, rulesStore } = useStore()
     const { loadSupplies, suppliesRegistry, loadingInitial: loadingInitialSupplies } = suppliesStore
     const { loadEnchantments, enchRegistry, loadingInitial: loadingInitialEnchantment } = enchantingStore
+    const { loadRules, ruleRegistry, loadingInitial: loadingInitialRules } = rulesStore
 
     useEffect(() => {
         if (suppliesRegistry.size < 1) loadSupplies();
         if (enchRegistry.size < 1) loadEnchantments();
-    }, [loadSupplies, loadSupplies, suppliesRegistry.size, enchRegistry.size])
+        if (ruleRegistry.size < 1) loadRules();
+    }, [loadSupplies, loadSupplies, loadRules, suppliesRegistry.size, enchRegistry.size, ruleRegistry.size])
 
-    if (loadingInitialSupplies || loadingInitialEnchantment)
+    if (loadingInitialSupplies || loadingInitialEnchantment || loadingInitialRules)
         return <div style={{ padding: '400px', position: 'relative' }}><LoadingComponent content='Loading Enchanting...' /></div>
 
     return (
