@@ -8,6 +8,7 @@ import AlchemyStore from "./alchemyStore";
 import SuppliesStore from "./suppliesStore";
 import RulesStore from "./rulesStore";
 import EnchantingStore from "./enchantingStore";
+import SokobanStore from "./sokobanStore";
 
 interface Store {
     commonStore: CommonStore;
@@ -19,6 +20,7 @@ interface Store {
     enchantingStore: EnchantingStore;
     suppliesStore: SuppliesStore;
     rulesStore: RulesStore;
+    sokobanStore: SokobanStore;
 }
 
 export const store: Store = {
@@ -31,6 +33,7 @@ export const store: Store = {
     enchantingStore: new EnchantingStore(),
     suppliesStore: new SuppliesStore(),
     rulesStore: new RulesStore(),
+    sokobanStore: new SokobanStore,
 }
 
 export const StoreContext = createContext(store)
