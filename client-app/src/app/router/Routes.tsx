@@ -13,6 +13,7 @@ import CrystalsDashboard from "../../features/crystals/dashboard/CrystalsDashboa
 import AidenDashboard from "../../features/aiden/dashboard/AidenDashboard";
 import CrelicsDashboard from "../../features/crelics/dashboard/CrelicsDashboard";
 import EnchantingDashboard from "../../features/enchanting/dashboard/EnchantingDashboard";
+import Sokoban from "../../features/puzzles/sokoban/sokoban";
 
 export const routes: RouteObject[] = [
     {
@@ -28,6 +29,7 @@ export const routes: RouteObject[] = [
                 {path: 'crystals', element: <CrystalsDashboard />},
                 {path: 'aiden', element: <AidenDashboard />},
                 {path: 'crelics', element: <CrelicsDashboard />},
+                {path: 'puzzles', element: <Sokoban />},
                 
                 {path: 'profile/:username', element: <UserDetails />},
                 
