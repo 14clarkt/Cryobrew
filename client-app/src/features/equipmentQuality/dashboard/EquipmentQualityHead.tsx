@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { Button, Grid, Search, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import EQForm from '../form/EQForm';
-import RulesList from '../../rules/apcs/RulesList';
+import RulesList from '../../rules/list/RulesList';
 
 export default observer(function EquipmentQualityList() {
     const { userStore, modalStore, equipmentQualityStore } = useStore()

@@ -11,7 +11,7 @@ interface Props {
     group: string;
 }
 
-export default observer(function APCRules(props: Props) {
+export default observer(function RulesList(props: Props) {
     const { rulesStore, modalStore, userStore } = useStore()
     const { loading, rulesList } = rulesStore
     const { isAdmin } = userStore

@@ -8,7 +8,7 @@ import APLUpdateForm from '../form/APLUpdateForm';
 import { useEffect, useState } from 'react';
 import { ActionPointCard } from '../../../app/models/actionPointCard';
 import DiffSpan from '../../../app/common/display/DiffSpan';
-import RulesList from '../../rules/apcs/RulesList';
+import RulesList from '../../rules/list/RulesList';
 
 export default observer(function APCList() {
     const { apcStore, modalStore, userStore } = useStore()

@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { Button, Grid, Popup, Search, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import AlchemyIngredientForm from '../form/AlchemyIngredientForm';
-import RulesList from '../../rules/apcs/RulesList';
+import RulesList from '../../rules/list/RulesList';
 
 export default observer(function AlchemyIngredientHeader() {
     const { userStore, modalStore, alchemyStore } = useStore()

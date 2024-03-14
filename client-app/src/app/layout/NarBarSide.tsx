@@ -3,6 +3,7 @@ import { Icon, Menu, Segment, Sidebar } from "semantic-ui-react";
 import { useStore } from "../stores/store";
 import { ReactNode } from "react";
 import DiceRoller from "../../features/misc/diceRoller/DiceRoller";
+import { NavLink } from 'react-router-dom';
 
 interface Props {
     content: ReactNode
@@ -24,6 +25,10 @@ export default observer(function NavBarSide(props: Props) {
                 <Menu.Item onClick={() => modalStore.openModal("Roll the Dice", <DiceRoller />, "large")}>
                     <Icon name='cube' />
                     Dice Roller
+                </Menu.Item>
+                <Menu.Item as={NavLink} to='/puzzles'>
+                    <Icon name='puzzle piece' />
+                    Sokoban*
                 </Menu.Item>
             </Sidebar>
             <Sidebar.Pusher content={content} />
