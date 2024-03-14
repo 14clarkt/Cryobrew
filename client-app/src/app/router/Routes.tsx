@@ -13,7 +13,7 @@ import CrystalsDashboard from "../../features/crystals/dashboard/CrystalsDashboa
 import AidenDashboard from "../../features/aiden/dashboard/AidenDashboard";
 import CrelicsDashboard from "../../features/crelics/dashboard/CrelicsDashboard";
 import EnchantingDashboard from "../../features/enchanting/dashboard/EnchantingDashboard";
-import Sokoban from "../../features/puzzles/sokoban/sokoban";
+import Sokoban from "../../features/puzzles/sokoban/Sokoban";
 
 export const routes: RouteObject[] = [
     {
