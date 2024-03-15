@@ -165,7 +165,7 @@ export default observer(function SokobanGame () {
     function checkVictory(level: string[]) {
         let victory = true
         for(let i = 0; i < targets.length; i++) {
-            if (getPositionChar(targets[i], level) !== BOX) victory = false
+            if (getPositionChar(targets[i], level) !== BOX && getPositionChar(targets[i], level) !== BOX_TARGET) victory = false
         }
         
         if (victory) {
