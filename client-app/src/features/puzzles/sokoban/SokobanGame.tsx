@@ -195,7 +195,7 @@ export default observer(function SokobanGame() {
     }
 
     return (
-        <Grid tabIndex={0} onKeyDown={handleKeyDown} className="sokoban" divided>
+        <Grid tabIndex={0} onKeyDown={handleKeyDown} divided>
             {level.map((row, rowIndex) => (
                 <Grid.Row key={rowIndex} >
                     {row.split('').map((cell, colIndex) => (
