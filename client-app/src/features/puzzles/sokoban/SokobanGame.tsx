@@ -5,10 +5,12 @@ import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 
 const WALL = '#'
-const FLOOR = '.'
-const BOX = 'B'
-const TARGET = 'T'
-const PLAYER = 'P'
+const FLOOR = '-'
+const BOX = '$'
+const TARGET = '.'
+const BOX_TARGET = '*'
+const PLAYER = '@'
+const PLAYER_TARGET = '+'
 
 export default observer(function SokobanGame () {
     const { sokobanStore } = useStore()
@@ -31,7 +33,10 @@ export default observer(function SokobanGame () {
     function findPlayerPos(level: string[]) {
         for (let i = 0; i < level.length; i++) {
             const row = level[i];
-            const col = row.indexOf(PLAYER);
+            let col = row.indexOf(PLAYER);
+            if (col !== -1) return { row: i, col };
+            
+            col = row.indexOf(PLAYER_TARGET);
             if (col !== -1) return { row: i, col };
         }
         return { row: -1, col: -1 }; // Player not found
@@ -44,8 +49,7 @@ export default observer(function SokobanGame () {
         return false
     }
 
-    function handleKeyDown(event: React.KeyboardEvent) {
-        
+    function handleKeyDown(event: React.KeyboardEvent) { 
         event.preventDefault();
         const { key } = event;
         if(victory && key !== 'r' && key !== 'R') return
@@ -97,7 +101,7 @@ export default observer(function SokobanGame () {
 
     function moveBoxes(newPlayerPos: Pos, direction: string) : string[] {
         const nextBoxPos = { ...newPlayerPos }
-        while (getPositionChar(nextBoxPos, level) === BOX) {
+        while (getPositionChar(nextBoxPos, level) === BOX || getPositionChar(nextBoxPos, level) === BOX_TARGET) {
             switch (direction) {
                 case 'ArrowUp':
                     nextBoxPos.row--
@@ -131,7 +135,7 @@ export default observer(function SokobanGame () {
         if (nextCell === WALL) return false;
 
         // Check if next cell contains a box
-        if (nextCell === BOX) {
+        if (nextCell === BOX || nextCell === BOX_TARGET) {
             // Calculate position of the box after player's move
             const nextBoxPos = { row, col };
             switch (direction) {
@@ -201,8 +205,9 @@ export default observer(function SokobanGame () {
                                     background: isTarget({row: rowIndex, col: colIndex}) ? 'green' : 'grey',
                                     fontSize: '3.75em', textAlign: 'center'}}>
                                 {cell === PLAYER && '😀'}
+                                {cell === PLAYER_TARGET && '😀'}
                                 {cell === BOX && '📦'}
-                                {cell === TARGET && '🎯'}
+                                {cell === BOX_TARGET && '📦'}
                                 {cell === WALL && '🧱'}
                             </Grid.Column>
                         ))}
