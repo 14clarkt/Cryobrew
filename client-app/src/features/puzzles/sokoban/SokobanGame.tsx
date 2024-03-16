@@ -54,7 +54,10 @@ export default observer(function SokobanGame() {
     function handleKeyDown(event: React.KeyboardEvent) {
         event.preventDefault()
         const { key } = event
-        if (victory && key !== 'r' && key !== 'R') return
+        if (victory && key !== 'r' && key !== 'R') {
+            alert('Victory')
+            return
+        }
         let newPlayerPos = { ...playerPos }
 
         switch (key) {
@@ -189,10 +192,7 @@ export default observer(function SokobanGame() {
             if (getPositionChar(targets[i], level) !== BOX && getPositionChar(targets[i], level) !== BOX_TARGET) victory = false
         }
 
-        if (victory) {
-            setVictory(true)
-            alert('Victory')
-        }
+        if (victory) setVictory(true)
     }
 
     function updateLevel(pos: Pos, newChar: string, level: string[]) {
