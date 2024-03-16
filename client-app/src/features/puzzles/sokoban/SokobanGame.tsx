@@ -29,6 +29,7 @@ export default observer(function SokobanGame() {
         setPlayerPos(findPlayerPos(currentLevel.levelState))
         setTargets(currentLevel.targets)
         setVictory(false)
+        setPastStates([])
     }, [currentLevelKey])
 
     function findPlayerPos(level: string[]) {
