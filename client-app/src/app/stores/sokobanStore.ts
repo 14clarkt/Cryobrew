@@ -77,7 +77,10 @@ export default class SokobanStore {
     }
 
     private populateLevels = (): SokobanLevel[] => {
-        let levels = this.formatLevelString()
+        let levels = [
+            ...this.formatLevelString(this.unformattedTutorialLevelsString),
+            ...this.formatLevelString(this.unformattedLevelsString),
+        ]
 
         for (let i = 0; i < levels.length; i++) {
             levels[i].key = (i + 1).toString();
@@ -86,9 +89,9 @@ export default class SokobanStore {
         return levels
     }
 
-    private formatLevelString = () : SokobanLevel[] => {
+    private formatLevelString = (unformattedLevelsString: string) : SokobanLevel[] => {
         const formattedData = []
-        const lines = this.unformattedLevelsString.split('\n');
+        const lines = unformattedLevelsString.split('\n');
         
         let currentLevel: string = ""
         let tooLong = false
@@ -131,6 +134,56 @@ export default class SokobanStore {
         return formattedData
     }
 
+    private unformattedTutorialLevelsString =
+    `#####
+    #@$.#
+    #####
+    Title: 1. Literally Can't Lose
+    Previously published: DL3
+    Date: 2024-03-15
+
+    #####
+    #.#.#
+    #-$$#
+    #-@-#
+    #####
+    Title: 2. Scary Boxes
+    Previously published: DL3
+    Date: 2024-03-15
+    
+    ###
+    #.##
+    #--##
+    #---#
+    #---#
+    ##$-#
+    #-@-#
+    #####
+    Title: 3. Corners Bad
+    Previously published: DL3
+    Date: 2024-03-15
+    
+    ####
+    #--##
+    #---#
+    #---#
+    #.$##
+    #.$#
+    #@-#
+    ####
+    Title: 4. Wallslide
+    Previously published: DL3
+    Date: 2024-03-15
+    
+    --####
+    ###--#
+    #---$##
+    #---*+#
+    ######
+    Title: 5. Replace
+    Previously published: DL3
+    Date: 2024-03-15`
+    
     private unformattedLevelsString = `###########
     #---------#
     #-$-$@$-$-#
