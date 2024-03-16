@@ -16,10 +16,11 @@ export default observer(function SokobanGame() {
     const { sokobanStore } = useStore()
     const { currentLevel, currentLevelKey } = sokobanStore
 
-    const [level, setLevel] = useState<string[]>([]);
-    const [playerPos, setPlayerPos] = useState<Pos>({ row: -1, col: -1 });
+    const [level, setLevel] = useState<string[]>([])
+    const [playerPos, setPlayerPos] = useState<Pos>({ row: -1, col: -1 })
     const [targets, setTargets] = useState<Pos[]>([])
     const [victory, setVictory] = useState<Boolean>(false)
+    const [pastStates, setPastStates] = useState<string[][]>([])
 
     useEffect(() => {
         if (!currentLevel) return
@@ -50,10 +51,10 @@ export default observer(function SokobanGame() {
     }
 
     function handleKeyDown(event: React.KeyboardEvent) {
-        event.preventDefault();
-        const { key } = event;
+        event.preventDefault()
+        const { key } = event
         if (victory && key !== 'r' && key !== 'R') return
-        let newPlayerPos = { ...playerPos };
+        let newPlayerPos = { ...playerPos }
 
         switch (key) {
             case 'ArrowUp':
@@ -71,6 +72,9 @@ export default observer(function SokobanGame() {
             case 'r' || 'R':
                 reset()
                 return
+            case 'Backspace':
+                undo()
+                return
             default:
                 return;
         }
@@ -80,18 +84,34 @@ export default observer(function SokobanGame() {
 
     function reset() {
         if (!currentLevel) return
+        setPastStates([])
         setLevel(currentLevel.levelState)
         setPlayerPos(findPlayerPos(currentLevel.levelState))
         setVictory(false)
     }
 
+    function undo() {
+        if(pastStates.length < 1) return
+        setLevel(pastStates[pastStates.length-1])
+        setPlayerPos(findPlayerPos(pastStates[pastStates.length-1]))
+        
+        let newPastStates = []
+        for (let i = 0; i < pastStates.length-1; i++) {
+            newPastStates.push(pastStates[i])
+        }
+
+        setPastStates(newPastStates)
+    }
+
     function makeMove(newPlayerPos: Pos, direction: string) {
         if (!isValidMove(newPlayerPos, direction)) return
 
-        let newLevel = moveBoxes(newPlayerPos, direction);
+        setPastStates([...pastStates, level])
 
-        newLevel = updateLevel(playerPos, FLOOR, newLevel);
-        newLevel = updateLevel(newPlayerPos, PLAYER, newLevel);
+        let newLevel = moveBoxes(newPlayerPos, direction)
+
+        newLevel = updateLevel(playerPos, FLOOR, newLevel)
+        newLevel = updateLevel(newPlayerPos, PLAYER, newLevel)
 
         setPlayerPos(newPlayerPos);
         setLevel(newLevel);
