@@ -9,6 +9,7 @@ import { AlchemyIngredient, AlchemyIngredientPotency, AlchemyPotencyRange, Alche
 import { Supply } from '../models/supply';
 import { Rule } from '../models/rule';
 import { Enchantment } from '../models/enchantment';
+import { Crelic } from '../models/crelic';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -129,6 +130,13 @@ const Enchanting = {
     delete: (id: string) => axios.delete(`/enchanting/${id}`),
 }
 
+const Crelics = {
+    list: () => requests.get<Crelic[]>('/crelic'),
+    create: (crelic: Crelic) => axios.post('/crelic', crelic),
+    update: (crelic: Crelic) => axios.put(`/crelic/${crelic.id}`, crelic),
+    delete: (id: string) => axios.delete(`/crelic/${id}`),
+}
+
 const Rules = {
     list: () => requests.get<Rule[]>('/rule'),
     create: (rule: Rule) => axios.post('/rule', rule),
@@ -149,6 +157,7 @@ const agent = {
     Alchemy,
     Supplies,
     Enchanting,
+    Crelics,
     Account,
     Rules,
 }
