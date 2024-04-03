@@ -21,5 +21,9 @@ namespace Persistence
         public DbSet<Supply> Supplies { get; set; }
         public DbSet<Enchantment> Enchantments { get; set; }
         public DbSet<Rule> Rules { get; set; }
+        public DbSet<Crelic> Crelics { get; set; }
+        public DbSet<CrelicAbility> CrelicAbilities { get; set; }
+        public DbSet<CrelicSubAbility> CrelicSubAbilities { get; set; }
+        public DbSet<CrelicSubAbilityLevel> CrelicSubAbilityLevels { get; set; }
     }
 }

@@ -22,6 +22,10 @@ namespace Application.Core
             CreateMap<Domain.Rule, Domain.Rule>();
             CreateMap<Domain.Supply, Domain.Supply>();
             CreateMap<Enchantment, Enchantment>();
+            CreateMap<Crelic, Crelic>();
+            CreateMap<CrelicAbility, CrelicAbility>();
+            CreateMap<CrelicSubAbility, CrelicSubAbility>();
+            CreateMap<CrelicSubAbilityLevel, CrelicSubAbilityLevel>();
         }
     }
 }
