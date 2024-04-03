@@ -8,9 +8,13 @@ export default function DiffSpan(props: Props) {
     const colorMap = new Map<string, string>([
         ["yellow", "\\y"],
         ["red", "\\r"],
+        ["firebrick", "\\fb"],
         ["lightGreen", "\\g"],
         ["cyan", "\\c"],
         ["orange", "\\o"],
+        ["silver", "\\s"],
+        ["grey", "\\grey"],
+        ["blueviolet", "\\p"],
     ])
 
     const colorizeSpan = (text: string): JSX.Element[] => {
