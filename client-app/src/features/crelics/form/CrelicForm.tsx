@@ -33,7 +33,7 @@ export default observer(function CrelicForm() {
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <MyTextInput placeholder='Name' name='name' />
+                    <MyTextInput placeholder='Name' name='name' label="Name" />
                     <ErrorMessage
                         name='error' render={() =>
                             <ValidationErrors errors={errors.error} />}

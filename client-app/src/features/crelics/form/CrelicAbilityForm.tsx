@@ -38,8 +38,8 @@ export default observer(function CrelicAbilityForm({crelicId}: Props) {
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <MyTextInput placeholder='Name' name='name' />
-                    <MyTextArea placeholder='Description' name='description' rows={5} />
+                    <MyTextInput placeholder='Name' name='name' label="Name" />
+                    <MyTextArea placeholder='Description' name='description' label="Description" rows={5} />
                     <ErrorMessage
                         name='error' render={() =>
                             <ValidationErrors errors={errors.error} />}
