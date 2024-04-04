@@ -22,6 +22,8 @@ namespace Application.Crelics
             {
                 var crelics = await _context.Crelics
                     .Include(a => a.CrelicAbilities)
+                        .ThenInclude(b => b.CrelicSubAbilities)
+                            .ThenInclude(d => d.CrelicSubAbilityLevels)
                     .ToListAsync();
 
                 return Result<List<Crelic>>.Success(crelics);
