@@ -33,5 +33,27 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new DeleteCrelic.Command{Id = id}));
         }
+
+        // CrelicAbilities
+
+        [HttpGet("ability")] //api/crelic/ability
+        public async Task<IActionResult> GetCrelicAbilites()
+        {
+            return HandleResult(await Mediator.Send(new ListCrelicAbility.Query()));
+        }
+
+        [HttpPost("ability/{crelicId}")] 
+        public async Task<IActionResult> CreateCrelicAbility([FromRoute] Guid crelicId, [FromBody] CrelicAbility crelicAbility)
+        {
+            return HandleResult(await Mediator.Send(new CreateCrelicAbility.Command{CrelicId = crelicId, CrelicAbility = crelicAbility}));
+        }
+
+        // CrelicSubAbilities
+
+        [HttpPost("subability/{crelicAbilityId}")] //api/crelic/subability
+        public async Task<IActionResult> CreateCrelicSubAbility([FromRoute] Guid crelicAbilityId, [FromBody] CrelicSubAbility crelicSubAbility)
+        {
+            return HandleResult(await Mediator.Send(new CreateCrelicSubAbility.Command{CrelicAbilityId = crelicAbilityId, CrelicSubAbility = crelicSubAbility}));
+        }
     }
 }
