@@ -19,7 +19,7 @@ export default class CrelicStore {
         let sortedcrelics = Array.from(this.crelicRegistry.values()).sort((a, b) =>
             a.name.localeCompare(b.name))
 
-        runInAction(() => { // sort the ranges within the traits
+        runInAction(() => { // sort the ranges within the crelics
             sortedcrelics.forEach((crelic) => {
                 crelic.crelicAbilities.sort((a, b) => a.name.localeCompare(b.name))
                 crelic.crelicAbilities.forEach((crelicAbility) => {
