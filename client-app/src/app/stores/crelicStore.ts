@@ -9,7 +9,7 @@ export default class CrelicStore {
     crelicRegistry = new Map<string, Crelic>()
     loadingInitial = false
     loading = false
-//     crelicFilter = ""
+    //     crelicFilter = ""
 
     constructor() {
         makeAutoObservable(this)
@@ -19,6 +19,15 @@ export default class CrelicStore {
         let sortedcrelics = Array.from(this.crelicRegistry.values()).sort((a, b) =>
             a.name.localeCompare(b.name))
 
+        runInAction(() => { // sort the ranges within the traits
+            sortedcrelics.forEach((crelic) => {
+                crelic.crelicAbilities.sort((a, b) => a.name.localeCompare(b.name))
+                crelic.crelicAbilities.forEach((crelicAbility) => {
+                    crelicAbility.crelicSubAbilities.sort((a, b) => a.name.localeCompare(b.name))
+                })
+            })
+        })
+        
         return sortedcrelics//.filter((crelic) => crelic.name.toLowerCase().includes(this.crelicFilter.toLowerCase()))
     }
 
@@ -108,63 +117,63 @@ export default class CrelicStore {
         }
     }
 
-//     deleteEQ = async (id: string) => {
-//         this.loading = true;
-//         try {
-//             await agent.EquipmentQualities.delete(id)
-//             runInAction(() => {
-//                 this.eqRegistry.delete(id)
-//                 this.loading = false
-//             })
-//         } catch (error) {
-//             console.log(error)
-//             runInAction(() => {
-//                 this.loading = false
-//             })
-//         }
-//     }
+    //     deleteEQ = async (id: string) => {
+    //         this.loading = true;
+    //         try {
+    //             await agent.EquipmentQualities.delete(id)
+    //             runInAction(() => {
+    //                 this.eqRegistry.delete(id)
+    //                 this.loading = false
+    //             })
+    //         } catch (error) {
+    //             console.log(error)
+    //             runInAction(() => {
+    //                 this.loading = false
+    //             })
+    //         }
+    //     }
 
-//     updateEQ = async (eq: EquipmentQuality) => {
-//         this.loading = true
-//         try {
-//             await agent.EquipmentQualities.update(eq)
-//             runInAction(() => {
-//                 this.eqRegistry.set(eq.id, eq)
-//                 this.loading = false
-//                 store.modalStore.closeModal();
-//             })
-//         } catch (error) {
-//             console.log(error)
-//             runInAction(() => {
-//                 this.loading = false
-//             })            
-//         }
-//     }
+    //     updateEQ = async (eq: EquipmentQuality) => {
+    //         this.loading = true
+    //         try {
+    //             await agent.EquipmentQualities.update(eq)
+    //             runInAction(() => {
+    //                 this.eqRegistry.set(eq.id, eq)
+    //                 this.loading = false
+    //                 store.modalStore.closeModal();
+    //             })
+    //         } catch (error) {
+    //             console.log(error)
+    //             runInAction(() => {
+    //                 this.loading = false
+    //             })            
+    //         }
+    //     }
 
-//     findLearnForgetEQ = async (eq: EquipmentQuality) => {
-//         this.loading = true
-        
-//         if(eq.found) {
-//             if(eq.learned) {
-//                 eq.found = false
-//                 eq.learned = false
-//             } else eq.learned = true
-//         } else eq.found = true
+    //     findLearnForgetEQ = async (eq: EquipmentQuality) => {
+    //         this.loading = true
 
-//         try {
-//             await agent.EquipmentQualities.update(eq)
-//             runInAction(() => {
-//                 this.eqRegistry.set(eq.id, eq)
-//                 this.loading = false
-//                 store.modalStore.closeModal();
-//             })
-//         } catch (error) {
-//             console.log(error)
-//             runInAction(() => {
-//                 this.loading = false
-//             })            
-//         }
-//     }
+    //         if(eq.found) {
+    //             if(eq.learned) {
+    //                 eq.found = false
+    //                 eq.learned = false
+    //             } else eq.learned = true
+    //         } else eq.found = true
+
+    //         try {
+    //             await agent.EquipmentQualities.update(eq)
+    //             runInAction(() => {
+    //                 this.eqRegistry.set(eq.id, eq)
+    //                 this.loading = false
+    //                 store.modalStore.closeModal();
+    //             })
+    //         } catch (error) {
+    //             console.log(error)
+    //             runInAction(() => {
+    //                 this.loading = false
+    //             })            
+    //         }
+    //     }
 
     setLoadingInitial = (state: boolean) => {
         this.loadingInitial = state
@@ -185,7 +194,7 @@ export default class CrelicStore {
             const crelic = crelics[i];
             for (let j = 0; j < crelic.crelicAbilities.length; j++) {
                 const crelicAbility = crelic.crelicAbilities[j];
-                if(crelicAbility.id === crelicAbilityId)
+                if (crelicAbility.id === crelicAbilityId)
                     crelicAbility.crelicSubAbilities.push(crelicSubAbility)
             }
         }
@@ -199,14 +208,14 @@ export default class CrelicStore {
                 const crelicAbility = crelic.crelicAbilities[j];
                 for (let k = 0; k < crelicAbility.crelicSubAbilities.length; k++) {
                     const crelicSubAbility = crelicAbility.crelicSubAbilities[k];
-                    if(crelicSubAbility.id === crelicSubAbilityId)
+                    if (crelicSubAbility.id === crelicSubAbilityId)
                         crelicSubAbility.crelicSubAbilityLevels.push(crelicSubAbilityLevel)
                 }
             }
         }
     }
 
-//     setEQFilter = (query: string) => {
-//         this.eqFilter = query
-//     }
+    //     setEQFilter = (query: string) => {
+    //         this.eqFilter = query
+    //     }
 }
