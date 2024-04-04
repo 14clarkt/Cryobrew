@@ -12,7 +12,7 @@ interface Props {
 export default observer(function CrelicAbilityItem({ crelicAbility }: Props) {
     const { crelicStore, modalStore, userStore } = useStore()
     const { isAdmin } = userStore
-    
+
     return (
         <Grid inverted divided="vertically">
             <Grid.Row style={{
@@ -21,8 +21,28 @@ export default observer(function CrelicAbilityItem({ crelicAbility }: Props) {
                 borderBottomStyle: "solid",
                 borderBottomColor: "teal",
             }}>
-                <Grid.Column width="16">
+                <Grid.Column width="2" />
+                <Grid.Column width="12">
                     <h1 style={{ color: "cyan", textAlign: "center" }}>{crelicAbility.name}</h1>
+                </Grid.Column>
+                <Grid.Column width="1">
+                    <Button
+                        color='teal'
+                        content='Edit'
+                        compact inverted
+                    />
+                </Grid.Column>
+                <Grid.Column width="1">
+                    {isAdmin && <Button
+                        disabled={!userStore.isAdmin}
+                        onClick={() => modalStore.openModal("Create Crelic SubAbility", <CrelicSubAbilityForm crelicAbilityId={crelicAbility.id} />, "tiny")}
+                        color='green'
+                        inverted compact
+                        loading={crelicStore.loading}
+                        content="Add" />
+                    }
+                </Grid.Column>
+                <Grid.Column width="16">
                     <h3 style={{ textAlign: "center" }}><DiffSpan content={crelicAbility.description} /></h3>
                 </Grid.Column>
             </Grid.Row>
@@ -58,27 +78,13 @@ export default observer(function CrelicAbilityItem({ crelicAbility }: Props) {
                 <Grid.Column width="1">
                     <h2 style={{ color: "cyan", textAlign: "center" }}>Cost</h2>
                 </Grid.Column>
-                <Grid.Column width="1">
-                    <Button
-                        color='teal'
-                        content='Edit All'
-                        compact inverted
-                    />
-                </Grid.Column>
-                <Grid.Column width="1">
-                    {isAdmin && <Button
-                                disabled={!userStore.isAdmin}
-                                onClick={() => modalStore.openModal("Create Crelic SubAbility", <CrelicSubAbilityForm crelicAbilityId={crelicAbility.id}/>, "tiny")}
-                                color='green'
-                                inverted compact
-                                loading={crelicStore.loading}
-                                content="Add" />
-                            }
-                </Grid.Column>
+                <Grid.Column width="2" />
             </Grid.Row>
-            {crelicAbility.crelicSubAbilities.map((crelicSubAbility) => (
-                <CrelicSubAbilityItem crelicSubAbility={crelicSubAbility} />
-            ))}
-        </Grid>
+            {
+                crelicAbility.crelicSubAbilities.map((crelicSubAbility) => (
+                    <CrelicSubAbilityItem crelicSubAbility={crelicSubAbility} />
+                ))
+            }
+        </Grid >
     )
 })
