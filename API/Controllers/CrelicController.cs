@@ -55,5 +55,12 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new CreateCrelicSubAbility.Command{CrelicAbilityId = crelicAbilityId, CrelicSubAbility = crelicSubAbility}));
         }
+
+        // CrelicSubAbilityLevels
+        [HttpPost("subabilitylevel/{crelicSubAbilityId}")] //api/crelic/subabilitylevel
+        public async Task<IActionResult> CreateCrelicSubAbilityLevel([FromRoute] Guid crelicSubAbilityId, [FromBody] CrelicSubAbilityLevel crelicSubAbilityLevel)
+        {
+            return HandleResult(await Mediator.Send(new CreateCrelicSubAbilityLevel.Command{CrelicSubAbilityId = crelicSubAbilityId, CrelicSubAbilityLevel = crelicSubAbilityLevel}));
+        }
     }
 }

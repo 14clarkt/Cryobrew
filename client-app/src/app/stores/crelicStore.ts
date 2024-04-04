@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx"
 // import { EquipmentQuality } from "../models/equipmentQuality";
 import { v4 as uuid } from "uuid"
 import { store } from "./store";
-import { Crelic, CrelicAbility, CrelicSubAbility } from "../models/crelic";
+import { Crelic, CrelicAbility, CrelicSubAbility, CrelicSubAbilityLevel } from "../models/crelic";
 import agent from "../api/agent";
 
 export default class CrelicStore {
@@ -79,6 +79,24 @@ export default class CrelicStore {
             await agent.Crelics.createSubAbility(crelicAbilityId, crelicSubAbility)
             runInAction(() => {
                 this.setCrelicSubAbility(crelicAbilityId, crelicSubAbility)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
+    createCrelicSubAbilityLevel = async (crelicSubAbilityId: string, crelicSubAbilityLevel: CrelicSubAbilityLevel) => {
+        this.loading = true
+        crelicSubAbilityLevel.id = uuid()
+        try {
+            await agent.Crelics.createSubAbilityLevel(crelicSubAbilityId, crelicSubAbilityLevel)
+            runInAction(() => {
+                this.setCrelicSubAbilityLevel(crelicSubAbilityId, crelicSubAbilityLevel)
                 this.loading = false
                 store.modalStore.closeModal();
             })
@@ -169,6 +187,21 @@ export default class CrelicStore {
                 const crelicAbility = crelic.crelicAbilities[j];
                 if(crelicAbility.id === crelicAbilityId)
                     crelicAbility.crelicSubAbilities.push(crelicSubAbility)
+            }
+        }
+    }
+
+    private setCrelicSubAbilityLevel = (crelicSubAbilityId: string, crelicSubAbilityLevel: CrelicSubAbilityLevel) => {
+        let crelics = Array.from(this.crelicRegistry.values())
+        for (let i = 0; i < crelics.length; i++) {
+            const crelic = crelics[i];
+            for (let j = 0; j < crelic.crelicAbilities.length; j++) {
+                const crelicAbility = crelic.crelicAbilities[j];
+                for (let k = 0; k < crelicAbility.crelicSubAbilities.length; k++) {
+                    const crelicSubAbility = crelicAbility.crelicSubAbilities[k];
+                    if(crelicSubAbility.id === crelicSubAbilityId)
+                        crelicSubAbility.crelicSubAbilityLevels.push(crelicSubAbilityLevel)
+                }
             }
         }
     }

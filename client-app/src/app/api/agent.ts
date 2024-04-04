@@ -9,7 +9,7 @@ import { AlchemyIngredient, AlchemyIngredientPotency, AlchemyPotencyRange, Alche
 import { Supply } from '../models/supply';
 import { Rule } from '../models/rule';
 import { Enchantment } from '../models/enchantment';
-import { Crelic, CrelicAbility, CrelicSubAbility } from '../models/crelic';
+import { Crelic, CrelicAbility, CrelicSubAbility, CrelicSubAbilityLevel } from '../models/crelic';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -142,6 +142,8 @@ const Crelics = {
     // deleteAbility: (id: string) => axios.delete(`/crelic/ability/${id}`),
 
     createSubAbility: (crelicAbilityId: string, crelicSubAbility: CrelicSubAbility) => axios.post(`/crelic/subability/${crelicAbilityId}`, crelicSubAbility),
+
+    createSubAbilityLevel: (crelicSubAbilityId: string, crelicSubAbilityLevel: CrelicSubAbilityLevel) => axios.post(`/crelic/subabilitylevel/${crelicSubAbilityId}`, crelicSubAbilityLevel),
 }
 
 const Rules = {
