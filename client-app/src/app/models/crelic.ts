@@ -18,7 +18,7 @@ export interface CrelicSubAbility {
     id: string
     name: string
     level: number
-    CrelicSubAbilityLevels: Array<CrelicSubAbilityLevel>
+    crelicSubAbilityLevels: Array<CrelicSubAbilityLevel>
 }
 
 export interface CrelicSubAbilityLevel {
