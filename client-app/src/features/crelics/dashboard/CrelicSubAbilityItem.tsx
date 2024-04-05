@@ -5,11 +5,13 @@ import DiffSpan from "../../../app/common/display/DiffSpan"
 import { useStore } from "../../../app/stores/store"
 import CrelicSubAbilityLevelForm from "../form/CrelicSubAbilityLevelForm"
 import { useEffect, useState } from "react"
+import CrelicSubAbilityUpdateForm from "../form/CrelicSubAbilityUpdateForm"
 
 interface Props {
     crelicSubAbility: CrelicSubAbility
+    crelicAbilityId: string
 }
-export default observer(function CrelicAbilityItem({ crelicSubAbility }: Props) {
+export default observer(function CrelicAbilityItem({ crelicAbilityId, crelicSubAbility }: Props) {
     const { crelicStore, modalStore, userStore } = useStore()
     const { isAdmin } = userStore
 
@@ -40,7 +42,7 @@ export default observer(function CrelicAbilityItem({ crelicSubAbility }: Props) 
                 borderRightStyle: "solid",
                 borderRightColor: "grey",
                 borderRightWidth: "1px"
-            }}><h3><DiffSpan content={currentCSAL ? currentCSAL.description : "Unavailable"} /></h3></Grid.Column>
+            }}><h3><DiffSpan content={currentCSAL ? currentCSAL.description : "\\greyUnavailable"} /></h3></Grid.Column>
             <Grid.Column width="5" style={{
                 borderRightStyle: "solid",
                 borderRightColor: "grey",
@@ -49,13 +51,16 @@ export default observer(function CrelicAbilityItem({ crelicSubAbility }: Props) 
                 <h3 style={{ color: "grey" }}><DiffSpan content={nextCSAL ? nextCSAL.description : "N/A"} /></h3>
             </Grid.Column>
             <Grid.Column width="1" style={{ color: "blueviolet" }}>
-                <h3>{nextCSAL ? nextCSAL.cost+" CE" : "N/A"}</h3>
+                <h3>{nextCSAL ? nextCSAL.cost + " CE" : "N/A"}</h3>
             </Grid.Column>
             <Grid.Column width="1">
                 <Button
                     color='teal'
                     content='Edit'
                     compact inverted
+                    onClick={() => modalStore.openModal("Update Crelic Sub Ability",
+                        <CrelicSubAbilityUpdateForm crelicAbilityId={crelicAbilityId} crelicSubAbility={crelicSubAbility}/>,
+                        "large")}
                 />
             </Grid.Column>
             <Grid.Column width="1">

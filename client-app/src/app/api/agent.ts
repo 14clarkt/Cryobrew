@@ -138,12 +138,14 @@ const Crelics = {
 
     // listAbility: () => requests.get<CrelicAbility[]>('/crelic/ability'),
     createAbility: (crelicId: string, crelicAbility: CrelicAbility) => axios.post(`/crelic/ability/${crelicId}`, crelicAbility),
-    // updateAbility: (crelicAbility: CrelicAbility) => axios.put(`/crelic/ability/${crelicAbility.id}`, crelicAbility),
+    updateAbility: (crelicAbility: CrelicAbility) => axios.put(`/crelic/ability/${crelicAbility.id}`, crelicAbility),
     // deleteAbility: (id: string) => axios.delete(`/crelic/ability/${id}`),
 
     createSubAbility: (crelicAbilityId: string, crelicSubAbility: CrelicSubAbility) => axios.post(`/crelic/subability/${crelicAbilityId}`, crelicSubAbility),
+    updateSubAbility: (crelicSubAbility: CrelicSubAbility) => axios.put(`/crelic/subability/${crelicSubAbility.id}`, crelicSubAbility),
 
     createSubAbilityLevel: (crelicSubAbilityId: string, crelicSubAbilityLevel: CrelicSubAbilityLevel) => axios.post(`/crelic/subabilitylevel/${crelicSubAbilityId}`, crelicSubAbilityLevel),
+    updateSubAbilityLevel: (crelicSubAbilityLevel: CrelicSubAbilityLevel) => axios.put(`/crelic/subabilitylevel/${crelicSubAbilityLevel.id}`, crelicSubAbilityLevel),
 }
 
 const Rules = {

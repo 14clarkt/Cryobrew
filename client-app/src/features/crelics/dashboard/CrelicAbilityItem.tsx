@@ -5,11 +5,13 @@ import { CrelicAbility } from "../../../app/models/crelic"
 import CrelicSubAbilityItem from "./CrelicSubAbilityItem"
 import { useStore } from "../../../app/stores/store"
 import CrelicSubAbilityForm from "../form/CrelicSubAbilityForm"
+import CrelicAbilityUpdateForm from "../form/CrelicAbilityUpdateForm"
 
 interface Props {
+    crelicId: string
     crelicAbility: CrelicAbility
 }
-export default observer(function CrelicAbilityItem({ crelicAbility }: Props) {
+export default observer(function CrelicAbilityItem({ crelicId, crelicAbility }: Props) {
     const { crelicStore, modalStore, userStore } = useStore()
     const { isAdmin } = userStore
 
@@ -18,8 +20,8 @@ export default observer(function CrelicAbilityItem({ crelicAbility }: Props) {
             <Grid.Row style={{
                 borderTopStyle: "solid",
                 borderTopColor: "cyan",
-                borderBottomStyle: "solid",
-                borderBottomColor: "teal",
+                borderBottomStyle: "dashed",
+                borderBottomColor: "#444444",
             }}>
                 <Grid.Column width="2" />
                 <Grid.Column width="12">
@@ -30,12 +32,14 @@ export default observer(function CrelicAbilityItem({ crelicAbility }: Props) {
                         color='teal'
                         content='Edit'
                         compact inverted
+                        onClick={() => modalStore.openModal("Update Crelic Ability", <CrelicAbilityUpdateForm crelicId={crelicId} crelicAbility={crelicAbility}/>, "large")}
+                        loading={crelicStore.loading}
                     />
                 </Grid.Column>
                 <Grid.Column width="1">
                     {isAdmin && <Button
                         disabled={!userStore.isAdmin}
-                        onClick={() => modalStore.openModal("Create Crelic SubAbility", <CrelicSubAbilityForm crelicAbilityId={crelicAbility.id} />, "tiny")}
+                        onClick={() => modalStore.openModal("Create Crelic SubAbility", <CrelicSubAbilityForm crelicAbilityId={crelicAbility.id} />, "mini")}
                         color='green'
                         inverted compact
                         loading={crelicStore.loading}
@@ -82,7 +86,7 @@ export default observer(function CrelicAbilityItem({ crelicAbility }: Props) {
             </Grid.Row>
             {
                 crelicAbility.crelicSubAbilities.map((crelicSubAbility) => (
-                    <CrelicSubAbilityItem crelicSubAbility={crelicSubAbility} />
+                    <CrelicSubAbilityItem key={crelicSubAbility.id} crelicAbilityId={crelicAbility.id} crelicSubAbility={crelicSubAbility} />
                 ))
             }
         </Grid >

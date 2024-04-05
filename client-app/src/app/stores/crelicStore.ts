@@ -25,8 +25,8 @@ export default class CrelicStore {
                 crelic.crelicAbilities.forEach((crelicAbility) => {
                     crelicAbility.crelicSubAbilities.sort((a, b) => a.name.localeCompare(b.name))
                 })
-            })
-        })
+            })  //TODO: the color tags affect the sorting. Allow the color list to be used
+        })      //TODO: this doesnt sort when you edit
         
         return sortedcrelics//.filter((crelic) => crelic.name.toLowerCase().includes(this.crelicFilter.toLowerCase()))
     }
@@ -133,22 +133,73 @@ export default class CrelicStore {
     //         }
     //     }
 
-    //     updateEQ = async (eq: EquipmentQuality) => {
-    //         this.loading = true
-    //         try {
-    //             await agent.EquipmentQualities.update(eq)
-    //             runInAction(() => {
-    //                 this.eqRegistry.set(eq.id, eq)
-    //                 this.loading = false
-    //                 store.modalStore.closeModal();
-    //             })
-    //         } catch (error) {
-    //             console.log(error)
-    //             runInAction(() => {
-    //                 this.loading = false
-    //             })            
-    //         }
-    //     }
+        updateCrelic = async (crelic: Crelic) => {
+            this.loading = true
+            try {
+                await agent.Crelics.update(crelic)
+                runInAction(() => {
+                    this.crelicRegistry.set(crelic.id, crelic)
+                    this.loading = false
+                    store.modalStore.closeModal();
+                })
+            } catch (error) {
+                console.log(error)
+                runInAction(() => {
+                    this.loading = false
+                })            
+            }
+        }
+
+        updateCrelicAbility = async (crelicId: string, crelicAbility: CrelicAbility) => {
+            this.loading = true
+            try {
+                await agent.Crelics.updateAbility(crelicAbility)
+                runInAction(() => {
+                    this.setCrelicAbility(crelicId, crelicAbility)
+                    this.loading = false
+                    store.modalStore.closeModal();
+                })
+            } catch (error) {
+                console.log(error)
+                runInAction(() => {
+                    this.loading = false
+                })            
+            }
+        }
+
+        updateCrelicSubAbility = async (crelicAbilityId: string, crelicSubAbility: CrelicSubAbility) => {
+            this.loading = true
+            try {
+                await agent.Crelics.updateSubAbility(crelicSubAbility)
+                runInAction(() => {
+                    this.setCrelicSubAbility(crelicAbilityId, crelicSubAbility)
+                    this.loading = false
+                    store.modalStore.closeModal();
+                })
+            } catch (error) {
+                console.log(error)
+                runInAction(() => {
+                    this.loading = false
+                })            
+            }
+        }
+        
+        updateCrelicSubAbilityLevel = async (crelicSubAbilityId: string, crelicSubAbilityLevel: CrelicSubAbilityLevel) => {
+            this.loading = true
+            try {
+                await agent.Crelics.updateSubAbilityLevel(crelicSubAbilityLevel)
+                runInAction(() => {
+                    this.setCrelicSubAbilityLevel(crelicSubAbilityId, crelicSubAbilityLevel)
+                    this.loading = false
+                    store.modalStore.closeModal();
+                })
+            } catch (error) {
+                console.log(error)
+                runInAction(() => {
+                    this.loading = false
+                })            
+            }
+        }
 
     //     findLearnForgetEQ = async (eq: EquipmentQuality) => {
     //         this.loading = true
@@ -185,7 +236,8 @@ export default class CrelicStore {
 
     private setCrelicAbility = (crelicId: string, crelicAbility: CrelicAbility) => {
         let crelic = this.crelicRegistry.get(crelicId)
-        crelic?.crelicAbilities.push(crelicAbility)
+        crelic!.crelicAbilities = crelic!.crelicAbilities.filter((a) => a.id !== crelicAbility.id)
+        crelic!.crelicAbilities.push(crelicAbility)
     }
 
     private setCrelicSubAbility = (crelicAbilityId: string, crelicSubAbility: CrelicSubAbility) => {
@@ -194,8 +246,10 @@ export default class CrelicStore {
             const crelic = crelics[i];
             for (let j = 0; j < crelic.crelicAbilities.length; j++) {
                 const crelicAbility = crelic.crelicAbilities[j];
-                if (crelicAbility.id === crelicAbilityId)
+                if (crelicAbility.id === crelicAbilityId) {
+                    crelicAbility.crelicSubAbilities = crelicAbility.crelicSubAbilities.filter((a) => a.id !== crelicSubAbility.id)
                     crelicAbility.crelicSubAbilities.push(crelicSubAbility)
+                }
             }
         }
     }
@@ -208,8 +262,11 @@ export default class CrelicStore {
                 const crelicAbility = crelic.crelicAbilities[j];
                 for (let k = 0; k < crelicAbility.crelicSubAbilities.length; k++) {
                     const crelicSubAbility = crelicAbility.crelicSubAbilities[k];
-                    if (crelicSubAbility.id === crelicSubAbilityId)
+                    if (crelicSubAbility.id === crelicSubAbilityId) {
+                        crelicSubAbility.crelicSubAbilityLevels =
+                            crelicSubAbility.crelicSubAbilityLevels.filter((a) => a.id !== crelicSubAbilityLevel.id)
                         crelicSubAbility.crelicSubAbilityLevels.push(crelicSubAbilityLevel)
+                    }
                 }
             }
         }
