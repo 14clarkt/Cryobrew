@@ -6,15 +6,20 @@ interface Props {
 
 export default function DiffSpan(props: Props) {
     const colorMap = new Map<string, string>([
-        ["yellow", "\\y"],
-        ["red", "\\r"],
-        ["firebrick", "\\fb"],
-        ["lightGreen", "\\g"],
+        ["black", "\\blk"],
+        ["blue", "\\b"],
         ["cyan", "\\c"],
-        ["orange", "\\o"],
-        ["silver", "\\s"],
+        ["green", "\\dg"], //darkgreen
+        ["firebrick", "\\fb"],
         ["grey", "\\grey"],
-        ["blueviolet", "\\p"],
+        ["lightGreen", "\\g"],
+        ["lavender", "\\l"],
+        ["orange", "\\o"],
+        ["blueviolet", "\\p"], //purple
+        ["red", "\\r"],
+        ["burlywood", "\\t"], //tan
+        ["white", "\\w"],
+        ["yellow", "\\y"],
     ])
 
     const colorizeSpan = (text: string): JSX.Element[] => {
