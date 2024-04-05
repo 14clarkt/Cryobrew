@@ -11,7 +11,7 @@ export default observer(function CrelicHeader() {
                 <Grid.Column width='2'>
                     <Button
                         disabled={!userStore.isAdmin}
-                        onClick={() => modalStore.openModal("Create Crelic", <CrelicForm />, "tiny")}
+                        onClick={() => modalStore.openModal("Create Crelic", <CrelicForm />, "mini")}
                         size='large'
                         color='green'
                         inverted fluid
