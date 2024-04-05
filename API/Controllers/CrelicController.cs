@@ -28,24 +28,25 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new UpdateCrelic.Command{Crelic = crelic}));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCrelic(Guid id)
-        {
-            return HandleResult(await Mediator.Send(new DeleteCrelic.Command{Id = id}));
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<IActionResult> DeleteCrelic(Guid id)
+        // {
+        //     return HandleResult(await Mediator.Send(new DeleteCrelic.Command{Id = id}));
+        // }
 
         // CrelicAbilities
-
-        [HttpGet("ability")] //api/crelic/ability
-        public async Task<IActionResult> GetCrelicAbilites()
-        {
-            return HandleResult(await Mediator.Send(new ListCrelicAbility.Query()));
-        }
 
         [HttpPost("ability/{crelicId}")] 
         public async Task<IActionResult> CreateCrelicAbility([FromRoute] Guid crelicId, [FromBody] CrelicAbility crelicAbility)
         {
             return HandleResult(await Mediator.Send(new CreateCrelicAbility.Command{CrelicId = crelicId, CrelicAbility = crelicAbility}));
+        }
+
+        [HttpPut("ability/{id}")]
+        public async Task<IActionResult> UpdateCrelicAbility(Guid id, CrelicAbility crelicAbility)
+        {
+            crelicAbility.Id = id;
+            return HandleResult(await Mediator.Send(new UpdateCrelicAbility.Command{CrelicAbility = crelicAbility}));
         }
 
         // CrelicSubAbilities
@@ -56,11 +57,26 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new CreateCrelicSubAbility.Command{CrelicAbilityId = crelicAbilityId, CrelicSubAbility = crelicSubAbility}));
         }
 
+        [HttpPut("subability/{id}")]
+        public async Task<IActionResult> UpdateCrelicSubAbility(Guid id, CrelicSubAbility crelicSubAbility)
+        {
+            crelicSubAbility.Id = id;
+            return HandleResult(await Mediator.Send(new UpdateCrelicSubAbility.Command{CrelicSubAbility = crelicSubAbility}));
+        }
+
         // CrelicSubAbilityLevels
+
         [HttpPost("subabilitylevel/{crelicSubAbilityId}")] //api/crelic/subabilitylevel
         public async Task<IActionResult> CreateCrelicSubAbilityLevel([FromRoute] Guid crelicSubAbilityId, [FromBody] CrelicSubAbilityLevel crelicSubAbilityLevel)
         {
             return HandleResult(await Mediator.Send(new CreateCrelicSubAbilityLevel.Command{CrelicSubAbilityId = crelicSubAbilityId, CrelicSubAbilityLevel = crelicSubAbilityLevel}));
+        }
+
+        [HttpPut("subabilitylevel/{id}")]
+        public async Task<IActionResult> UpdateCrelicSubAbilityLevel(Guid id, CrelicSubAbilityLevel crelicSubAbilityLevel)
+        {
+            crelicSubAbilityLevel.Id = id;
+            return HandleResult(await Mediator.Send(new UpdateCrelicSubAbilityLevel.Command{CrelicSubAbilityLevel = crelicSubAbilityLevel}));
         }
     }
 }
