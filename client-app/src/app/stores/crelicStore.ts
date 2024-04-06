@@ -31,6 +31,25 @@ export default class CrelicStore {
         return sortedcrelics//.filter((crelic) => crelic.name.toLowerCase().includes(this.crelicFilter.toLowerCase()))
     }
 
+    get totalCERegistry() {
+        let CERegistry = new Map<string, number>()
+
+        this.crelicRegistry.forEach((crelic, crelicId) => {
+            let totalCE = 0
+            crelic.crelicAbilities.forEach((crelicA) => {
+                crelicA.crelicSubAbilities.forEach((crelicSA) => {
+                    crelicSA.crelicSubAbilityLevels.forEach((crelicSAL) => {
+                        if (crelicSAL.level <= crelicSA.level)
+                            totalCE += crelicSAL.cost
+                    })
+                })
+            })
+            CERegistry.set(crelicId, totalCE)
+        })
+
+        return CERegistry
+    }
+
     loadCrelics = async () => {
         this.setLoadingInitial(true)
         try {

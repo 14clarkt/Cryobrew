@@ -4,12 +4,19 @@ import { useStore } from "../../../app/stores/store"
 import CrelicAbilityItem from "./CrelicAbilityItem"
 import CrelicAbilityForm from "../form/CrelicAbilityForm"
 import CrelicUpdateForm from "../form/CrelicUpdateForm"
+import { useEffect, useState } from "react"
 
 export default observer(function CrelicList() {
     const { crelicStore, modalStore, userStore } = useStore()
-    const { crelicList } = crelicStore
+    const { crelicList, totalCERegistry } = crelicStore
     const { isAdmin } = userStore
     const username = userStore.user?.username
+
+    const [totalCE, setTotalCE] = useState(0)
+
+    useEffect(() => {
+        totalCERegistry
+    }, [crelicList, totalCERegistry])
 
     return (<>{
         crelicList.map((crelic) => (
@@ -28,7 +35,7 @@ export default observer(function CrelicList() {
                             fontWeight: "bold",
                             color: "blueviolet"
                         }}>
-                            Total CE: 0CE
+                            Total CE: {totalCERegistry.get(crelic.id)}CE
                         </Grid.Column>
                         <Grid.Column width="2">
                             {isAdmin && <Button
