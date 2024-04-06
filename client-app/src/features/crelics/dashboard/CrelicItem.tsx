@@ -18,9 +18,8 @@ export default observer(function CrelicItem({ crelic }: Props) {
     const [charges, setCharges] = useState(0)
 
     useEffect(() => {
-
-    }, [userStore.currentAP])
-    //TODO: This needs to be made into two classes. That will make both the charges and totalCE cleaner.
+        setCharges(crelic.charges)
+    }, [crelic])
     //TODO: remove equipped from the DB from Crelic. No need for it since there is not limit unlike APCs
     //TODO: Add Hide/Reveal to Crelics
 
@@ -40,7 +39,7 @@ export default observer(function CrelicItem({ crelic }: Props) {
                         fontWeight: "bold",
                         color: "blueviolet"
                     }}>
-                        Total CE: {totalCERegistry.get(crelic.id)}CE
+                        Total CE: {totalCERegistry.get(crelic.id)}
                     </Grid.Column>
                     <Grid.Column width="2">
                         {isAdmin && <Button
@@ -72,24 +71,12 @@ export default observer(function CrelicItem({ crelic }: Props) {
                     </Grid.Column>
                     <Grid.Column width="3">
                         <span style={{ fontSize: "1.7em" }}>Charges: </span>
-                        <Button inverted icon='left chevron' onClick={() => setCharges(charges! - 1)} />
-                        <span style={{ fontSize: "1.7em" }}> {crelic.charges} / {crelic.maxCharges} </span>
-                        <Button inverted icon='right chevron' onClick={() => { }} />
-                        <Button inverted icon='save' disabled={true} onClick={() => { }} />
+                        <Button inverted icon='left chevron' onClick={() => setCharges(charges - 1)} />
+                        <span style={{ fontSize: "1.7em" }}> {charges} / {crelic.maxCharges} </span>
+                        <Button inverted icon='right chevron' onClick={() => setCharges(charges + 1)} />
+                        <Button inverted icon='save' disabled={charges === crelic.charges}
+                            onClick={() => {crelicStore.updateCrelic({...crelic, charges: charges})}} />
                     </Grid.Column>
-
-                    {/* <Button inverted icon='left chevron' onClick={() => setCurrentAP(currentAP! - 1)} />
-                        <span style={{ color: "white", fontSize: "1.5em" }}> AP: {currentAP} / {userStore.user?.maxAP} </span>
-                        <Button inverted icon='right chevron' onClick={() => setCurrentAP(currentAP! + 1)} />
-                        <Button inverted icon='save' disabled={currentAP === userStore.currentAP}
-                            onClick={() => userStore.updateUserValues({
-                                currentAP,
-                                maxAP: userStore.user?.maxAP!,
-                                shortAP: userStore.user?.shortAP!,
-                                apcSlots: userStore.user?.apcSlots!
-                            })} />
-                        <span style={{ color: "white", fontSize: "1.5em" }}> Slots: {equippedAmount} / {userStore.user?.apcSlots} </span> */}
-
                 </Grid.Row>
             </Grid>
             {crelic.crelicAbilities.map((crelicAbility) => (
