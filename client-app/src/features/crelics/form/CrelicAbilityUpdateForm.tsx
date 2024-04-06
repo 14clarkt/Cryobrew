@@ -6,6 +6,7 @@ import MyTextInput from "../../../app/common/form/MyTextInput";
 import * as Yup from 'yup';
 import ValidationErrors from "../../errors/ValidationErrors";
 import { CrelicAbility } from "../../../app/models/crelic";
+import MyTextArea from "../../../app/common/form/MyTextArea";
 
 interface Props {
     crelicId: string
@@ -45,7 +46,7 @@ export default observer(function CrelicAbilityUpdateForm(props: Props) {
                                 <MyTextInput placeholder='Name' name='name' label='Name' />
                             </Grid.Column>
                             <Grid.Column width="12">
-                                <MyTextInput placeholder='Description' name='description' label='Description' />
+                                <MyTextArea placeholder='Description' name='description' label='Description' rows={1} />
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>
