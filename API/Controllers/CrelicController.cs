@@ -28,11 +28,11 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new UpdateCrelic.Command{Crelic = crelic}));
         }
 
-        // [HttpDelete("{id}")]
-        // public async Task<IActionResult> DeleteCrelic(Guid id)
-        // {
-        //     return HandleResult(await Mediator.Send(new DeleteCrelic.Command{Id = id}));
-        // }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCrelic(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new DeleteCrelic.Command{Id = id}));
+        }
 
         // CrelicAbilities
 
@@ -47,6 +47,12 @@ namespace API.Controllers
         {
             crelicAbility.Id = id;
             return HandleResult(await Mediator.Send(new UpdateCrelicAbility.Command{CrelicAbility = crelicAbility}));
+        }
+
+        [HttpDelete("ability/{id}")]
+        public async Task<IActionResult> DeleteCrelicAbility(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new DeleteCrelicAbility.Command{Id = id}));
         }
 
         // CrelicSubAbilities
@@ -64,6 +70,12 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new UpdateCrelicSubAbility.Command{CrelicSubAbility = crelicSubAbility}));
         }
 
+        [HttpDelete("subability/{id}")]
+        public async Task<IActionResult> DeleteCrelicSubAbility(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new DeleteCrelicSubAbility.Command{Id = id}));
+        }
+
         // CrelicSubAbilityLevels
 
         [HttpPost("subabilitylevel/{crelicSubAbilityId}")] //api/crelic/subabilitylevel
@@ -77,6 +89,12 @@ namespace API.Controllers
         {
             crelicSubAbilityLevel.Id = id;
             return HandleResult(await Mediator.Send(new UpdateCrelicSubAbilityLevel.Command{CrelicSubAbilityLevel = crelicSubAbilityLevel}));
+        }
+
+        [HttpDelete("subabilitylevel/{id}")]
+        public async Task<IActionResult> DeleteCrelicSubAbilityLevel(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new DeleteCrelicSubAbilityLevel.Command{Id = id}));
         }
     }
 }

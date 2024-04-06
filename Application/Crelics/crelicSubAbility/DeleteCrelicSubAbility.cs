@@ -6,7 +6,7 @@ using Application.Core;
 
 namespace Application.Crelics
 {
-    public class DeleteCrelic
+    public class DeleteCrelicSubAbility
     {
         public class Command : IRequest<Result<Unit>>
         {
@@ -22,33 +22,23 @@ namespace Application.Crelics
             }
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
-            {
-                var crelic = await _context.Crelics
-                    .Include(a => a.CrelicAbilities)
-                        .ThenInclude(b => b.CrelicSubAbilities)
-                        .ThenInclude(d => d.CrelicSubAbilityLevels)
+            {                
+                var crelicSubAbility = await _context.CrelicSubAbilities
+                    .Include(a => a.CrelicSubAbilityLevels)
                     .Where(a => a.Id == request.Id)
                     .SingleOrDefaultAsync();
 
-                if (crelic == null) return null;
+                if (crelicSubAbility == null) return null;
 
-                foreach (var ca in crelic.CrelicAbilities)
+                foreach (var csal in crelicSubAbility.CrelicSubAbilityLevels)
                 {
-                    foreach (var csa in ca.CrelicSubAbilities)
-                    {
-                        foreach (var csal in csa.CrelicSubAbilityLevels)
-                        {
-                            _context.Remove(csal);
-                        }
-                        _context.Remove(csa);
-                    }
-                    _context.Remove(ca);
+                    _context.Remove(csal);
                 }
-                _context.Remove(crelic);
+                _context.Remove(crelicSubAbility);
 
                 var result = await _context.SaveChangesAsync() > 0;
 
-                if (!result) return Result<Unit>.Failure("Failed to delete the crelic");
+                if(!result) return Result<Unit>.Failure("Failed to delete the crelicSubAbility");
 
                 return Result<Unit>.Success(Unit.Value);
             }

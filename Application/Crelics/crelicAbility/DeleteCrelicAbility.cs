@@ -6,7 +6,7 @@ using Application.Core;
 
 namespace Application.Crelics
 {
-    public class DeleteCrelic
+    public class DeleteCrelicAbility
     {
         public class Command : IRequest<Result<Unit>>
         {
@@ -23,32 +23,27 @@ namespace Application.Crelics
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var crelic = await _context.Crelics
-                    .Include(a => a.CrelicAbilities)
-                        .ThenInclude(b => b.CrelicSubAbilities)
-                        .ThenInclude(d => d.CrelicSubAbilityLevels)
+                var crelicAbility = await _context.CrelicAbilities
+                    .Include(a => a.CrelicSubAbilities)
+                        .ThenInclude(b => b.CrelicSubAbilityLevels)
                     .Where(a => a.Id == request.Id)
                     .SingleOrDefaultAsync();
 
-                if (crelic == null) return null;
+                if (crelicAbility == null) return null;
 
-                foreach (var ca in crelic.CrelicAbilities)
+                foreach (var csa in crelicAbility.CrelicSubAbilities)
                 {
-                    foreach (var csa in ca.CrelicSubAbilities)
+                    foreach (var csal in csa.CrelicSubAbilityLevels)
                     {
-                        foreach (var csal in csa.CrelicSubAbilityLevels)
-                        {
-                            _context.Remove(csal);
-                        }
-                        _context.Remove(csa);
+                        _context.Remove(csal);
                     }
-                    _context.Remove(ca);
+                    _context.Remove(csa);
                 }
-                _context.Remove(crelic);
+                _context.Remove(crelicAbility);
 
                 var result = await _context.SaveChangesAsync() > 0;
 
-                if (!result) return Result<Unit>.Failure("Failed to delete the crelic");
+                if (!result) return Result<Unit>.Failure("Failed to delete the crelicAbility");
 
                 return Result<Unit>.Success(Unit.Value);
             }
