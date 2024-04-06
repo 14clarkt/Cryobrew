@@ -55,14 +55,14 @@ export default observer(function CrelicAbilityItem({ crelicId, crelicAbility }: 
                 }}>
                     <h2 style={{ color: "cyan", textAlign: "center" }}>Name</h2>
                 </Grid.Column>
-                <Grid.Column width="5" style={{
+                <Grid.Column width={isAdmin ? "5" : "6"} style={{
                     borderRightStyle: "solid",
                     borderRightColor: "grey",
                     borderRightWidth: "1px"
                 }}>
                     <h2 style={{ color: "cyan", textAlign: "center" }}>Description</h2>
                 </Grid.Column>
-                <Grid.Column width="5" style={{
+                <Grid.Column width={isAdmin ? "5" : "6"} style={{
                     borderRightStyle: "solid",
                     borderRightColor: "grey",
                     borderRightWidth: "1px"

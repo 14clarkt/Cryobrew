@@ -38,12 +38,12 @@ export default observer(function CrelicAbilityItem({ crelicAbilityId, crelicSubA
                 borderRightColor: "grey",
                 borderRightWidth: "1px"
             }}><h2><DiffSpan content={crelicSubAbility.name} /></h2></Grid.Column>
-            <Grid.Column width="5" style={{
+            <Grid.Column width={isAdmin ? "5" : "6"} style={{
                 borderRightStyle: "solid",
                 borderRightColor: "grey",
                 borderRightWidth: "1px"
             }}><h3><DiffSpan content={currentCSAL ? currentCSAL.description : "\\greyUnavailable"} /></h3></Grid.Column>
-            <Grid.Column width="5" style={{
+            <Grid.Column width={isAdmin ? "5" : "6"} style={{
                 borderRightStyle: "solid",
                 borderRightColor: "grey",
                 borderRightWidth: "1px"
@@ -53,7 +53,7 @@ export default observer(function CrelicAbilityItem({ crelicAbilityId, crelicSubA
             <Grid.Column width="1" style={{ color: "blueviolet" }}>
                 <h3>{nextCSAL ? nextCSAL.cost + " CE" : "N/A"}</h3>
             </Grid.Column>
-            <Grid.Column width="1">
+            {isAdmin && <Grid.Column width="1">
                 <Button
                     color='teal'
                     content='Edit'
@@ -62,17 +62,17 @@ export default observer(function CrelicAbilityItem({ crelicAbilityId, crelicSubA
                         <CrelicSubAbilityUpdateForm crelicAbilityId={crelicAbilityId} crelicSubAbility={crelicSubAbility}/>,
                         "large")}
                 />
-            </Grid.Column>
-            <Grid.Column width="1">
-                {isAdmin && <Button
+            </Grid.Column>}
+            {isAdmin && <Grid.Column width="1">
+                <Button
                     disabled={!userStore.isAdmin}
                     onClick={() => modalStore.openModal("Create Crelic SubAbilityLevel", <CrelicSubAbilityLevelForm crelicSubAbilityId={crelicSubAbility.id} />, "large")}
                     color='green'
                     inverted compact
                     loading={crelicStore.loading}
                     content="Add"
-                />}
-            </Grid.Column>
+                />
+            </Grid.Column>}
         </Grid.Row>
     )
 })

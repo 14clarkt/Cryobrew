@@ -4,15 +4,12 @@ import { useStore } from "../../../app/stores/store"
 import CrelicAbilityItem from "./CrelicAbilityItem"
 import CrelicAbilityForm from "../form/CrelicAbilityForm"
 import CrelicUpdateForm from "../form/CrelicUpdateForm"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 export default observer(function CrelicList() {
     const { crelicStore, modalStore, userStore } = useStore()
     const { crelicList, totalCERegistry } = crelicStore
     const { isAdmin } = userStore
-    const username = userStore.user?.username
-
-    const [totalCE, setTotalCE] = useState(0)
 
     useEffect(() => {
         totalCERegistry
@@ -42,7 +39,7 @@ export default observer(function CrelicList() {
                                 disabled={!userStore.isAdmin}
                                 onClick={() => modalStore.openModal("Create Crelic Ability", <CrelicAbilityForm crelicId={crelic.id}/>, "mini")}
                                 color='green'
-                                inverted compact
+                                inverted
                                 loading={crelicStore.loading}
                                 content="Add Ability" />
                             }
@@ -56,19 +53,7 @@ export default observer(function CrelicList() {
                         }}>
                             {crelic.name}
                         </Grid.Column>
-                        <Grid.Column width="3">
-                            <span style={{ fontSize: "1.7em" }}>Charges: </span>
-                            <Button inverted icon='left chevron' onClick={() => { }} />
-                            <span style={{ fontSize: "1.7em" }}> {crelic.charges} / {crelic.maxCharges} </span>
-                            <Button inverted icon='right chevron' onClick={() => { }} />
-                            <Button inverted icon='save' disabled={true} onClick={() => { }} />
-                        </Grid.Column>
                         <Grid.Column width="1">
-                            {!isAdmin && <Button
-                                color='teal'
-                                content='Equip'
-                                fluid inverted
-                            />}
                             {isAdmin && <Button
                                 color='teal'
                                 content='Edit'
@@ -76,6 +61,13 @@ export default observer(function CrelicList() {
                                 loading={crelicStore.loading}
                                 onClick={() => modalStore.openModal("Update Crelic", <CrelicUpdateForm crelic={crelic}/>, "tiny")}
                             />}
+                        </Grid.Column>
+                        <Grid.Column width="3">
+                            <span style={{ fontSize: "1.7em" }}>Charges: </span>
+                            <Button inverted icon='left chevron' onClick={() => { }} />
+                            <span style={{ fontSize: "1.7em" }}> {crelic.charges} / {crelic.maxCharges} </span>
+                            <Button inverted icon='right chevron' onClick={() => { }} />
+                            <Button inverted icon='save' disabled={true} onClick={() => { }} />
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
