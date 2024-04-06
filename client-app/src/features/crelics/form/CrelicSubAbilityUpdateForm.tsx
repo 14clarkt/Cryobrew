@@ -46,7 +46,17 @@ export default observer(function CrelicSubAbilityUpdateForm({ crelicAbilityId, c
                             <ValidationErrors errors={errors.error} />}
                     />
                     <Grid>
-                        <Grid.Column width="8">
+                        <Grid.Column width="5">
+                            <Button
+                                color='teal'
+                                content='Edit Levels'
+                                fluid inverted
+                                onClick={() => modalStore.openModal("Update Crelic Sub Ability Levels",
+                                    <CrelicSALsUpdateForm crelicSAId={oldCrelicSubAbility.id} crelicSALs={oldCrelicSubAbility.crelicSubAbilityLevels} />, "large")}
+                                loading={crelicStore.loading}
+                            />
+                        </Grid.Column>
+                        <Grid.Column width="6">
                             <Button
                                 disabled={!isValid || !dirty || isSubmitting}
                                 content="Update"
@@ -55,16 +65,15 @@ export default observer(function CrelicSubAbilityUpdateForm({ crelicAbilityId, c
                                 fluid inverted
                                 loading={crelicStore.loading}
                             />
-
                         </Grid.Column>
-                        <Grid.Column width="8">
+                        <Grid.Column width="5">
                             <Button
-                                color='teal'
-                                content='Edit Levels'
+                                color='red'
+                                content='Delete'
+                                type="button"
                                 fluid inverted
-                                onClick={() => modalStore.openModal("Update Crelic Ability Levels",
-                                    <CrelicSALsUpdateForm crelicSAId={oldCrelicSubAbility.id} crelicSALs={oldCrelicSubAbility.crelicSubAbilityLevels} />, "large")}
                                 loading={crelicStore.loading}
+                                onClick={() => crelicStore.deleteCrelicSubAbility(oldCrelicSubAbility.id)}
                             />
                         </Grid.Column>
                     </Grid>

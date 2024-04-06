@@ -50,7 +50,7 @@ export default observer(function CrelicSubAbilityLevelUpdateForm({ crelicSubAbil
                             <Grid.Column width="2">
                                 <MyTextInput placeholder='Cost' name='cost' label='Cost' />
                             </Grid.Column>
-                            <Grid.Column width="10">
+                            <Grid.Column width="8">
                                 <MyTextArea placeholder='Description' name='description' label='Description' rows={1} />
                             </Grid.Column>
                             <Grid.Column width="2">
@@ -61,6 +61,16 @@ export default observer(function CrelicSubAbilityLevelUpdateForm({ crelicSubAbil
                                     color="green"
                                     fluid inverted
                                     loading={crelicStore.loading}
+                                />
+                            </Grid.Column>
+                            <Grid.Column width="2">
+                                <Button
+                                    color='red'
+                                    content='Delete'
+                                    type="button"
+                                    fluid inverted
+                                    loading={crelicStore.loading}
+                                    onClick={() => crelicStore.deleteCrelicSubAbilityLevel(oldCrelicSubAbilityLevel.id)}
                                 />
                             </Grid.Column>
                             <ErrorMessage

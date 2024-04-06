@@ -67,7 +67,7 @@ export default observer(function CrelicList() {
                                 content='Edit'
                                 fluid inverted
                                 loading={crelicStore.loading}
-                                onClick={() => modalStore.openModal("Update Crelic", <CrelicUpdateForm crelic={crelic}/>, "mini")}
+                                onClick={() => modalStore.openModal("Update Crelic", <CrelicUpdateForm crelic={crelic}/>, "tiny")}
                             />}
                         </Grid.Column>
                     </Grid.Row>

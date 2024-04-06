@@ -8,8 +8,7 @@ interface Props {
 }
 
 export default observer(function CrelicSALsUpdateForm({ crelicSAId, crelicSALs: oldCrelicSALs }: Props) {
-    crelicSAId
     return (<>{oldCrelicSALs.map((crelicSAL) => (
-        <CrelicSubAbilityLevelUpdateForm crelicSubAbilityId={crelicSAId} crelicSubAbilityLevel={crelicSAL}/>
+        <CrelicSubAbilityLevelUpdateForm key={crelicSAL.id} crelicSubAbilityId={crelicSAId} crelicSubAbilityLevel={crelicSAL}/>
     ))}</>)
 })

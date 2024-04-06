@@ -1,5 +1,5 @@
 import { ErrorMessage, Form, Formik } from "formik";
-import { Button } from "semantic-ui-react";
+import { Button, Grid } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
 import MyTextInput from "../../../app/common/form/MyTextInput";
@@ -21,9 +21,11 @@ export default observer(function CrelicUpdateForm(props: Props) {
                 name: oldCrelic.name,
                 charges: oldCrelic.charges,
                 maxCharges: oldCrelic.maxCharges,
-                error: null }}
+                error: null
+            }}
             onSubmit={(values, { setErrors }) => {
-                let newCrelic = {...oldCrelic,
+                let newCrelic = {
+                    ...oldCrelic,
                     name: values.name,
                     charges: values.charges,
                     maxCharges: values.maxCharges
@@ -39,21 +41,45 @@ export default observer(function CrelicUpdateForm(props: Props) {
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <MyTextInput placeholder='Name' name='name' label='Name' />
-                    <MyTextInput placeholder='Charges' name='charges' label='Charges'/>
-                    <MyTextInput placeholder='MaxCharges' name='maxCharges' label='Max Charges'/>
-                    <ErrorMessage
-                        name='error' render={() =>
-                            <ValidationErrors errors={errors.error} />}
-                    />
-                    <Button
-                        disabled={!isValid || !dirty || isSubmitting}
-                        content="Update"
-                        type="submit"
-                        color = "green"
-                        fluid inverted
-                        loading={crelicStore.loading}
-                    />
+                    <Grid>
+                        <Grid.Row>
+                            <Grid.Column width="10">
+                                <MyTextInput placeholder='Name' name='name' label='Name' />
+                            </Grid.Column>
+                            <Grid.Column width="3">
+                                <MyTextInput placeholder='Charges' name='charges' label='Charges' />
+                            </Grid.Column>
+                            <Grid.Column width="3">
+                                <MyTextInput placeholder='MaxCharges' name='maxCharges' label='MaxCharges' />
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row>
+                            <Grid.Column width="8">
+                                <Button
+                                    disabled={!isValid || !dirty || isSubmitting}
+                                    content="Update"
+                                    type="submit"
+                                    color="green"
+                                    fluid inverted
+                                    loading={crelicStore.loading}
+                                />
+                            </Grid.Column>
+                            <Grid.Column width="8">
+                                <Button
+                                    color='red'
+                                    content='Delete'
+                                    type="button"
+                                    fluid inverted
+                                    loading={crelicStore.loading}
+                                    onClick={() => crelicStore.deleteCrelic(oldCrelic.id)}
+                                />
+                            </Grid.Column>
+                        </Grid.Row>
+                        <ErrorMessage
+                            name='error' render={() =>
+                                <ValidationErrors errors={errors.error} />}
+                        />
+                    </Grid>
                 </Form>
             )}
         </Formik>
