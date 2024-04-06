@@ -4,16 +4,11 @@ import { useStore } from "../../../app/stores/store"
 import CrelicAbilityItem from "./CrelicAbilityItem"
 import CrelicAbilityForm from "../form/CrelicAbilityForm"
 import CrelicUpdateForm from "../form/CrelicUpdateForm"
-import { useEffect } from "react"
 
 export default observer(function CrelicList() {
     const { crelicStore, modalStore, userStore } = useStore()
     const { crelicList, totalCERegistry } = crelicStore
     const { isAdmin } = userStore
-
-    useEffect(() => {
-        totalCERegistry
-    }, [crelicList, totalCERegistry])
 
     return (<>{
         crelicList.map((crelic) => (
