@@ -11,7 +11,7 @@ import SuppliesDashboard from "../../features/supplies/dashboard/SuppliesDashboa
 import RequireAuth from "./RequireAuth";
 import CrystalsDashboard from "../../features/crystals/dashboard/CrystalsDashboard";
 import AidenDashboard from "../../features/aiden/dashboard/AidenDashboard";
-import CrelicsDashboard from "../../features/crelics/dashboard/CrelicsDashboard";
+import CrelicDashboard from "../../features/crelics/dashboard/CrelicDashboard";
 import EnchantingDashboard from "../../features/enchanting/dashboard/EnchantingDashboard";
 import Sokoban from "../../features/puzzles/sokoban/Sokoban";
 
@@ -28,7 +28,7 @@ export const routes: RouteObject[] = [
                 {path: 'supplies', element: <SuppliesDashboard />},
                 {path: 'crystals', element: <CrystalsDashboard />},
                 {path: 'aiden', element: <AidenDashboard />},
-                {path: 'crelics', element: <CrelicsDashboard />},
+                {path: 'crelics', element: <CrelicDashboard />},
                 {path: 'puzzles', element: <Sokoban />},
                 
                 {path: 'profile/:username', element: <UserDetails />},

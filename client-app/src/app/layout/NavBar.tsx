@@ -14,18 +14,18 @@ export default observer(function NavBar() {
                 
                 <Menu.Item style={{ paddingLeft:"250px" }}/>
                 
-                <Menu.Item as={NavLink} to='/' header>
+                <Menu.Item as={NavLink} to='/' header style={{color: "cyan"}}>
                     <img src="/assets/tcp.png" alt="logo" style={{ marginRight: '10px' }} />
                     Cryobrew
                 </Menu.Item>
-                <Menu.Item as={NavLink} to='/apc' name="APC" />
-                <Menu.Item as={NavLink} to='/alchemy' name="Alchemy" />
-                <Menu.Item as={NavLink} to='/equipmentQuality' name="Equipment Quality" />
-                <Menu.Item as={NavLink} to='/enchanting' name="Enchanting" />
-                <Menu.Item as={NavLink} to='/supplies' name="Supplies" />
-                <Menu.Item as={NavLink} to='/crystals' name="Crystals" />
-                <Menu.Item as={NavLink} to='/aiden' name="Aiden Upgrades" />
-                <Menu.Item as={NavLink} to='/crelics' name="Crelics" />
+                <Menu.Item as={NavLink} to='/apc' style={{color: "cyan"}}>APC</Menu.Item>
+                <Menu.Item as={NavLink} to='/alchemy' style={{color: "cyan"}}>Alchemy</Menu.Item>
+                <Menu.Item as={NavLink} to='/equipmentQuality' style={{color: "cyan"}}>Equipment Quality</Menu.Item>
+                <Menu.Item as={NavLink} to='/enchanting' style={{color: "cyan"}}>Enchanting</Menu.Item>
+                <Menu.Item as={NavLink} to='/supplies' style={{color: "cyan"}}>Supplies</Menu.Item>
+                <Menu.Item as={NavLink} to='/crystals' style={{color: "cyan"}}>Crystals</Menu.Item>
+                <Menu.Item as={NavLink} to='/aiden' style={{color: "cyan"}}>Aiden Upgrades</Menu.Item>
+                <Menu.Item as={NavLink} to='/crelics' style={{color: "cyan"}}>Crelics</Menu.Item>
                 <Menu.Item position='right' content={<AccountOptions/>}/>
                 <Menu.Item style={{ paddingRight:"50px" }}/>
             </Container>

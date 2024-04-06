@@ -9,6 +9,7 @@ import { AlchemyIngredient, AlchemyIngredientPotency, AlchemyPotencyRange, Alche
 import { Supply } from '../models/supply';
 import { Rule } from '../models/rule';
 import { Enchantment } from '../models/enchantment';
+import { Crelic, CrelicAbility, CrelicSubAbility, CrelicSubAbilityLevel } from '../models/crelic';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -129,6 +130,25 @@ const Enchanting = {
     delete: (id: string) => axios.delete(`/enchanting/${id}`),
 }
 
+const Crelics = {
+    list: () => requests.get<Crelic[]>('/crelic'),
+    create: (crelic: Crelic) => axios.post('/crelic', crelic),
+    update: (crelic: Crelic) => axios.put(`/crelic/${crelic.id}`, crelic),
+    delete: (id: string) => axios.delete(`/crelic/${id}`),
+
+    createAbility: (crelicId: string, crelicAbility: CrelicAbility) => axios.post(`/crelic/ability/${crelicId}`, crelicAbility),
+    updateAbility: (crelicAbility: CrelicAbility) => axios.put(`/crelic/ability/${crelicAbility.id}`, crelicAbility),
+    deleteAbility: (id: string) => axios.delete(`/crelic/ability/${id}`),
+
+    createSubAbility: (crelicAbilityId: string, crelicSubAbility: CrelicSubAbility) => axios.post(`/crelic/subability/${crelicAbilityId}`, crelicSubAbility),
+    updateSubAbility: (crelicSubAbility: CrelicSubAbility) => axios.put(`/crelic/subability/${crelicSubAbility.id}`, crelicSubAbility),
+    deleteSubAbility: (id: string) => axios.delete(`/crelic/subability/${id}`),
+
+    createSubAbilityLevel: (crelicSubAbilityId: string, crelicSubAbilityLevel: CrelicSubAbilityLevel) => axios.post(`/crelic/subabilitylevel/${crelicSubAbilityId}`, crelicSubAbilityLevel),
+    updateSubAbilityLevel: (crelicSubAbilityLevel: CrelicSubAbilityLevel) => axios.put(`/crelic/subabilitylevel/${crelicSubAbilityLevel.id}`, crelicSubAbilityLevel),
+    deleteSubAbilityLevel: (id: string) => axios.delete(`/crelic/subabilitylevel/${id}`),
+}
+
 const Rules = {
     list: () => requests.get<Rule[]>('/rule'),
     create: (rule: Rule) => axios.post('/rule', rule),
@@ -149,6 +169,7 @@ const agent = {
     Alchemy,
     Supplies,
     Enchanting,
+    Crelics,
     Account,
     Rules,
 }
