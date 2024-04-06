@@ -22,8 +22,11 @@ export default class CrelicStore {
         runInAction(() => { // sort the ranges within the crelics
             sortedcrelics.forEach((crelic) => {
                 crelic.crelicAbilities.sort((a, b) => a.name.localeCompare(b.name))
-                crelic.crelicAbilities.forEach((crelicAbility) => {
-                    crelicAbility.crelicSubAbilities.sort((a, b) => a.name.localeCompare(b.name))
+                crelic.crelicAbilities.forEach((crelicA) => {
+                    crelicA.crelicSubAbilities.sort((a, b) => a.name.localeCompare(b.name))
+                    crelicA.crelicSubAbilities.forEach((crelicSA) => {
+                        crelicSA.crelicSubAbilityLevels.sort((a, b) => a.level - b.level)
+                    })
                 })
             })  //TODO: the color tags affect the sorting. Allow the color list to be used
         })      //TODO: this doesnt sort when you edit
