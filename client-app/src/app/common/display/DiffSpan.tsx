@@ -9,6 +9,7 @@ export default function DiffSpan(props: Props) {
     const colorizeSpan = (text: string): JSX.Element[] => {
         let earliestSet: [string, number] = ["none", -1]
 
+        //find the earliest instance of a color tag.
         colorMap.forEach((value, key) => {
             let colorIndex = text.indexOf(value)
             if (colorIndex !== -1 && (earliestSet[1] === -1 || earliestSet[1] > colorIndex)) {
@@ -16,6 +17,7 @@ export default function DiffSpan(props: Props) {
             }
         })
 
+        //return normal span if no tags were found.
         if (earliestSet[1] === -1)
             return [<span key={generateKey('ds0')}>{text}</span>]
 
