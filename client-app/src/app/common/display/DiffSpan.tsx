@@ -1,27 +1,11 @@
 import { generateKey } from "../functions/CommonFunctions";
+import { colorMap } from "../options/ColorList";
 
 interface Props {
     content: string;
 }
 
 export default function DiffSpan(props: Props) {
-    const colorMap = new Map<string, string>([
-        ["black", "\\blk"],
-        ["blue", "\\b"],
-        ["cyan", "\\c"],
-        ["green", "\\dg"], //darkgreen
-        ["firebrick", "\\fb"],
-        ["grey", "\\grey"],
-        ["lightGreen", "\\g"],
-        ["lavender", "\\l"],
-        ["orange", "\\o"],
-        ["blueviolet", "\\p"], //purple
-        ["red", "\\r"],
-        ["burlywood", "\\t"], //tan
-        ["white", "\\w"],
-        ["yellow", "\\y"],
-    ])
-
     const colorizeSpan = (text: string): JSX.Element[] => {
         let earliestSet: [string, number] = ["none", -1]
 
