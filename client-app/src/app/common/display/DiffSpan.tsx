@@ -33,7 +33,7 @@ export default function DiffSpan(props: Props) {
         })
 
         if (earliestSet[1] === -1)
-            return [<span key={text}>{text}</span>]
+            return [<span key={generateKey('ds0')}>{text}</span>]
 
         const splitSymbol = colorMap.get(earliestSet[0])!
         const textArray = text.split(splitSymbol);
