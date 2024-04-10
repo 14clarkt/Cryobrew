@@ -6,7 +6,7 @@ import { useEffect } from "react"
 import LoadingComponent from "../../../app/layout/LoadingComponent"
 
 export default observer(function CrelicDashboard() {
-    const { crelicStore, rulesStore, userStore } = useStore()
+    const { crelicStore, rulesStore } = useStore()
     const { loadCrelics, crelicRegistry, loadingInitial } = crelicStore
     const { loadRules, ruleRegistry, loadingInitial: loadingRules } = rulesStore
 
@@ -20,7 +20,7 @@ export default observer(function CrelicDashboard() {
 
     return (
         <>
-            {userStore.isAdmin && <CrelicHeader />}
+            <CrelicHeader />
             <CrelicList />
         </>
     )

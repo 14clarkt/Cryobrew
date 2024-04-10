@@ -9,7 +9,7 @@ export default class CrelicStore {
     crelicRegistry = new Map<string, Crelic>()
     loadingInitial = false
     loading = false
-    //     crelicFilter = ""
+    crelicFilter = ""
 
     constructor() {
         makeAutoObservable(this)
@@ -31,7 +31,7 @@ export default class CrelicStore {
             })  //TODO: the color tags affect the sorting. Allow the color list to be used
         })      //TODO: this doesnt sort when you edit
                 //TODO: sort the SALs as well since they are listed in the edit window
-        return sortedcrelics//.filter((crelic) => crelic.name.toLowerCase().includes(this.crelicFilter.toLowerCase()))
+        return sortedcrelics.filter((crelic) => crelic.name.toLowerCase().includes(this.crelicFilter.toLowerCase()))
     }
 
     get totalCERegistry() {
@@ -312,6 +312,10 @@ export default class CrelicStore {
 
     setLoadingInitial = (state: boolean) => {
         this.loadingInitial = state
+    }
+
+    setCrelicFilter = (query: string) => {
+        this.crelicFilter = query
     }
 
     private setCrelic = (crelic: Crelic) => {
