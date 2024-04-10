@@ -6,6 +6,7 @@ import CrelicSubAbilityItem from "./CrelicSubAbilityItem"
 import { useStore } from "../../../app/stores/store"
 import CrelicSubAbilityForm from "../form/CrelicSubAbilityForm"
 import CrelicAbilityUpdateForm from "../form/CrelicAbilityUpdateForm"
+import { useState } from "react"
 
 interface Props {
     crelicId: string
@@ -14,17 +15,18 @@ interface Props {
 export default observer(function CrelicAbilityItem({ crelicId, crelicAbility }: Props) {
     const { crelicStore, modalStore, userStore } = useStore()
     const { isAdmin } = userStore
+    const [ isCollapsed, setIsCollapsed ] = useState<boolean>(false)
 
     return (
         <Grid inverted divided="vertically">
             <Grid.Row style={{
                 borderTopStyle: "solid",
                 borderTopColor: "cyan",
-                borderBottomStyle: "dashed",
+                borderBottomStyle: !isCollapsed ? "dashed" : "none",
                 borderBottomColor: "#444444",
             }}>
-                <Grid.Column width="1" />
-                <Grid.Column width="14">
+                <Grid.Column width="2" />
+                <Grid.Column width="12">
                     <h1 style={{ color: "cyan", textAlign: "center" }}>{crelicAbility.name}</h1>
                 </Grid.Column>
                 <Grid.Column width="1">
@@ -36,11 +38,19 @@ export default observer(function CrelicAbilityItem({ crelicId, crelicAbility }: 
                         loading={crelicStore.loading} />
                     }
                 </Grid.Column>
-                <Grid.Column width="16">
-                    <h3 style={{ textAlign: "center" }}><DiffSpan content={crelicAbility.description} /></h3>
+                <Grid.Column width="1">
+                    <Button
+                        color='yellow'
+                        content={isCollapsed ? 'Expand' : 'Collapse'}
+                        compact inverted
+                        onClick={() => setIsCollapsed(!isCollapsed)}
+                        loading={crelicStore.loading} />
                 </Grid.Column>
+                {!isCollapsed && <Grid.Column width="16">
+                    <h3 style={{ textAlign: "center" }}><DiffSpan content={crelicAbility.description} /></h3>
+                </Grid.Column>}
             </Grid.Row>
-            <Grid.Row>
+            {!isCollapsed && <><Grid.Row>
                 <Grid.Column width="1" style={{
                     borderRightStyle: "solid",
                     borderRightColor: "grey",
@@ -88,7 +98,7 @@ export default observer(function CrelicAbilityItem({ crelicId, crelicAbility }: 
                 crelicAbility.crelicSubAbilities.map((crelicSubAbility) => (
                     <CrelicSubAbilityItem key={crelicSubAbility.id} crelicAbilityId={crelicAbility.id} crelicSubAbility={crelicSubAbility} />
                 ))
-            }
+            }</>}
         </Grid >
     )
 })
