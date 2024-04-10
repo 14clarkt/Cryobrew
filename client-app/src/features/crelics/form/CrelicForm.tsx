@@ -19,7 +19,7 @@ export default observer(function CrelicForm() {
                 let newCrelic = {
                     id: "",
                     name: values.name,
-                    equippedBy: null,
+                    isHidden: true,
                     charges: 10,
                     maxCharges: 10,
                     crelicAbilities: new Array<CrelicAbility>()

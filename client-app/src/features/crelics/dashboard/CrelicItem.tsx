@@ -20,8 +20,6 @@ export default observer(function CrelicItem({ crelic }: Props) {
     useEffect(() => {
         setCharges(crelic.charges)
     }, [crelic])
-    //TODO: remove equipped from the DB from Crelic. No need for it since there is not limit unlike APCs
-    //TODO: Add Hide/Reveal to Crelics
 
     return (
         <Segment key={crelic.id} style={{
@@ -29,7 +27,7 @@ export default observer(function CrelicItem({ crelic }: Props) {
             color: "white",
             borderStyle: "solid",
             borderWidth: "4px",
-            borderColor: "#444444",
+            borderColor: crelic.isHidden ? "red" : "#444444"
         }}>
             <Grid>
                 <Grid.Row>

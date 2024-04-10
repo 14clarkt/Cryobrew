@@ -1,8 +1,8 @@
 export interface Crelic {
     id: string
-    equippedBy: string | null
     name: string
     charges: number
+    isHidden: boolean
     maxCharges: number
     crelicAbilities: Array<CrelicAbility>
 }

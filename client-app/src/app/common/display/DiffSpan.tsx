@@ -1,30 +1,15 @@
 import { generateKey } from "../functions/CommonFunctions";
+import { colorMap } from "../options/ColorList";
 
 interface Props {
     content: string;
 }
 
 export default function DiffSpan(props: Props) {
-    const colorMap = new Map<string, string>([
-        ["black", "\\blk"],
-        ["blue", "\\b"],
-        ["cyan", "\\c"],
-        ["green", "\\dg"], //darkgreen
-        ["firebrick", "\\fb"],
-        ["grey", "\\grey"],
-        ["lightGreen", "\\g"],
-        ["lavender", "\\l"],
-        ["orange", "\\o"],
-        ["blueviolet", "\\p"], //purple
-        ["red", "\\r"],
-        ["burlywood", "\\t"], //tan
-        ["white", "\\w"],
-        ["yellow", "\\y"],
-    ])
-
     const colorizeSpan = (text: string): JSX.Element[] => {
         let earliestSet: [string, number] = ["none", -1]
 
+        //find the earliest instance of a color tag.
         colorMap.forEach((value, key) => {
             let colorIndex = text.indexOf(value)
             if (colorIndex !== -1 && (earliestSet[1] === -1 || earliestSet[1] > colorIndex)) {
@@ -32,8 +17,9 @@ export default function DiffSpan(props: Props) {
             }
         })
 
+        //return normal span if no tags were found.
         if (earliestSet[1] === -1)
-            return [<span key={text}>{text}</span>]
+            return [<span key={generateKey('ds0')}>{text}</span>]
 
         const splitSymbol = colorMap.get(earliestSet[0])!
         const textArray = text.split(splitSymbol);
