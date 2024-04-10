@@ -3,12 +3,12 @@ import { useStore } from "../../../app/stores/store"
 import CrelicItem from "./CrelicItem"
 
 export default observer(function CrelicList() {
-    const { crelicStore } = useStore()
+    const { crelicStore, userStore } = useStore()
     const { crelicList } = crelicStore
 
     return (<>{
-        crelicList.map((crelic) => (
-            <CrelicItem key={crelic.id} crelic={crelic} />
-        ))
+        crelicList.map((crelic) => (<>{
+            (userStore.isAdmin || !crelic.isHidden) && <CrelicItem key={crelic.id} crelic={crelic} />
+        }</>))
     }</>)
 })
