@@ -54,7 +54,17 @@ export default observer(function CrelicUpdateForm(props: Props) {
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>
-                            <Grid.Column width="8">
+                            <Grid.Column width="5">
+                                <Button
+                                    color='yellow'
+                                    content={oldCrelic.isHidden ? 'Show' : 'Hide'}
+                                    type="button"
+                                    fluid inverted
+                                    loading={crelicStore.loading}
+                                    onClick={() => crelicStore.updateCrelic({...oldCrelic, isHidden: !oldCrelic.isHidden})}
+                                />
+                            </Grid.Column>
+                            <Grid.Column width="6">
                                 <Button
                                     disabled={!isValid || !dirty || isSubmitting}
                                     content="Update"
@@ -64,7 +74,7 @@ export default observer(function CrelicUpdateForm(props: Props) {
                                     loading={crelicStore.loading}
                                 />
                             </Grid.Column>
-                            <Grid.Column width="8">
+                            <Grid.Column width="5">
                                 <Button
                                     color='red'
                                     content='Delete'
