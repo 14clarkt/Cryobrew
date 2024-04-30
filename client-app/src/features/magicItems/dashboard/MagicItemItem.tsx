@@ -3,7 +3,7 @@ import { useStore } from '../../../app/stores/store';
 import { Button, Grid, Segment } from 'semantic-ui-react';
 import { MagicItem } from '../../../app/models/magicItem';
 import DiffSpan from '../../../app/common/display/DiffSpan';
-import MiUpdateForm from '../form/MiUpdateForm';
+import MiUpdateForm from '../form/MIUpdateForm';
 import { useEffect, useState } from 'react';
 
 interface Props {

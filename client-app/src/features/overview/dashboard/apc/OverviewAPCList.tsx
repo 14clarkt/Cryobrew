@@ -1,16 +1,13 @@
-import { Button, Container, Grid, Radio, Search, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { ActionPointCard } from '../../../../app/models/actionPointCard';
-import DiffSpan from '../../../../app/common/display/DiffSpan';
-import RulesList from '../../../rules/list/RulesList';
 import OverviewAPCItem from './OverviewAPCItem';
 
 export default observer(function OverviewAPCList() {
     const { apcStore, userStore } = useStore()
     const { apcSortedList } = apcStore
-    const { isAdmin } = userStore
+    // const { isAdmin } = userStore
     const username = userStore.user?.username
 
     const [APCList, setAPCList] = useState<ActionPointCard[]>([])
@@ -38,7 +35,8 @@ export default observer(function OverviewAPCList() {
     }, [userStore.currentAP])
 
     return (
-        <>{APCList.map((apc) => (
+        <><div style={{color: 'white'}}>{'currentAP: ' + currentAP + ' equippedAmount: ' + equippedAmount}</div>
+        {APCList.map((apc) => (
             <OverviewAPCItem key={apc.id + "APCI"} apc={apc} />
         ))}</>
     )

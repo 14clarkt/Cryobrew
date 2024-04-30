@@ -2,7 +2,6 @@ import { Button, Grid, Segment } from "semantic-ui-react"
 import { ActionPointCard } from "../../../../app/models/actionPointCard"
 import { observer } from "mobx-react-lite"
 import { useStore } from "../../../../app/stores/store"
-import { useState } from "react"
 import DiffSpan from "../../../../app/common/display/DiffSpan"
 
 interface Props {
@@ -10,7 +9,7 @@ interface Props {
 }
 export default observer(function OverviewAPCList({ apc }: Props) {
     const { apcStore, modalStore, userStore } = useStore()
-    const { deleteApl, copyApl, upgradeApc, downgradeApc, equipApc, loading } = apcStore
+    const { upgradeApc, downgradeApc, equipApc, loading } = apcStore
     const { isAdmin } = userStore
     const username = userStore.user?.username
 
