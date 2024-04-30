@@ -29,7 +29,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEQ(Guid id)
+        public async Task<IActionResult> DeleteEnch(Guid id)
         {
             return HandleResult(await Mediator.Send(new DeleteEnch.Command{Id = id}));
         }
