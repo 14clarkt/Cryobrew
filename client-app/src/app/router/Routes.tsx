@@ -14,6 +14,7 @@ import AidenDashboard from "../../features/aiden/dashboard/AidenDashboard";
 import CrelicDashboard from "../../features/crelics/dashboard/CrelicDashboard";
 import EnchantingDashboard from "../../features/enchanting/dashboard/EnchantingDashboard";
 import Sokoban from "../../features/puzzles/sokoban/Sokoban";
+// import OverviewDashboard from "../../features/overview/dashboard/OverviewDashboard";
 
 export const routes: RouteObject[] = [
     {
@@ -21,6 +22,7 @@ export const routes: RouteObject[] = [
         element: <App />,
         children: [
             {element: <RequireAuth />, children :[                
+                // {path: 'overview', element: <OverviewDashboard />},
                 {path: 'apc', element: <APCDashboard />},
                 {path: 'alchemy', element: <AlchemyDashboard />},
                 {path: 'equipmentQuality', element: <EquipmentQualityDashboard />},

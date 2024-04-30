@@ -18,6 +18,7 @@ export default observer(function NavBar() {
                     <img src="/assets/tcp.png" alt="logo" style={{ marginRight: '10px' }} />
                     Cryobrew
                 </Menu.Item>
+                {/* <Menu.Item as={NavLink} to='/overview' style={{color: "cyan"}}>Overview</Menu.Item> */}
                 <Menu.Item as={NavLink} to='/apc' style={{color: "cyan"}}>APC</Menu.Item>
                 <Menu.Item as={NavLink} to='/alchemy' style={{color: "cyan"}}>Alchemy</Menu.Item>
                 <Menu.Item as={NavLink} to='/equipmentQuality' style={{color: "cyan"}}>Equipment Quality</Menu.Item>
