@@ -10,6 +10,7 @@ import RulesStore from "./rulesStore";
 import EnchantingStore from "./enchantingStore";
 import SokobanStore from "./sokobanStore";
 import CrelicStore from "./crelicStore";
+import MagicItemStore from "./magicItemStore";
 
 interface Store {
     commonStore: CommonStore;
@@ -22,6 +23,7 @@ interface Store {
     suppliesStore: SuppliesStore;
     rulesStore: RulesStore;
     crelicStore: CrelicStore;
+    magicItemStore: MagicItemStore;
     sokobanStore: SokobanStore;
 }
 
@@ -36,6 +38,7 @@ export const store: Store = {
     suppliesStore: new SuppliesStore(),
     rulesStore: new RulesStore(),
     crelicStore: new CrelicStore(),
+    magicItemStore: new MagicItemStore(),
     sokobanStore: new SokobanStore(),
 }
 

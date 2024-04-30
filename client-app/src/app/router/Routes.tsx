@@ -9,11 +9,11 @@ import AlchemyDashboard from "../../features/alchemy/dashboard/AlchemyDashboard"
 import EquipmentQualityDashboard from "../../features/equipmentQuality/dashboard/EquipmentQualityDashboard";
 import SuppliesDashboard from "../../features/supplies/dashboard/SuppliesDashboard";
 import RequireAuth from "./RequireAuth";
-import CrystalsDashboard from "../../features/crystals/dashboard/CrystalsDashboard";
 import AidenDashboard from "../../features/aiden/dashboard/AidenDashboard";
 import CrelicDashboard from "../../features/crelics/dashboard/CrelicDashboard";
 import EnchantingDashboard from "../../features/enchanting/dashboard/EnchantingDashboard";
 import Sokoban from "../../features/puzzles/sokoban/Sokoban";
+import MagicItemsDashboard from "../../features/magicItems/dashboard/MagicItemsDashboard";
 
 export const routes: RouteObject[] = [
     {
@@ -21,12 +21,13 @@ export const routes: RouteObject[] = [
         element: <App />,
         children: [
             {element: <RequireAuth />, children :[                
+                // {path: 'overview', element: <OverviewDashboard />},
                 {path: 'apc', element: <APCDashboard />},
                 {path: 'alchemy', element: <AlchemyDashboard />},
                 {path: 'equipmentQuality', element: <EquipmentQualityDashboard />},
                 {path: 'enchanting', element: <EnchantingDashboard />},
                 {path: 'supplies', element: <SuppliesDashboard />},
-                {path: 'crystals', element: <CrystalsDashboard />},
+                {path: 'magicitem', element: <MagicItemsDashboard />},
                 {path: 'aiden', element: <AidenDashboard />},
                 {path: 'crelics', element: <CrelicDashboard />},
                 {path: 'puzzles', element: <Sokoban />},

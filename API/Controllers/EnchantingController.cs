@@ -10,13 +10,13 @@ namespace API.Controllers
     public class EnchantingController : BaseApiController
     {
         [HttpGet] //api/enchanting
-        public async Task<IActionResult> GetEQs()
+        public async Task<IActionResult> GetEnchs()
         {
             return HandleResult(await Mediator.Send(new ListEnch.Query()));
         }
 
         [HttpPost] 
-        public async Task<IActionResult> CreateEQ(Enchantment ench)
+        public async Task<IActionResult> CreateEnch(Enchantment ench)
         {
             return HandleResult(await Mediator.Send(new CreateEnch.Command{Enchantment = ench}));
         }
@@ -29,7 +29,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEQ(Guid id)
+        public async Task<IActionResult> DeleteEnch(Guid id)
         {
             return HandleResult(await Mediator.Send(new DeleteEnch.Command{Id = id}));
         }
