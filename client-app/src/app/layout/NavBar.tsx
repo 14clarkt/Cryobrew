@@ -24,7 +24,7 @@ export default observer(function NavBar() {
                 <Menu.Item as={NavLink} to='/equipmentQuality' style={{color: "cyan"}}>Equipment Quality</Menu.Item>
                 <Menu.Item as={NavLink} to='/enchanting' style={{color: "cyan"}}>Enchanting</Menu.Item>
                 <Menu.Item as={NavLink} to='/supplies' style={{color: "cyan"}}>Supplies</Menu.Item>
-                <Menu.Item as={NavLink} to='/crystals' style={{color: "cyan"}}>Crystals</Menu.Item>
+                <Menu.Item as={NavLink} to='/magicitem' style={{color: "cyan"}}>Magic Items</Menu.Item>
                 <Menu.Item as={NavLink} to='/aiden' style={{color: "cyan"}}>Aiden Upgrades</Menu.Item>
                 <Menu.Item as={NavLink} to='/crelics' style={{color: "cyan"}}>Crelics</Menu.Item>
                 <Menu.Item position='right' content={<AccountOptions/>}/>

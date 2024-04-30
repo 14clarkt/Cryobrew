@@ -10,6 +10,7 @@ import { Supply } from '../models/supply';
 import { Rule } from '../models/rule';
 import { Enchantment } from '../models/enchantment';
 import { Crelic, CrelicAbility, CrelicSubAbility, CrelicSubAbilityLevel } from '../models/crelic';
+import { MagicItem } from '../models/magicItem';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -149,6 +150,13 @@ const Crelics = {
     deleteSubAbilityLevel: (id: string) => axios.delete(`/crelic/subabilitylevel/${id}`),
 }
 
+const MagicItems = {
+    list: () => requests.get<MagicItem[]>('/magicitem'),
+    create: (mi: MagicItem) => axios.post('/magicitem', mi),
+    update: (mi: MagicItem) => axios.put(`/magicitem/${mi.id}`, mi),
+    delete: (id: string) => axios.delete(`/magicitem/${id}`),
+}
+
 const Rules = {
     list: () => requests.get<Rule[]>('/rule'),
     create: (rule: Rule) => axios.post('/rule', rule),
@@ -170,6 +178,7 @@ const agent = {
     Supplies,
     Enchanting,
     Crelics,
+    MagicItems,
     Account,
     Rules,
 }
