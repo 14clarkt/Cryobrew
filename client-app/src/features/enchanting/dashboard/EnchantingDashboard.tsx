@@ -17,7 +17,7 @@ export default observer(function EnchantingDashboard() {
         if (suppliesRegistry.size < 1) loadSupplies();
         if (enchRegistry.size < 1) loadEnchantments();
         if (ruleRegistry.size < 1) loadRules();
-    }, [loadSupplies, loadSupplies, loadRules, suppliesRegistry.size, enchRegistry.size, ruleRegistry.size])
+    }, [loadSupplies, loadRules, suppliesRegistry.size, enchRegistry.size, ruleRegistry.size])
 
     if (loadingInitialSupplies || loadingInitialEnchantment || loadingInitialRules)
         return <div style={{ padding: '400px', position: 'relative' }}><LoadingComponent content='Loading Enchanting...' /></div>
