@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx"
 import { MagicItem } from "../models/magicItem"
 import { v4 as uuid } from "uuid"
 import agent from "../api/agent";
-import { store, useStore } from "./store";
+import { store } from "./store";
 
 export default class MagicItemStore {
     magicItemRegistry = new Map<string, MagicItem>()
