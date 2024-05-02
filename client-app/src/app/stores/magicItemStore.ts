@@ -2,18 +2,19 @@ import { makeAutoObservable, runInAction } from "mobx"
 import { MagicItem } from "../models/magicItem"
 import { v4 as uuid } from "uuid"
 import agent from "../api/agent";
-import { store } from "./store";
+import { store, useStore } from "./store";
 
 export default class MagicItemStore {
     magicItemRegistry = new Map<string, MagicItem>()
     loadingInitial = false
     loading = false
     miFilter = ""
-
+    miGroup : "equipped" | "all" | "available" = "equipped"
+    
     constructor() {
         makeAutoObservable(this)
     }
-
+    
     get magicItemList() {
         let sortedMIs = Array.from(this.magicItemRegistry.values()).sort((a, b) =>
             a.name.localeCompare(b.name))
@@ -98,4 +99,8 @@ export default class MagicItemStore {
     setMIFilter = (query: string) => {
         this.miFilter = query
     }
+
+    setMIGroup = (group: "all" | "equipped" | "available") => {
+        this.miGroup = group
+    }    
 }
