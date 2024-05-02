@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react-lite';
-import { Button, Grid, Search, Segment } from 'semantic-ui-react';
+import { Button, Grid, Radio, Search, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import MIForm from '../form/MIForm';
 
 export default observer(function MagicItemsDashboard() {
     const { userStore, modalStore, magicItemStore } = useStore()
-    const { setMIFilter, loading } = magicItemStore
+    const { setMIFilter, setMIGroup, miGroup, loading } = magicItemStore
     const { isAdmin } = userStore
 
     return (<>
@@ -24,7 +24,22 @@ export default observer(function MagicItemsDashboard() {
                     <h1 style={{ color: "cyan" }}>Magic Items</h1>
                 </Grid.Column>
                 <Grid.Column width='1' />
-                <Grid.Column width='2'>
+                <Grid.Column width="2">
+                    <span style={{ color: "white" }}> All </span>
+                    <Radio
+                        checked={miGroup === 'all'}
+                        onChange={() => setMIGroup("all")}
+                    />
+                    <span style={{ color: "white" }}> Equipped </span>
+                    <Radio
+                        checked={miGroup === 'equipped'}
+                        onChange={() => setMIGroup("equipped")}
+                    />
+                    <span style={{ color: "white" }}> Available </span>
+                    <Radio
+                        checked={miGroup === 'available'}
+                        onChange={() => setMIGroup("available")}
+                    />
                     <Search
                         onSearchChange={(_e, data) => { data.value ? setMIFilter(data.value) : setMIFilter("") }}
                         open={false}

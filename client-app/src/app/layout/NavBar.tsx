@@ -12,7 +12,7 @@ export default observer(function NavBar() {
                     as={Button} onClick={toggleSidebar}
                     active={sidebarVisable}><span id="sidebarToggle">Sidebar</span></Menu.Item>
                 
-                <Menu.Item style={{ paddingLeft:"250px" }}/>
+                <Menu.Item style={{ paddingLeft:"275px" }}/>
                 
                 <Menu.Item as={NavLink} to='/' header style={{color: "cyan"}}>
                     <img src="/assets/tcp.png" alt="logo" style={{ marginRight: '10px' }} />
