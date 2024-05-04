@@ -27,7 +27,7 @@ export default observer(function MagicItemItem({ magicItem }: Props) {
             color: "white",
             borderStyle: "solid",
             borderWidth: "2px",
-            borderColor: magicItem.isHidden ? "red" : "#444444"
+            borderColor: magicItem.isHidden ? "red" : (username === magicItem.equippedBy) ? "yellow" : "#444444"
         }}>
             <Grid verticalAlign='middle' divided inverted>
                 <Grid.Row>
