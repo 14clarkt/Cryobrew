@@ -21,7 +21,7 @@ export default observer(function MagicItemsDashboard() {
                         content="Create Magic Item" />}
                 </Grid.Column>
                 <Grid.Column width='10'>
-                    <h1 style={{ color: "cyan" }}>Magic Items</h1>
+                    <h1 style={{ color: "cyan" }}>Custom Items</h1>
                 </Grid.Column>
                 <Grid.Column width='1' />
                 <Grid.Column width="2">
