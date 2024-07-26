@@ -60,7 +60,8 @@ export default observer(function EnchantingList() {
                                 content="Adds this many max Points to the equipment this is added to."
                                 trigger={<div>
                                     <h3 style={{ color: "cyan" }}>Pts</h3>
-                                    <div style={{ fontSize: "1.1em" }}>{ench.points}</div></div>} />
+                                    <div style={{ fontSize: "1.1em" }}>{ench.points}</div>
+                                </div>} />
                         </Grid.Column>
 
                         <Grid.Column width='3'>
@@ -69,7 +70,8 @@ export default observer(function EnchantingList() {
                                 content="Equipment that this Enchantment can be applied to."
                                 trigger={<div>
                                     <h3 style={{ color: "cyan" }}>Applicable Equipment</h3>
-                                    <div style={{ fontSize: "1.1em" }}>{ench.applicableEquipment}</div></div>} />
+                                    <div style={{ fontSize: "1.1em" }}><DiffSpan content={ench.applicableEquipment} /></div>
+                                </div>} />
                         </Grid.Column>
 
                         <Grid.Column width='3'>
@@ -78,7 +80,8 @@ export default observer(function EnchantingList() {
                                 content="Restrictions to USE this Enchantment."
                                 trigger={<div>
                                     <h3 style={{ color: "cyan" }}>Restriction(s)</h3>
-                                    <div style={{ fontSize: "1.1em" }}>{ench.restrictions}</div></div>} />
+                                    <div style={{ fontSize: "1.1em" }}><DiffSpan content={ench.restrictions} /></div>
+                                </div>} />
                         </Grid.Column>
 
                         <Grid.Column width='2'>
@@ -87,7 +90,8 @@ export default observer(function EnchantingList() {
                                 content="Range of the Effect of this Enchantment."
                                 trigger={<div>
                                     <h3 style={{ color: "cyan" }}>Range</h3>
-                                    <div style={{ fontSize: "1.1em" }}>{ench.range}</div></div>} />
+                                    <div style={{ fontSize: "1.1em" }}><DiffSpan content={ench.range} /></div>
+                                </div>} />
                         </Grid.Column>
 
                         <Grid.Column width='3'>
@@ -96,7 +100,8 @@ export default observer(function EnchantingList() {
                                 content="Duration of the Effect of this Enchantment."
                                 trigger={<div>
                                     <h3 style={{ color: "cyan" }}>Duration</h3>
-                                    <div style={{ fontSize: "1.1em" }}>{ench.duration}</div></div>} />
+                                    <div style={{ fontSize: "1.1em" }}><DiffSpan content={ench.duration} /></div>
+                                </div>} />
                         </Grid.Column>
 
                         <Grid.Column width='3'>
@@ -105,7 +110,8 @@ export default observer(function EnchantingList() {
                                 content="Specific items required to be sacrificed for this Enchantment."
                                 trigger={<div>
                                     <h3 style={{ color: "cyan" }}>Specific Costs</h3>
-                                    <div style={{ fontSize: "1.1em" }}>{ench.specificCosts}</div></div>} />
+                                    <div style={{ fontSize: "1.1em" }}><DiffSpan content={ench.specificCosts} /></div>
+                                </div>} />
                         </Grid.Column>
 
                         <Grid.Column width='1'>
@@ -114,7 +120,8 @@ export default observer(function EnchantingList() {
                                 content="Total combined Power from Enchanting Crystals required for this Enchantment."
                                 trigger={<div>
                                     <h3 style={{ color: "cyan" }}>Power</h3>
-                                    <div style={{ fontSize: "1.1em" }}>{ench.totalPower}</div></div>} />
+                                    <div style={{ fontSize: "1.1em" }}>{ench.totalPower}</div>
+                                </div>} />
                         </Grid.Column>
                     </Grid.Row>
 
@@ -130,7 +137,8 @@ export default observer(function EnchantingList() {
                                 content="Resources required to spend to activate this Effect (typically EP; Enchantment Points)."
                                 trigger={<div>
                                     <span style={{ color: "cyan" }}>Effect Cost: </span>
-                                    <span>{ench.effectCost}</span></div>} />
+                                    <DiffSpan content={ench.effectCost} />
+                                </div>} />
                             </h3>
                         </Grid.Column>
                         <Grid.Column width='2'>
@@ -145,7 +153,8 @@ export default observer(function EnchantingList() {
                                 content={'The "Casting Time" to activate this Enchantment' + "'s Effect."}
                                 trigger={<div>
                                     <span style={{ color: "cyan" }}>Effect Action: </span>
-                                    <span>{ench.effectAction}</span></div>} />
+                                    <DiffSpan content={ench.effectAction} />
+                                </div>} />
                             </h3>
                         </Grid.Column>
                     </Grid.Row>
