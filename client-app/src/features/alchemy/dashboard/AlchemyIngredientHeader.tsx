@@ -3,14 +3,36 @@ import { Button, Grid, Popup, Search, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import AlchemyIngredientForm from '../form/AlchemyIngredientForm';
 import RulesList from '../../rules/list/RulesList';
+import { useEffect, useState } from 'react';
 
 export default observer(function AlchemyIngredientHeader() {
-    const { userStore, modalStore, alchemyStore } = useStore()
+    const { userStore, modalStore, suppliesStore, alchemyStore } = useStore()
+    const { suppliesList } = suppliesStore
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
     const { loading, setIngredientFilter, showZero, toggleShowZero, filterByName, toggleFilterByName } = alchemyStore
 
+    const [catalyst, setCatalyst] = useState(0)
+
+    useEffect(() => {
+        for (let index = 0; index < suppliesList.length; index++) {
+            const supply = suppliesList[index];
+            console.log(supply.name);
+
+            if (supply.name.toLowerCase().includes("alchemy catalyst".toLowerCase())) {
+                setCatalyst(supply.quantity)
+                break
+            }
+        }
+    }, [suppliesList])
+
     return (
-        <><h1 style={{ color: 'white', textAlign: 'center' }}>Ingredients</h1>
+        <>
+            <Grid>
+                <Grid.Column width={1} />
+                <Grid.Column width={4}><h3 style={{ color: 'white', textAlign: 'center' }}>Catalyst: {catalyst}gp</h3></Grid.Column>
+                <Grid.Column width={6}><h1 style={{ color: 'white', textAlign: 'center' }}>Ingredients</h1></Grid.Column>
+                <Grid.Column width={5} />
+            </Grid>
             <Segment style={{ backgroundColor: "black" }}>
                 <Grid>
                     <Grid.Row>

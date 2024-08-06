@@ -12,7 +12,7 @@ import RequireAuth from "./RequireAuth";
 import AidenDashboard from "../../features/aiden/dashboard/AidenDashboard";
 import CrelicDashboard from "../../features/crelics/dashboard/CrelicDashboard";
 import EnchantingDashboard from "../../features/enchanting/dashboard/EnchantingDashboard";
-import Sokoban from "../../features/puzzles/sokoban/Sokoban";
+import Sokoban from "../../features/puzzles/sokoban/sokoban";
 import MagicItemsDashboard from "../../features/magicItems/dashboard/MagicItemsDashboard";
 
 export const routes: RouteObject[] = [

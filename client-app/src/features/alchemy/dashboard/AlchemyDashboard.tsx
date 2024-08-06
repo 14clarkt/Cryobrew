@@ -12,7 +12,8 @@ import AlchemyIngredientHeader from "./AlchemyIngredientHeader"
 import AlchemyTraitPicker from "./AlchemyTraitPicker"
 
 export default observer(function AlchemyDashboard() {
-    const { alchemyStore, rulesStore } = useStore()
+    const { alchemyStore, rulesStore, suppliesStore } = useStore()
+    const { loadSupplies, suppliesRegistry, loadingInitial: loadingSupplies } = suppliesStore
     const {loadTraits, loadIngredients, loadProducts, productRegistry, traitRegistry, ingredientRegistry, loadingInitial, rightHandDisplay} = alchemyStore
     const { ruleRegistry, loadRules, loadingInitial: loadingRules} = rulesStore
 
@@ -21,10 +22,13 @@ export default observer(function AlchemyDashboard() {
         if (ingredientRegistry.size < 1) loadIngredients();
         if (productRegistry.size < 1) loadProducts();
         if (ruleRegistry.size < 1) loadRules();
-    }, [loadTraits, loadIngredients, loadProducts, loadRules, productRegistry.size, traitRegistry.size, ingredientRegistry.size, ruleRegistry.size])
+        if (suppliesRegistry.size < 1) loadSupplies();
+    }, [loadTraits, loadIngredients, loadProducts, loadSupplies, loadRules, 
+        productRegistry.size, traitRegistry.size, ingredientRegistry.size, suppliesRegistry.size, ruleRegistry.size])
 
     if (loadingInitial) return <div style={{padding:'400px', position:'relative'}}><LoadingComponent content='Loading Alchemy...' /></div>
     if (loadingRules) return <div style={{padding:'400px', position:'relative'}}><LoadingComponent content='Loading Rules...' /></div>
+    if (loadingSupplies) return <div style={{padding:'400px', position:'relative'}}><LoadingComponent content='Loading Supplies...' /></div>
     
     return (
         <Grid>
