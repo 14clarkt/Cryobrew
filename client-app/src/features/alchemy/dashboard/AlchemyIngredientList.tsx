@@ -6,7 +6,7 @@ import AlchemyIngredientUpdateForm from '../form/AlchemyIngredientUpdateForm';
 import AlchemyIngredientPotencyDelete from '../form/AlchemyIngredientPotencyDelete';
 import DiffSpan from '../../../app/common/display/DiffSpan';
 import { useEffect, useState } from 'react';
-import { AlchemyIngredient } from '../../../app/models/alchemy';
+import { AlchemyIngredient, AlchemyIngredientPotency } from '../../../app/models/alchemy';
 
 export default observer(function AlchemyIngredientList() {
     const { userStore, alchemyStore, modalStore } = useStore()
@@ -39,7 +39,7 @@ export default observer(function AlchemyIngredientList() {
                     }
                     flag = flag && traitsFlag
                 } else {
-                    if(ingredientFilter.length > 0) flag = false
+                    if (ingredientFilter.length > 0) flag = false
                 }
             }
 
@@ -47,6 +47,14 @@ export default observer(function AlchemyIngredientList() {
         }
         setIngredientList(listToShow)
     }, [ingredientSortedList, ingredientFilter, showZero, filterByName])
+
+    const ingredientTotalPotency = (potencies: AlchemyIngredientPotency[]) : number => {
+        let total = 0
+        for (let potency of potencies) {
+            total += Math.abs(potency.potency)
+        }
+        return total
+    }
 
     return (
         <>
@@ -132,7 +140,11 @@ export default observer(function AlchemyIngredientList() {
                                 onClick={() => modalStore.openModal("Add Ingredient Trait Potency", <AlchemyIngredientPotencyForm AIid={ing.id} />)}
                             />
                             </Grid.Column>
-                            <Grid.Column width='12'><span style={{ color: "cyan" }}><h2>Traits</h2></span></Grid.Column>
+                            <Grid.Column width='4'>
+                                <h3>Total Potency: {ingredientTotalPotency(ing.potencies)}</h3>
+                            </Grid.Column>
+                            <Grid.Column width='4'><span style={{ color: "cyan" }}><h2>Traits</h2></span></Grid.Column>
+                            <Grid.Column width='4' />
                             <Grid.Column width='2'>
                                 <Button
                                     disabled={!isAdmin}
