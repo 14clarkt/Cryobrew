@@ -30,6 +30,7 @@ export interface AlchemyIngredient {
 export interface AlchemyProduct {
     id: string
     name: string
+    count: number
 }
 
 export interface AlchemyIngredientPotency {

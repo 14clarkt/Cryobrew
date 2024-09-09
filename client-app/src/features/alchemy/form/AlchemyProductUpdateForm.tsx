@@ -19,6 +19,7 @@ export default observer(function AlchemyProductUpdateForm({oldProduct}: Props) {
         <Formik
             initialValues={{
                 name: oldProduct.name,
+                count: oldProduct.count,
                 error: null
             }}
             onSubmit={(values, { setErrors }) => {
@@ -27,11 +28,13 @@ export default observer(function AlchemyProductUpdateForm({oldProduct}: Props) {
             }}
             validationSchema={Yup.object({
                 name: Yup.string().required(),
+                count: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than or equal to 1."),
             })}
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     <MyTextInput placeholder='Name' name='name' label="Name" />
+                    <MyTextInput placeholder="How many of this item there are." label='Count' name='count' />
                     <ErrorMessage
                         name='error' render={() =>
                             <ValidationErrors errors={errors.error} />}

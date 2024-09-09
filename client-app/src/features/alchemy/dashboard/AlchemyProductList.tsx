@@ -19,8 +19,11 @@ export default observer(function AlchemyProductList() {
         }}>
             <Grid inverted divided="vertically">
                 <Grid.Row style={{ fontWeight: "bold", textAlign: "center" }}>
-                    <Grid.Column width={14}>
+                    <Grid.Column width={13}>
                         <h1>Name</h1>
+                    </Grid.Column>
+                    <Grid.Column width={1}>
+                        <h2>#</h2>
                     </Grid.Column>
                     <Grid.Column width={2}>
                         <h2>Edit</h2>
@@ -28,8 +31,11 @@ export default observer(function AlchemyProductList() {
                 </Grid.Row>
                 {productList.map((product) => (
                     <Grid.Row key={product.id} style={{ fontWeight: "bold" }}>
-                        <Grid.Column width={14}>
+                        <Grid.Column width={13}>
                             <div style={{ fontSize: "1.5em" }}><DiffSpan content={product.name} /></div>
+                        </Grid.Column>
+                        <Grid.Column width={1}>
+                            <div style={{ fontSize: "1.5em" }}>x{product.count}</div>
                         </Grid.Column>
                         <Grid.Column width={2}>
                             <Button
@@ -39,7 +45,7 @@ export default observer(function AlchemyProductList() {
                                 fluid inverted
                                 size='mini'
                                 loading={loading}
-                                onClick={() => modalStore.openModal("Update Alchemy Product", <AlchemyProductUpdateForm oldProduct={product} />, 'large')}
+                                onClick={() => modalStore.openModal("Update Alchemy Product", <AlchemyProductUpdateForm oldProduct={product}/>, "small")}
                             />
                         </Grid.Column>
                     </Grid.Row>))}
