@@ -34,7 +34,13 @@ export default observer(function MagicItemItem({ magicItem }: Props) {
                     <Grid.Column width='3' style={{ color: "cyan" }}>
                         <h1>{magicItem.name}</h1>
                     </Grid.Column>
-                    <Grid.Column width={magicItem.maxCharges===0 ? '11' : '9'}>
+                    {magicItem.count !== 1 && <Grid.Column width='1' style={{ color: "cyan" }}>
+                        <h1>x{magicItem.count}</h1>
+                    </Grid.Column>}
+                    <Grid.Column width={
+                        magicItem.maxCharges===0 ? 
+                            magicItem.count===1 ? '11' : '10' :
+                            magicItem.count===1 ? '9' : '8'}>
                         <h3><DiffSpan content={magicItem.description} /></h3>
                     </Grid.Column>
                     {magicItem.maxCharges!==0 && <Grid.Column width="2">

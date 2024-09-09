@@ -59,7 +59,10 @@ export default observer(function MagicItemsDashboard() {
                     <Grid.Column width='3' style={{ color: "lightblue" }}>
                         <h1>Name</h1>
                     </Grid.Column>
-                    <Grid.Column width='9' style={{ color: "lightblue" }}>
+                    <Grid.Column width='1' style={{ color: "lightblue" }}>
+                        <h1>#?</h1>
+                    </Grid.Column>
+                    <Grid.Column width='8' style={{ color: "lightblue" }}>
                         <h1>Description</h1>
                     </Grid.Column>
                     <Grid.Column width="2" style={{ color: "lightblue" }}>
