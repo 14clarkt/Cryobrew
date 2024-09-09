@@ -38,6 +38,7 @@ export default observer(function MIForm() {
                 name: Yup.string().required(),
                 description: Yup.string().required(),
                 maxCharges: Yup.number().integer("must be a whole number.").min(0).required("must be a number greater than or equal to 0."),
+                count: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than or equal to 1."),
             })}
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
