@@ -14,22 +14,25 @@ export default observer(function AlchemyProductForm() {
         <Formik
             initialValues={{
                 name: "",
+                count: 1,
                 error: null }}
             onSubmit={(values, { setErrors }) => {
                 let newProduct = {
-                    id: "",
-                    name: values.name,
+                    ...values,
+                    id: ""
                 }
                 alchemyStore.createProduct(newProduct).catch(error =>
                     setErrors({ error }))
             }}
             validationSchema={Yup.object({
                 name: Yup.string().required(),
+                count: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than or equal to 1."),
             })}
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     <MyTextInput label='Name' placeholder='Name' name='name' />
+                    <MyTextInput placeholder="How many of this item there are." label='Count' name='count' />
                     <ErrorMessage
                         name='error' render={() =>
                             <ValidationErrors errors={errors.error} />}

@@ -39,6 +39,7 @@ export default observer(function MIUpdateForm(props: Props) {
             validationSchema={Yup.object({
                 name: Yup.string().required(),
                 maxCharges: Yup.number().integer("must be a whole number.").min(0).required("must be a number greater than or equal to 0."),
+                count: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than or equal to 1."),
                 description: Yup.string().required()
             })}
         >

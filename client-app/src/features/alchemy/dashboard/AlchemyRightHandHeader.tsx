@@ -25,7 +25,7 @@ export default observer(function AlchemyRightHandHeader() {
                             content="Create Trait" />}
                         {rightHandDisplay.includes("Products") && <Button
                             disabled={!isAdmin}
-                            onClick={() => modalStore.openModal("Create Product", <AlchemyProductForm />)}
+                            onClick={() => modalStore.openModal("Create Product", <AlchemyProductForm />, "small")}
                             size='large'
                             color='green'
                             inverted fluid

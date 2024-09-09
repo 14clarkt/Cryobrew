@@ -5,54 +5,36 @@ import { useStore } from "../../../app/stores/store";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import * as Yup from 'yup';
 import ValidationErrors from "../../errors/ValidationErrors";
-import MyTextArea from "../../../app/common/form/MyTextArea";
+import { AlchemyProduct } from "../../../app/models/alchemy";
 
-export default observer(function MIForm() {
-    const { magicItemStore } = useStore()
-    const { loading, createMagicItem } = magicItemStore
+interface Props {
+    oldProduct: AlchemyProduct
+}
+
+export default observer(function AlchemyProductUpdateForm({oldProduct}: Props) {
+    const { alchemyStore } = useStore()
+    const { updateProduct, deleteProduct, loading } = alchemyStore
 
     return (
         <Formik
             initialValues={{
-                name: "",
-                description: "",
-                maxCharges: 0,
-                count: 1,
+                name: oldProduct.name,
+                count: oldProduct.count,
                 error: null
             }}
             onSubmit={(values, { setErrors }) => {
-                let newMI = {
-                    id: "",
-                    name: values.name,
-                    description: values.description,
-                    maxCharges: values.maxCharges,
-                    charges: values.maxCharges,
-                    count: values.count,
-                    isHidden: true,
-                    equippedBy: null,
-                }
-                createMagicItem(newMI).catch(error =>
+                updateProduct({...oldProduct, ...values}).catch(error =>
                     setErrors({ error }))
             }}
             validationSchema={Yup.object({
                 name: Yup.string().required(),
-                description: Yup.string().required(),
-                maxCharges: Yup.number().integer("must be a whole number.").min(0).required("must be a number greater than or equal to 0."),
                 count: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than or equal to 1."),
             })}
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <Grid>
-                        <Grid.Column width={6}>
-                            <MyTextInput placeholder='Name' label='Name' name='name' />
-                            <MyTextInput placeholder="Put 0 if this item has no charges." label='Max Charges' name='maxCharges' />
-                            <MyTextInput placeholder="How many of this item there are." label='Count' name='count' />
-                        </Grid.Column>
-                        <Grid.Column width={10}>
-                            <MyTextArea placeholder='Describe what this item does.' label='Description' name='description' rows={9} />
-                        </Grid.Column>
-                    </Grid>
+                    <MyTextInput placeholder='Name' name='name' label="Name" />
+                    <MyTextInput placeholder="How many of this item there are." label='Count' name='count' />
                     <ErrorMessage
                         name='error' render={() =>
                             <ValidationErrors errors={errors.error} />}
@@ -63,14 +45,23 @@ export default observer(function MIForm() {
                         <Grid.Column width={6}>
                             <Button
                                 disabled={!isValid || !dirty || isSubmitting}
-                                content="Create"
+                                content="Update"
                                 type="submit"
                                 color="green"
                                 fluid inverted
                                 loading={loading}
                             />
                         </Grid.Column>
-                        <Grid.Column width={5} />
+                        <Grid.Column width={5}>
+                            <Button
+                                color='red'
+                                content='Delete'
+                                type="button"
+                                fluid inverted
+                                loading={loading}
+                                onClick={() => deleteProduct(oldProduct.id)}
+                            />
+                        </Grid.Column>
                     </Grid>
                 </Form>
             )}

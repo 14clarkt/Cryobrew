@@ -105,6 +105,13 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new CreateAlchemyProduct.Command{AlchemyProduct = product}));
         }
 
+        [HttpPut("product/{id}")]
+        public async Task<IActionResult> UpdateAlchemyProduct(AlchemyProduct product, Guid id)
+        {
+            product.Id = id;
+            return HandleResult(await Mediator.Send(new UpdateAlchemyProduct.Command{AlchemyProduct = product}));
+        }
+
         [HttpDelete("product/{id}")]
         public async Task<IActionResult> DeleteAlchemyProduct(Guid id)
         {

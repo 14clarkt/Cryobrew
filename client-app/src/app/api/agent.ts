@@ -114,6 +114,7 @@ const Alchemy = {
 
     listProduct: () => requests.get<AlchemyProduct[]>('/alchemy/product'),
     createProduct: (product: AlchemyProduct) => axios.post('/alchemy/product', product),
+    updateProduct: (product: AlchemyProduct) => axios.put(`/alchemy/product/${product.id}`, product),
     deleteProduct: (id: string) => axios.delete(`/alchemy/product/${id}`),
 }
 
