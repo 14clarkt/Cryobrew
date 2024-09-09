@@ -333,10 +333,6 @@ export default class AlchemyStore {
         }
     }
 
-    private setProduct = (product: AlchemyProduct) => {
-        this.productRegistry.set(product.id, product)
-    }
-
     createProduct = async (product: AlchemyProduct) => {
         this.loading = true
         product.id = uuid()
@@ -362,6 +358,7 @@ export default class AlchemyStore {
             runInAction(() => {
                 this.productRegistry.delete(id)
                 this.loading = false
+                store.modalStore.closeModal();
             })
         } catch (error) {
             console.log(error)
@@ -369,6 +366,27 @@ export default class AlchemyStore {
                 this.loading = false
             })
         }
+    }
+
+    updateProduct = async (product: AlchemyProduct) => {
+        this.loading = true
+        try {
+            await agent.Alchemy.updateProduct(product)
+            runInAction(() => {
+                this.setProduct(product)
+                this.loading = false
+                store.modalStore.closeModal();
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
+    private setProduct = (product: AlchemyProduct) => {
+        this.productRegistry.set(product.id, product)
     }
 
     // misc

@@ -2,11 +2,12 @@ import { observer } from 'mobx-react-lite';
 import { Button, Grid, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import DiffSpan from '../../../app/common/display/DiffSpan';
+import AlchemyProductUpdateForm from '../form/AlchemyProductUpdateForm';
 
 export default observer(function AlchemyProductList() {
-    const { userStore, alchemyStore } = useStore()
+    const { userStore, alchemyStore, modalStore } = useStore()
     const isAdmin = userStore.user?.role.localeCompare("Admin") === 0
-    const { deleteProduct, productList, loading } = alchemyStore
+    const { productList, loading } = alchemyStore
 
     return (
         <Segment style={{
@@ -17,12 +18,12 @@ export default observer(function AlchemyProductList() {
             borderColor: "#222222",
         }}>
             <Grid inverted divided="vertically">
-                <Grid.Row style={{ fontWeight: "bold" }}>
+                <Grid.Row style={{ fontWeight: "bold", textAlign: "center" }}>
                     <Grid.Column width={14}>
                         <h1>Name</h1>
                     </Grid.Column>
                     <Grid.Column width={2}>
-                        <h2>Delete</h2>
+                        <h2>Edit</h2>
                     </Grid.Column>
                 </Grid.Row>
                 {productList.map((product) => (
@@ -33,12 +34,12 @@ export default observer(function AlchemyProductList() {
                         <Grid.Column width={2}>
                             <Button
                                 disabled={!isAdmin}
-                                color='red'
-                                content='Del'
+                                color='blue'
+                                content='Edit'
                                 fluid inverted
                                 size='mini'
                                 loading={loading}
-                                onClick={() => deleteProduct(product.id)}
+                                onClick={() => modalStore.openModal("Update Alchemy Product", <AlchemyProductUpdateForm oldProduct={product} />, 'large')}
                             />
                         </Grid.Column>
                     </Grid.Row>))}

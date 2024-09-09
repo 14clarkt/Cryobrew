@@ -16,8 +16,6 @@ export default observer(function AlchemyIngredientHeader() {
     useEffect(() => {
         for (let index = 0; index < suppliesList.length; index++) {
             const supply = suppliesList[index];
-            console.log(supply.name);
-
             if (supply.name.toLowerCase().includes("alchemy catalyst".toLowerCase())) {
                 setCatalyst(supply.quantity)
                 break
