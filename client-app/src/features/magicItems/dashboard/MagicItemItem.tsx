@@ -15,7 +15,7 @@ export default observer(function MagicItemItem({ magicItem }: Props) {
     const { loading, updateMagicItem } = magicItemStore
     const { isAdmin } = userStore
     const username = userStore.user!.username
-    const [charges, setCharges] = useState(0)
+    const [charges, setCharges] = useState(0) 
 
     useEffect(() => {
         setCharges(magicItem.charges)
