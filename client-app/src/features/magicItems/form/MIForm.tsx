@@ -17,6 +17,7 @@ export default observer(function MIForm() {
                 name: "",
                 description: "",
                 maxCharges: 0,
+                count: 1,
                 error: null
             }}
             onSubmit={(values, { setErrors }) => {
@@ -26,6 +27,7 @@ export default observer(function MIForm() {
                     description: values.description,
                     maxCharges: values.maxCharges,
                     charges: values.maxCharges,
+                    count: values.count,
                     isHidden: true,
                     equippedBy: null,
                 }
@@ -44,9 +46,10 @@ export default observer(function MIForm() {
                         <Grid.Column width={6}>
                             <MyTextInput placeholder='Name' label='Name' name='name' />
                             <MyTextInput placeholder="Put 0 if this item has no charges." label='Max Charges' name='maxCharges' />
+                            <MyTextInput placeholder="How many of this item there are." label='Count' name='count' />
                         </Grid.Column>
                         <Grid.Column width={10}>
-                            <MyTextArea placeholder='Describe what this item does.' label='Description' name='description' rows={5} />
+                            <MyTextArea placeholder='Describe what this item does.' label='Description' name='description' rows={9} />
                         </Grid.Column>
                     </Grid>
                     <ErrorMessage

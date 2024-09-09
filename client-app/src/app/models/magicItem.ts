@@ -4,6 +4,7 @@ export interface MagicItem {
     description: string
     charges: number
     maxCharges: number
+    count: number
     isHidden: boolean
     equippedBy: string | null
 }

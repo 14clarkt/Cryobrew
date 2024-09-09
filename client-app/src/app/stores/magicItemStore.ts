@@ -9,7 +9,7 @@ export default class MagicItemStore {
     loadingInitial = false
     loading = false
     miFilter = ""
-    miGroup : "equipped" | "all" | "available" = "equipped"
+    miGroup : "equipped" | "all" | "available" = "all"
     
     constructor() {
         makeAutoObservable(this)
@@ -84,7 +84,7 @@ export default class MagicItemStore {
             console.log(error)
             runInAction(() => {
                 this.loading = false
-            })            
+            })
         }
     }
 

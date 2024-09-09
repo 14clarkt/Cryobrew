@@ -17,3 +17,10 @@
 
 1. In terminal, run: fly proxy 6543:5432 -a cryobrew-db
 2. DB is now viewable in the PostgreSQL Explorer tab under flyio
+
+## To update the database
+
+0. (To use dotnet-ef, you must run: dotnet tool install --global dotnet-ef --version 7.0.0)
+1. In terminal at base directory:
+2. dotnet ef migrations add {Descriptive Name} -s API -p Persistence
+3. dotnet ef database update -s API -p Persistence

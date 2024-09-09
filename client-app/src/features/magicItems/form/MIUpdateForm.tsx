@@ -21,6 +21,7 @@ export default observer(function MIUpdateForm(props: Props) {
             initialValues={{
                 name: oldMagicItem.name,
                 maxCharges: oldMagicItem.maxCharges,
+                count: oldMagicItem.count,
                 description: oldMagicItem.description,
                 error: null
             }}
@@ -29,6 +30,7 @@ export default observer(function MIUpdateForm(props: Props) {
                     ...oldMagicItem,
                     name: values.name,
                     maxCharges: values.maxCharges,
+                    count: values.count,
                     description: values.description,
                 }
                 magicItemStore.updateMagicItem(newMI).catch(error =>
@@ -46,9 +48,10 @@ export default observer(function MIUpdateForm(props: Props) {
                         <Grid.Column width={6}>
                             <MyTextInput placeholder='Name' label='Name' name='name' />
                             <MyTextInput placeholder="Put 0 if this item has no charges." label='Max Charges' name='maxCharges' />
+                            <MyTextInput placeholder="How many of this item there are." label='Count' name='count' />
                         </Grid.Column>
                         <Grid.Column width={10}>
-                            <MyTextArea placeholder='Describe what this item does.' label='Description' name='description' rows={5} />
+                            <MyTextArea placeholder='Describe what this item does.' label='Description' name='description' rows={9} />
                         </Grid.Column>
                     </Grid>
                     <ErrorMessage
