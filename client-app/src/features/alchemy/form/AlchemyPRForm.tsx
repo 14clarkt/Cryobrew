@@ -18,18 +18,24 @@ export default observer(function AlchemyPRForm(props: Props) {
         <Formik
             initialValues={{
                 order: 1,
-                range: "",
+                rangeMin: "",
+                rangeMax: "",
                 duration: "",
                 effect: "",
                 error: null
             }}
-            onSubmit={(values, { setErrors }) => {
-                alchemyStore.createAPR(props.ATid, {...values, id: "", order: +values.order}).catch(error =>
+            onSubmit={async (values, { setErrors }) => {
+                let newRange: string
+                values.rangeMax.length > 0 ?
+                    newRange = values.rangeMin + "-" + values.rangeMax :
+                    newRange = values.rangeMin + "+"
+                await alchemyStore.createAPR(props.ATid, { ...values, id: "", order: +values.order, range: newRange }).catch(error =>
                     setErrors({ error }))
             }}
             validationSchema={Yup.object({
                 order: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than 0."),
-                range: Yup.string().required(),
+                rangeMin: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than 0."),
+                rangeMax: Yup.number().integer("must be a whole number.").nullable().moreThan(Yup.ref("rangeMin"), "must be a number greater than Range Min."),
                 duration: Yup.string().required(),
                 effect: Yup.string().required(),
             })}
@@ -39,11 +45,12 @@ export default observer(function AlchemyPRForm(props: Props) {
                     <Grid>
                         <Grid.Column width={8}>
                             <MyTextInput placeholder='1' name='order' label="Order" />
-                            <MyTextInput placeholder='5-, 5-9, 20+...' name='range' label="Potency Range" />
                             <MyTextInput placeholder='Instantaneous, 1 minute...' name='duration' label="Duration" />
+                            <MyTextInput placeholder='1, 5, 10... Minimum value of this Range' name='rangeMin' label="Range Min" />
+                            <MyTextInput placeholder='10, 15, 99... Maximum value of this Range. Leave Blank if there is no limit.' name='rangeMax' label="Range Max" />
                         </Grid.Column>
                         <Grid.Column width={8}>
-                            <MyTextArea placeholder='Details of this potency range' name='effect' label="Effect" rows={9} />
+                            <MyTextArea placeholder='Details of this potency range' name='effect' label="Effect" rows={13} />
                         </Grid.Column>
                     </Grid>
                     <ErrorMessage
@@ -58,9 +65,9 @@ export default observer(function AlchemyPRForm(props: Props) {
                                 disabled={!isValid || !dirty || isSubmitting}
                                 content="Create"
                                 type="submit"
-                                color = "green"
+                                color="green"
                                 fluid inverted
-                            loading={alchemyStore.loading}
+                                loading={alchemyStore.loading}
                             />
                         </Grid.Column>
                         <Grid.Column width={5} />
