@@ -13,23 +13,32 @@ interface Props {
     apr: AlchemyPotencyRange
 }
 
-export default observer(function AlchemyPRUpdateForm(props: Props) {
+export default observer(function AlchemyPRUpdateForm({ATid, apr}: Props) {
     const { alchemyStore } = useStore()
     const { updateAPR, deleteAPR, loading } = alchemyStore
 
     return (
         <Formik
             initialValues={{
-                ...props.apr,
+                order: apr.order,
+                rangeMin: apr.range.includes("-") ? apr.range.split("-")[0] : apr.range.split("+")[0],
+                rangeMax: apr.range.includes("-") ? apr.range.split("-")[1] : "",
+                duration: apr.duration,
+                effect: apr.effect,
                 error: null
             }}
-            onSubmit={(values, { setErrors }) => {
-                updateAPR(props.ATid, { ...values, order: +values.order }).catch(error =>
+            onSubmit={async (values, { setErrors }) => {
+                let newRange: string
+                values.rangeMax.length > 0 ?
+                    newRange = values.rangeMin + "-" + values.rangeMax :
+                    newRange = values.rangeMin + "+"
+                updateAPR(ATid, { ...apr, ...values, order: +values.order, range: newRange }).catch(error =>
                     setErrors({ error }))
             }}
             validationSchema={Yup.object({
                 order: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than 0."),
-                range: Yup.string().required(),
+                rangeMin: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than 0."),
+                rangeMax: Yup.number().integer("must be a whole number.").nullable().moreThan(Yup.ref("rangeMin"), "must be a number greater than Range Min."),
                 duration: Yup.string().required(),
                 effect: Yup.string().required(),
             })}
@@ -39,11 +48,12 @@ export default observer(function AlchemyPRUpdateForm(props: Props) {
                     <Grid>
                         <Grid.Column width={8}>
                             <MyTextInput placeholder='1' name='order' label="Order" />
-                            <MyTextInput placeholder='5-, 5-9, 20+...' name='range' label="Potency Range" />
                             <MyTextInput placeholder='Instantaneous, 1 minute...' name='duration' label="Duration" />
+                            <MyTextInput placeholder='1, 5, 10... Minimum value of this Range' name='rangeMin' label="Range Min" />
+                            <MyTextInput placeholder='10, 15, 99... Maximum value of this Range. Leave Blank if there is no limit.' name='rangeMax' label="Range Max" />
                         </Grid.Column>
                         <Grid.Column width={8}>
-                            <MyTextArea placeholder='Details of this potency range' name='effect' label="Effect" rows={9} />
+                            <MyTextArea placeholder='Details of this potency range' name='effect' label="Effect" rows={13} />
                         </Grid.Column>
                     </Grid>
                     <ErrorMessage
@@ -70,7 +80,7 @@ export default observer(function AlchemyPRUpdateForm(props: Props) {
                                 type="button"
                                 fluid inverted
                                 loading={loading}
-                                onClick={() => deleteAPR(props.ATid, props.apr.id)}
+                                onClick={() => deleteAPR(ATid, apr.id)}
                             />
                         </Grid.Column>
                     </Grid>
