@@ -3,6 +3,7 @@ import { Button, Grid, Popup, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import DiffSpan from '../../../app/common/display/DiffSpan';
 import EnchUpdateForm from '../form/EnchUpdateForm';
+import { Fragment } from 'react';
 
 export default observer(function EnchantingList() {
     const { userStore, modalStore, enchantingStore } = useStore()
@@ -11,7 +12,7 @@ export default observer(function EnchantingList() {
 
     return (
         <>{enchList.map((ench) => (
-            <>{(isAdmin || ench.found) && <Segment key={ench.id} style={{
+            <Fragment key={ench.id}>{(isAdmin || ench.found) && <Segment style={{
                 backgroundColor: "#111111",
                 color: "white",
                 borderStyle: "solid",
@@ -164,7 +165,7 @@ export default observer(function EnchantingList() {
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
-            </Segment>}</>))}
+            </Segment>}</Fragment>))}
         </>
     )
 })
