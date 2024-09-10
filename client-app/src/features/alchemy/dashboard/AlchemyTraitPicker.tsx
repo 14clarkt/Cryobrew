@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite"
 import { useStore } from "../../../app/stores/store"
 import { Button, Grid, GridColumn, Segment } from "semantic-ui-react"
 import { AlchemyTrait } from "../../../app/models/alchemy"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import DiffSpan from "../../../app/common/display/DiffSpan"
 
 export default observer(function AlchemyTraitPicker() {
@@ -10,24 +10,27 @@ export default observer(function AlchemyTraitPicker() {
     const { traitList } = alchemyStore
 
     const [randomTrait, setRandomTrait] = useState<AlchemyTrait | undefined>(undefined)
+    const [hinderanceList, setHinderanceList] = useState<AlchemyTrait[]>([])
+    const [nonHinderanceList, setNonHinderanceList] = useState<AlchemyTrait[]>([])
 
-    const randomizeTrait = () => {
-        const newTrait = traitList[Math.floor(traitList.length * Math.random())]
-        setRandomTrait(newTrait)
-    }
-
-    const randomizeHinderance = () => {
-        let newHinderance: AlchemyTrait | undefined = undefined
-        while (!newHinderance?.types.includes("Hinderance")) {
-            newHinderance = traitList[Math.floor(traitList.length * Math.random())]
+    useEffect(() => {
+        let newHinderanceList: AlchemyTrait[] = []
+        let newNonHinderanceList: AlchemyTrait[] = []
+        for (let trait of traitList) {
+            if (trait.types.includes("Hinderance"))
+                newHinderanceList.push(trait)
+            else
+                newNonHinderanceList.push(trait)
         }
-        setRandomTrait(newHinderance)
-    }
-    const randomizeNonHinderance = () => {
-        let newNonHinderance: AlchemyTrait | undefined = undefined
-        do { newNonHinderance = traitList[Math.floor(traitList.length * Math.random())] }
-        while (newNonHinderance?.types.includes("Hinderance"))
-        setRandomTrait(newNonHinderance)
+        setHinderanceList(newHinderanceList)
+        setNonHinderanceList(newNonHinderanceList)
+    }, [traitList])
+
+    const selectTrait = (givenList: AlchemyTrait[]) => {
+        if (givenList.length > 0)
+            setRandomTrait(givenList[Math.floor((givenList.length) * Math.random())])
+        else
+            setRandomTrait({name: "None Available.", id: "", triggers: "", types: "", tier: "", hidden: false, potencyRanges: []})
     }
 
     return (
@@ -46,7 +49,7 @@ export default observer(function AlchemyTraitPicker() {
                             content='Random Trait'
                             size="huge"
                             fluid inverted
-                            onClick={randomizeTrait}
+                            onClick={() => selectTrait(traitList)}
                         />
                     </Grid.Column>
                     <Grid.Column width={6}>
@@ -55,7 +58,7 @@ export default observer(function AlchemyTraitPicker() {
                             content='Random Non-Hinderance'
                             size="huge"
                             fluid inverted
-                            onClick={randomizeNonHinderance}
+                            onClick={() => selectTrait(nonHinderanceList)}
                         />
                     </Grid.Column>
                     <Grid.Column width={5}>
@@ -64,7 +67,7 @@ export default observer(function AlchemyTraitPicker() {
                             content='Random Hinderance'
                             size="huge"
                             fluid inverted
-                            onClick={randomizeHinderance}
+                            onClick={() => selectTrait(hinderanceList)}
                         />
                     </Grid.Column>
                 </Grid.Row>
