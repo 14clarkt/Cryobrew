@@ -63,3 +63,7 @@ div{
   white-space: pre-wrap;
   overflow-wrap: break-word;
 }
+
+.visible.menu.transition{
+  max-height: 5em !important;
+}
