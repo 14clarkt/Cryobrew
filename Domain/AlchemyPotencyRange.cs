@@ -6,6 +6,5 @@ namespace Domain
         public string Range { get; set; }
         public string Duration { get; set; }
         public string Effect { get; set; }
-        public int Order { get; set; } = 0;
     }
 }

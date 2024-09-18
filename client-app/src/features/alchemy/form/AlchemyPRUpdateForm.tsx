@@ -13,30 +13,28 @@ interface Props {
     apr: AlchemyPotencyRange
 }
 
-export default observer(function AlchemyPRUpdateForm({ATid, apr}: Props) {
+export default observer(function AlchemyPRUpdateForm({ ATid, apr }: Props) {
     const { alchemyStore } = useStore()
     const { updateAPR, deleteAPR, loading } = alchemyStore
 
     return (
         <Formik
             initialValues={{
-                order: apr.order,
-                rangeMin: apr.range.includes("-") ? apr.range.split("-")[0] : apr.range.split("+")[0],
-                rangeMax: apr.range.includes("-") ? apr.range.split("-")[1] : "",
+                rangeMin: apr.range.includes("-") ? +apr.range.split("-")[0] : +apr.range.split("+")[0],
+                rangeMax: apr.range.includes("-") ? +apr.range.split("-")[1] : "",
                 duration: apr.duration,
                 effect: apr.effect,
                 error: null
             }}
             onSubmit={async (values, { setErrors }) => {
                 let newRange: string
-                values.rangeMax.length > 0 ?
+                values.rangeMax.toString().length > 0 ?
                     newRange = values.rangeMin + "-" + values.rangeMax :
                     newRange = values.rangeMin + "+"
-                updateAPR(ATid, { ...apr, ...values, order: +values.order, range: newRange }).catch(error =>
+                updateAPR(ATid, { ...apr, ...values, range: newRange }).catch(error =>
                     setErrors({ error }))
             }}
             validationSchema={Yup.object({
-                order: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than 0."),
                 rangeMin: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than 0."),
                 rangeMax: Yup.number().integer("must be a whole number.").nullable().moreThan(Yup.ref("rangeMin"), "must be a number greater than Range Min."),
                 duration: Yup.string().required(),
@@ -47,13 +45,20 @@ export default observer(function AlchemyPRUpdateForm({ATid, apr}: Props) {
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     <Grid>
                         <Grid.Column width={8}>
-                            <MyTextInput placeholder='1' name='order' label="Order" />
-                            <MyTextInput placeholder='Instantaneous, 1 minute...' name='duration' label="Duration" />
-                            <MyTextInput placeholder='1, 5, 10... Minimum value of this Range' name='rangeMin' label="Range Min" />
-                            <MyTextInput placeholder='10, 15, 99... Maximum value of this Range. Leave Blank if there is no limit.' name='rangeMax' label="Range Max" />
+                            <Grid>
+                                <Grid.Column width={8}>
+                                    <MyTextInput placeholder='1, 5, 10...' name='rangeMin' label="Range Min" type='number' />
+                                </Grid.Column>
+                                <Grid.Column width={8}>
+                                    <MyTextInput placeholder='10, 15, 99... Blank for no max' name='rangeMax' label="Range Max" type='number' />
+                                </Grid.Column>
+                                <Grid.Column width={16}>
+                                    <MyTextInput placeholder='Instantaneous, 1 minute...' name='duration' label="Duration" />
+                                </Grid.Column>
+                            </Grid>
                         </Grid.Column>
                         <Grid.Column width={8}>
-                            <MyTextArea placeholder='Details of this potency range' name='effect' label="Effect" rows={13} />
+                            <MyTextArea placeholder='Details of this potency range' name='effect' label="Effect" rows={6} />
                         </Grid.Column>
                     </Grid>
                     <ErrorMessage
