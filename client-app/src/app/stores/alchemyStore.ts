@@ -31,7 +31,11 @@ export default class AlchemyStore {
             a.name.localeCompare(b.name))
 
         runInAction(() => { // sort the ranges within the traits
-            traits.forEach((trait) => trait.potencyRanges.sort((a, b) => a.order - b.order))
+            traits.forEach((trait) => trait.potencyRanges.sort((a, b) => {
+                const aMin = a.range.includes("-") ? +a.range.split("-")[0] : +a.range.split("+")[0]
+                const bMin = b.range.includes("-") ? +b.range.split("-")[0] : +b.range.split("+")[0]
+                return aMin - bMin
+            }))
         })
 
         return traits
@@ -96,7 +100,11 @@ export default class AlchemyStore {
     private setAPR = (ATid: string, apr: AlchemyPotencyRange) => {
         let at = this.traitRegistry.get(ATid)
         at?.potencyRanges.push(apr)
-        at?.potencyRanges.sort((a, b) => a.order - b.order)
+        at?.potencyRanges.sort((a, b) => {
+            const aMin = a.range.includes("-") ? +a.range.split("-")[0] : +a.range.split("+")[0]
+            const bMin = b.range.includes("-") ? +b.range.split("-")[0] : +b.range.split("+")[0]
+            return aMin - bMin
+        })
     }
 
     updateTrait = async (at: AlchemyTrait) => {

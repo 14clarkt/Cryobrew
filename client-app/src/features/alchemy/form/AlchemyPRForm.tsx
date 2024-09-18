@@ -17,7 +17,6 @@ export default observer(function AlchemyPRForm(props: Props) {
     return (
         <Formik
             initialValues={{
-                order: 1,
                 rangeMin: "",
                 rangeMax: "",
                 duration: "",
@@ -26,14 +25,13 @@ export default observer(function AlchemyPRForm(props: Props) {
             }}
             onSubmit={async (values, { setErrors }) => {
                 let newRange: string
-                values.rangeMax.length > 0 ?
+                values.rangeMax.toString().length > 0 ?
                     newRange = values.rangeMin + "-" + values.rangeMax :
                     newRange = values.rangeMin + "+"
-                await alchemyStore.createAPR(props.ATid, { ...values, id: "", order: +values.order, range: newRange }).catch(error =>
+                await alchemyStore.createAPR(props.ATid, { ...values, id: "", range: newRange }).catch(error =>
                     setErrors({ error }))
             }}
             validationSchema={Yup.object({
-                order: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than 0."),
                 rangeMin: Yup.number().integer("must be a whole number.").min(1).required("must be a number greater than 0."),
                 rangeMax: Yup.number().integer("must be a whole number.").nullable().moreThan(Yup.ref("rangeMin"), "must be a number greater than Range Min."),
                 duration: Yup.string().required(),
@@ -44,13 +42,20 @@ export default observer(function AlchemyPRForm(props: Props) {
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     <Grid>
                         <Grid.Column width={8}>
-                            <MyTextInput placeholder='1' name='order' label="Order" />
-                            <MyTextInput placeholder='Instantaneous, 1 minute...' name='duration' label="Duration" />
-                            <MyTextInput placeholder='1, 5, 10... Minimum value of this Range' name='rangeMin' label="Range Min" />
-                            <MyTextInput placeholder='10, 15, 99... Maximum value of this Range. Leave Blank if there is no limit.' name='rangeMax' label="Range Max" />
+                            <Grid>
+                                <Grid.Column width={8}>
+                                    <MyTextInput placeholder='1, 5, 10...' name='rangeMin' label="Range Min" type='number' />
+                                </Grid.Column>
+                                <Grid.Column width={8}>
+                                    <MyTextInput placeholder='10, 15, 99... Blank for no max' name='rangeMax' label="Range Max" type='number' />
+                                </Grid.Column>
+                                <Grid.Column width={16}>
+                                    <MyTextInput placeholder='Instantaneous, 1 minute...' name='duration' label="Duration" />
+                                </Grid.Column>
+                            </Grid>
                         </Grid.Column>
                         <Grid.Column width={8}>
-                            <MyTextArea placeholder='Details of this potency range' name='effect' label="Effect" rows={13} />
+                            <MyTextArea placeholder='Details of this potency range' name='effect' label="Effect" rows={6} />
                         </Grid.Column>
                     </Grid>
                     <ErrorMessage

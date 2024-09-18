@@ -13,7 +13,6 @@ export interface AlchemyPotencyRange {
     range: string
     duration: string
     effect: string
-    order: number
 }
 
 export interface AlchemyIngredient {
