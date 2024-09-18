@@ -67,3 +67,12 @@ div{
 .visible.menu.transition{
   max-height: 5em !important;
 }
+
+.ui.segment.pushable {
+  margin-top: 0 !important;
+}
+
+.alchemycol {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
