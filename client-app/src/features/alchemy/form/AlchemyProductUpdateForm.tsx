@@ -49,15 +49,13 @@ export default observer(function AlchemyProductUpdateForm({ oldProduct }: Props)
             {({ handleSubmit, setFieldValue, values, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     <Grid>
-                        <Grid.Column width={16}>
+                        <Grid.Column width={13}>
                             <MyTextInput placeholder='Name' name='name' label="Name" />
-                            <MyTextInput placeholder="How many of this item there are." label='Count' name='count' />
-                            <ErrorMessage
-                                name='error' render={() =>
-                                    <ValidationErrors errors={errors.error} />}
-                            />
                         </Grid.Column>
-                        <Grid.Column width={10}>
+                        <Grid.Column width={3}>
+                            <MyTextInput placeholder="How many of this item there are." label='Count' name='count' type='number' />
+                        </Grid.Column>
+                        <Grid.Column width={13}>
                             <MySelectInput
                                 placeholder="Select Trait"
                                 name="trait"
@@ -65,9 +63,13 @@ export default observer(function AlchemyProductUpdateForm({ oldProduct }: Props)
                                 label="Trait"
                             />
                         </Grid.Column>
-                        <Grid.Column width={6}>
-                            <MyTextInput label='Potency' placeholder='1, 5, 10...' name='potency' />
+                        <Grid.Column width={3}>
+                            <MyTextInput label='Potency' placeholder='1, 5, 10...' name='potency' type='number' />
                         </Grid.Column>
+                        <ErrorMessage
+                            name='error' render={() =>
+                                <ValidationErrors errors={errors.error} />}
+                        />
                         <Grid.Column width={5}>
                             <Button
                                 content="Add Trait"
@@ -104,7 +106,8 @@ export default observer(function AlchemyProductUpdateForm({ oldProduct }: Props)
                         </Grid.Column>
                     </Grid>
                 </Form>
-            )}
-        </Formik>
+            )
+            }
+        </Formik >
     )
 })
