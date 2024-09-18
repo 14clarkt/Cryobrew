@@ -59,13 +59,9 @@ body {
   font-weight: normal;
 }
 
-div{
+div {
   white-space: pre-wrap;
   overflow-wrap: break-word;
-}
-
-.visible.menu.transition{
-  max-height: 5em !important;
 }
 
 .ui.segment.pushable {
@@ -75,4 +71,33 @@ div{
 .alchemycol {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
+}
+
+/* MySelectInput */
+.visible.menu.transition {
+  max-height: 5em !important;
+}
+
+.ui.selection.dropdown {
+  background: #222222 !important;
+}
+
+.ui.search.selection.dropdown {
+  color: white !important;
+}
+
+.ui.search.dropdown>input.search {
+  color: white !important;
+}
+
+.visible.menu.transition {
+  background: #222222 !important;
+}
+
+.ui.selection.dropdown .menu>.item {
+  border-top: 1px solid #333333;
+}
+
+.ui.dropdown .menu>.item {
+  color: white !important
 }
