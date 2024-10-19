@@ -13,7 +13,7 @@ import RulesList from '../../rules/list/RulesList';
 export default observer(function APCList() {
     const { apcStore, modalStore, userStore } = useStore()
     const { apcSortedList, deleteApc, deleteApl, copyApl, upgradeApc, downgradeApc, equipApc, loading } = apcStore
-    const { isAdmin } = userStore
+    const { isAdmin, isManager } = userStore
     const username = userStore.user?.username
 
     const [apcFilter, setAPCFilter] = useState(isAdmin ? "all" : "equipped")
@@ -118,7 +118,7 @@ export default observer(function APCList() {
             </Grid>
             <br/>
             {APCList.map((apc) => (
-                <div key={"seg"+apc.id}>{(apc.upgradeLevel > 0 || isAdmin) && (apc.name.toLowerCase().includes(query.toLowerCase())) &&
+                <div key={"seg"+apc.id}>{(apc.upgradeLevel > 0 || isAdmin || isManager) && (apc.name.toLowerCase().includes(query.toLowerCase())) &&
                     <><Segment style={{
                         backgroundColor: "#111111",
                         color: "white",
