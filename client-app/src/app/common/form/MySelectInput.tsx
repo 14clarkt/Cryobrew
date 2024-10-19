@@ -14,14 +14,16 @@ export default function MySelectInput(props: Props) {
     return ( // Shortened by css as: .visible.menu.transition
         <Form.Field error={meta.touched && !!meta.error}>
             <label style={{ color: 'teal' }}>{props.label}</label>
-            <Dropdown
-                clearable selection search
-                options={props.options}
-                value={field.value || null}
-                onChange={(_e, d) => helpers.setValue(d.value)}
-                onBlur={() => helpers.setTouched(true)}
-                placeholder={props.placeholder}
-            />
+            <div className="MySelectInput">
+                <Dropdown
+                    clearable selection search
+                    options={props.options}
+                    value={field.value || null}
+                    onChange={(_e, d) => helpers.setValue(d.value)}
+                    onBlur={() => helpers.setTouched(true)}
+                    placeholder={props.placeholder}
+                />
+            </div>
             {meta.touched && meta.error ? (
                 <Label basic color='red'>{meta.error}</Label>
             ) : null}

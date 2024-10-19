@@ -8,6 +8,7 @@ export interface User {
     maxAP: number;
     shortAP: number;
     apcSlots: number;
+    email: string;
 }
 
 export interface UserFormValues {

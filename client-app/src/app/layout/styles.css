@@ -74,30 +74,30 @@ div {
 }
 
 /* MySelectInput */
-.visible.menu.transition {
+div.MySelectInput .visible.menu.transition {
   max-height: 5em !important;
 }
 
-.ui.selection.dropdown {
+div.MySelectInput .ui.selection.dropdown {
   background: #222222 !important;
 }
 
-.ui.search.selection.dropdown {
+div.MySelectInput .ui.search.selection.dropdown {
   color: white !important;
 }
 
-.ui.search.dropdown>input.search {
+div.MySelectInput .ui.search.dropdown>input.search {
   color: white !important;
 }
 
-.visible.menu.transition {
+div.MySelectInput .visible.menu.transition {
   background: #222222 !important;
 }
 
-.ui.selection.dropdown .menu>.item {
+div.MySelectInput .ui.selection.dropdown .menu>.item {
   border-top: 1px solid #333333;
 }
 
-.ui.dropdown .menu>.item {
+div.MySelectInput .ui.dropdown .menu>.item {
   color: white !important
 }
