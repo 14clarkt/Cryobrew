@@ -107,8 +107,34 @@ namespace API.Controllers
                 MaxAP = user.MaxAP,
                 ShortAP = user.ShortAP,
                 APCSlots = user.APCSlots,
-                Role = userRoles.ElementAt(0)
+                Role = userRoles.ElementAt(0),
+                Email = user.Email
             };
+        }
+
+        [HttpGet("getall")]
+        public async Task<ActionResult<List<UserDto>>> GetAllUsers()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            var userDTOs = new List<UserDto>();
+            for (int i = 0; i < users.Count; i++) {
+                var userDTO = await CreateUserObject(users.ElementAt(i));
+                userDTOs.Add(userDTO);
+            }
+            return userDTOs;
+        }
+
+        [HttpDelete("{email}")]
+        public async Task<IActionResult> DeleteUser(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null) throw new Exception("User with email " + email + " does not exist.");
+            
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+                return Ok();
+            else
+                throw new Exception("Error when deleting User with email: " + email);
         }
     }
 }

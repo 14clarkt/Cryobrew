@@ -68,7 +68,7 @@ axios.interceptors.response.use(async response => {
     return Promise.reject(error)
 })
 
-const requests = {
+const requests = { //TODO: replace axios calls with this... not sure why that wasnt already the case.
     get: <T>(url: string) => axios.get<T>(url).then(responseBody),
     post: <T>(url: string, body: {}) => axios.post<T>(url, body).then(responseBody),
     put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
@@ -169,7 +169,10 @@ const Account = {
     current: () => requests.get<User>('/account'),
     login: (user: UserFormValues) => requests.post<User>('/account/login', user),
     register: (user: UserFormValues) => requests.post<User>('/account/register', user),
-    updateUserValues: (values: UserEditValues) => requests.put<User>('/account/update', values)
+    updateUserValues: (values: UserEditValues) => requests.put<User>('/account/update', values),
+
+    list: () => requests.get<User[]>('/account/getall'),
+    delete: (email: string) => axios.delete(`/account/${email}`),
 }
 
 const agent = {

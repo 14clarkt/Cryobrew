@@ -11,5 +11,6 @@ namespace API.DTOs
         public int MaxAP { get; set; }
         public int ShortAP { get; set; }
         public int APCSlots { get; set; }
+        public string Email { get; set; }
     }
 }

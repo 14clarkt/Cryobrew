@@ -14,6 +14,7 @@ import CrelicDashboard from "../../features/crelics/dashboard/CrelicDashboard";
 import EnchantingDashboard from "../../features/enchanting/dashboard/EnchantingDashboard";
 import Sokoban from "../../features/puzzles/sokoban/sokoban";
 import MagicItemsDashboard from "../../features/magicItems/dashboard/MagicItemsDashboard";
+import UserControls from "../../features/users/userControls/UserControls";
 
 export const routes: RouteObject[] = [
     {
@@ -33,6 +34,7 @@ export const routes: RouteObject[] = [
                 {path: 'puzzles', element: <Sokoban />},
                 
                 {path: 'profile/:username', element: <UserDetails />},
+                {path: 'profile/usercontrolls', element: <UserControls />},
                 
                 {path: 'errors', element: <TestErrors />},
             ]},

@@ -5,7 +5,8 @@ import { store } from "./store";
 import { router } from "../router/Routes";
 
 export default class UserStore {
-    user: User | null = null;
+    user: User | null = null
+    allUsers: User[] = []
 
     constructor() {
         makeAutoObservable(this)
@@ -74,6 +75,28 @@ export default class UserStore {
             });
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    loadAllUsers = async () => {
+        try {
+            const users = await agent.Account.list()
+            runInAction(() => {
+                this.allUsers = users
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
+    deleteUser = async (email: string) => {
+        try {
+            await agent.Account.delete(email)
+            runInAction(() => {
+                this.allUsers = this.allUsers.filter((user) => user.email !== email)
+            })
+        } catch (error) {
+            console.log(error)
         }
     }
 }
