@@ -6,7 +6,7 @@ import { router } from "../router/Routes";
 
 export default class UserStore {
     user: User | null = null
-    allUsers: User[] = []
+    userRegistry = new Map<string, User>();
 
     constructor() {
         makeAutoObservable(this)
@@ -26,6 +26,11 @@ export default class UserStore {
 
     get isManager() {
         return this.user?.role.localeCompare("Manager") === 0
+    }
+
+    get allUsers() {
+        return Array.from(this.userRegistry.values()).sort((a, b) =>
+            a.username.localeCompare(b.username))
     }
 
     login = async (creds: UserFormValues) => {
@@ -86,7 +91,9 @@ export default class UserStore {
         try {
             const users = await agent.Account.list()
             runInAction(() => {
-                this.allUsers = users
+                users.forEach(user => {
+                    this.setUser(user)
+                })
             })
         } catch (error) {
             console.log(error)
@@ -97,10 +104,25 @@ export default class UserStore {
         try {
             await agent.Account.delete(email)
             runInAction(() => {
-                this.allUsers = this.allUsers.filter((user) => user.email !== email)
+                this.userRegistry.delete(email)
             })
         } catch (error) {
             console.log(error)
         }
+    }
+    
+    makeManager = async (email: string) => {
+        try {
+            await agent.Account.makeManager(email)
+            runInAction(() => {
+                this.userRegistry.set(email, {...this.userRegistry.get(email)!, role: "Manager"})
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    private setUser = (user: User) => {
+        this.userRegistry.set(user.email, user)
     }
 }

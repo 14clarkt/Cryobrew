@@ -5,11 +5,11 @@ import { useEffect } from 'react';
 
 export default observer(function UserControls() {
     const { userStore } = useStore()
-    const { user: currentUser, isAdmin, allUsers, loadAllUsers, deleteUser } = userStore
+    const { user: currentUser, isAdmin, userRegistry, allUsers, loadAllUsers, deleteUser, makeManager } = userStore
 
     useEffect(() => {
         if (allUsers.length === 0) loadAllUsers()
-    }, [allUsers, loadAllUsers])
+    }, [userRegistry.size, loadAllUsers])
 
     if (!currentUser || !isAdmin || allUsers.length === 0) return <></>
 
@@ -29,8 +29,11 @@ export default observer(function UserControls() {
                     <Grid.Column width='5' style={{ color: "cyan" }}>
                         <h1>Email</h1>
                     </Grid.Column>
-                    <Grid.Column width='5' style={{ color: "cyan" }}>
+                    <Grid.Column width='3' style={{ color: "cyan" }}>
                         <h1>Role</h1>
+                    </Grid.Column>
+                    <Grid.Column width='2' style={{ color: "cyan" }}>
+                        <h1>Make Manager</h1>
                     </Grid.Column>
                     <Grid.Column width='1' style={{ color: "cyan" }}>
                         <h1>Delete</h1>
@@ -44,8 +47,17 @@ export default observer(function UserControls() {
                         <Grid.Column width='5'>
                             <h2>{user.email}</h2>
                         </Grid.Column>
-                        <Grid.Column width='5'>
+                        <Grid.Column width='3'>
                             <h2>{user.role}</h2>
+                        </Grid.Column>
+                        <Grid.Column width='2'>
+                            <Button
+                                disabled={user.role === "Admin" || user.role === "Manager"}
+                                color='yellow'
+                                content='Promote'
+                                fluid inverted
+                                onClick={async () => await makeManager(user.email)}
+                            />
                         </Grid.Column>
                         <Grid.Column width='1'>
                             <Button

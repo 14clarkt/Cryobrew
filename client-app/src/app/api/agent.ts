@@ -173,6 +173,7 @@ const Account = {
 
     list: () => requests.get<User[]>('/account/getall'),
     delete: (email: string) => axios.delete(`/account/${email}`),
+    makeManager: (email: string) => axios.put(`/account/${email}`),
 }
 
 const agent = {
