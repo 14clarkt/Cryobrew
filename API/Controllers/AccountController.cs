@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using API.DTOs;
 using API.Services;
+using Application.Core;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -135,6 +136,22 @@ namespace API.Controllers
                 return Ok();
             else
                 throw new Exception("Error when deleting User with email: " + email);
+        }
+
+        [HttpPut("{email}")]
+        public async Task<IActionResult> MakeUserManager(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null) throw new Exception("User with email " + email + " does not exist.");
+
+            var result = await _userManager.RemoveFromRoleAsync(user, "Member");
+            if (!result.Succeeded) throw new Exception("cannot remove Role Member from User with email: " + email);
+
+            result = await _userManager.AddToRoleAsync(user, "Manager");
+            if (result.Succeeded)
+                return Ok();
+            else
+                throw new Exception("Error adding Role Manager to User with email: " + email);
         }
     }
 }
