@@ -26,5 +26,6 @@ namespace Persistence
         public DbSet<CrelicSubAbility> CrelicSubAbilities { get; set; }
         public DbSet<CrelicSubAbilityLevel> CrelicSubAbilityLevels { get; set; }
         public DbSet<MagicItem> MagicItems { get; set; }
+        public DbSet<AidenUpgrade> AidenUpgrades { get; set; }
     }
 }
