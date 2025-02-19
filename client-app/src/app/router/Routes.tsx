@@ -9,7 +9,7 @@ import AlchemyDashboard from "../../features/alchemy/dashboard/AlchemyDashboard"
 import EquipmentQualityDashboard from "../../features/equipmentQuality/dashboard/EquipmentQualityDashboard";
 import SuppliesDashboard from "../../features/supplies/dashboard/SuppliesDashboard";
 import RequireAuth from "./RequireAuth";
-import AidenDashboard from "../../features/aiden/dashboard/AidenDashboard";
+import AidenDashboard from "../../features/aiden/dashboard/AidenUpgradeDashboard";
 import CrelicDashboard from "../../features/crelics/dashboard/CrelicDashboard";
 import EnchantingDashboard from "../../features/enchanting/dashboard/EnchantingDashboard";
 import Sokoban from "../../features/puzzles/sokoban/sokoban";

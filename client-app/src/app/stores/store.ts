@@ -11,6 +11,7 @@ import EnchantingStore from "./enchantingStore";
 import SokobanStore from "./sokobanStore";
 import CrelicStore from "./crelicStore";
 import MagicItemStore from "./magicItemStore";
+import AidenUpgradeStore from "./aidenUpgradeStore";
 
 interface Store {
     commonStore: CommonStore;
@@ -24,6 +25,7 @@ interface Store {
     rulesStore: RulesStore;
     crelicStore: CrelicStore;
     magicItemStore: MagicItemStore;
+    aidenUpgradeStore: AidenUpgradeStore;
     sokobanStore: SokobanStore;
 }
 
@@ -39,6 +41,7 @@ export const store: Store = {
     rulesStore: new RulesStore(),
     crelicStore: new CrelicStore(),
     magicItemStore: new MagicItemStore(),
+    aidenUpgradeStore: new AidenUpgradeStore(),
     sokobanStore: new SokobanStore(),
 }
 

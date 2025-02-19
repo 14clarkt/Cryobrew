@@ -27,6 +27,7 @@ namespace Application.Core
             CreateMap<CrelicSubAbility, CrelicSubAbility>();
             CreateMap<CrelicSubAbilityLevel, CrelicSubAbilityLevel>();
             CreateMap<MagicItem, MagicItem>();
+            CreateMap<AidenUpgrade, AidenUpgrade>();
         }
     }
 }
