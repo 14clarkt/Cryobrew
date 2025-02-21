@@ -4,6 +4,7 @@ interface Modal {
     open: boolean
     body: JSX.Element | null
     header: string | null
+    scrolling: boolean
     size: "mini" | "small" | "tiny" | "large" | "fullscreen" | undefined
 }
 
@@ -12,6 +13,7 @@ export default class ModalStore {
         open: false,
         body: null,
         header: null,
+        scrolling: true,
         size: "mini"
     }
 
@@ -19,8 +21,9 @@ export default class ModalStore {
         makeAutoObservable(this);
     }
 
-    openModal = (header: string, content: JSX.Element, size?: "mini" | "small" | "tiny" | "large" | "fullscreen" | undefined) => {
+    openModal = (header: string, content: JSX.Element, size?: "mini" | "small" | "tiny" | "large" | "fullscreen" | undefined, scrolling?: boolean) => {
         size ? this.modal.size=size : this.modal.size = "mini"
+        this.modal.scrolling = scrolling ?? true
         this.modal.open = true
         this.modal.header = header
         this.modal.body = content
