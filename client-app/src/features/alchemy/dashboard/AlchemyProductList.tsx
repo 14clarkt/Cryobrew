@@ -45,7 +45,7 @@ export default observer(function AlchemyProductList() {
                                 fluid inverted
                                 size='mini'
                                 loading={loading}
-                                onClick={() => modalStore.openModal("Update Alchemy Product", <AlchemyProductUpdateForm oldProduct={product}/>, "small")}
+                                onClick={() => modalStore.openModal("Update Alchemy Product", <AlchemyProductUpdateForm oldProduct={product}/>, "small", false)}
                             />
                         </Grid.Column>
                     </Grid.Row>))}
